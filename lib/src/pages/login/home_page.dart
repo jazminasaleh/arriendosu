@@ -20,8 +20,7 @@ class Home_Page extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40),
                   topRight: Radius.circular(40),
-                )
-            ),
+                )),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 28),
               child: Column(
@@ -42,8 +41,8 @@ class Home_Page extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _button(Colors.black, 'Iniciar', Colors.white),
-                      _button(Colors.white, 'Registrarse', Colors.black),
+                      _button(Colors.black, 'Iniciar', Colors.white, context),
+                      _button(Colors.white, 'Registrarse', Colors.black, context),
                     ],
                   ),
                 ],
@@ -56,13 +55,12 @@ class Home_Page extends StatelessWidget {
   }
 
 //*Boton tanto de inicio como de registro
-  Widget _button(Color colorfondo, String texto, Color colorTexto) {
+  Widget _button(Color colorfondo, String texto, Color colorTexto, BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (texto == 'Iniciar') {
-        } else {
-          
-        }
+          Navigator.popAndPushNamed(context, 'inicio');
+        } else {}
       },
       child: Container(
         decoration: BoxDecoration(
