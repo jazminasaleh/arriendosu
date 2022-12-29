@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/login/contrasena_page.dart';
 import 'package:app_arriendosu/src/pages/login/home_page.dart';
 import 'package:app_arriendosu/src/pages/login/inicio_page.dart';
 import 'package:app_arriendosu/src/pages/login/registro_page.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
      routes: {
       'home' : (BuildContext context) => Home_Page(),
       'inicio' : (BuildContext context) => Inicio_Page(),
-      'registro' : (BuildContext context) => RegistroPage()
+      'registro' : (BuildContext context) => RegistroPage(),
+      'olvidoContrasena': (BuildContext context) => OlvidarContrasenaPage()
      },
     );
   }

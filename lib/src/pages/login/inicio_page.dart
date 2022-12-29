@@ -224,7 +224,9 @@ class _Inicio_PageState extends State<Inicio_Page> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.popAndPushNamed(context, 'olvidoContrasena');
+              },
               child: const Text(
                 '¿Olvido su contraseña?',
                 style: TextStyle(
