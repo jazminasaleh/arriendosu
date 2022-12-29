@@ -14,11 +14,16 @@ class MyApp extends StatelessWidget {
       title: 'App Arriendos',
       initialRoute: 'home',
       theme: ThemeData(
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           elevation: 0,
           backgroundColor: utils.Colors.ocre
-        )
+        ),
+          colorScheme: ThemeData().colorScheme.copyWith(
+              primary:utils.Colors.ocre,
+        ),
+        
       ),
+    
      routes: {
       'home' : (BuildContext context) => Home_Page(),
       'inicio' : (BuildContext context) => Inicio_Page()
