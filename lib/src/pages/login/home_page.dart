@@ -60,7 +60,9 @@ class Home_Page extends StatelessWidget {
       onTap: () {
         if (texto == 'Iniciar') {
           Navigator.popAndPushNamed(context, 'inicio');
-        } else {}
+        } else {
+          Navigator.popAndPushNamed(context, 'registro');
+        }
       },
       child: Container(
         decoration: BoxDecoration(

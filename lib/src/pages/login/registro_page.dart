@@ -1,28 +1,12 @@
-import 'package:app_arriendosu/src/pages/login/inicio_controller.dart';
+import 'package:app_arriendosu/src/pages/login/home_page.dart';
+import 'package:app_arriendosu/src/pages/login/registro_controller.dart';
 import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
-import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
-//*Pagina para iniciar sesion
-class Inicio_Page extends StatefulWidget {
-  @override
-  State<Inicio_Page> createState() => _Inicio_PageState();
-}
-
-class _Inicio_PageState extends State<Inicio_Page> {
-  InicialController _inicialController = new InicialController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _inicialController.init(context);
-    });
-  }
+class RegistroPage extends StatelessWidget {
+  RegistroController _registroController = new RegistroController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +24,10 @@ class _Inicio_PageState extends State<Inicio_Page> {
         actions: [
           TextButton(
               onPressed: () {
-                Navigator.popAndPushNamed(context, 'registro');
+                Navigator.popAndPushNamed(context, 'inicio');
               },
               child: const Text(
-                'Registrar',
+                'Iniciar',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -57,7 +41,6 @@ class _Inicio_PageState extends State<Inicio_Page> {
       body: SingleChildScrollView(
         child: GestureDetector(
           onTap: () {
-            //*Quitar el teclado
             final FocusScopeNode focus = FocusScope.of(context);
             if (!focus.hasPrimaryFocus && focus.hasFocus) {
               FocusManager.instance.primaryFocus!.unfocus();
@@ -72,7 +55,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text(
-                        'Iniciar',
+                        'Registrarse',
                         style: TextStyle(
                             fontSize: 45, fontWeight: FontWeight.bold),
                       ),
@@ -97,27 +80,14 @@ class _Inicio_PageState extends State<Inicio_Page> {
                     const SizedBox(
                       height: 80,
                     ),
-                    _formTextField(),
-                    _textContrasena(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ButtonApp(
-                      direccion: 'home',
-                      texto: 'Iniciar',
-                      onpress: _inicialController.login,
-                      
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    _buttonConectar(
-                        'Continuar con google', 'assets/registro/google.png'),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    _buttonConectar(
-                        'Continuar con facebook', 'assets/registro/face.png')
+                     _formTextField(),
+                     const SizedBox(
+                      height: 80,
+                     ),
+                     ButtonApp(
+                      onpress: _registroController.login, 
+                      direccion: 'inicio', 
+                      texto: 'Registrarse')
                   ],
                 ),
               )
@@ -128,9 +98,6 @@ class _Inicio_PageState extends State<Inicio_Page> {
     );
   }
 
-//*Formulario donde:
-//*Campo para ingresar el nombre de usuario
-//*Campo para ingresar la contraseña
   Widget _formTextField() {
     return Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -147,8 +114,24 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 child: _textFieldUsuario(),
               ),
             ),
+           
             const SizedBox(
               height: 15,
+            ),
+             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 35),
+              child: Container(
+                height: 64,
+                decoration: BoxDecoration(
+                  color: utils.Colors.grisMedio,
+                  borderRadius: BorderRadius.circular(35),
+                ),
+                child: _textFielCorreo(),
+              ),
+            ),
+
+             const SizedBox(
+              height: 50,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
@@ -161,14 +144,27 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 child: _textFieldContrasena(),
               ),
             ),
+             const SizedBox(
+              height: 15,
+            ),
+             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 35),
+              child: Container(
+                height: 64,
+                decoration: BoxDecoration(
+                  color: utils.Colors.grisMedio,
+                  borderRadius: BorderRadius.circular(35),
+                ),
+                child: _textFieldContrasena2(),
+              ),
+            ),
           ],
         ));
   }
 
-//*Campo para llenar el nombre de usuario
   TextFormField _textFieldUsuario() {
     return TextFormField(
-      controller: _inicialController.usuarioController,
+      controller: _registroController.usuarioController,
       autocorrect: false,
       keyboardType: TextInputType.name,
       decoration: const InputDecoration(
@@ -188,11 +184,33 @@ class _Inicio_PageState extends State<Inicio_Page> {
       cursorColor: Color(0xff3A4750),
     );
   }
-  
-//*Campo para llenar la contraseña
+
+   TextFormField _textFielCorreo() {
+    return TextFormField(
+      controller: _registroController.correoController,
+      autocorrect: false,
+      keyboardType: TextInputType.emailAddress,
+      decoration: const InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Correo electronico',
+          labelText: 'Correo',
+          prefixIcon: Icon(
+            Icons.email,
+            size: 30,
+          ),
+          iconColor: Color(0xff3A4750),
+          labelStyle: TextStyle(
+              color: Color(0xff3A4750),
+              fontSize: 20,
+              fontWeight: FontWeight.w600)),
+      cursorHeight: 20,
+      cursorColor: Color(0xff3A4750),
+    );
+  }
+
   TextFormField _textFieldContrasena() {
     return TextFormField(
-      controller: _inicialController.passwordController,
+      controller: _registroController.passwordController,
       autocorrect: false,
       obscureText: true,
       keyboardType: TextInputType.visiblePassword,
@@ -210,71 +228,29 @@ class _Inicio_PageState extends State<Inicio_Page> {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
-     
     );
   }
 
-
-
-//*TextButton si la persona olvido su contraseña
-  Widget _textContrasena() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 30, top: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          TextButton(
-              onPressed: () {},
-              child: const Text(
-                '¿Olvido su contraseña?',
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.black),
-              )),
-        ],
-      ),
-    );
-  }
-
-//*Ingresar con una cuneta de google o facebook
-  Widget _buttonConectar(String texto, String linkImge) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(35),
-            boxShadow: const[
-              BoxShadow(
-                color: Colors.grey,
-                spreadRadius: 0.2,
-                blurRadius: 5,
-                offset: Offset(0, 2),
-              )
-            ]),
-        height: 64,
-        width: 340,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            CircleAvatar(
-              //backgroundImage: NetworkImage(linkImge),
-              backgroundImage: AssetImage(linkImge),
-              backgroundColor: Colors.white,
-            ),
-            Text(
-              texto,
-              style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500),
-            ),
-            IconButton(
-                onPressed: () {}, icon: Icon(Icons.arrow_forward_ios_rounded))
-          ],
-        ),
-      ),
+  TextFormField _textFieldContrasena2() {
+    return TextFormField(
+      controller: _registroController.confirmarPasswordController,
+      autocorrect: false,
+      obscureText: true,
+      keyboardType: TextInputType.visiblePassword,
+      decoration: const InputDecoration(
+          border: InputBorder.none,
+          labelText: 'Confirmar Contraseña',
+          prefixIcon: Icon(
+            Icons.lock,
+            size: 30,
+          ),
+          iconColor: Color(0xff3A4750),
+          labelStyle: TextStyle(
+              color: Color(0xff3A4750),
+              fontSize: 20,
+              fontWeight: FontWeight.w600)),
+      cursorHeight: 15,
+      cursorColor: Color(0xff3A4750),
     );
   }
 }
