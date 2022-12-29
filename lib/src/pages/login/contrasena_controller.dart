@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ContrasenaController{
+class ContrasenaController {
   late BuildContext context;
+  TextEditingController correoController = new TextEditingController();
 
-  TextEditingController correoController    = new TextEditingController();
  
-  Future init(BuildContext context) async {
-    this.context = context;
+
+  Future init (BuildContext context, TextEditingController correo) async {
+    this.context = await context;
   }
 
-  void login() {
+  String login() {
     String email = correoController.text;
-    
-    print('$email');
+    return email;
   }
 }

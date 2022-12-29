@@ -1,13 +1,19 @@
+import 'package:app_arriendosu/src/pages/login/contrasena_controller.dart';
 import 'package:flutter/material.dart';
-//*Boton que se usa en todo el loguin 
-//*ejemplo en iniciar 
+
+//*Boton que se usa en todo el loguin
+//*ejemplo en iniciar
 class ButtonApp extends StatelessWidget {
   String direccion;
   String texto;
   Function onpress;
+  String correo;
 
   ButtonApp(
-      {required this.onpress, required this.direccion, required this.texto});
+      {required this.onpress,
+      required this.direccion,
+      required this.texto,
+      this.correo = ''});
 
   @override
   Widget build(BuildContext context) {

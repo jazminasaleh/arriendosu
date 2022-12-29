@@ -1,6 +1,6 @@
-import 'dart:math';
-
 import 'package:app_arriendosu/src/pages/login/contrasena_controller.dart';
+import 'package:app_arriendosu/src/pages/login/nueva_contrasena_controller.dart';
+import 'package:app_arriendosu/src/pages/login/nueva_contrasena_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,10 +8,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../widgets/button.dart';
 
 class OlvidarContrasenaPage extends StatelessWidget {
-  ContrasenaController _contrasenaController = new ContrasenaController();
+  ContrasenaController contrasenaController = new ContrasenaController();
 
   @override
   Widget build(BuildContext context) {
+    contrasenaController.init(context, contrasenaController.correoController);
     return Scaffold(
       backgroundColor: utils.Colors.ocre,
       appBar: AppBar(
@@ -80,26 +81,48 @@ class OlvidarContrasenaPage extends StatelessWidget {
                   ),
                 ),
                 child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(40),
-                        child: Text(
-                          'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                        ),
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(40),
+                      child: Text(
+                        'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500),
                       ),
-                     _fromTextField(),
-                      const SizedBox(
+                    ),
+                    _fromTextField(),
+                    const SizedBox(
                       height: 40,
-                     ),
-                      ButtonApp(
-                      onpress: _contrasenaController.login, 
-                      direccion: 'inicio', 
-                      texto: 'Enviar')
-                    ],
-                  ),
-                
+                    ),
+                    GestureDetector(
+                      onTap: () {
+        
+        Navigator.push(context, MaterialPageRoute(builder: (context) => NuevaContrasenaPage(correo: contrasenaController.correoController.text)
+        ));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(35),
+        ),
+        height: 64,
+        width: 340,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Enviar',
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+      ),
+    ),
+                  ],
+                ),
               )
             ],
           ),
@@ -110,28 +133,26 @@ class OlvidarContrasenaPage extends StatelessWidget {
 
   Widget _fromTextField() {
     return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-       child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFielCorreo(),
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: Container(
+              height: 64,
+              decoration: BoxDecoration(
+                color: utils.Colors.grisMedio,
+                borderRadius: BorderRadius.circular(35),
               ),
+              child: _textFielCorreo(),
             ),
-          ]
-       )
-        );
+          ),
+        ]));
   }
 
   TextFormField _textFielCorreo() {
     return TextFormField(
-      controller: _contrasenaController.correoController,
+      //TODO: cambiar
+      controller: contrasenaController.correoController,
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
       decoration: const InputDecoration(
