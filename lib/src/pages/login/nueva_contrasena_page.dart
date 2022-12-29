@@ -1,16 +1,15 @@
-import 'package:app_arriendosu/src/pages/login/contrasena_page.dart';
-import 'package:app_arriendosu/src/pages/login/nueva_contrasena_controller.dart';
-import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:flutter/material.dart';
-import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:app_arriendosu/src/widgets/button.dart';
+import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+import 'package:app_arriendosu/src/pages/login/login.dart';
 
 class NuevaContrasenaPage extends StatelessWidget {
   String correo;
   NuevaContrasenaPage({super.key, required this.correo});
 
-  NuevaContrasenaController _contrasenaController =
-      new NuevaContrasenaController();
+  NuevaContrasenaController _contrasenaController = new NuevaContrasenaController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class NuevaContrasenaPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, 'home');
+            Navigator.popAndPushNamed(context, 'olvidoContrasena');
           },
           icon: const FaIcon(FontAwesomeIcons.arrowLeft),
           iconSize: 20,
@@ -30,8 +29,8 @@ class NuevaContrasenaPage extends StatelessWidget {
               onPressed: () {
                 Navigator.popAndPushNamed(context, 'inicio');
               },
-              child: Text(
-                '',
+              child: const Text(
+                'Iniciar',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -42,6 +41,7 @@ class NuevaContrasenaPage extends StatelessWidget {
           ),
         ],
       ),
+        
       body: SingleChildScrollView(
         child: GestureDetector(
           onTap: () {
@@ -57,7 +57,7 @@ class NuevaContrasenaPage extends StatelessWidget {
                 child: Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const[
                       Text(
                         'Nueva contraseña',
                         style: TextStyle(
@@ -92,8 +92,18 @@ class NuevaContrasenaPage extends StatelessWidget {
                           color: utils.Colors.grisMedio,
                           borderRadius: BorderRadius.circular(35),
                         ),
-                        child: Row(
-                          children: [Text(correo)],
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.email, color: Colors.black, size: 30,),
+                              Padding(
+                              padding: EdgeInsets.only(left: 13),
+                              child: Text(correo, style: TextStyle(color: Colors.black,  fontSize: 20,
+                                    fontWeight: FontWeight.w600),),
+                            )],
+                          ),
                         ),
                       ),
                     ),
@@ -174,7 +184,7 @@ class NuevaContrasenaPage extends StatelessWidget {
       keyboardType: TextInputType.name,
       decoration: const InputDecoration(
           border: InputBorder.none,
-          labelText: 'Codigo verificacion',
+          labelText: 'Código verificación',
           prefixIcon: Icon(
             Icons.password,
             size: 30,

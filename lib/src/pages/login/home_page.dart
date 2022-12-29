@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 //*Pagina principal de bienvenida

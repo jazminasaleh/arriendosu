@@ -1,9 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+
 import 'package:app_arriendosu/src/pages/login/inicio_controller.dart';
 import 'package:app_arriendosu/src/widgets/button.dart';
-import 'package:flutter/material.dart';
-import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+
+
+
 import 'package:flutter/scheduler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 
 //*Pagina para iniciar sesion

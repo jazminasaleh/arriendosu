@@ -1,9 +1,9 @@
-import 'package:app_arriendosu/src/pages/login/contrasena_controller.dart';
-import 'package:app_arriendosu/src/pages/login/nueva_contrasena_controller.dart';
-import 'package:app_arriendosu/src/pages/login/nueva_contrasena_page.dart';
-import 'package:flutter/material.dart';
-import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart';
+
+import 'package:app_arriendosu/src/pages/login/login.dart';
+import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+
 
 import '../../widgets/button.dart';
 
@@ -18,7 +18,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, 'home');
+            Navigator.popAndPushNamed(context, 'inicio');
           },
           icon: const FaIcon(FontAwesomeIcons.arrowLeft),
           iconSize: 20,
@@ -82,7 +82,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(40),
                       child: Text(
                         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
@@ -96,31 +96,32 @@ class OlvidarContrasenaPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-        
-        Navigator.push(context, MaterialPageRoute(builder: (context) => NuevaContrasenaPage(correo: contrasenaController.correoController.text)
-        ));
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(35),
-        ),
-        height: 64,
-        width: 340,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Enviar',
-              style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
-      ),
-    ),
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NuevaContrasenaPage(correo: contrasenaController.correoController.text)
+            )
+           );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        height: 64,
+                        width: 340,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const[
+                            Text(
+                              'Enviar',
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -151,7 +152,6 @@ class OlvidarContrasenaPage extends StatelessWidget {
 
   TextFormField _textFielCorreo() {
     return TextFormField(
-      //TODO: cambiar
       controller: contrasenaController.correoController,
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
