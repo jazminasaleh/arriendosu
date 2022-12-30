@@ -181,7 +181,7 @@ class NuevaContrasenaPage extends StatelessWidget {
     return TextFormField(
       controller: _contrasenaController.codigoController,
       autocorrect: false,
-      keyboardType: TextInputType.name,
+      keyboardType: TextInputType.number,
       decoration: const InputDecoration(
           border: InputBorder.none,
           labelText: 'Código verificación',
