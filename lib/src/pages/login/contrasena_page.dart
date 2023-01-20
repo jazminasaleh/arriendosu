@@ -14,7 +14,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     contrasenaController.init(context, contrasenaController.correoController);
     return Scaffold(
-      backgroundColor: utils.Colors.ocre,
+      backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -22,7 +22,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
           },
           icon: const FaIcon(FontAwesomeIcons.arrowLeft),
           iconSize: 20,
-          color: Colors.black,
+          color: utils.Colors.blanco,
         ),
         actions: [
           TextButton(
@@ -34,7 +34,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    color: utils.Colors.blanco),
               )),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.05,
@@ -62,6 +62,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 45,
                           fontWeight: FontWeight.bold,
+                          color: utils.Colors.blanco
                         ),
                       ),
                       const SizedBox(
@@ -74,7 +75,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
               Container(
                 height: 700,
                 decoration: const BoxDecoration(
-                  color: utils.Colors.grisClaro,
+                  color: utils.Colors.azulOscuro,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -87,7 +88,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                       child: Text(
                         'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                            fontSize: 20, fontWeight: FontWeight.w500, color: utils.Colors.blanco),
                       ),
                     ),
                     _fromTextField(),
@@ -102,7 +103,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: utils.Colors.ocre,
                           borderRadius: BorderRadius.circular(35),
                         ),
                         height: 64,

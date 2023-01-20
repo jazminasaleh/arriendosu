@@ -33,7 +33,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: utils.Colors.ocre,
+      backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -41,7 +41,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
           },
           icon: const FaIcon(FontAwesomeIcons.arrowLeft),
           iconSize: 20,
-          color: Colors.black,
+          color: utils.Colors.blanco,
         ),
         actions: [
           TextButton(
@@ -53,7 +53,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    color: utils.Colors.blanco),
               )),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.05,
@@ -80,7 +80,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                       Text(
                         'Iniciar',
                         style: TextStyle(
-                            fontSize: 45, fontWeight: FontWeight.bold),
+                            fontSize: 45, fontWeight: FontWeight.bold, color: utils.Colors.blanco),
                       ),
                     ],
                   ),
@@ -92,7 +92,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
               Container(
                 height: 700,
                 decoration: const BoxDecoration(
-                  color: utils.Colors.grisClaro,
+                  color: utils.Colors.azulOscuro,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -238,7 +238,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w800,
-                    color: Colors.black),
+                    color: utils.Colors.grisClaro),
               )),
         ],
       ),

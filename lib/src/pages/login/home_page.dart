@@ -7,7 +7,7 @@ class Home_Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: utils.Colors.fondoOscuro,
       body: Column(
         children: [
           SizedBox(
@@ -17,7 +17,7 @@ class Home_Page extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.40,
             width: MediaQuery.of(context).size.width * 100,
             decoration: const BoxDecoration(
-                color: utils.Colors.ocre,
+                color: utils.Colors.azulOscuro,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40),
                   topRight: Radius.circular(40),
@@ -29,20 +29,20 @@ class Home_Page extends StatelessWidget {
                 children: [
                   const Text(
                     'Bienvenido',
-                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold, color: utils.Colors.blanco),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   const Text(
                     'Amet minim mollit non deserunt ullamco est sitt aliqua dolor do a sunt nostrud amet.',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.Colors.blanco),
                   ),
                   Expanded(child: Container()),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _button(Colors.black, 'Iniciar', Colors.white, context),
+                      _button(utils.Colors.ocre, 'Iniciar', Colors.white, context),
                       _button(Colors.white, 'Registrarse', Colors.black, context),
                     ],
                   ),

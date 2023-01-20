@@ -11,7 +11,7 @@ class RegistroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: utils.Colors.ocre,
+      backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -19,7 +19,7 @@ class RegistroPage extends StatelessWidget {
           },
           icon: const FaIcon(FontAwesomeIcons.arrowLeft),
           iconSize: 20,
-          color: Colors.black,
+          color: utils.Colors.blanco,
         ),
         actions: [
           TextButton(
@@ -31,7 +31,7 @@ class RegistroPage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    color: utils.Colors.blanco),
               )),
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.05,
@@ -57,7 +57,10 @@ class RegistroPage extends StatelessWidget {
                       Text(
                         'Registrarse',
                         style: TextStyle(
-                            fontSize: 45, fontWeight: FontWeight.bold),
+                            fontSize: 45, 
+                            fontWeight: FontWeight.bold,
+                            color: utils.Colors.blanco
+                        ),
                       ),
                     ],
                   ),
@@ -69,7 +72,7 @@ class RegistroPage extends StatelessWidget {
               Container(
                 height: 700,
                 decoration: const BoxDecoration(
-                  color: utils.Colors.grisClaro,
+                  color: utils.Colors.azulOscuro,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
