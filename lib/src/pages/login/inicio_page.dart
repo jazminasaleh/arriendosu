@@ -109,7 +109,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                       height: 20,
                     ),
                     ButtonApp(
-                      direccion: 'filtrar',
+                      direccion: 'inicioPublicaciones',
                       texto: 'Iniciar',
                       onpress: _inicialController.login,
                       

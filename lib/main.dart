@@ -1,4 +1,5 @@
 
+import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         'inicio': (BuildContext context) => Inicio_Page(),
         'registro': (BuildContext context) => RegistroPage(),
         'olvidoContrasena': (BuildContext context) => OlvidarContrasenaPage(),
+        'inicioPublicaciones': (BuildContext context) => InicioPublicaciones()
       },
     );
   }
