@@ -12,12 +12,12 @@ class InicioPublicaciones extends StatelessWidget {
           precio: '350.000',
           iamgen: 'assets/publicaciones/pub1.jpg'),
       ListaFavoritos(
-          direccion: 'Calle 47 # 14-25',
+          direccion: 'Carrear 10 # 10-78',
           barrio: 'Santa Barbara 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub2.jpg'),
       ListaFavoritos(
-          direccion: 'Calle 47 # 14-25',
+          direccion: 'Carrera 18 # 104-125',
           barrio: 'Santa Barbara 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub3.jpg'),
@@ -93,26 +93,72 @@ class InicioPublicaciones extends StatelessWidget {
                     ],
                   ),
                   _buscador(),
+                  SizedBox(height: 10,),
                   _listaFavoritos(listaFavoritos: listaFavoritos),
                   SizedBox(
-                    height: 50,
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(padding: EdgeInsets.only(left: 10),
+                      child: Text('Sugerencias', style: TextStyle(color: utils.Colors.blanco, fontSize: 16, fontWeight: FontWeight.w500))),
+                      TextButton(
+                        onPressed: (){}, 
+                        child: Text('Ver todo', style: TextStyle(fontSize: 16),)
+                      ),
+                      
+                    ],
                   ),
                   Container(
                     width: double.infinity,
-                    height: 200,
-                    color: Colors.red,
+                    height: 180,
                     child: Column(
                       children: [
                         Expanded(
                           child: ListView.builder(
-                            itemCount: 20,
+                            itemCount: listaFavoritos.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
-                                height: 150,
-                                width: 100,
-                                color: Colors.green,
+                                height: 130,
+                               width: 386,
                                 margin: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10),
+                                    vertical: 10, horizontal: 10
+                                ),
+                                decoration: BoxDecoration(
+                                  color: utils.Colors.azulOscuro,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(listaFavoritos[index].iamgen, width: 110 ,),
+                                      SizedBox(width: 10,),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(listaFavoritos[index].direccion, style: TextStyle(color: utils.Colors.blanco, fontSize: 17, fontWeight: FontWeight.w500),),
+                                          Row(
+                                            children: [
+                                               Icon(Icons.star, color: utils.Colors.ocre,),
+                                               SizedBox(width: 5,),
+                                              Text('4.8', style: TextStyle(color: utils.Colors.blanco, fontSize: 16),)
+                                            ],
+                                          ),
+                                          Text(listaFavoritos[index].barrio, style: TextStyle(fontSize: 16, color: utils.Colors.blanco),),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.monetization_on, color: utils.Colors.ocre,),
+                                              Text(listaFavoritos[index].precio, style: TextStyle(color: utils.Colors.ocre, fontSize: 20),)
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
                               );
                             },
                           ),
@@ -130,7 +176,7 @@ class _listaFavoritos extends StatelessWidget {
   const _listaFavoritos({
     required this.listaFavoritos,
   });
-  
+   
   final List<ListaFavoritos> listaFavoritos;
 
   @override
