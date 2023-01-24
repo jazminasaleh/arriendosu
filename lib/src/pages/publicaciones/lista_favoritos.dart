@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ListaFavoritos {
   final String direccion;
@@ -14,27 +14,27 @@ class ListaLlenaFavoritos{
 final listaFavoritos = <ListaFavoritos>[
       ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
-          barrio: 'Santa Barbara 1',
+          barrio: 'Santa Maria 1',
           precio: '350.000',
           iamgen: 'assets/publicaciones/pub1.jpg'),
       ListaFavoritos(
           direccion: 'Carrear 10 # 10-78',
-          barrio: 'Santa Barbara 2',
+          barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub2.jpg'),
       ListaFavoritos(
           direccion: 'Carrera 18 # 104-125',
-          barrio: 'Santa Barbara 2',
+          barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub3.jpg'),
       ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
-          barrio: 'Santa Barbara 2',
+          barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub4.jpg'),
       ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
-          barrio: 'Santa Barbara 2',
+          barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub5.jpg'),
        ListaFavoritos(
@@ -44,17 +44,17 @@ final listaFavoritos = <ListaFavoritos>[
           iamgen: 'assets/publicaciones/pub1.jpg'),
       ListaFavoritos(
           direccion: 'Carrear 10 # 10-78',
-          barrio: 'Santa Barbara 2',
+          barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub2.jpg'),
       ListaFavoritos(
           direccion: 'Carrera 18 # 104-125',
-          barrio: 'Santa Barbara 2',
+          barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub3.jpg'),
       ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
-          barrio: 'Santa Barbara 2',
+          barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub4.jpg'),
       ListaFavoritos(

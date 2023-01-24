@@ -1,13 +1,14 @@
 import 'package:app_arriendosu/src/pages/publicaciones/lista_favoritos.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/lista_sugerencias_page.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/lista_sugernecias.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 class InicioPublicaciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-     
     ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
+    ListaLlenaSugerencias listaSugernecias = new ListaLlenaSugerencias();
     return Scaffold(
         backgroundColor: utils.Colors.fondoOscuro,
         appBar: AppBar(
@@ -42,11 +43,20 @@ class InicioPublicaciones extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Icon(
+                  IconButton(
+                    onPressed: (){
+                      Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ListaSugerenciasPage(lista: listaFavoritos.listaFavoritos, titulo: 'Guardados',)),
+                            );
+                    }, 
+                    icon: Icon(
                     Icons.bookmark_outline_rounded,
                     color: utils.Colors.blanco,
                     size: 35,
                   ),
+                  )
                 ],
               ),
             ),
@@ -72,7 +82,8 @@ class InicioPublicaciones extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                 _listaFavoritos(listaFavoritos: listaFavoritos.listaFavoritos),
+                  _listaFavoritos(
+                      listaFavoritos: listaFavoritos.listaFavoritos),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -85,10 +96,10 @@ class InicioPublicaciones extends StatelessWidget {
                                   fontWeight: FontWeight.w500))),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(context,
+                            Navigator.push(
+                              context,
                               MaterialPageRoute(
-                                builder: (context) => ListaSugerenciasPage()
-                              ),
+                                  builder: (context) => ListaSugerenciasPage(lista: listaSugernecias.listaSugerencias, titulo: 'Resultados',)),
                             );
                           },
                           child: Text(
@@ -97,22 +108,21 @@ class InicioPublicaciones extends StatelessWidget {
                           )),
                     ],
                   ),
-                  _listaSugerencias(listaFavoritos: listaFavoritos.listaFavoritos)
+                  _listaSugerencias(
+                      listaSugerencias: listaSugernecias.listaSugerencias)
                 ],
               )),
         ));
   }
 }
 
-
-
 class _listaSugerencias extends StatelessWidget {
   const _listaSugerencias({
     Key? key,
-    required this.listaFavoritos,
+    required this.listaSugerencias,
   }) : super(key: key);
 
-  final List<ListaFavoritos> listaFavoritos;
+  final List<ListaSugernecias> listaSugerencias;
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +133,7 @@ class _listaSugerencias extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: listaFavoritos.length,
+              itemCount: listaSugerencias.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   height: 130,
@@ -138,7 +148,7 @@ class _listaSugerencias extends StatelessWidget {
                     child: Row(
                       children: [
                         Image.asset(
-                          listaFavoritos[index].iamgen,
+                          listaSugerencias[index].iamgen,
                           width: 110,
                         ),
                         SizedBox(
@@ -149,19 +159,19 @@ class _listaSugerencias extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              listaFavoritos[index].direccion,
+                              listaSugerencias[index].direccion,
                               style: TextStyle(
                                   color: utils.Colors.blanco,
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              listaFavoritos[index].barrio,
+                              listaSugerencias[index].barrio,
                               style: TextStyle(
                                   fontSize: 16, color: utils.Colors.blanco),
                             ),
                             Text(
-                              '\$${listaFavoritos[index].precio}',
+                              '\$${listaSugerencias[index].precio}',
                               style: TextStyle(
                                   color: utils.Colors.ocre,
                                   fontSize: 20,
