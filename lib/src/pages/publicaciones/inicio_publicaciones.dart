@@ -1,37 +1,13 @@
 import 'package:app_arriendosu/src/pages/publicaciones/lista_favoritos.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/lista_sugerencias_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 class InicioPublicaciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final listaFavoritos = <ListaFavoritos>[
-      ListaFavoritos(
-          direccion: 'Calle 47 # 14-25',
-          barrio: 'Santa Barbara 1',
-          precio: '350.000',
-          iamgen: 'assets/publicaciones/pub1.jpg'),
-      ListaFavoritos(
-          direccion: 'Carrear 10 # 10-78',
-          barrio: 'Santa Barbara 2',
-          precio: '340.000',
-          iamgen: 'assets/publicaciones/pub2.jpg'),
-      ListaFavoritos(
-          direccion: 'Carrera 18 # 104-125',
-          barrio: 'Santa Barbara 2',
-          precio: '340.000',
-          iamgen: 'assets/publicaciones/pub3.jpg'),
-      ListaFavoritos(
-          direccion: 'Calle 47 # 14-25',
-          barrio: 'Santa Barbara 2',
-          precio: '340.000',
-          iamgen: 'assets/publicaciones/pub4.jpg'),
-      ListaFavoritos(
-          direccion: 'Calle 47 # 14-25',
-          barrio: 'Santa Barbara 2',
-          precio: '340.000',
-          iamgen: 'assets/publicaciones/pub5.jpg')
-    ];
+     
+    ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
     return Scaffold(
         backgroundColor: utils.Colors.fondoOscuro,
         appBar: AppBar(
@@ -56,7 +32,7 @@ class InicioPublicaciones extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.38,
+                    width: MediaQuery.of(context).size.width * 0.30,
                   ),
                   Icon(
                     Icons.notifications_none_outlined,
@@ -93,82 +69,116 @@ class InicioPublicaciones extends StatelessWidget {
                     ],
                   ),
                   _buscador(),
-                  SizedBox(height: 10,),
-                  _listaFavoritos(listaFavoritos: listaFavoritos),
                   SizedBox(
                     height: 10,
                   ),
+                 _listaFavoritos(listaFavoritos: listaFavoritos.listaFavoritos),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(padding: EdgeInsets.only(left: 10),
-                      child: Text('Sugerencias', style: TextStyle(color: utils.Colors.blanco, fontSize: 16, fontWeight: FontWeight.w500))),
+                      Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text('Sugerencias',
+                              style: TextStyle(
+                                  color: utils.Colors.blanco,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500))),
                       TextButton(
-                        onPressed: (){}, 
-                        child: Text('Ver todo', style: TextStyle(fontSize: 16),)
-                      ),
-                      
+                          onPressed: () {
+                            Navigator.push(context,
+                              MaterialPageRoute(
+                                builder: (context) => ListaSugerenciasPage()
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Ver todo',
+                            style: TextStyle(fontSize: 16),
+                          )),
                     ],
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 180,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: listaFavoritos.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                height: 130,
-                               width: 386,
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10
-                                ),
-                                decoration: BoxDecoration(
-                                  color: utils.Colors.azulOscuro,
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(listaFavoritos[index].iamgen, width: 110 ,),
-                                      SizedBox(width: 10,),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(listaFavoritos[index].direccion, style: TextStyle(color: utils.Colors.blanco, fontSize: 17, fontWeight: FontWeight.w500),),
-                                          Row(
-                                            children: [
-                                               Icon(Icons.star, color: utils.Colors.ocre,),
-                                               SizedBox(width: 5,),
-                                              Text('4.8', style: TextStyle(color: utils.Colors.blanco, fontSize: 16),)
-                                            ],
-                                          ),
-                                          Text(listaFavoritos[index].barrio, style: TextStyle(fontSize: 16, color: utils.Colors.blanco),),
-                                          Row(
-                                            children: [
-                                              Icon(Icons.monetization_on, color: utils.Colors.ocre,),
-                                              Text(listaFavoritos[index].precio, style: TextStyle(color: utils.Colors.ocre, fontSize: 20),)
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                  _listaSugerencias(listaFavoritos: listaFavoritos.listaFavoritos)
                 ],
               )),
         ));
+  }
+}
+
+
+
+class _listaSugerencias extends StatelessWidget {
+  const _listaSugerencias({
+    Key? key,
+    required this.listaFavoritos,
+  }) : super(key: key);
+
+  final List<ListaFavoritos> listaFavoritos;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 180,
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: listaFavoritos.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 130,
+                  width: 386,
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: utils.Colors.azulOscuro,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          listaFavoritos[index].iamgen,
+                          width: 110,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              listaFavoritos[index].direccion,
+                              style: TextStyle(
+                                  color: utils.Colors.blanco,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              listaFavoritos[index].barrio,
+                              style: TextStyle(
+                                  fontSize: 16, color: utils.Colors.blanco),
+                            ),
+                            Text(
+                              '\$${listaFavoritos[index].precio}',
+                              style: TextStyle(
+                                  color: utils.Colors.ocre,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -176,7 +186,7 @@ class _listaFavoritos extends StatelessWidget {
   const _listaFavoritos({
     required this.listaFavoritos,
   });
-   
+
   final List<ListaFavoritos> listaFavoritos;
 
   @override
@@ -194,8 +204,7 @@ class _listaFavoritos extends StatelessWidget {
                 return Container(
                   height: 364,
                   width: 280,
-                  margin: EdgeInsets.symmetric(
-                      vertical: 10, horizontal: 10),
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       image: DecorationImage(
@@ -204,12 +213,10 @@ class _listaFavoritos extends StatelessWidget {
                         fit: BoxFit.cover,
                       )),
                   child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 10, bottom: 10, right: 10),
+                    padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           listaFavoritos[index].direccion,
@@ -224,8 +231,7 @@ class _listaFavoritos extends StatelessWidget {
                         Text(
                           listaFavoritos[index].barrio,
                           style: TextStyle(
-                              fontSize: 15,
-                              color: utils.Colors.blanco),
+                              fontSize: 15, color: utils.Colors.blanco),
                         ),
                         SizedBox(
                           height: 5,
@@ -281,7 +287,6 @@ class _buscador extends StatelessWidget {
         },
         child: Container(
           height: 60,
-          width: 385,
           decoration: BoxDecoration(
               color: utils.Colors.azulOscuro,
               borderRadius: BorderRadius.circular(10)),

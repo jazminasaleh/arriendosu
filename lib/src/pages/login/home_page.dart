@@ -23,7 +23,7 @@ class Home_Page extends StatelessWidget {
                   topRight: Radius.circular(40),
                 )),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 28),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

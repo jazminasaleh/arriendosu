@@ -1,4 +1,3 @@
-import 'package:app_arriendosu/src/pages/login/contrasena_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 //*Boton que se usa en todo el loguin
@@ -28,7 +27,7 @@ class ButtonApp extends StatelessWidget {
           borderRadius: BorderRadius.circular(35),
         ),
         height: 64,
-        width: 340,
+        width: 300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
