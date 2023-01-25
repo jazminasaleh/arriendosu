@@ -1,9 +1,10 @@
 import 'package:app_arriendosu/src/pages/publicaciones/lista_favoritos.dart';
-import 'package:app_arriendosu/src/pages/publicaciones/lista_sugerencias_page.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/listas_pages.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/lista_sugernecias.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
+//*Pagina donde muestra las publicaciones de sugerencia y guardadas
 class InicioPublicaciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -82,40 +83,68 @@ class InicioPublicaciones extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  _listaFavoritos(
-                      listaFavoritos: listaFavoritos.listaFavoritos),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text('Sugerencias',
-                              style: TextStyle(
-                                  color: utils.Colors.blanco,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500))),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ListaSugerenciasPage(lista: listaSugernecias.listaSugerencias, titulo: 'Resultados',)),
-                            );
-                          },
-                          child: Text(
-                            'Ver todo',
-                            style: TextStyle(fontSize: 16),
-                          )),
-                    ],
-                  ),
-                  _listaSugerencias(
-                      listaSugerencias: listaSugernecias.listaSugerencias)
+                  _listaFavoritos( listaFavoritos: listaFavoritos.listaFavoritos),
+                  _textSugerencias(context, listaSugernecias),
+                  _listaSugerencias(listaSugerencias: listaSugernecias.listaSugerencias)
                 ],
               )),
-        ));
+        ),
+        bottomNavigationBar: _buttonNavigationBar(),
+        );
+  }
+//*Texto de sugerincia
+//*Boton de ver todo para ver la lista de todas las sugerencias
+  Row _textSugerencias(BuildContext context, ListaLlenaSugerencias listaSugernecias) {
+    return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text('Sugerencias',
+                            style: TextStyle(
+                                color: utils.Colors.blanco,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500))),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ListaSugerenciasPage(lista: listaSugernecias.listaSugerencias, titulo: 'Resultados',)),
+                          );
+                        },
+                        child: Text(
+                          'Ver todo',
+                          style: TextStyle(fontSize: 16),
+                        )),
+                  ],
+                );
+  }
+//*El navegador de la parte inferior
+  BottomNavigationBar _buttonNavigationBar() {
+    return BottomNavigationBar(
+        backgroundColor: utils.Colors.fondoOscuro,
+        
+        items: [
+          new BottomNavigationBarItem(
+            icon: IconButton(icon: Icon(Icons.home, size: 35,), onPressed: (){},),
+            label: '',
+            
+          ),
+          new BottomNavigationBarItem(
+            icon: IconButton(icon: Icon(Icons.search_rounded, size: 35, color: utils.Colors.grisClaro,), onPressed: (){},),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: IconButton(icon: Icon(Icons.person, size:35, color: utils.Colors.grisClaro,), onPressed: (){},),
+            label: ''
+          ),
+      ]
+    );
   }
 }
 
+//*Muestra la lista de inmuebles sugeridos
 class _listaSugerencias extends StatelessWidget {
   const _listaSugerencias({
     Key? key,
@@ -128,7 +157,7 @@ class _listaSugerencias extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 180,
+      height: 200,
       child: Column(
         children: [
           Expanded(
@@ -147,9 +176,20 @@ class _listaSugerencias extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Image.asset(
-                          listaSugerencias[index].iamgen,
-                          width: 110,
+                        Padding(
+                          padding: EdgeInsets.only(left: 5),
+                          child: Container(
+                            width: 110,
+                            height: 110,
+                           decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                opacity: 0.50,
+                                image: AssetImage(listaSugerencias[index].iamgen),
+                                fit: BoxFit.cover,
+                              )
+                            ),
+                          ),
                         ),
                         SizedBox(
                           width: 10,
@@ -192,6 +232,7 @@ class _listaSugerencias extends StatelessWidget {
   }
 }
 
+//*Lista de los inmuebles gurdados o considerados como favoritos
 class _listaFavoritos extends StatelessWidget {
   const _listaFavoritos({
     required this.listaFavoritos,
@@ -218,7 +259,7 @@ class _listaFavoritos extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       image: DecorationImage(
-                        opacity: 0.60,
+                        opacity: 0.50,
                         image: AssetImage(listaFavoritos[index].iamgen),
                         fit: BoxFit.cover,
                       )),
@@ -248,12 +289,8 @@ class _listaFavoritos extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Icon(
-                              Icons.euro_symbol_rounded,
-                              color: utils.Colors.blanco,
-                            ),
                             Text(
-                              listaFavoritos[index].precio,
+                              '\$ ${listaFavoritos[index].precio}',
                               style: TextStyle(
                                   color: utils.Colors.blanco,
                                   fontSize: 20,
@@ -280,6 +317,7 @@ class _listaFavoritos extends StatelessWidget {
   }
 }
 
+//*Buscador que nos manda a los filtros
 class _buscador extends StatelessWidget {
   const _buscador({
     Key? key,

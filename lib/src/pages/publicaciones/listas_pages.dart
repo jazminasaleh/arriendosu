@@ -106,6 +106,7 @@ class ListaSugerenciasPage extends StatelessWidget {
           ),
         ),
       ),
+      
     );
   }
 }

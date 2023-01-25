@@ -1,5 +1,5 @@
 
-import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;

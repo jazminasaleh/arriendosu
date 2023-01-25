@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//*Inmuebles que fueron guardados
 class ListaFavoritos {
   final String direccion;
   final String barrio;
