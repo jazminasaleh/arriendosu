@@ -2,11 +2,11 @@ import 'package:app_arriendosu/src/pages/publicaciones/lista_favoritos.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
-class ListaSugerenciasPage extends StatelessWidget {
+class ListasPage extends StatelessWidget {
   final List lista;
   final String titulo;
 
-  ListaSugerenciasPage({super.key, required this.lista, required this.titulo});
+  ListasPage({super.key, required this.lista, required this.titulo});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,8 @@ class ListaSugerenciasPage extends StatelessWidget {
               icon: Icon(
                 Icons.view_module_sharp,
                 size: 35,
-              ))
+              )),
+          SizedBox(width: MediaQuery.of(context).size.width*0.02,)
         ],
       ),
       body: SingleChildScrollView(

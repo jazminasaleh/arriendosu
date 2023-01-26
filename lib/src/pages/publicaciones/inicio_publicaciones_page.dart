@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/perfil/perfil_page.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/lista_favoritos.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/listas_pages.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/lista_sugernecias.dart';
@@ -49,8 +50,9 @@ class InicioPublicaciones extends StatelessWidget {
                       Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ListaSugerenciasPage(lista: listaFavoritos.listaFavoritos, titulo: 'Guardados',)),
-                            );
+                                  builder: (context) => ListasPage(lista: listaFavoritos.listaFavoritos, titulo: 'Gurdaddos',)
+                              ),
+                      );
                     }, 
                     icon: Icon(
                     Icons.bookmark_outline_rounded,
@@ -89,56 +91,81 @@ class InicioPublicaciones extends StatelessWidget {
                 ],
               )),
         ),
-        bottomNavigationBar: _buttonNavigationBar(),
+        bottomNavigationBar: _bottomNavigationBar(listaFavoritos: listaFavoritos),
         );
   }
 //*Texto de sugerincia
 //*Boton de ver todo para ver la lista de todas las sugerencias
   Row _textSugerencias(BuildContext context, ListaLlenaSugerencias listaSugernecias) {
     return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text('Sugerencias',
-                            style: TextStyle(
-                                color: utils.Colors.blanco,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500))),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ListaSugerenciasPage(lista: listaSugernecias.listaSugerencias, titulo: 'Resultados',)),
-                          );
-                        },
-                        child: Text(
-                          'Ver todo',
-                          style: TextStyle(fontSize: 16),
-                        )),
-                  ],
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Text('Sugerencias',style: TextStyle(
+            color: utils.Colors.blanco,
+            fontSize: 16,
+            fontWeight: FontWeight.w500
+          ))),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListasPage(lista: listaSugernecias.listaSugerencias, titulo: 'Sugerencias',)),
                 );
+              },
+            child: Text(
+              'Ver todo',
+              style: TextStyle(fontSize: 16),
+            )),
+        ],
+    );
   }
+}
+
 //*El navegador de la parte inferior
-  BottomNavigationBar _buttonNavigationBar() {
+class _bottomNavigationBar extends StatelessWidget {
+  const _bottomNavigationBar({
+    Key? key,
+    required this.listaFavoritos,
+  }) : super(key: key);
+
+  final ListaLlenaFavoritos listaFavoritos;
+
+  @override
+  Widget build(BuildContext context) {
     return BottomNavigationBar(
-        backgroundColor: utils.Colors.fondoOscuro,
+    backgroundColor: utils.Colors.fondoOscuro,
+    
+    items: [
+      new BottomNavigationBarItem(
+        icon: IconButton(
+          icon: Icon(Icons.home, size: 35,), 
+          onPressed: (){
+
+          },
+        ),
+        label: '',
         
-        items: [
-          new BottomNavigationBarItem(
-            icon: IconButton(icon: Icon(Icons.home, size: 35,), onPressed: (){},),
-            label: '',
-            
-          ),
-          new BottomNavigationBarItem(
-            icon: IconButton(icon: Icon(Icons.search_rounded, size: 35, color: utils.Colors.grisClaro,), onPressed: (){},),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(icon: Icon(Icons.person, size:35, color: utils.Colors.grisClaro,), onPressed: (){},),
-            label: ''
-          ),
+      ),
+      new BottomNavigationBarItem(
+        icon: IconButton(icon: Icon(Icons.search_rounded, size: 35, color: utils.Colors.grisClaro,), onPressed: (){},),
+        label: '',
+      ),
+      BottomNavigationBarItem(
+        icon: IconButton(
+          icon: Icon(Icons.person, size:35, color: utils.Colors.grisClaro,), 
+          onPressed: (){
+            Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PerfilPage()),
+                        );
+          },
+        ),
+        label: ''
+      ),
       ]
     );
   }
