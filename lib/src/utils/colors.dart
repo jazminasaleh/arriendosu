@@ -8,4 +8,5 @@ class Colors {
   static const Color fondoOscuro = Color(0xff181A20);
   static const Color azulOscuro = Color(0xff1F222A);
   static const Color blanco = Color(0xffffffff);
+  static const Color rojo = Color(0xffF75555);
 }

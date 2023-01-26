@@ -14,12 +14,10 @@ class InicioPublicaciones extends StatelessWidget {
     return Scaffold(
         backgroundColor: utils.Colors.fondoOscuro,
         appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Icon(
+          leading: Text(''),
+          title: Row(
+            children: [
+              Icon(
                     Icons.home_work_rounded,
                     color: utils.Colors.ocre,
                     size: 35,
@@ -34,9 +32,13 @@ class InicioPublicaciones extends StatelessWidget {
                         color: utils.Colors.blanco,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.30,
-                  ),
+            ],
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
                   Icon(
                     Icons.notifications_none_outlined,
                     color: utils.Colors.blanco,
@@ -153,7 +155,7 @@ class _bottomNavigationBar extends StatelessWidget {
         icon: IconButton(icon: Icon(Icons.search_rounded, size: 35, color: utils.Colors.grisClaro,), onPressed: (){},),
         label: '',
       ),
-      BottomNavigationBarItem(
+      new BottomNavigationBarItem(
         icon: IconButton(
           icon: Icon(Icons.person, size:35, color: utils.Colors.grisClaro,), 
           onPressed: (){
