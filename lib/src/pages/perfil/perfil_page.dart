@@ -105,11 +105,11 @@ class PerfilPage extends StatelessWidget {
               _menuPerfil(
                 iconoItem: Icons.account_circle_outlined,
                 nomItem: 'Editar Perfil',
-                onPress: '',
+                onPress: 'editarperfil',
               ),
               _menuPerfil(
                 iconoItem: Icons.map_outlined,
-                nomItem: 'Ubicacion',
+                nomItem: 'Ubicación',
                 onPress: '',
               ),
               _menuPerfil(
