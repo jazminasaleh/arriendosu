@@ -186,7 +186,7 @@ class _listaSugerencias extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 200,
+      height: 250,
       child: Column(
         children: [
           Expanded(
@@ -227,12 +227,9 @@ class _listaSugerencias extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              listaSugerencias[index].direccion,
-                              style: TextStyle(
-                                  color: utils.Colors.blanco,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500),
+                           
+                            RichText(
+                              text: TextSpan(text: listaSugerencias[index].direccion, style: TextStyle(color: utils.Colors.blanco, fontWeight: FontWeight.w400))
                             ),
                             Text(
                               listaSugerencias[index].barrio,

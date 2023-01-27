@@ -12,12 +12,18 @@ class EditarPerfilPage extends StatefulWidget {
 
 class _EditarPerfilPageState extends State<EditarPerfilPage> {
   EditarPerfilController _editarController = new EditarPerfilController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text('Editar perfil'),
       ),
       body: SingleChildScrollView(
@@ -43,7 +49,10 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                     ButtonApp(
                         onpress: _editarController.datosUsuario,
                         direccion: 'inicio',
-                        texto: 'Guardar')
+                        texto: 'Guardar'),
+                    SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
               )
@@ -145,12 +154,10 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                                   onChanged: (value) {
                                     setState(() {
                                       (value)
-                                        ? widget.whatsapp = value!
-                                        :widget.whatsapp = value;
-                                    }
-                                    );
-                                  }
-                              )
+                                          ? widget.whatsapp = value!
+                                          : widget.whatsapp = value;
+                                    });
+                                  })
                             ],
                           ),
                           SizedBox(
@@ -164,20 +171,19 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                                 style: TextStyle(
                                     fontSize: 25, color: utils.Colors.blanco),
                               ),
-                               Switch(
+                              Switch(
                                   activeColor: utils.Colors.blanco,
                                   activeTrackColor: utils.Colors.ocre,
                                   value: widget.telegram,
                                   onChanged: (value) {
                                     setState(() {
                                       (value)
-                                        ?widget.telegram = value!
-                                        :widget.telegram = value;
+                                          ? widget.telegram = value!
+                                          : widget.telegram = value;
                                     });
                                   })
                             ],
                           ),
-                         
                         ],
                       ),
                     )
@@ -262,7 +268,6 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
     return TextFormField(
       controller: _editarController.telefonoController,
       autocorrect: false,
-      obscureText: true,
       keyboardType: TextInputType.number,
       decoration: const InputDecoration(
           border: InputBorder.none,
