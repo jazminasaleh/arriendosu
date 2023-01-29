@@ -1,7 +1,7 @@
-import 'package:app_arriendosu/src/pages/publicaciones/lista_favoritos.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
+//*Pagina de listas ya sea de favoritos o de sugernecias
 class ListasPage extends StatelessWidget {
   final List lista;
   final String titulo;

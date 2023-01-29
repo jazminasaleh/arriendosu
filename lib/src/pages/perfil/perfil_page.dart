@@ -1,19 +1,28 @@
-import 'package:app_arriendosu/src/pages/login/home_page.dart';
-import 'package:app_arriendosu/src/pages/publicaciones/listas_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:app_arriendosu/src/utils/colors.dart' as utils;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
+import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+//* Pagina de perfil, donde muestra el menu de opciones
+//*editar perfil, ubicacion, publicar y salir
 class PerfilPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+             Navigator.push(context,MaterialPageRoute(
+                builder: (context) => InicioPublicaciones()
+            ));
+          }
+        ),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
           child: Row(
-            children: [
+            children: const[
               Icon(
                 Icons.home_work_rounded,
                 color: utils.Colors.ocre,
@@ -45,7 +54,7 @@ class PerfilPage extends StatelessWidget {
                       child: Container(
                         height: 200,
                         width: 150,
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           backgroundImage: AssetImage('assets/perfil/foto.jpg'),
                           radius: 50,
                         ),
@@ -63,43 +72,46 @@ class PerfilPage extends StatelessWidget {
                         bottom: 18,
                         right: 12,
                         child: IconButton(
-                          icon: Icon(Icons.mode_edit_rounded,
+                          icon: const Icon(Icons.mode_edit_rounded,
                               size: 30, color: Colors.black),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Home_Page()));
+                                    builder: (context) => EditarPerfilPage()
+                                )
+                            );
                           },
-                        )),
+                        )
+                      ),
                   ],
                 ),
               ),
-              Text(
+              const Text(
                 'Jasmin Saleh',
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: utils.Colors.blanco),
               ),
-              Text(
+              const Text(
                 'jaminsaleh@uptc.edu.co',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: utils.Colors.blanco),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   height: 2,
                   color: utils.Colors.azulOscuro,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _menuPerfil(
@@ -131,6 +143,7 @@ class PerfilPage extends StatelessWidget {
   }
 }
 
+//*Menu del perfil
 class _menuPerfil extends StatelessWidget {
   String nomItem;
   IconData iconoItem;

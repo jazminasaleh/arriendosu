@@ -1,8 +1,7 @@
-import 'package:app_arriendosu/src/pages/perfil/perfil_page.dart';
-import 'package:app_arriendosu/src/pages/publicaciones/lista_favoritos.dart';
-import 'package:app_arriendosu/src/pages/publicaciones/listas_pages.dart';
-import 'package:app_arriendosu/src/pages/publicaciones/lista_sugernecias.dart';
 import 'package:flutter/material.dart';
+
+import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 //*Pagina donde muestra las publicaciones de sugerencia y guardadas

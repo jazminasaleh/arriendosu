@@ -1,8 +1,11 @@
-import 'package:app_arriendosu/src/pages/perfil/editar_perfil_controller.dart';
-import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:flutter/material.dart';
+
+import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
+import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
+//*Pagina para que el usuario pueda editar su perfil
+//*Editar datos como nombre, apellido, correo y telefono
 class EditarPerfilPage extends StatefulWidget {
   bool whatsapp = false;
   bool telegram = true;
@@ -21,7 +24,9 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+             Navigator.push(context,MaterialPageRoute(
+                builder: (context) => PerfilPage()
+            ));
           },
         ),
         title: Text('Editar perfil'),
@@ -43,14 +48,14 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                       height: 50,
                     ),
                     _formTextField(),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     ButtonApp(
                         onpress: _editarController.datosUsuario,
                         direccion: 'inicio',
                         texto: 'Guardar'),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     )
                   ],
@@ -62,7 +67,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
       ),
     );
   }
-
+//*Formulario para digitar la infromacion para editar el perfil
   Widget _formTextField() {
     return Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -122,7 +127,8 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 30),
+                          horizontal: 20, vertical: 30
+                      ),
                       child: Container(
                         height: 64,
                         decoration: BoxDecoration(
@@ -132,56 +138,62 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                         child: _textFieldTelefono(),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'whatsApp',
-                                style: TextStyle(
-                                    fontSize: 25, color: utils.Colors.blanco),
+                              Row(
+                                children: const[
+                                  Icon(Icons.whatsapp_outlined, size: 30, color: utils.Colors.blanco,),
+                                  SizedBox(width: 5,),
+                                  Text('whatsApp', style: TextStyle(fontSize: 25, color: utils.Colors.blanco),),
+                                ],
                               ),
                               Switch(
-                                  activeColor: utils.Colors.blanco,
-                                  activeTrackColor: utils.Colors.ocre,
-                                  value: widget.whatsapp,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      (value)
-                                          ? widget.whatsapp = value!
-                                          : widget.whatsapp = value;
-                                    });
-                                  })
+                                activeColor: utils.Colors.blanco,
+                                activeTrackColor: utils.Colors.ocre,
+                                value: widget.whatsapp,
+                                onChanged: (value) {
+                                  setState(() {
+                                    (value)
+                                      ? widget.whatsapp = value!
+                                      : widget.whatsapp = value;
+                                  });
+                                }
+                              )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Telegram',
-                                style: TextStyle(
-                                    fontSize: 25, color: utils.Colors.blanco),
+                              Row(
+                                children: const[
+                                  Icon(Icons.telegram, size: 30, color: utils.Colors.blanco,),
+                                  SizedBox(width: 5,),
+                                   Text('Telegram', style: TextStyle(fontSize: 25, color: utils.Colors.blanco),),
+                                ],
                               ),
                               Switch(
-                                  activeColor: utils.Colors.blanco,
-                                  activeTrackColor: utils.Colors.ocre,
-                                  value: widget.telegram,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      (value)
-                                          ? widget.telegram = value!
-                                          : widget.telegram = value;
-                                    });
-                                  })
+                                activeColor: utils.Colors.blanco,
+                                activeTrackColor: utils.Colors.ocre,
+                                value: widget.telegram,
+                                onChanged: (value) {
+                                  setState(() {
+                                    (value)
+                                      ? widget.telegram = value!
+                                      : widget.telegram = value;
+                                  });
+                                }
+                              )
                             ],
                           ),
                         ],
@@ -194,7 +206,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
           ],
         ));
   }
-
+//*Textfield del nombre del usuario
   TextFormField _textFieldNombre() {
     return TextFormField(
       controller: _editarController.nombreController,
@@ -217,7 +229,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
       cursorColor: Color(0xff3A4750),
     );
   }
-
+ //*Textfield del apellido del usuario
   TextFormField _textFieldApellido() {
     return TextFormField(
       controller: _editarController.apellidoController,
@@ -241,6 +253,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
     );
   }
 
+//*Textfield del correo del usuario
   TextFormField _textFieldCorreo() {
     return TextFormField(
       controller: _editarController.correoController,
@@ -264,6 +277,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
     );
   }
 
+//*Textfield del telefono del usuario
   TextFormField _textFieldTelefono() {
     return TextFormField(
       controller: _editarController.telefonoController,

@@ -1,5 +1,4 @@
-import 'package:app_arriendosu/src/pages/publicaciones/listas_pages.dart';
-import 'package:flutter/material.dart';
+
 //*Lista de inmuebles sugeridos
 class ListaSugernecias {
   final String direccion;

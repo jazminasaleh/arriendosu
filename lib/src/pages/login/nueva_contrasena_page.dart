@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+
+import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:app_arriendosu/src/pages/login/login.dart';
 
 class NuevaContrasenaPage extends StatelessWidget {

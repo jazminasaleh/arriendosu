@@ -1,9 +1,10 @@
-import 'package:app_arriendosu/src/pages/login/home_page.dart';
-import 'package:app_arriendosu/src/pages/login/registro_controller.dart';
-import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:flutter/material.dart';
-import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:app_arriendosu/src/pages/login/login.dart';
+import 'package:app_arriendosu/src/widgets/button.dart';
+import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+
 
 class RegistroPage extends StatelessWidget {
   RegistroController _registroController = new RegistroController();

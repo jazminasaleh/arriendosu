@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+//*Dtaos de usuario obtenidos a la hora de editar el perfil
 class EditarPerfilController {
   late BuildContext context;
 
