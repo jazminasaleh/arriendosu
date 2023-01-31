@@ -1,8 +1,11 @@
+import 'package:app_arriendosu/src/pages/perfil/editar_perfil_page.dart';
+import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
 import 'package:flutter/material.dart';
 
-import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
+
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+
 //* Pagina de perfil, donde muestra el menu de opciones
 //*editar perfil, ubicacion, publicar y salir
 class PerfilPage extends StatelessWidget {
@@ -122,7 +125,7 @@ class PerfilPage extends StatelessWidget {
               _menuPerfil(
                 iconoItem: Icons.map_outlined,
                 nomItem: 'Ubicación',
-                onPress: '',
+                onPress: 'ubicacion',
               ),
               _menuPerfil(
                 iconoItem: Icons.photo_camera_back_sharp,

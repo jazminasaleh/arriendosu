@@ -204,7 +204,8 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
               ),
             )
           ],
-        ));
+        )
+      );
   }
 //*Textfield del nombre del usuario
   TextFormField _textFieldNombre() {

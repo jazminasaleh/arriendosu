@@ -1,6 +1,7 @@
 
 import 'package:app_arriendosu/src/pages/perfil/editar_perfil_page.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
+import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         'registro': (BuildContext context) => RegistroPage(),
         'olvidoContrasena': (BuildContext context) => OlvidarContrasenaPage(),
         'inicioPublicaciones': (BuildContext context) => InicioPublicaciones(),
-        'editarperfil': (BuildContext context) => EditarPerfilPage()
+        'editarperfil': (BuildContext context) => EditarPerfilPage(),
+        'ubicacion': (BuildContext context) =>  UbicacionPage()
       },
     );
   }
