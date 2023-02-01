@@ -1,6 +1,6 @@
 
-import 'package:app_arriendosu/src/pages/perfil/editar_perfil_page.dart';
-import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
+import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
         'olvidoContrasena': (BuildContext context) => OlvidarContrasenaPage(),
         'inicioPublicaciones': (BuildContext context) => InicioPublicaciones(),
         'editarperfil': (BuildContext context) => EditarPerfilPage(),
-        'ubicacion': (BuildContext context) =>  UbicacionPage()
+        'ubicacion': (BuildContext context) =>  UbicacionPage(),
+        'perfil': (BuildContext context) => PerfilPage()
       },
     );
   }
