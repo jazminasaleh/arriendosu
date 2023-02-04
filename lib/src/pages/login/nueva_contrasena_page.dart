@@ -222,6 +222,11 @@ class NuevaContrasenaPage extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
+      validator: (value) {
+        return (value != null && value.length >= 6)
+            ? null
+            : 'La contraseña debe de ser de 6 caracteres';
+      },
     );
   }
 
@@ -245,6 +250,11 @@ class NuevaContrasenaPage extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
+      validator: (value) {
+        return (value != null && value.length >= 6)
+            ? null
+            : 'La contraseña debe de ser de 6 caracteres';
+      },
     );
   }
 }

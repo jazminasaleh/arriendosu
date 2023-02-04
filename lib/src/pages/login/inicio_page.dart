@@ -216,7 +216,11 @@ class _Inicio_PageState extends State<Inicio_Page> {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
-     
+     validator: (value) {
+        return (value != null && value.length >= 6)
+            ? null
+            : 'La contraseña debe de ser de 6 caracteres';
+      },
     );
   }
 
@@ -238,7 +242,8 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w800,
-                    color: utils.Colors.grisClaro),
+                    color: utils.Colors.grisClaro,
+                ),
               )),
         ],
       ),

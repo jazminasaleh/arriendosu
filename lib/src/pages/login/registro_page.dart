@@ -5,7 +5,6 @@ import 'package:app_arriendosu/src/pages/login/login.dart';
 import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
-
 class RegistroPage extends StatelessWidget {
   RegistroController _registroController = new RegistroController();
 
@@ -58,10 +57,9 @@ class RegistroPage extends StatelessWidget {
                       Text(
                         'Registrarse',
                         style: TextStyle(
-                            fontSize: 45, 
+                            fontSize: 45,
                             fontWeight: FontWeight.bold,
-                            color: utils.Colors.blanco
-                        ),
+                            color: utils.Colors.blanco),
                       ),
                     ],
                   ),
@@ -84,14 +82,14 @@ class RegistroPage extends StatelessWidget {
                     const SizedBox(
                       height: 80,
                     ),
-                     _formTextField(),
-                     const SizedBox(
+                    _formTextField(),
+                    const SizedBox(
                       height: 80,
-                     ),
-                     ButtonApp(
-                      onpress: _registroController.login, 
-                      direccion: 'inicio', 
-                      texto: 'Registrarse')
+                    ),
+                    ButtonApp(
+                        onpress: _registroController.login,
+                        direccion: 'inicio',
+                        texto: 'Registrarse')
                   ],
                 ),
               )
@@ -118,11 +116,10 @@ class RegistroPage extends StatelessWidget {
                 child: _textFieldUsuario(),
               ),
             ),
-           
             const SizedBox(
               height: 15,
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Container(
                 height: 64,
@@ -133,8 +130,7 @@ class RegistroPage extends StatelessWidget {
                 child: _textFielCorreo(),
               ),
             ),
-
-             const SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Padding(
@@ -148,10 +144,10 @@ class RegistroPage extends StatelessWidget {
                 child: _textFieldContrasena(),
               ),
             ),
-             const SizedBox(
+            const SizedBox(
               height: 15,
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Container(
                 height: 64,
@@ -189,7 +185,7 @@ class RegistroPage extends StatelessWidget {
     );
   }
 
-   TextFormField _textFielCorreo() {
+  TextFormField _textFielCorreo() {
     return TextFormField(
       controller: _registroController.correoController,
       autocorrect: false,
@@ -209,6 +205,14 @@ class RegistroPage extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 20,
       cursorColor: Color(0xff3A4750),
+      validator: (value) {
+        String pattern =
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        RegExp regExp = new RegExp(pattern);
+        return regExp.hasMatch(value ?? '')
+            ? null
+            : 'El valor ingresado no luce como un correo';
+      },
     );
   }
 
@@ -232,6 +236,11 @@ class RegistroPage extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
+      validator: (value) {
+        return (value != null && value.length >= 6)
+            ? null
+            : 'La contraseña debe de ser de 6 caracteres';
+      },
     );
   }
 
@@ -255,6 +264,11 @@ class RegistroPage extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
+      validator: (value) {
+        return (value != null && value.length >= 6)
+            ? null
+            : 'La contraseña debe de ser de 6 caracteres';
+      },
     );
   }
 }
