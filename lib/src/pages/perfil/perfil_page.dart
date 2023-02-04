@@ -2,9 +2,9 @@ import 'package:app_arriendosu/src/pages/perfil/editar_perfil_page.dart';
 import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
 import 'package:flutter/material.dart';
 
-
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+import 'package:image_picker/image_picker.dart';
 
 //* Pagina de perfil, donde muestra el menu de opciones
 //*editar perfil, ubicacion, publicar y salir
@@ -15,17 +15,17 @@ class PerfilPage extends StatelessWidget {
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: (){
-             Navigator.push(context,MaterialPageRoute(
-                builder: (context) => InicioPublicaciones()
-            ));
-          }
-        ),
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => InicioPublicaciones()));
+            }),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
           child: Row(
-            children: const[
+            children: const [
               Icon(
                 Icons.home_work_rounded,
                 color: utils.Colors.ocre,
@@ -77,16 +77,17 @@ class PerfilPage extends StatelessWidget {
                         child: IconButton(
                           icon: const Icon(Icons.mode_edit_rounded,
                               size: 30, color: Colors.black),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditarPerfilPage()
-                                )
-                            );
+                          onPressed: () async {
+                            final picker = new ImagePicker();
+                            final XFile? pickerFile = await picker.pickImage(
+                                source: ImageSource.gallery, imageQuality: 100);
+                            if (pickerFile == null) {
+                              print('No selecciono nada');
+                              return;
+                            }
+                            print('Tenemos imagen ${pickerFile.path}');
                           },
-                        )
-                      ),
+                        )),
                   ],
                 ),
               ),
@@ -153,7 +154,10 @@ class _menuPerfil extends StatelessWidget {
   String onPress;
   Color color;
   _menuPerfil(
-      {required this.nomItem, required this.iconoItem, required this.onPress, this.color = utils.Colors.blanco});
+      {required this.nomItem,
+      required this.iconoItem,
+      required this.onPress,
+      this.color = utils.Colors.blanco});
 
   @override
   Widget build(BuildContext context) {
