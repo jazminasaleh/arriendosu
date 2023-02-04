@@ -22,15 +22,15 @@ class _PerfilPageState extends State<PerfilPage> {
   Future selImagen(op) async {
     var pickedFile;
     if (op == 1) {
-      pickedFile = await picker.getImage(source: ImageSource.camera);
+      pickedFile = await picker.pickImage(source: ImageSource.camera);
     } else {
-      pickedFile = await picker.getImage(source: ImageSource.gallery);
+      pickedFile = await picker.pickImage(source: ImageSource.gallery);
     }
     setState(() {
       if (pickedFile != null) {
         imagen = File(pickedFile.path);
       } else {
-        print('No se selecciono nunguna imagen');
+        print('No se selecciono ninguna imagen');
       }
     });
   }
@@ -91,28 +91,28 @@ class _PerfilPageState extends State<PerfilPage> {
                           backgroundColor: utils.Colors.fondoOscuro,
                           child:  imagen == null 
                             ? ClipRRect(
-                             borderRadius: BorderRadius.circular(20),
+                             borderRadius: BorderRadius.circular(10),
                               child: Image.asset('assets/perfil/foto.jpg',),
                             ) 
                             : 
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                               child: Image.file(imagen!),
                             ) ,
                         )
                       ),
                     ),
                     const Positioned(
-                        bottom: 0,
-                        right: 15,
+                        bottom: -4,
+                        right: 10,
                         child: Icon(
                           Icons.circle,
                           size: 45,
                           color: utils.Colors.ocre,
                         )),
                     Positioned(
-                        bottom: 0,
-                        right: 15,
+                        bottom: -5,
+                        right: 10,
                         child: IconButton(
                             icon: const Icon(Icons.mode_edit_rounded,
                                 size: 30, color: Colors.black),
