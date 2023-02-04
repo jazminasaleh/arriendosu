@@ -1,5 +1,5 @@
-import 'package:app_arriendosu/src/pages/perfil/editar_perfil_page.dart';
-import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
@@ -8,7 +8,33 @@ import 'package:image_picker/image_picker.dart';
 
 //* Pagina de perfil, donde muestra el menu de opciones
 //*editar perfil, ubicacion, publicar y salir
-class PerfilPage extends StatelessWidget {
+
+class PerfilPage extends StatefulWidget {
+  @override
+  State<PerfilPage> createState() => _PerfilPageState();
+}
+
+class _PerfilPageState extends State<PerfilPage> {
+  File? imagen;
+
+  final picker = ImagePicker();
+
+  Future selImagen(op) async {
+    var pickedFile;
+    if (op == 1) {
+      pickedFile = await picker.getImage(source: ImageSource.camera);
+    } else {
+      pickedFile = await picker.getImage(source: ImageSource.gallery);
+    }
+    setState(() {
+      if (pickedFile != null) {
+        imagen = File(pickedFile.path);
+      } else {
+        print('No se selecciono nunguna imagen');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,42 +81,50 @@ class PerfilPage extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 20),
                       child: Container(
-                        height: 200,
-                        width: 150,
-                        child: const CircleAvatar(
-                          backgroundImage: AssetImage('assets/perfil/foto.jpg'),
-                          radius: 50,
+                        height: 150,
+                        width: 200,
+                        decoration: BoxDecoration(
+                           color: utils.Colors.fondoOscuro,
+                          borderRadius: BorderRadius.circular(30)
                         ),
+                        child:  CircleAvatar(
+                          backgroundColor: utils.Colors.fondoOscuro,
+                          child:  imagen == null 
+                            ? ClipRRect(
+                             borderRadius: BorderRadius.circular(20),
+                              child: Image.asset('assets/perfil/foto.jpg',),
+                            ) 
+                            : 
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.file(imagen!),
+                            ) ,
+                        )
                       ),
                     ),
                     const Positioned(
-                        bottom: 15,
-                        right: 10,
+                        bottom: 0,
+                        right: 15,
                         child: Icon(
                           Icons.circle,
                           size: 45,
                           color: utils.Colors.ocre,
                         )),
                     Positioned(
-                        bottom: 18,
-                        right: 12,
+                        bottom: 0,
+                        right: 15,
                         child: IconButton(
-                          icon: const Icon(Icons.mode_edit_rounded,
-                              size: 30, color: Colors.black),
-                          onPressed: () async {
-                            final picker = new ImagePicker();
-                            final XFile? pickerFile = await picker.pickImage(
-                                source: ImageSource.gallery, imageQuality: 100);
-                            if (pickerFile == null) {
-                              print('No selecciono nada');
-                              return;
+                            icon: const Icon(Icons.mode_edit_rounded,
+                                size: 30, color: Colors.black),
+                            onPressed: () {
+                              opciones(context);
                             }
-                            print('Tenemos imagen ${pickerFile.path}');
-                          },
-                        )),
+                        )
+                    ),
                   ],
                 ),
               ),
+              SizedBox(height: 20,),
               const Text(
                 'Jasmin Saleh',
                 style: TextStyle(
@@ -144,6 +178,97 @@ class PerfilPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void opciones(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.all(0),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      selImagen(1);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(width: 1, color: Colors.grey)),
+                      ),
+                      child: Row(
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'Tomar una foto',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Icon(
+                            Icons.camera_alt,
+                            color: utils.Colors.ocre,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      selImagen(2);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'Seleccionar una foto',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Icon(
+                            Icons.image,
+                            color: utils.Colors.ocre,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: utils.Colors.rojo,
+                      ),
+                      child: Row(
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'Cancelar',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: utils.Colors.blanco),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
 
