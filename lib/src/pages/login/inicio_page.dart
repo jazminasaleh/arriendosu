@@ -1,16 +1,14 @@
+import 'package:app_arriendosu/src/provider/login_form_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
-import 'package:app_arriendosu/src/pages/login/login.dart';
+
 import 'package:app_arriendosu/src/widgets/button.dart';
 
 
-
-import 'package:flutter/scheduler.dart';
-
-
+import 'package:provider/provider.dart';
 
 //*Pagina para iniciar sesion
 class Inicio_Page extends StatefulWidget {
@@ -19,17 +17,6 @@ class Inicio_Page extends StatefulWidget {
 }
 
 class _Inicio_PageState extends State<Inicio_Page> {
-  InicialController _inicialController = new InicialController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _inicialController.init(context);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +67,9 @@ class _Inicio_PageState extends State<Inicio_Page> {
                       Text(
                         'Iniciar',
                         style: TextStyle(
-                            fontSize: 45, fontWeight: FontWeight.bold, color: utils.Colors.blanco),
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                            color: utils.Colors.blanco),
                       ),
                     ],
                   ),
@@ -103,16 +92,13 @@ class _Inicio_PageState extends State<Inicio_Page> {
                     const SizedBox(
                       height: 80,
                     ),
-                    _formTextField(),
+                    ChangeNotifierProvider(
+                      create: (_) => LoginFromProvider(),
+                      child: _formTextField(),
+                    ),
                     _textContrasena(),
                     const SizedBox(
                       height: 20,
-                    ),
-                    ButtonApp(
-                      direccion: 'inicioPublicaciones',
-                      texto: 'Iniciar',
-                      onpress: _inicialController.login,
-                      
                     ),
                     const SizedBox(
                       height: 50,
@@ -138,19 +124,21 @@ class _Inicio_PageState extends State<Inicio_Page> {
 //*Campo para ingresar el nombre de usuario
 //*Campo para ingresar la contraseña
   Widget _formTextField() {
+    final loginForm = Provider.of<LoginFromProvider>(context);
     return Form(
+        key: loginForm.formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Container(
-                height: 64,
+                height: 75,
                 decoration: BoxDecoration(
                   color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                child: _textFieldUsuario(),
+                child: _textFieldUsuario(loginForm),
               ),
             ),
             const SizedBox(
@@ -159,22 +147,37 @@ class _Inicio_PageState extends State<Inicio_Page> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Container(
-                height: 64,
+                height: 75,
                 decoration: BoxDecoration(
                   color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                child: _textFieldContrasena(),
+                child: _textFieldContrasena(loginForm),
               ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ButtonApp(
+              direccion: '',
+              texto: loginForm.isLoading ? 'Espere...' : 'Iniciar',
+              onpress: () {
+                FocusScope.of(context).unfocus();
+                if (!loginForm.isValidForm()) return;
+                loginForm.isLoading = true;
+                /*Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InicioPublicaciones()));*/
+              },
             ),
           ],
         ));
   }
 
 //*Campo para llenar el nombre de usuario
-  TextFormField _textFieldUsuario() {
+  TextFormField _textFieldUsuario(LoginFromProvider loginFromProvider) {
     return TextFormField(
-      controller: _inicialController.usuarioController,
       autocorrect: false,
       keyboardType: TextInputType.name,
       decoration: const InputDecoration(
@@ -190,15 +193,15 @@ class _Inicio_PageState extends State<Inicio_Page> {
               color: Color(0xff3A4750),
               fontSize: 20,
               fontWeight: FontWeight.w600)),
-      cursorHeight: 20,
+      cursorHeight: 10,
       cursorColor: Color(0xff3A4750),
+      onChanged: (value) => loginFromProvider.nomUusario,
     );
   }
-  
+
 //*Campo para llenar la contraseña
-  TextFormField _textFieldContrasena() {
+  TextFormField _textFieldContrasena(LoginFromProvider loginFromProvider) {
     return TextFormField(
-      controller: _inicialController.passwordController,
       autocorrect: false,
       obscureText: true,
       keyboardType: TextInputType.visiblePassword,
@@ -216,15 +219,14 @@ class _Inicio_PageState extends State<Inicio_Page> {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
-     validator: (value) {
+      onChanged: (value) => loginFromProvider.contrasena,
+      validator: (value) {
         return (value != null && value.length >= 6)
             ? null
             : 'La contraseña debe de ser de 6 caracteres';
       },
     );
   }
-
-
 
 //*TextButton si la persona olvido su contraseña
   Widget _textContrasena() {
@@ -235,14 +237,14 @@ class _Inicio_PageState extends State<Inicio_Page> {
         children: [
           TextButton(
               onPressed: () {
-                 Navigator.popAndPushNamed(context, 'olvidoContrasena');
+                Navigator.popAndPushNamed(context, 'olvidoContrasena');
               },
               child: const Text(
                 '¿Olvido su contraseña?',
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    color: utils.Colors.grisClaro,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
+                  color: utils.Colors.grisClaro,
                 ),
               )),
         ],
@@ -258,7 +260,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(35),
-            boxShadow: const[
+            boxShadow: const [
               BoxShadow(
                 color: Colors.grey,
                 spreadRadius: 0.2,

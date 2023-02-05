@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+
 //*Boton que se usa en todo el loguin
 //*ejemplo en iniciar
 class ButtonApp extends StatelessWidget {
@@ -19,6 +20,7 @@ class ButtonApp extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         onpress();
+        if (direccion == '') return;
         Navigator.popAndPushNamed(context, direccion);
       },
       child: Container(

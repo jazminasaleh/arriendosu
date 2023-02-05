@@ -1,7 +1,8 @@
 import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
-import 'package:app_arriendosu/src/pages/perfil/perfil_page_controller.dart';
+
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
+import 'package:app_arriendosu/src/provider/login_form_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
@@ -15,7 +16,7 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider(
-        create: (_) => PerilPageController()
+        create: (_) => LoginFromProvider()
       )
     ],
     child: MyApp(),
