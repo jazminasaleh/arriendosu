@@ -13,7 +13,7 @@ class ButtonApp extends StatelessWidget {
       {required this.onpress,
       required this.direccion,
       required this.texto,
-      this.correo = ''});
+      this.correo = '', Future<Null> Function()? onPressed});
 
   @override
   Widget build(BuildContext context) {

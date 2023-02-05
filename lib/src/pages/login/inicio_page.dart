@@ -4,11 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
-
 import 'package:app_arriendosu/src/widgets/button.dart';
 
-
 import 'package:provider/provider.dart';
+
+import '../publicaciones/publicaciones.dart';
 
 //*Pagina para iniciar sesion
 class Inicio_Page extends StatefulWidget {
@@ -24,7 +24,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, 'home');
+            Navigator.pushReplacementNamed(context, 'home');
           },
           icon: const FaIcon(FontAwesomeIcons.arrowLeft),
           iconSize: 20,
@@ -158,19 +158,31 @@ class _Inicio_PageState extends State<Inicio_Page> {
             SizedBox(
               height: 20,
             ),
-            ButtonApp(
-              direccion: '',
-              texto: loginForm.isLoading ? 'Espere...' : 'Iniciar',
-              onpress: () {
-                FocusScope.of(context).unfocus();
-                if (!loginForm.isValidForm()) return;
-                loginForm.isLoading = true;
-                /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => InicioPublicaciones()));*/
-              },
-            ),
+           MaterialButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              disabledColor: Colors.grey,
+              elevation: 0,
+              color: Colors.amber,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                child: Text(
+                        loginForm.isLoading ? 'Espere' : 'Ingresar',
+                        style: TextStyle(color: Colors.white),
+                      )
+              ),
+                onPressed: loginForm.isLoading
+                    ? null
+                    : () async {
+                        FocusScope.of(context).unfocus();
+                        if (!loginForm.isValidForm()) return;
+
+                        loginForm.isLoading = true;
+
+                        await Future.delayed(Duration(seconds: 2));
+
+                        loginForm.isLoading = false;
+                        Navigator.popAndPushNamed(context, 'inicioPublicaciones');
+                      })
           ],
         ));
   }
@@ -182,10 +194,10 @@ class _Inicio_PageState extends State<Inicio_Page> {
       keyboardType: TextInputType.name,
       decoration: const InputDecoration(
           border: InputBorder.none,
-          hintText: 'Nombre de usuario',
-          labelText: 'Usuario',
+          hintText: 'Correo electronico',
+          labelText: 'Correo',
           prefixIcon: Icon(
-            Icons.person,
+            Icons.email,
             size: 30,
           ),
           iconColor: Color(0xff3A4750),
@@ -195,7 +207,15 @@ class _Inicio_PageState extends State<Inicio_Page> {
               fontWeight: FontWeight.w600)),
       cursorHeight: 10,
       cursorColor: Color(0xff3A4750),
-      onChanged: (value) => loginFromProvider.nomUusario,
+      onChanged: (value) => loginFromProvider.correo = value,
+      validator: (value) {
+        String pattern =
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        RegExp regExp = new RegExp(pattern);
+        return regExp.hasMatch(value ?? '')
+            ? null
+            : 'El valor ingresado no luce como un correo';
+      },
     );
   }
 
@@ -219,7 +239,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
-      onChanged: (value) => loginFromProvider.contrasena,
+      onChanged: (value) => loginFromProvider.contrasena = value,
       validator: (value) {
         return (value != null && value.length >= 6)
             ? null

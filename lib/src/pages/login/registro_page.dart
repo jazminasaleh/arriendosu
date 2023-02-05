@@ -1,13 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:app_arriendosu/src/pages/login/login.dart';
 import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+import 'package:provider/provider.dart';
+
+import '../../provider/login_form_provider.dart';
 
 class RegistroPage extends StatelessWidget {
-  RegistroController _registroController = new RegistroController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +18,7 @@ class RegistroPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, 'home');
+            Navigator.pushReplacementNamed(context, 'inicio');
           },
           icon: const FaIcon(FontAwesomeIcons.arrowLeft),
           iconSize: 20,
@@ -82,14 +85,10 @@ class RegistroPage extends StatelessWidget {
                     const SizedBox(
                       height: 80,
                     ),
-                    _formTextField(),
-                    const SizedBox(
-                      height: 80,
+                   ChangeNotifierProvider(
+                      create: (_) => LoginFromProvider(),
+                      child: _formTextField(),
                     ),
-                    ButtonApp(
-                        onpress: _registroController.login,
-                        direccion: 'inicio',
-                        texto: 'Registrarse')
                   ],
                 ),
               )
@@ -99,9 +98,14 @@ class RegistroPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _formTextField() {
+class _formTextField extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final loginForm = Provider.of<LoginFromProvider>(context);
     return Form(
+        key: loginForm.formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
@@ -113,7 +117,7 @@ class RegistroPage extends StatelessWidget {
                   color: utils.Colors.grisMedio,
                   borderRadius: BorderRadius.circular(35),
                 ),
-                child: _textFieldUsuario(),
+                child: _textFieldUsuario(loginForm),
               ),
             ),
             const SizedBox(
@@ -127,7 +131,7 @@ class RegistroPage extends StatelessWidget {
                   color: utils.Colors.grisMedio,
                   borderRadius: BorderRadius.circular(35),
                 ),
-                child: _textFielCorreo(),
+                child: _textFielCorreo(loginForm),
               ),
             ),
             const SizedBox(
@@ -141,7 +145,7 @@ class RegistroPage extends StatelessWidget {
                   color: utils.Colors.grisMedio,
                   borderRadius: BorderRadius.circular(35),
                 ),
-                child: _textFieldContrasena(),
+                child: _textFieldContrasena(loginForm),
               ),
             ),
             const SizedBox(
@@ -155,98 +159,43 @@ class RegistroPage extends StatelessWidget {
                   color: utils.Colors.grisMedio,
                   borderRadius: BorderRadius.circular(35),
                 ),
-                child: _textFieldContrasena2(),
+                child: _textFieldContrasena2(loginForm),
               ),
             ),
+            SizedBox(
+              height: 80,
+            ),
+            MaterialButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              disabledColor: Colors.grey,
+              elevation: 0,
+              color: Colors.amber,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                child: Text(
+                        loginForm.isLoading ? 'Espere' : 'Ingresar',
+                        style: TextStyle(color: Colors.white),
+                      )
+              ),
+                onPressed: loginForm.isLoading
+                    ? null
+                    : () async {
+                        FocusScope.of(context).unfocus();
+                        if (!loginForm.isValidForm()) return;
+
+                        loginForm.isLoading = true;
+
+                        await Future.delayed(Duration(seconds: 2));
+
+                        loginForm.isLoading = false;
+                        Navigator.popAndPushNamed(context, 'inicio');
+                      })
           ],
         ));
   }
 
-  TextFormField _textFieldUsuario() {
+  TextFormField _textFieldContrasena2(LoginFromProvider loginFromProvider) {
     return TextFormField(
-      controller: _registroController.usuarioController,
-      autocorrect: false,
-      keyboardType: TextInputType.name,
-      decoration: const InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Nombre de usuario',
-          labelText: 'Usuario',
-          prefixIcon: Icon(
-            Icons.person,
-            size: 30,
-          ),
-          iconColor: Color(0xff3A4750),
-          labelStyle: TextStyle(
-              color: Color(0xff3A4750),
-              fontSize: 20,
-              fontWeight: FontWeight.w600)),
-      cursorHeight: 20,
-      cursorColor: Color(0xff3A4750),
-    );
-  }
-
-  TextFormField _textFielCorreo() {
-    return TextFormField(
-      controller: _registroController.correoController,
-      autocorrect: false,
-      keyboardType: TextInputType.emailAddress,
-      decoration: const InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Correo electronico',
-          labelText: 'Correo',
-          prefixIcon: Icon(
-            Icons.email,
-            size: 30,
-          ),
-          iconColor: Color(0xff3A4750),
-          labelStyle: TextStyle(
-              color: Color(0xff3A4750),
-              fontSize: 20,
-              fontWeight: FontWeight.w600)),
-      cursorHeight: 20,
-      cursorColor: Color(0xff3A4750),
-      validator: (value) {
-        String pattern =
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-        RegExp regExp = new RegExp(pattern);
-        return regExp.hasMatch(value ?? '')
-            ? null
-            : 'El valor ingresado no luce como un correo';
-      },
-    );
-  }
-
-  TextFormField _textFieldContrasena() {
-    return TextFormField(
-      controller: _registroController.passwordController,
-      autocorrect: false,
-      obscureText: true,
-      keyboardType: TextInputType.visiblePassword,
-      decoration: const InputDecoration(
-          border: InputBorder.none,
-          labelText: 'Contraseña',
-          prefixIcon: Icon(
-            Icons.lock,
-            size: 30,
-          ),
-          iconColor: Color(0xff3A4750),
-          labelStyle: TextStyle(
-              color: Color(0xff3A4750),
-              fontSize: 20,
-              fontWeight: FontWeight.w600)),
-      cursorHeight: 15,
-      cursorColor: Color(0xff3A4750),
-      validator: (value) {
-        return (value != null && value.length >= 6)
-            ? null
-            : 'La contraseña debe de ser de 6 caracteres';
-      },
-    );
-  }
-
-  TextFormField _textFieldContrasena2() {
-    return TextFormField(
-      controller: _registroController.confirmarPasswordController,
       autocorrect: false,
       obscureText: true,
       keyboardType: TextInputType.visiblePassword,
@@ -264,6 +213,94 @@ class RegistroPage extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
+      onChanged: (value) => loginFromProvider.verificarContrasena = value,
+      validator: (value) {
+        return (value != null && value.length >= 6)
+            ? null
+            : 'La contraseña debe de ser de 6 caracteres';
+      },
+    );
+  }
+
+  TextFormField _textFieldUsuario(LoginFromProvider loginFromProvider) {
+    return TextFormField(
+      autocorrect: false,
+      keyboardType: TextInputType.name,
+      decoration: const InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Nombre de usuario',
+          labelText: 'Usuario',
+          prefixIcon: Icon(
+            Icons.person,
+            size: 30,
+          ),
+          iconColor: Color(0xff3A4750),
+          labelStyle: TextStyle(
+              color: Color(0xff3A4750),
+              fontSize: 20,
+              fontWeight: FontWeight.w600)),
+      cursorHeight: 20,
+      cursorColor: Color(0xff3A4750),
+      onChanged: (value) => loginFromProvider.nomUusario = value,
+      validator: (value) {
+        return (value != null && value.length >= 3)
+            ? null
+            : 'El nombre debe ser mayor a 3 caracteres';
+      },
+    );
+  }
+
+  TextFormField _textFielCorreo(LoginFromProvider loginFromProvider) {
+    return TextFormField(
+      autocorrect: false,
+      keyboardType: TextInputType.emailAddress,
+      decoration: const InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Correo electronico',
+          labelText: 'Correo',
+          prefixIcon: Icon(
+            Icons.email,
+            size: 30,
+          ),
+          iconColor: Color(0xff3A4750),
+          labelStyle: TextStyle(
+              color: Color(0xff3A4750),
+              fontSize: 20,
+              fontWeight: FontWeight.w600)),
+      cursorHeight: 20,
+      cursorColor: Color(0xff3A4750),
+      onChanged: (value) => loginFromProvider.correo,
+      validator: (value) {
+        String pattern =
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        RegExp regExp = new RegExp(pattern);
+        return regExp.hasMatch(value ?? '')
+            ? null
+            : 'El valor ingresado no luce como un correo';
+      },
+    );
+  }
+
+  TextFormField _textFieldContrasena(LoginFromProvider loginFromProvider) {
+    return TextFormField(
+      autocorrect: false,
+      obscureText: true,
+      keyboardType: TextInputType.visiblePassword,
+      decoration: const InputDecoration(
+          border: InputBorder.none,
+          labelText: 'Contraseña',
+          prefixIcon: Icon(
+            Icons.lock,
+            size: 30,
+          ),
+          iconColor: Color(0xff3A4750),
+          labelStyle: TextStyle(
+              color: Color(0xff3A4750),
+              fontSize: 20,
+              fontWeight: FontWeight.w600)),
+      cursorHeight: 15,
+      cursorColor: Color(0xff3A4750),
+      onChanged: (value) => loginFromProvider.contrasena = value,
       validator: (value) {
         return (value != null && value.length >= 6)
             ? null
