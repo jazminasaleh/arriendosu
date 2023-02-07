@@ -165,31 +165,30 @@ class _formTextField extends StatelessWidget {
             SizedBox(
               height: 80,
             ),
-            MaterialButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              disabledColor: Colors.grey,
+           MaterialButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+              disabledColor: utils.Colors.grisOscuro,
               elevation: 0,
-              color: Colors.amber,
+              color: utils.Colors.ocre,
+              height: 64,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                 child: Text(
-                        loginForm.isLoading ? 'Espere' : 'Ingresar',
-                        style: TextStyle(color: Colors.white),
+                        loginForm.isLoading ? 'Espere' : 'Registrarse',
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 25),
                       )
               ),
-                onPressed: loginForm.isLoading
-                    ? null
-                    : () async {
-                        FocusScope.of(context).unfocus();
-                        if (!loginForm.isValidForm()) return;
-
-                        loginForm.isLoading = true;
-
-                        await Future.delayed(Duration(seconds: 2));
-
-                        loginForm.isLoading = false;
-                        Navigator.popAndPushNamed(context, 'inicio');
-                      })
+              onPressed: loginForm.isLoading
+                ? null
+                : () async {
+                  FocusScope.of(context).unfocus();
+                  if (!loginForm.isValidForm()) return;
+                  loginForm.isLoading = true;
+                  await Future.delayed(Duration(seconds: 1));
+                  loginForm.isLoading = false;
+                  Navigator.popAndPushNamed(context, 'inicio');
+                }
+              )
           ],
         ));
   }

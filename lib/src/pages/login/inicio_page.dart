@@ -1,14 +1,11 @@
 import 'package:app_arriendosu/src/provider/login_form_provider.dart';
 import 'package:flutter/material.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
-import 'package:app_arriendosu/src/widgets/button.dart';
-
 import 'package:provider/provider.dart';
-
-import '../publicaciones/publicaciones.dart';
 
 //*Pagina para iniciar sesion
 class Inicio_Page extends StatefulWidget {
@@ -90,15 +87,11 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 80,
+                      height: 50,
                     ),
                     ChangeNotifierProvider(
                       create: (_) => LoginFromProvider(),
                       child: _formTextField(),
-                    ),
-                    _textContrasena(),
-                    const SizedBox(
-                      height: 20,
                     ),
                     const SizedBox(
                       height: 50,
@@ -123,6 +116,9 @@ class _Inicio_PageState extends State<Inicio_Page> {
 //*Formulario donde:
 //*Campo para ingresar el nombre de usuario
 //*Campo para ingresar la contraseña
+  bool ver = false;
+  bool ver2 = false;
+  int contador = 0;
   Widget _formTextField() {
     final loginForm = Provider.of<LoginFromProvider>(context);
     return Form(
@@ -133,61 +129,91 @@ class _Inicio_PageState extends State<Inicio_Page> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Container(
-                height: 75,
+                height: 64,
                 decoration: BoxDecoration(
                   color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(35),
                 ),
                 child: _textFieldUsuario(loginForm),
               ),
             ),
             const SizedBox(
-              height: 15,
+              height: 5,
             ),
+            a(ver),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Container(
-                height: 75,
+                height: 60,
                 decoration: BoxDecoration(
                   color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(35),
                 ),
                 child: _textFieldContrasena(loginForm),
               ),
             ),
-            SizedBox(
+            b(ver2),
+            _textContrasena(),
+            const SizedBox(
               height: 20,
             ),
-           MaterialButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              disabledColor: Colors.grey,
-              elevation: 0,
-              color: Colors.amber,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                child: Text(
-                        loginForm.isLoading ? 'Espere' : 'Ingresar',
-                        style: TextStyle(color: Colors.white),
-                      )
-              ),
+            MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35)),
+                disabledColor: utils.Colors.grisOscuro,
+                elevation: 0,
+                color: utils.Colors.ocre,
+                height: 60,
+                child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    child: Text(
+                      loginForm.isLoading ? 'Espere' : 'Ingresar',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 25),
+                    )),
                 onPressed: loginForm.isLoading
                     ? null
                     : () async {
+                        contador = 0;
                         FocusScope.of(context).unfocus();
-                        if (!loginForm.isValidForm()) return;
-
-                        loginForm.isLoading = true;
-
-                        await Future.delayed(Duration(seconds: 2));
-
-                        loginForm.isLoading = false;
-                        Navigator.popAndPushNamed(context, 'inicioPublicaciones');
+                        String pattern =
+                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                        RegExp regExp = new RegExp(pattern);
+                        if (regExp.hasMatch(loginForm.correo ?? '')) {
+                          ver = false;
+                          contador++;
+                        } else {
+                          ver = true;
+                          a(ver);
+                        }
+                        if (loginForm.contrasena != null &&
+                            loginForm.contrasena.length >= 6) {
+                          ver2 = false;
+                          contador++;
+                        } else {
+                          ver2 = true;
+                          b(ver2);
+                        }
+                        if (contador >= 2) {
+                          ver = false;
+                          ver2 = false;
+                          if (!loginForm.isValidForm()) return;
+                          loginForm.isLoading = true;
+                          await Future.delayed(Duration(seconds: 1));
+                          loginForm.isLoading = false;
+                          Navigator.popAndPushNamed(
+                              context, 'inicioPublicaciones');
+                        }
                       })
           ],
         ));
   }
 
-//*Campo para llenar el nombre de usuario
+//*Campo para llenar el correo
+//*Y hacer la validacion del correo
   TextFormField _textFieldUsuario(LoginFromProvider loginFromProvider) {
     return TextFormField(
       autocorrect: false,
@@ -205,17 +231,9 @@ class _Inicio_PageState extends State<Inicio_Page> {
               color: Color(0xff3A4750),
               fontSize: 20,
               fontWeight: FontWeight.w600)),
-      cursorHeight: 10,
+      cursorHeight: 20,
       cursorColor: Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.correo = value,
-      validator: (value) {
-        String pattern =
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-        RegExp regExp = new RegExp(pattern);
-        return regExp.hasMatch(value ?? '')
-            ? null
-            : 'El valor ingresado no luce como un correo';
-      },
     );
   }
 
@@ -227,24 +245,20 @@ class _Inicio_PageState extends State<Inicio_Page> {
       keyboardType: TextInputType.visiblePassword,
       decoration: const InputDecoration(
           border: InputBorder.none,
+          hintText: '******',
           labelText: 'Contraseña',
           prefixIcon: Icon(
             Icons.lock,
-            size: 30,
+            size: 35,
           ),
           iconColor: Color(0xff3A4750),
           labelStyle: TextStyle(
               color: Color(0xff3A4750),
               fontSize: 20,
               fontWeight: FontWeight.w600)),
-      cursorHeight: 15,
+      cursorHeight: 20,
       cursorColor: Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.contrasena = value,
-      validator: (value) {
-        return (value != null && value.length >= 6)
-            ? null
-            : 'La contraseña debe de ser de 6 caracteres';
-      },
     );
   }
 
@@ -294,7 +308,6 @@ class _Inicio_PageState extends State<Inicio_Page> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CircleAvatar(
-              //backgroundImage: NetworkImage(linkImge),
               backgroundImage: AssetImage(linkImge),
               backgroundColor: Colors.white,
             ),
@@ -311,5 +324,37 @@ class _Inicio_PageState extends State<Inicio_Page> {
         ),
       ),
     );
+  }
+
+  Widget a(bool a) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Text(
+            a ? 'El valor ingresado no luce como un correo' : '',
+            style: TextStyle(color: utils.Colors.rojo),
+          ),
+        ),
+      ],
+    ));
+  }
+
+  Widget b(bool a) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Text(
+            a ? 'El valor ingresado no luce como una contraseña' : '',
+            style: TextStyle(color: utils.Colors.rojo),
+          ),
+        ),
+      ],
+    ));
   }
 }
