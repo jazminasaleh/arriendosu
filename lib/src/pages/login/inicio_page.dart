@@ -116,8 +116,8 @@ class _Inicio_PageState extends State<Inicio_Page> {
 //*Formulario donde:
 //*Campo para ingresar el nombre de usuario
 //*Campo para ingresar la contraseña
-  bool ver = false;
-  bool ver2 = false;
+  bool validacionEmail = false;
+  bool validacionContrasegna = false;
   int contador = 0;
   Widget _formTextField() {
     final loginForm = Provider.of<LoginFromProvider>(context);
@@ -137,10 +137,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 child: _textFieldUsuario(loginForm),
               ),
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            a(ver),
+            validacionCorreo(validacionEmail),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Container(
@@ -152,7 +149,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 child: _textFieldContrasena(loginForm),
               ),
             ),
-            b(ver2),
+            validacionContrasena(validacionContrasegna),
             _textContrasena(),
             const SizedBox(
               height: 20,
@@ -182,24 +179,24 @@ class _Inicio_PageState extends State<Inicio_Page> {
                         String pattern =
                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                         RegExp regExp = new RegExp(pattern);
-                        if (regExp.hasMatch(loginForm.correo ?? '')) {
-                          ver = false;
+                        if (regExp.hasMatch(loginForm.correo ?? '') && loginForm.correo != '') {
+                          validacionEmail = false;
                           contador++;
                         } else {
-                          ver = true;
-                          a(ver);
+                          validacionEmail = true;
+                          validacionCorreo(validacionEmail);
                         }
                         if (loginForm.contrasena != null &&
                             loginForm.contrasena.length >= 6) {
-                          ver2 = false;
+                          validacionContrasegna = false;
                           contador++;
                         } else {
-                          ver2 = true;
-                          b(ver2);
+                          validacionContrasegna = true;
+                          validacionContrasena(validacionContrasegna);
                         }
                         if (contador >= 2) {
-                          ver = false;
-                          ver2 = false;
+                          validacionEmail = false;
+                          validacionContrasegna = false;
                           if (!loginForm.isValidForm()) return;
                           loginForm.isLoading = true;
                           await Future.delayed(Duration(seconds: 1));
@@ -326,7 +323,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
     );
   }
 
-  Widget a(bool a) {
+  Widget validacionCorreo(bool validacion) {
     return Container(
         child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -334,7 +331,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
         Padding(
           padding: EdgeInsets.only(bottom: 10),
           child: Text(
-            a ? 'El valor ingresado no luce como un correo' : '',
+            validacion ? 'El valor ingresado no luce como un correo' : '',
             style: TextStyle(color: utils.Colors.rojo),
           ),
         ),
@@ -342,18 +339,15 @@ class _Inicio_PageState extends State<Inicio_Page> {
     ));
   }
 
-  Widget b(bool a) {
+  Widget validacionContrasena(bool validacion) {
     return Container(
         child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 10),
-          child: Text(
-            a ? 'El valor ingresado no luce como una contraseña' : '',
+          Text(
+            validacion ? 'El valor ingresado no luce como una contraseña' : '',
             style: TextStyle(color: utils.Colors.rojo),
           ),
-        ),
       ],
     ));
   }

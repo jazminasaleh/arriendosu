@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:app_arriendosu/src/pages/login/login.dart';
-import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:provider/provider.dart';
 
@@ -85,7 +81,7 @@ class RegistroPage extends StatelessWidget {
                     const SizedBox(
                       height: 80,
                     ),
-                   ChangeNotifierProvider(
+                    ChangeNotifierProvider(
                       create: (_) => LoginFromProvider(),
                       child: _formTextField(),
                     ),
@@ -99,6 +95,13 @@ class RegistroPage extends StatelessWidget {
     );
   }
 }
+
+bool validacionUsser = false;
+bool validEmail = false;
+bool validacionPassword = false;
+bool validacionConfPassword = false;
+bool validacionPasswords = false;
+int contador = 0;
 
 class _formTextField extends StatelessWidget {
   @override
@@ -120,8 +123,9 @@ class _formTextField extends StatelessWidget {
                 child: _textFieldUsuario(loginForm),
               ),
             ),
+            validacionUsuario(validacionUsser),
             const SizedBox(
-              height: 15,
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
@@ -134,8 +138,9 @@ class _formTextField extends StatelessWidget {
                 child: _textFielCorreo(loginForm),
               ),
             ),
+            validacionCorreo(validEmail),
             const SizedBox(
-              height: 50,
+              height: 40,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
@@ -148,8 +153,9 @@ class _formTextField extends StatelessWidget {
                 child: _textFieldContrasena(loginForm),
               ),
             ),
+            validacionContrasena(validacionPassword),
             const SizedBox(
-              height: 15,
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 35),
@@ -162,33 +168,95 @@ class _formTextField extends StatelessWidget {
                 child: _textFieldContrasena2(loginForm),
               ),
             ),
+            validacionConfContrasena(validacionConfPassword),
             SizedBox(
-              height: 80,
+              height: 10,
             ),
-           MaterialButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
-              disabledColor: utils.Colors.grisOscuro,
-              elevation: 0,
-              color: utils.Colors.ocre,
-              height: 64,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                child: Text(
-                        loginForm.isLoading ? 'Espere' : 'Registrarse',
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 25),
-                      )
-              ),
-              onPressed: loginForm.isLoading
-                ? null
-                : () async {
-                  FocusScope.of(context).unfocus();
-                  if (!loginForm.isValidForm()) return;
-                  loginForm.isLoading = true;
-                  await Future.delayed(Duration(seconds: 1));
-                  loginForm.isLoading = false;
-                  Navigator.popAndPushNamed(context, 'inicio');
-                }
-              )
+            validacionContrasenas(validacionPasswords),
+            SizedBox(
+              height: 50,
+            ),
+            MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35)),
+                disabledColor: utils.Colors.grisOscuro,
+                elevation: 0,
+                color: utils.Colors.ocre,
+                height: 64,
+                child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                    child: Text(
+                      loginForm.isLoading ? 'Espere' : 'Registrarse',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 25),
+                    )),
+                onPressed: loginForm.isLoading
+                    ? null
+                    : () async {
+                        contador = 0;
+                        FocusScope.of(context).unfocus();
+                        String pattern =
+                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                        RegExp regExp = new RegExp(pattern);
+                        if (loginForm.nomUusario != null &&
+                            loginForm.nomUusario.length >= 3) {
+                          validacionUsser = false;
+                          contador++;
+                        } else {
+                          validacionUsser = true;
+                          validacionUsuario(validacionUsser);
+                        }
+                        if (regExp.hasMatch(loginForm.correo ?? '') &&
+                            loginForm.correo != '') {
+                          validEmail = false;
+                          print('valid$validEmail${loginForm.correo}');
+                          contador++;
+                        } else {
+                          validEmail = true;
+                          print('validconcorreo$validEmail${loginForm.correo}');
+                          validacionCorreo(validEmail);
+                        }
+                        if (loginForm.contrasena != null &&
+                            loginForm.contrasena.length >= 6) {
+                          validacionPassword = false;
+                          contador++;
+                        } else {
+                          validacionPassword = true;
+                          validacionContrasena(validacionConfPassword);
+                        }
+                        if (loginForm.verificarContrasena != null &&
+                            loginForm.verificarContrasena.length >= 6) {
+                          validacionConfPassword = false;
+                          contador++;
+                        } else {
+                          validacionConfPassword = true;
+
+                          validacionContrasena(validacionConfPassword);
+                        }
+                        if (loginForm.contrasena ==
+                            loginForm.verificarContrasena) {
+                          contador++;
+                          validacionPasswords = false;
+                        } else {
+                          validacionPasswords = true;
+                        }
+                        if (contador >= 5) {
+                          validacionUsser = false;
+                          validEmail = false;
+                          validacionPassword = false;
+                          validacionConfPassword = false;
+                          validacionPasswords = false;
+                          print('valid$validEmail');
+                          if (!loginForm.isValidForm()) return;
+                          loginForm.isLoading = true;
+                          await Future.delayed(Duration(seconds: 1));
+                          loginForm.isLoading = false;
+                          Navigator.popAndPushNamed(context, 'inicio');
+                        }
+                        print('info${loginForm.isValidForm()}');
+                      })
           ],
         ));
   }
@@ -213,11 +281,6 @@ class _formTextField extends StatelessWidget {
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.verificarContrasena = value,
-      validator: (value) {
-        return (value != null && value.length >= 6)
-            ? null
-            : 'La contraseña debe de ser de 6 caracteres';
-      },
     );
   }
 
@@ -241,11 +304,6 @@ class _formTextField extends StatelessWidget {
       cursorHeight: 20,
       cursorColor: Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.nomUusario = value,
-      validator: (value) {
-        return (value != null && value.length >= 3)
-            ? null
-            : 'El nombre debe ser mayor a 3 caracteres';
-      },
     );
   }
 
@@ -268,15 +326,7 @@ class _formTextField extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 20,
       cursorColor: Color(0xff3A4750),
-      onChanged: (value) => loginFromProvider.correo,
-      validator: (value) {
-        String pattern =
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-        RegExp regExp = new RegExp(pattern);
-        return regExp.hasMatch(value ?? '')
-            ? null
-            : 'El valor ingresado no luce como un correo';
-      },
+      onChanged: (value) => loginFromProvider.correo = value,
     );
   }
 
@@ -300,11 +350,77 @@ class _formTextField extends StatelessWidget {
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.contrasena = value,
-      validator: (value) {
-        return (value != null && value.length >= 6)
-            ? null
-            : 'La contraseña debe de ser de 6 caracteres';
-      },
     );
+  }
+
+  Widget validacionUsuario(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Text(
+            validacion ? 'El valor ingresado no luce como un usuario' : '',
+            style: TextStyle(color: utils.Colors.rojo),
+          ),
+        ),
+      ],
+    ));
+  }
+
+  Widget validacionCorreo(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Text(
+            validacion ? 'El valor ingresado no luce como un correo' : '',
+            style: TextStyle(color: utils.Colors.rojo),
+          ),
+        ),
+      ],
+    ));
+  }
+
+  Widget validacionContrasena(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          validacion ? 'La contraseña debe de ser de 6 caracteres' : '',
+          style: TextStyle(color: utils.Colors.rojo),
+        ),
+      ],
+    ));
+  }
+
+  Widget validacionConfContrasena(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          validacion ? 'La contraseña debe de ser de 6 caracteres' : '',
+          style: TextStyle(color: utils.Colors.rojo),
+        ),
+      ],
+    ));
+  }
+
+  Widget validacionContrasenas(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          validacion ? 'Las dos contraseñas no coindicen' : '',
+          style: TextStyle(color: utils.Colors.rojo),
+        ),
+      ],
+    ));
   }
 }

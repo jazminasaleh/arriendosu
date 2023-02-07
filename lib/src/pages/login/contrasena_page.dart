@@ -98,7 +98,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => NuevaContrasenaPage(correo: contrasenaController.correoController.text)
-            )
+                    )
            );
                       },
                       child: Container(
