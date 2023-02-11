@@ -179,7 +179,8 @@ class _PerfilPageState extends State<PerfilPage> {
       ),
     );
   }
-
+//*el cuadro que sale caundo se desea editar la imagen del jusuario
+//*sale la opcion de tomar foto o una de la galeria
   void opciones(BuildContext context) {
     showDialog(
         context: context,

@@ -116,6 +116,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
 //*Formulario donde:
 //*Campo para ingresar el nombre de usuario
 //*Campo para ingresar la contraseña
+//*Vlidacion de fromulario
   bool validacionEmail = false;
   bool validacionContrasegna = false;
   int contador = 0;

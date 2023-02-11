@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../provider/login_form_provider.dart';
 
+//*Pagina para hacer el registro en la app
 class RegistroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -96,6 +97,8 @@ class RegistroPage extends StatelessWidget {
   }
 }
 
+//*Campos como el correo, usuario, contraseña
+//*validacion del formulario
 bool validacionUsser = false;
 bool validEmail = false;
 bool validacionPassword = false;
@@ -169,11 +172,11 @@ class _formTextField extends StatelessWidget {
               ),
             ),
             validacionConfContrasena(validacionConfPassword),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             validacionContrasenas(validacionPasswords),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             MaterialButton(
@@ -211,11 +214,9 @@ class _formTextField extends StatelessWidget {
                         if (regExp.hasMatch(loginForm.correo ?? '') &&
                             loginForm.correo != '') {
                           validEmail = false;
-                          print('valid$validEmail${loginForm.correo}');
                           contador++;
                         } else {
                           validEmail = true;
-                          print('validconcorreo$validEmail${loginForm.correo}');
                           validacionCorreo(validEmail);
                         }
                         if (loginForm.contrasena != null &&
@@ -248,19 +249,18 @@ class _formTextField extends StatelessWidget {
                           validacionPassword = false;
                           validacionConfPassword = false;
                           validacionPasswords = false;
-                          print('valid$validEmail');
                           if (!loginForm.isValidForm()) return;
                           loginForm.isLoading = true;
                           await Future.delayed(Duration(seconds: 1));
                           loginForm.isLoading = false;
                           Navigator.popAndPushNamed(context, 'inicio');
                         }
-                        print('info${loginForm.isValidForm()}');
                       })
           ],
         ));
   }
 
+//*Campo para confrimar la contraseña
   TextFormField _textFieldContrasena2(LoginFromProvider loginFromProvider) {
     return TextFormField(
       autocorrect: false,
@@ -284,6 +284,7 @@ class _formTextField extends StatelessWidget {
     );
   }
 
+//*campo para digitar nombre del usuario
   TextFormField _textFieldUsuario(LoginFromProvider loginFromProvider) {
     return TextFormField(
       autocorrect: false,
@@ -307,6 +308,7 @@ class _formTextField extends StatelessWidget {
     );
   }
 
+//*campo para digitar el correo
   TextFormField _textFielCorreo(LoginFromProvider loginFromProvider) {
     return TextFormField(
       autocorrect: false,
@@ -330,6 +332,7 @@ class _formTextField extends StatelessWidget {
     );
   }
 
+//*campo para digitar la contraseña
   TextFormField _textFieldContrasena(LoginFromProvider loginFromProvider) {
     return TextFormField(
       autocorrect: false,
@@ -353,6 +356,7 @@ class _formTextField extends StatelessWidget {
     );
   }
 
+//*texto de validacion de usuario
   Widget validacionUsuario(bool validacion) {
     return Container(
         child: Row(
@@ -362,29 +366,31 @@ class _formTextField extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 10),
           child: Text(
             validacion ? 'El valor ingresado no luce como un usuario' : '',
-            style: TextStyle(color: utils.Colors.rojo),
+            style: const TextStyle(color: utils.Colors.rojo),
           ),
         ),
       ],
     ));
   }
 
+//*Texto de validacion de correo
   Widget validacionCorreo(bool validacion) {
     return Container(
         child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 10),
           child: Text(
             validacion ? 'El valor ingresado no luce como un correo' : '',
-            style: TextStyle(color: utils.Colors.rojo),
+            style: const TextStyle(color: utils.Colors.rojo),
           ),
         ),
       ],
     ));
   }
 
+//*Texto de validacion de ka contraseña
   Widget validacionContrasena(bool validacion) {
     return Container(
         child: Row(
@@ -392,12 +398,13 @@ class _formTextField extends StatelessWidget {
       children: [
         Text(
           validacion ? 'La contraseña debe de ser de 6 caracteres' : '',
-          style: TextStyle(color: utils.Colors.rojo),
+          style: const TextStyle(color: utils.Colors.rojo),
         ),
       ],
     ));
   }
 
+//*Texto de validacion de contraseña confirmada
   Widget validacionConfContrasena(bool validacion) {
     return Container(
         child: Row(
@@ -411,6 +418,7 @@ class _formTextField extends StatelessWidget {
     ));
   }
 
+//*Texto para ver si las dos contraseñas digitadas son iguales
   Widget validacionContrasenas(bool validacion) {
     return Container(
         child: Row(

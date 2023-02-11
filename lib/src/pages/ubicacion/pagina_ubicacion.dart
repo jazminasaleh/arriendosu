@@ -6,14 +6,14 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 import '../../widgets/button.dart';
 import '../perfil/perfil.dart';
-
+//*pagina donde el usuario puede digitar su ubicacion
 class UbicacionPage extends StatefulWidget {
   const UbicacionPage({super.key});
 
   @override
   State<UbicacionPage> createState() => _UbicacionPageState();
 }
-
+//*para observar el mapa se consumio la api de google maps
 class _UbicacionPageState extends State<UbicacionPage> {
   Completer<GoogleMapController> _controller = Completer();
   UbicacionController _ubicacionController = new UbicacionController();
