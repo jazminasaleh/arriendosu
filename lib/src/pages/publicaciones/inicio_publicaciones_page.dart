@@ -1,4 +1,5 @@
-import 'package:app_arriendosu/src/pages/publicaciones/descripcion_publicacion.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/descripcion_publicaciones.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/pages/perfil/perfil.dart';

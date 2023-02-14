@@ -1,15 +1,17 @@
-import 'package:app_arriendosu/src/provider/publicaciones_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:provider/provider.dart';
+import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+import '../provider/publicaciones_slider.dart';
 
-class DescripcionPublicaciones extends StatelessWidget {
-  const DescripcionPublicaciones({super.key});
+class SidesShow extends StatelessWidget {
+  final List<Widget> slides;
+
+  const SidesShow({required this.slides});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) =>new SliderModel(),
+      create: (_) => new SliderModel(),
       child: Scaffold(
           backgroundColor: utils.Colors.fondoOscuro,
           appBar: AppBar(),
@@ -19,9 +21,14 @@ class DescripcionPublicaciones extends StatelessWidget {
               Container(
                 height: 300,
                 width: double.infinity,
-                child: _Slides(),
+                child: _Slides(
+                  slides: this.slides,
+                ),
               ),
-              _Dots()
+              SizedBox(
+                height: 10,
+              ),
+              _Dots(totalSlides: this.slides.length,)
             ],
           ))),
     );
@@ -29,6 +36,9 @@ class DescripcionPublicaciones extends StatelessWidget {
 }
 
 class _Dots extends StatelessWidget {
+  final int totalSlides;
+
+  const _Dots({super.key, required this.totalSlides});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,17 +46,7 @@ class _Dots extends StatelessWidget {
       height: 10,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _Dot(
-            index: 0,
-          ),
-          _Dot(
-            index: 1,
-          ),
-          _Dot(
-            index: 2,
-          )
-        ],
+        children: List.generate(this.totalSlides, (index) => _Dot(index: index)),
       ),
     );
   }
@@ -60,20 +60,24 @@ class _Dot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pageViewIndex = Provider.of<SliderModel>(context).currentPage;
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(microseconds: 200),
       width: 12,
       height: 12,
       margin: EdgeInsets.symmetric(horizontal: 5),
-      decoration:
-          BoxDecoration(
-            color: (pageViewIndex == index) ? utils.Colors.ocre : utils.Colors.grisClaro, 
-            shape: BoxShape.circle
-          ),
+      decoration: BoxDecoration(
+          color: (pageViewIndex >= index - 0.5 && pageViewIndex < index + 0.5)
+              ? utils.Colors.ocre
+              : utils.Colors.grisClaro,
+          shape: BoxShape.circle),
     );
   }
 }
 
 class _Slides extends StatefulWidget {
+  final List<Widget> slides;
+
+  const _Slides({required this.slides});
   @override
   State<_Slides> createState() => _SlidesState();
 }
@@ -101,29 +105,24 @@ class _SlidesState extends State<_Slides> {
     return Container(
       child: PageView(
         controller: pageViewController,
-        children: [
-          _slide(
-            img: 'assets/publicaciones/pub1.jpg',
-          ),
-          Image.asset('assets/publicaciones/pub2.jpg'),
-          Image.asset('assets/publicaciones/pub3.jpg'),
-        ],
+        children: widget.slides
+            .map((slide) => _slide(
+                  slide: slide,
+                ))
+            .toList(),
       ),
     );
   }
 }
 
 class _slide extends StatelessWidget {
-  final String img;
+  final Widget slide;
 
-  const _slide({required this.img});
+  const _slide({required this.slide});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: double.infinity,
-      child: Image.asset(img),
-    );
+        width: double.infinity, height: double.infinity, child: slide);
   }
 }
