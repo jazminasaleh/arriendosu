@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/publicaciones/descripcion_publicacion.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
@@ -267,76 +268,86 @@ class _listaFavoritos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 370,
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: listaFavoritos.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 364,
-                  width: 280,
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      image: DecorationImage(
-                        opacity: 0.50,
-                        image: AssetImage(listaFavoritos[index].iamgen),
-                        fit: BoxFit.cover,
-                      )),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          listaFavoritos[index].direccion,
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500,
-                              color: utils.Colors.blanco),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          listaFavoritos[index].barrio,
-                          style: TextStyle(
-                              fontSize: 15, color: utils.Colors.blanco),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              '\$ ${listaFavoritos[index].precio}',
-                              style: TextStyle(
-                                  color: utils.Colors.blanco,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Expanded(child: Container()),
-                            Icon(
-                              Icons.bookmark_outline_rounded,
-                              color: utils.Colors.blanco,
-                              size: 30,
-                            ),
-                          ],
-                        )
-                      ],
+    return GestureDetector(
+      onTap: () {
+         Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DescripcionPublicaciones()
+                              ),
+                      );
+      },
+      child: Container(
+        width: double.infinity,
+        height: 370,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: listaFavoritos.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 364,
+                    width: 280,
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        image: DecorationImage(
+                          opacity: 0.50,
+                          image: AssetImage(listaFavoritos[index].iamgen),
+                          fit: BoxFit.cover,
+                        )),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            listaFavoritos[index].direccion,
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w500,
+                                color: utils.Colors.blanco),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            listaFavoritos[index].barrio,
+                            style: TextStyle(
+                                fontSize: 15, color: utils.Colors.blanco),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '\$ ${listaFavoritos[index].precio}',
+                                style: TextStyle(
+                                    color: utils.Colors.blanco,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Expanded(child: Container()),
+                              Icon(
+                                Icons.bookmark_outline_rounded,
+                                color: utils.Colors.blanco,
+                                size: 30,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
