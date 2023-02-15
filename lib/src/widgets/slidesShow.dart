@@ -1,11 +1,10 @@
-import 'dart:ffi';
 
 import 'package:app_arriendosu/src/pages/publicaciones/descripcion_publicaciones.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import '../provider/publicaciones_slider.dart';
-
+//*slider de imagnes de la pagina descripcion de publicaciones
 class SidesShow extends StatelessWidget {
   final List<Widget> slides;
   String direccion;
@@ -62,7 +61,7 @@ class _Dots extends StatelessWidget {
     );
   }
 }
-
+//*uno de los punticos 
 class _Dot extends StatelessWidget {
   final int index;
 
@@ -85,16 +84,6 @@ class _Dot extends StatelessWidget {
   }
 }
 
-class Direccion extends StatelessWidget {
-  const Direccion({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('kskks'),
-    );
-  }
-}
 
 class _Slides extends StatefulWidget {
   final List<Widget> slides;

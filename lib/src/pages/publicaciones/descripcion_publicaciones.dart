@@ -1,9 +1,9 @@
-import 'package:app_arriendosu/src/pages/publicaciones/lista_favoritos.dart';
+
+import 'package:app_arriendosu/src/pages/publicaciones/galeria_imagenes.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/slidesShow.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
-//*mandar la lista de imagenes que van a ir en el slide de fotos
+//*pagina descripcion de publicaciones
 class DescripcionPublicaciones extends StatelessWidget {
   String direccion;
   String barrio;
@@ -17,12 +17,13 @@ class DescripcionPublicaciones extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           child: Column(
               children: [
+                const SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       direccion,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 25,
                         color: utils.Colors.blanco,
                         fontWeight: FontWeight.w500),
@@ -34,7 +35,7 @@ class DescripcionPublicaciones extends StatelessWidget {
                   children: [
                      Text(
                       barrio,
-                      style: TextStyle(
+                      style: const TextStyle(
                       fontSize: 18,
                       color: utils.Colors.blanco,
                       fontWeight: FontWeight.w300),
@@ -42,7 +43,7 @@ class DescripcionPublicaciones extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
                   child: Container(
                     height: 1,
                     width: double.infinity,
@@ -52,8 +53,16 @@ class DescripcionPublicaciones extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Galeria', style: TextStyle(fontSize: 20, color: utils.Colors.blanco, fontWeight: FontWeight.w500),),
-                    TextButton(onPressed: (){}, child: Text('Ver todo', style:  TextStyle(color: utils.Colors.ocre, fontSize: 15),))
+                    const Text('Galeria', style: TextStyle(fontSize: 20, color: utils.Colors.blanco, fontWeight: FontWeight.w500),),
+                    TextButton(
+                      onPressed: (){
+                        Navigator.push(context,
+                          MaterialPageRoute(
+                            builder: (context) => GaleriaImagenes()),
+                        );
+                      }, 
+                      child: const Text('Ver todo', style:  TextStyle(color: utils.Colors.ocre, fontSize: 15),)
+                    )
                   ],
                 )
               ],
