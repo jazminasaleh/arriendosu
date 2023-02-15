@@ -8,7 +8,7 @@ class ListaFavoritos {
 
   ListaFavoritos({ required this.direccion,  required this.barrio,  required this.precio,  required this.iamgen});
 }
-
+//*lista de las publicaciones favoritas
 class ListaLlenaFavoritos{
   
 final listaFavoritos = <ListaFavoritos>[

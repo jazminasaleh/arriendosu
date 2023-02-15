@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
+//*Slider de la pagina publicaciones
 class SliderModel with ChangeNotifier {
   double _currentPage = 0;
 

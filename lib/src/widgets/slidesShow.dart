@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:app_arriendosu/src/pages/publicaciones/descripcion_publicaciones.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
@@ -5,8 +8,10 @@ import '../provider/publicaciones_slider.dart';
 
 class SidesShow extends StatelessWidget {
   final List<Widget> slides;
-
-  const SidesShow({required this.slides});
+  String direccion;
+  String barrio;
+  String precio;
+  SidesShow({required this.slides, required this.direccion, required this.barrio, required this.precio});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +20,8 @@ class SidesShow extends StatelessWidget {
       child: Scaffold(
           backgroundColor: utils.Colors.fondoOscuro,
           appBar: AppBar(),
-          body: Center(
-              child: Column(
+          body: 
+              Column(
             children: [
               Container(
                 height: 300,
@@ -28,9 +33,14 @@ class SidesShow extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              _Dots(totalSlides: this.slides.length,)
+              Center(
+                child: _Dots(
+                  totalSlides: this.slides.length,
+                ),
+              ),
+              DescripcionPublicaciones(direccion: direccion, barrio: barrio, precio: precio,)
             ],
-          ))),
+          )),
     );
   }
 }
@@ -46,7 +56,8 @@ class _Dots extends StatelessWidget {
       height: 10,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(this.totalSlides, (index) => _Dot(index: index)),
+        children:
+            List.generate(this.totalSlides, (index) => _Dot(index: index)),
       ),
     );
   }
@@ -70,6 +81,17 @@ class _Dot extends StatelessWidget {
               ? utils.Colors.ocre
               : utils.Colors.grisClaro,
           shape: BoxShape.circle),
+    );
+  }
+}
+
+class Direccion extends StatelessWidget {
+  const Direccion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text('kskks'),
     );
   }
 }

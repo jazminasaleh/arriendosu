@@ -5,7 +5,7 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:app_arriendosu/src/pages/login/login.dart';
-
+//*Pagina para poder asignar una nueva contraseña
 class NuevaContrasenaPage extends StatelessWidget {
   String correo;
   NuevaContrasenaPage({super.key, required this.correo});

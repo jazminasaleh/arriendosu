@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 //*El estado del fromulario del login
+//*La infromacion del formualrio
 class LoginFromProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 

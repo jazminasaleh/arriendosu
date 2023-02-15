@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//*Datos de la nueva contraseña 
 class NuevaContrasenaController {
   late BuildContext context;
 

@@ -6,6 +6,8 @@ import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
+import '../../widgets/slidesShow.dart';
+
 //*Pagina donde muestra las publicaciones de sugerencia y guardadas
 class InicioPublicaciones extends StatelessWidget {
   @override
@@ -13,116 +15,124 @@ class InicioPublicaciones extends StatelessWidget {
     ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
     ListaLlenaSugerencias listaSugernecias = new ListaLlenaSugerencias();
     return Scaffold(
-        backgroundColor: utils.Colors.fondoOscuro,
-        appBar: AppBar(
-          leading: Text(''),
-          title: Row(
-            children: [
-              Icon(
-                    Icons.home_work_rounded,
-                    color: utils.Colors.ocre,
-                    size: 35,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    'Uhome',
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: utils.Colors.blanco,
-                        fontWeight: FontWeight.bold),
-                  ),
-            ],
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.notifications_none_outlined,
-                    color: utils.Colors.blanco,
-                    size: 35,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  IconButton(
-                    onPressed: (){
-                      Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ListasPage(lista: listaFavoritos.listaFavoritos, titulo: 'Gurdaddos',)
-                              ),
-                      );
-                    }, 
-                    icon: Icon(
+      backgroundColor: utils.Colors.fondoOscuro,
+      appBar: AppBar(
+        leading: Text(''),
+        title: Row(
+          children: [
+            Icon(
+              Icons.home_work_rounded,
+              color: utils.Colors.ocre,
+              size: 35,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              'Uhome',
+              style: TextStyle(
+                  fontSize: 25,
+                  color: utils.Colors.blanco,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.notifications_none_outlined,
+                  color: utils.Colors.blanco,
+                  size: 35,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ListasPage(
+                                lista: listaFavoritos.listaFavoritos,
+                                titulo: 'Gurdaddos',
+                              )),
+                    );
+                  },
+                  icon: Icon(
                     Icons.bookmark_outline_rounded,
                     color: utils.Colors.blanco,
                     size: 35,
                   ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-              padding: EdgeInsets.only(left: 30, top: 20, right: 20),
-              child: Column(
-                children: [
-                  Row(
-                    children: const [
-                      Text(
-                        'Hola, jas',
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: utils.Colors.blanco,
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  ),
-                  _buscador(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  _listaFavoritos( listaFavoritos: listaFavoritos.listaFavoritos),
-                  _textSugerencias(context, listaSugernecias),
-                  _listaSugerencias(listaSugerencias: listaSugernecias.listaSugerencias)
-                ],
-              )),
-        ),
-        bottomNavigationBar: _bottomNavigationBar(listaFavoritos: listaFavoritos),
-        );
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+            padding: EdgeInsets.only(left: 30, top: 20, right: 20),
+            child: Column(
+              children: [
+                Row(
+                  children: const [
+                    Text(
+                      'Hola, jas',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: utils.Colors.blanco,
+                          fontWeight: FontWeight.w500),
+                    )
+                  ],
+                ),
+                _buscador(),
+                SizedBox(
+                  height: 10,
+                ),
+                _listaFavoritos(listaFavoritos: listaFavoritos.listaFavoritos),
+                _textSugerencias(context, listaSugernecias),
+                _listaSugerencias(
+                    listaSugerencias: listaSugernecias.listaSugerencias)
+              ],
+            )),
+      ),
+      bottomNavigationBar: _bottomNavigationBar(listaFavoritos: listaFavoritos),
+    );
   }
+
 //*Texto de sugerincia
 //*Boton de ver todo para ver la lista de todas las sugerencias
-  Row _textSugerencias(BuildContext context, ListaLlenaSugerencias listaSugernecias) {
+  Row _textSugerencias(
+      BuildContext context, ListaLlenaSugerencias listaSugernecias) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Text('Sugerencias',style: TextStyle(
-            color: utils.Colors.blanco,
-            fontSize: 16,
-            fontWeight: FontWeight.w500
-          ))),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ListasPage(lista: listaSugernecias.listaSugerencias, titulo: 'Sugerencias',)),
-                );
-              },
+            padding: EdgeInsets.only(left: 10),
+            child: Text('Sugerencias',
+                style: TextStyle(
+                    color: utils.Colors.blanco,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500))),
+        TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ListasPage(
+                          lista: listaSugernecias.listaSugerencias,
+                          titulo: 'Sugerencias',
+                        )),
+              );
+            },
             child: Text(
               'Ver todo',
               style: TextStyle(fontSize: 16),
             )),
-        ],
+      ],
     );
   }
 }
@@ -139,38 +149,45 @@ class _bottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-    backgroundColor: utils.Colors.fondoOscuro,
-    
-    items: [
-      new BottomNavigationBarItem(
-        icon: IconButton(
-          icon: Icon(Icons.home, size: 35,), 
-          onPressed: (){
-
-          },
-        ),
-        label: '',
-        
-      ),
-      new BottomNavigationBarItem(
-        icon: IconButton(icon: Icon(Icons.search_rounded, size: 35, color: utils.Colors.grisClaro,), onPressed: (){},),
-        label: '',
-      ),
-      new BottomNavigationBarItem(
-        icon: IconButton(
-          icon: Icon(Icons.person, size:35, color: utils.Colors.grisClaro,), 
-          onPressed: (){
-            Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PerfilPage()),
-                        );
-          },
-        ),
-        label: ''
-      ),
-      ]
-    );
+        backgroundColor: utils.Colors.fondoOscuro,
+        items: [
+          new BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(
+                Icons.home,
+                size: 35,
+              ),
+              onPressed: () {},
+            ),
+            label: '',
+          ),
+          new BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(
+                Icons.search_rounded,
+                size: 35,
+                color: utils.Colors.grisClaro,
+              ),
+              onPressed: () {},
+            ),
+            label: '',
+          ),
+          new BottomNavigationBarItem(
+              icon: IconButton(
+                icon: Icon(
+                  Icons.person,
+                  size: 35,
+                  color: utils.Colors.grisClaro,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PerfilPage()),
+                  );
+                },
+              ),
+              label: ''),
+        ]);
   }
 }
 
@@ -211,14 +228,14 @@ class _listaSugerencias extends StatelessWidget {
                           child: Container(
                             width: 110,
                             height: 110,
-                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                opacity: 0.50,
-                                image: AssetImage(listaSugerencias[index].iamgen),
-                                fit: BoxFit.cover,
-                              )
-                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  opacity: 0.50,
+                                  image: AssetImage(
+                                      listaSugerencias[index].iamgen),
+                                  fit: BoxFit.cover,
+                                )),
                           ),
                         ),
                         SizedBox(
@@ -228,10 +245,12 @@ class _listaSugerencias extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                           
                             RichText(
-                              text: TextSpan(text: listaSugerencias[index].direccion, style: TextStyle(color: utils.Colors.blanco, fontWeight: FontWeight.w400))
-                            ),
+                                text: TextSpan(
+                                    text: listaSugerencias[index].direccion,
+                                    style: TextStyle(
+                                        color: utils.Colors.blanco,
+                                        fontWeight: FontWeight.w400))),
                             Text(
                               listaSugerencias[index].barrio,
                               style: TextStyle(
@@ -268,17 +287,10 @@ class _listaFavoritos extends StatelessWidget {
   final List<ListaFavoritos> listaFavoritos;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-         Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DescripcionPublicaciones()
-                              ),
-                      );
-      },
-      child: Container(
+  Widget build(
+    BuildContext context,
+  ) {
+    return Container(
         width: double.infinity,
         height: 370,
         child: Column(
@@ -288,59 +300,74 @@ class _listaFavoritos extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: listaFavoritos.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 364,
-                    width: 280,
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        image: DecorationImage(
-                          opacity: 0.50,
-                          image: AssetImage(listaFavoritos[index].iamgen),
-                          fit: BoxFit.cover,
-                        )),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            listaFavoritos[index].direccion,
-                            style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w500,
-                                color: utils.Colors.blanco),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            listaFavoritos[index].barrio,
-                            style: TextStyle(
-                                fontSize: 15, color: utils.Colors.blanco),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                '\$ ${listaFavoritos[index].precio}',
-                                style: TextStyle(
-                                    color: utils.Colors.blanco,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              Expanded(child: Container()),
-                              Icon(
-                                Icons.bookmark_outline_rounded,
-                                color: utils.Colors.blanco,
-                                size: 30,
-                              ),
-                            ],
-                          )
-                        ],
+                  return GestureDetector(
+                     onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SidesShow(slides: [
+                      Image.asset('assets/publicaciones/pub2.jpg'),
+                      Image.asset('assets/publicaciones/pub3.jpg'),
+                      Image.asset('assets/publicaciones/pub1.jpg'),
+                    ], direccion: listaFavoritos[index].direccion, 
+                       barrio: listaFavoritos[index].barrio, 
+                       precio: listaFavoritos[index].precio,) ),
+        );
+      },
+                    child: Container(
+                      height: 364,
+                      width: 280,
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          image: DecorationImage(
+                            opacity: 0.50,
+                            image: AssetImage(listaFavoritos[index].iamgen),
+                            fit: BoxFit.cover,
+                          )),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              listaFavoritos[index].direccion,
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w500,
+                                  color: utils.Colors.blanco),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              listaFavoritos[index].barrio,
+                              style: TextStyle(
+                                  fontSize: 15, color: utils.Colors.blanco),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  '\$ ${listaFavoritos[index].precio}',
+                                  style: TextStyle(
+                                      color: utils.Colors.blanco,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Expanded(child: Container()),
+                                Icon(
+                                  Icons.bookmark_outline_rounded,
+                                  color: utils.Colors.blanco,
+                                  size: 30,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -349,8 +376,7 @@ class _listaFavoritos extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
 

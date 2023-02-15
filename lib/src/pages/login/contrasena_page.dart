@@ -6,7 +6,7 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 
 import '../../widgets/button.dart';
-
+//*pagina de si la persona olvido su contraseña
 class OlvidarContrasenaPage extends StatelessWidget {
   ContrasenaController contrasenaController = new ContrasenaController();
 

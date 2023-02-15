@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//*obtencion del correo 
 class ContrasenaController {
   late BuildContext context;
   TextEditingController correoController = new TextEditingController();
