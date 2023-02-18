@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
+import '../../widgets/slidesShow.dart';
+
 //*Pagina de listas ya sea de favoritos o de sugernecias
 class ListasPage extends StatelessWidget {
   final List lista;
@@ -51,52 +53,50 @@ class ListasPage extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: lista.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: 130,
-                      width: 386,
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: utils.Colors.azulOscuro,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              lista[index].iamgen,
-                              width: 110,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  lista[index].direccion,
-                                  style: TextStyle(
-                                      color: utils.Colors.blanco,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  lista[index].barrio,
-                                  style: TextStyle(
-                                      fontSize: 16, color: utils.Colors.blanco),
-                                ),
-                                Text(
-                                  '\$${lista[index].precio}',
-                                  style: TextStyle(
-                                      color: utils.Colors.ocre,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                )
-                              ],
-                            ),
-                          ],
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SidesShow(
+                                      slides: lista[index].imagenes,
+                                      direccion: lista[index].direccion, 
+                                      barrio: lista[index].barrio, 
+                                      precio: lista[index].precio, 
+                                      iconosDetalles: [], 
+                                      nombreDeatlles: [], 
+                                      iconosRestricciones: [], 
+                                      nombreRestricciones: [], 
+                                      descripcion: '',
+                              ) 
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 130,
+                        width: 386,
+                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: utils.Colors.azulOscuro,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              Image.asset(lista[index].iamgen,width: 110,),
+                              SizedBox(width: 10),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text( lista[index].direccion,style: TextStyle(color: utils.Colors.blanco,fontSize: 17,fontWeight: FontWeight.w500),),
+                                  Text(lista[index].barrio,style: TextStyle(fontSize: 16, color: utils.Colors.blanco),),
+                                  Text('\$${lista[index].precio}',style: TextStyle(color: utils.Colors.ocre,fontSize: 20,fontWeight: FontWeight.w600),)
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -107,7 +107,6 @@ class ListasPage extends StatelessWidget {
           ),
         ),
       ),
-      
     );
   }
 }

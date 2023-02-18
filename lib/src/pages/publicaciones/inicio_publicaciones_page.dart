@@ -211,61 +211,82 @@ class _listaSugerencias extends StatelessWidget {
             child: ListView.builder(
               itemCount: listaSugerencias.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 130,
-                  width: 386,
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: utils.Colors.azulOscuro,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 5),
-                          child: Container(
-                            width: 110,
-                            height: 110,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  opacity: 0.50,
-                                  image: AssetImage(
-                                      listaSugerencias[index].iamgen),
-                                  fit: BoxFit.cover,
-                                )),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            RichText(
-                                text: TextSpan(
-                                    text: listaSugerencias[index].direccion,
-                                    style: TextStyle(
-                                        color: utils.Colors.blanco,
-                                        fontWeight: FontWeight.w400))),
-                            Text(
-                              listaSugerencias[index].barrio,
-                              style: TextStyle(
-                                  fontSize: 16, color: utils.Colors.blanco),
+                return GestureDetector(
+                  onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            //TODO flata agregar contendio
+              builder: (context) => SidesShow(
+                      slides: listaSugerencias[index].imagenes,
+                      direccion: listaSugerencias[index].direccion, 
+                       barrio: listaSugerencias[index].barrio, 
+                       precio: listaSugerencias[index].precio, 
+                       iconosDetalles: [], 
+                       nombreDeatlles: [], 
+                       iconosRestricciones: [], 
+                       nombreRestricciones: [], 
+                       descripcion: '',
+              ) 
+          ),
+        );
+      },
+                  child: Container(
+                    height: 130,
+                    width: 386,
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: utils.Colors.azulOscuro,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Container(
+                              width: 110,
+                              height: 110,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    opacity: 0.50,
+                                    image: AssetImage(
+                                        listaSugerencias[index].iamgen),
+                                    fit: BoxFit.cover,
+                                  )),
                             ),
-                            Text(
-                              '\$${listaSugerencias[index].precio}',
-                              style: TextStyle(
-                                  color: utils.Colors.ocre,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
-                            )
-                          ],
-                        ),
-                      ],
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                  text: TextSpan(
+                                      text: listaSugerencias[index].direccion,
+                                      style: TextStyle(
+                                          color: utils.Colors.blanco,
+                                          fontWeight: FontWeight.w400))),
+                              Text(
+                                listaSugerencias[index].barrio,
+                                style: TextStyle(
+                                    fontSize: 16, color: utils.Colors.blanco),
+                              ),
+                              Text(
+                                '\$${listaSugerencias[index].precio}',
+                                style: TextStyle(
+                                    color: utils.Colors.ocre,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -302,16 +323,23 @@ class _listaFavoritos extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SidesShow(
-                      slides: listaFavoritos[index].imagenes,
-                      direccion: listaFavoritos[index].direccion, 
-                       barrio: listaFavoritos[index].barrio, 
-                       precio: listaFavoritos[index].precio,) ),
-        );
-      },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SidesShow(
+                              slides: listaFavoritos[index].imagenes,
+                              direccion: listaFavoritos[index].direccion, 
+                              barrio: listaFavoritos[index].barrio, 
+                              precio: listaFavoritos[index].precio, 
+                              iconosDetalles: listaFavoritos[index].iconosDetalle, 
+                              nombreDeatlles: listaFavoritos[index].nombreDetalle, 
+                              iconosRestricciones: listaFavoritos[index].iconosRestricciones,
+                              nombreRestricciones: listaFavoritos[index].nombreRestricciones,
+                              descripcion: listaFavoritos[index].descripcio,
+                            ) 
+                          ),
+                        );
+                      },
                     child: Container(
                       height: 364,
                       width: 280,

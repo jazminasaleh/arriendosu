@@ -10,7 +10,22 @@ class SidesShow extends StatelessWidget {
   String direccion;
   String barrio;
   String precio;
-  SidesShow({required this.slides, required this.direccion, required this.barrio, required this.precio});
+  List iconosDetalles;
+  List nombreDeatlles;
+  List iconosRestricciones;
+  List nombreRestricciones;
+  String descripcion;
+  SidesShow({
+    required this.slides, 
+    required this.direccion, 
+    required this.barrio, 
+    required this.precio, 
+    required this.iconosDetalles, 
+    required this.nombreDeatlles,
+    required this.iconosRestricciones,
+    required this.nombreRestricciones,
+    required this.descripcion}
+  );
 
   @override
   Widget build(BuildContext context,) {
@@ -20,26 +35,37 @@ class SidesShow extends StatelessWidget {
           backgroundColor: utils.Colors.fondoOscuro,
           appBar: AppBar(),
           body: 
-              Column(
-            children: [
-              Container(
-                height: 300,
-                width: double.infinity,
-                child: _Slides(
-                  slides: this.slides,
+              SingleChildScrollView(
+                child: Column(
+                          children: [
+                Container(
+                  height: 300,
+                  width: double.infinity,
+                  child: _Slides(
+                    slides: this.slides,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: _Dots(
-                  totalSlides: this.slides.length,
+                SizedBox(
+                  height: 10,
                 ),
-              ),
-              DescripcionPublicaciones(direccion: direccion, barrio: barrio, precio: precio, slides: slides,)
-            ],
-          )),
+                Center(
+                  child: _Dots(
+                    totalSlides: this.slides.length,
+                  ),
+                ),
+                DescripcionPublicaciones(
+                  direccion: direccion, 
+                  barrio: barrio, 
+                  precio: precio, 
+                  slides: slides, 
+                  iconosDetalles: iconosDetalles, 
+                  nombreDeatlles: nombreDeatlles, 
+                  iconosRestricciones: iconosRestricciones, 
+                  nombreRestricciones: nombreRestricciones, 
+                  descripcion: descripcion,)
+                  ],
+                ),
+              )),
     );
   }
 }
