@@ -13,7 +13,7 @@ class ListaFavoritos {
   List<Widget> nombreDetalle;
   List<Widget> iconosRestricciones;
   List<Widget> nombreRestricciones;
-  final String descripcio;
+  final String descripcion;
   ListaFavoritos(
       {required this.direccion,
       required this.barrio,
@@ -24,7 +24,7 @@ class ListaFavoritos {
       required this.nombreDetalle,
       required this.iconosRestricciones,
       required this.nombreRestricciones,
-      required this.descripcio});
+      required this.descripcion});
 }
 
 //*lista de las publicaciones favoritas
@@ -90,7 +90,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
     ListaFavoritos(
         direccion: 'Carrear 10 # 10-78',
         barrio: 'Santa Maria 2',
@@ -155,7 +155,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
         
     ListaFavoritos(
         direccion: 'Carrera 18 # 104-125',
@@ -220,7 +220,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Maria 2',
@@ -284,7 +284,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Maria 2',
@@ -348,7 +348,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Barbara 1',
@@ -412,7 +412,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
     ListaFavoritos(
         direccion: 'Carrear 10 # 10-78',
         barrio: 'Santa Maria 2',
@@ -476,7 +476,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
     ListaFavoritos(
         direccion: 'Carrera 18 # 104-125',
         barrio: 'Santa Maria 2',
@@ -540,7 +540,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Maria 2',
@@ -604,7 +604,7 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Barbara 2',
@@ -669,6 +669,6 @@ class ListaLlenaFavoritos {
             style: TextStyle(color: utils.Colors.blanco, fontSize: 10),
           )
         ], 
-        descripcio: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
+        descripcion: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ames enim velit mollit. Exercitation veniam consequat sunt nostrud amet.'),
   ];
 }

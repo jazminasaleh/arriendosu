@@ -63,11 +63,11 @@ class ListasPage extends StatelessWidget {
                                       direccion: lista[index].direccion, 
                                       barrio: lista[index].barrio, 
                                       precio: lista[index].precio, 
-                                      iconosDetalles: [], 
-                                      nombreDeatlles: [], 
-                                      iconosRestricciones: [], 
-                                      nombreRestricciones: [], 
-                                      descripcion: '',
+                                      iconosDetalles: lista[index].iconosDetalle, 
+                                      nombreDeatlles: lista[index].nombreDetalle, 
+                                      iconosRestricciones: lista[index].iconosRestricciones, 
+                                      nombreRestricciones: lista[index].nombreRestricciones, 
+                                      descripcion: lista[index].descripcion,
                               ) 
                           ),
                         );

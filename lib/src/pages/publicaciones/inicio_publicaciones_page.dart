@@ -216,16 +216,15 @@ class _listaSugerencias extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            //TODO flata agregar contendio
               builder: (context) => SidesShow(
                       slides: listaSugerencias[index].imagenes,
                       direccion: listaSugerencias[index].direccion, 
                        barrio: listaSugerencias[index].barrio, 
                        precio: listaSugerencias[index].precio, 
-                       iconosDetalles: [], 
-                       nombreDeatlles: [], 
-                       iconosRestricciones: [], 
-                       nombreRestricciones: [], 
+                       iconosDetalles: listaSugerencias[index].iconosDetalle, 
+                       nombreDeatlles: listaSugerencias[index].nombreDetalle, 
+                       iconosRestricciones: listaSugerencias[index].iconosRestricciones, 
+                       nombreRestricciones: listaSugerencias[index].nombreRestricciones, 
                        descripcion: '',
               ) 
           ),
@@ -335,7 +334,7 @@ class _listaFavoritos extends StatelessWidget {
                               nombreDeatlles: listaFavoritos[index].nombreDetalle, 
                               iconosRestricciones: listaFavoritos[index].iconosRestricciones,
                               nombreRestricciones: listaFavoritos[index].nombreRestricciones,
-                              descripcion: listaFavoritos[index].descripcio,
+                              descripcion: listaFavoritos[index].descripcion,
                             ) 
                           ),
                         );
