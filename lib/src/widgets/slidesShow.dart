@@ -6,14 +6,14 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import '../provider/publicaciones_slider.dart';
 //*slider de imagnes de la pagina descripcion de publicaciones
 class SidesShow extends StatelessWidget {
-  final List<Widget> slides;
+  List<Widget> slides;
   String direccion;
   String barrio;
   String precio;
   SidesShow({required this.slides, required this.direccion, required this.barrio, required this.precio});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
     return ChangeNotifierProvider(
       create: (_) => new SliderModel(),
       child: Scaffold(
@@ -37,7 +37,7 @@ class SidesShow extends StatelessWidget {
                   totalSlides: this.slides.length,
                 ),
               ),
-              DescripcionPublicaciones(direccion: direccion, barrio: barrio, precio: precio,)
+              //*DescripcionPublicaciones(direccion: direccion, barrio: barrio, precio: precio, slides: slides,)
             ],
           )),
     );

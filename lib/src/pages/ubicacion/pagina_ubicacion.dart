@@ -72,72 +72,80 @@ class _UbicacionPageState extends State<UbicacionPage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: GestureDetector(
-          onTap: (){
+          child: GestureDetector(
+             onTap: (){
              final FocusScopeNode focus = FocusScope.of(context);
             if (!focus.hasPrimaryFocus && focus.hasFocus) {
               FocusManager.instance.primaryFocus!.unfocus();
             }
           },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, children: [
-              SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-            Container(
-              height: 350,
-              width: 350,
-              child: GoogleMap(
-                myLocationButtonEnabled: true,
-                markers: markers,
-                mapType: MapType.normal,
-                initialCameraPosition: puntoInicial,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                },
-              ),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height*0.05,),
-            Form(
-                child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 35),
-                  child: Container(
-                    height: 64,
-                    decoration: BoxDecoration(
-                        color: utils.Colors.grisMedio,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: TextFormField(
-                      controller: _ubicacionController.ubicacionController,
-                      autocorrect: false,
-                      keyboardType: TextInputType.streetAddress,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Su dirección',
-                        labelText: 'Ubicación',
-                        prefixIcon: Icon(
-                          Icons.location_on_rounded,
-                          size: 30,
-                        ),
-                        iconColor: Color(0xff3A4750),
-                         labelStyle: TextStyle(
-                          color: Color(0xff3A4750),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600
-                        )
-                      ),
-                    ),
+            child: Container(
+              height: MediaQuery.of(context).size.height*0.90,
+              color: utils.Colors.fondoOscuro,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, 
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+                Container(
+                  height: 350,
+                  width: 350,
+                  child: GoogleMap(
+                    myLocationButtonEnabled: true,
+                    markers: markers,
+                    mapType: MapType.normal,
+                    initialCameraPosition: puntoInicial,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
                   ),
-                )
-              ],
-            )),
-            SizedBox(height: MediaQuery.of(context).size.height*0.25,),
-            ButtonApp(
-              onpress: _ubicacionController.ubicacion,
-              direccion: 'perfil',
-              texto: 'Guardar'
-            )
-          ]),
-        ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+                  Form(
+                      child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35),
+                        child: Container(
+                          height: 64,
+                          decoration: BoxDecoration(
+                              color: utils.Colors.grisMedio,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: TextFormField(
+                            controller: _ubicacionController.ubicacionController,
+                            autocorrect: false,
+                            keyboardType: TextInputType.streetAddress,
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Su dirección',
+                              labelText: 'Ubicación',
+                              prefixIcon: Icon(
+                                Icons.location_on_rounded,
+                                size: 30,
+                              ),
+                              iconColor: Color(0xff3A4750),
+                               labelStyle: TextStyle(
+                                color: Color(0xff3A4750),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600
+                              )
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  )),
+                
+                SizedBox(height: MediaQuery.of(context).size.height*0.20,),
+                ButtonApp(
+                  onpress: _ubicacionController.ubicacion,
+                  direccion: 'perfil',
+                  texto: 'Guardar'
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+              ]),
+            ),
+          ),
+        
       ),
     );
   }

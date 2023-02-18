@@ -305,11 +305,9 @@ class _listaFavoritos extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => SidesShow(slides: [
-                      Image.asset('assets/publicaciones/pub2.jpg'),
-                      Image.asset('assets/publicaciones/pub3.jpg'),
-                      Image.asset('assets/publicaciones/pub1.jpg'),
-                    ], direccion: listaFavoritos[index].direccion, 
+              builder: (context) => SidesShow(
+                      slides: listaFavoritos[index].imagenes,
+                      direccion: listaFavoritos[index].direccion, 
                        barrio: listaFavoritos[index].barrio, 
                        precio: listaFavoritos[index].precio,) ),
         );
