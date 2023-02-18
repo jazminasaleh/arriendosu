@@ -1,10 +1,12 @@
+import 'dart:ui';
+
 import 'package:app_arriendosu/src/pages/publicaciones/galeria_imagenes.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 //*pagina descripcion de publicaciones
 class DescripcionPublicaciones extends StatelessWidget {
-  final List<Widget> slides;
+  List slides;
   String direccion;
   String barrio;
   String precio;
@@ -80,37 +82,43 @@ class DescripcionPublicaciones extends StatelessWidget {
                   ))
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              Container(
-                height: 150,
-                child: Column(
-                  children: [
-                    Expanded(child: ListView.builder(
-                        itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 100,
-                        width: 140,
-                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          image: DecorationImage(
-                            opacity: 0.50,
-                            image: AssetImage(''),
-                            fit: BoxFit.cover,
-                          )),
-                      );
-                    }))
-                  ],
-                ),
-              )
-            ],
-          )
+         
+          _galeria(slides: slides)
         ],
       ),
     ));
+  }
+}
+
+class _galeria extends StatelessWidget {
+  const _galeria({
+    Key? key,
+    required this.slides,
+  }) : super(key: key);
+
+  final List slides;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      width: double.infinity,
+      child: Column(
+        children: [
+          Expanded(child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: slides.length,
+              itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 100,
+              width: 140,
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              
+              child: slides[index],
+            );
+          }))
+        ],
+      ),
+    );
   }
 }

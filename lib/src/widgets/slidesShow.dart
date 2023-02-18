@@ -37,7 +37,7 @@ class SidesShow extends StatelessWidget {
                   totalSlides: this.slides.length,
                 ),
               ),
-              //*DescripcionPublicaciones(direccion: direccion, barrio: barrio, precio: precio, slides: slides,)
+              DescripcionPublicaciones(direccion: direccion, barrio: barrio, precio: precio, slides: slides,)
             ],
           )),
     );

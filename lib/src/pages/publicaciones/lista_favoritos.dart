@@ -19,7 +19,7 @@ final listaFavoritos = <ListaFavoritos>[
           barrio: 'Santa Maria 1',
           precio: '350.000',
           iamgen: 'assets/publicaciones/pub1.jpg',
-          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
+          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub1.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
       ListaFavoritos(
           direccion: 'Carrear 10 # 10-78',
           barrio: 'Santa Maria 2',
@@ -31,25 +31,25 @@ final listaFavoritos = <ListaFavoritos>[
           barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub3.jpg',
-          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
+          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub3.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
       ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
           barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub4.jpg',
-          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
+          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub4.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
       ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
           barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub5.jpg',
-          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
+          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub5.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
        ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
           barrio: 'Santa Barbara 1',
           precio: '350.000',
           iamgen: 'assets/publicaciones/pub1.jpg',
-          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
+          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub1.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
       ListaFavoritos(
           direccion: 'Carrear 10 # 10-78',
           barrio: 'Santa Maria 2',
@@ -61,18 +61,18 @@ final listaFavoritos = <ListaFavoritos>[
           barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub3.jpg',
-          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
+          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub3.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
       ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
           barrio: 'Santa Maria 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub4.jpg',
-          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
+          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub4.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
       ListaFavoritos(
           direccion: 'Calle 47 # 14-25',
           barrio: 'Santa Barbara 2',
           precio: '340.000',
           iamgen: 'assets/publicaciones/pub5.jpg',
-          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
+          imagenes: [Image(image:  AssetImage('assets/publicaciones/pub5.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')), Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),Image(image:  AssetImage('assets/publicaciones/pub2.jpg')),]),
     ];
 }
