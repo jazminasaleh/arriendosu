@@ -5,15 +5,23 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 import 'package:app_arriendosu/src/widgets/button.dart';
 import 'package:app_arriendosu/src/pages/login/login.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/login_form_provider.dart';
 //*Pagina para poder asignar una nueva contraseña
 class NuevaContrasenaPage extends StatelessWidget {
   String correo;
   NuevaContrasenaPage({required this.correo});
-
   NuevaContrasenaController _contrasenaController = new NuevaContrasenaController();
-
+  bool validacionContrasegna = false;
+  bool validacionConfirmarContrasegna = false;
+  bool validacionContrasegnas = false;
+  int contador = 0;
+  static GlobalKey<FormState> formKeyContrasena = new GlobalKey<FormState>();
+  
   @override
   Widget build(BuildContext context) {
+    final loginForm = Provider.of<LoginFromProvider>(context);
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -113,14 +121,116 @@ class NuevaContrasenaPage extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    _formTextField(),
+                    Form(
+                      key: formKeyContrasena,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 35),
+                              child: Container(
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  color: utils.Colors.grisMedio,
+                                  borderRadius: BorderRadius.circular(35),
+                                ),
+                                child: _textFieldCodigo(),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 35),
+                              child: Container(
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  color: utils.Colors.grisMedio,
+                                  borderRadius: BorderRadius.circular(35),
+                                ),
+                                child: _textFieldContrasena(loginForm),
+                              ),
+                            ),
+                            validacionContrasena(validacionContrasegna),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 35),
+                              child: Container(
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  color: utils.Colors.grisMedio,
+                                  borderRadius: BorderRadius.circular(35),
+                                ),
+                                child: _textFieldContrasena2(loginForm),
+                              ),
+                            ),
+                            validacionConfirmarContrasena(validacionConfirmarContrasegna),
+                            validacionContrasenas(validacionContrasegnas)
+                          ],
+                        )
+                      ),
                     const SizedBox(
                       height: 80,
                     ),
-                    ButtonApp(
-                      onpress: _contrasenaController.login,
-                      direccion: 'inicio',
-                      texto: 'Iniciar',
+                   MaterialButton(
+                    shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35)),
+                disabledColor: utils.Colors.grisOscuro,
+                elevation: 0,
+                color: utils.Colors.ocre,
+                height: 60,
+                child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    child: Text(
+                      loginForm.isLoading ? 'Espere' : 'Iniciar',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 25),
+                    )),
+                    onPressed: loginForm.isLoading
+                      ?null
+                      :()async{
+                        contador = 0;
+                         FocusScope.of(context).unfocus();
+                         String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+                        RegExp regExp = new RegExp(pattern);
+                        if(regExp.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena != ''){
+                          validacionContrasegna = false;
+                          contador++;
+                        }else{
+                          validacionContrasegna = true;
+                        }
+                         if(regExp.hasMatch(loginForm.verificarContrasena ?? '') && loginForm.verificarContrasena != ''){
+                          contador++;
+                          validacionConfirmarContrasegna = false;
+                        }else{
+                          validacionConfirmarContrasegna = true;
+                        }
+                        if(loginForm.contrasena == loginForm.verificarContrasena){
+                          contador++;
+                          validacionContrasegnas = false;
+                        }else{
+                          validacionContrasegnas = true;
+                        }
+                        if(contador>=3){
+                          validacionContrasegna=false;
+                          validacionContrasegnas=false;
+                          validacionConfirmarContrasegna=false;
+                          formKeyContrasena.currentState?.validate() ?? false;
+                          loginForm.isLoading = true;
+                          await Future.delayed(Duration(seconds: 1));
+                          loginForm.isLoading = false;
+                           Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Inicio_Page()),
+                                  );
+                        }
+                      }
                     )
                   ],
                 ),
@@ -131,55 +241,6 @@ class NuevaContrasenaPage extends StatelessWidget {
       ),
     );
   }
-
-  Widget _formTextField() {
-    return Form(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFieldCodigo(),
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFieldContrasena(),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFieldContrasena2(),
-              ),
-            ),
-          ],
-        ));
-  }
-
   TextFormField _textFieldCodigo() {
     return TextFormField(
       controller: _contrasenaController.codigoController,
@@ -202,7 +263,7 @@ class NuevaContrasenaPage extends StatelessWidget {
     );
   }
 
-  TextFormField _textFieldContrasena() {
+  TextFormField _textFieldContrasena(LoginFromProvider loginFromProvider) {
     return TextFormField(
       controller: _contrasenaController.passwordController,
       autocorrect: false,
@@ -222,15 +283,11 @@ class NuevaContrasenaPage extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
-      validator: (value) {
-        return (value != null && value.length >= 6)
-            ? null
-            : 'La contraseña debe de ser de 6 caracteres';
-      },
+      onChanged: (value)=> loginFromProvider.contrasena = value,
     );
   }
 
-  TextFormField _textFieldContrasena2() {
+  TextFormField _textFieldContrasena2(LoginFromProvider loginFromProvider) {
     return TextFormField(
       controller: _contrasenaController.confirmarPasswordController,
       autocorrect: false,
@@ -250,11 +307,45 @@ class NuevaContrasenaPage extends StatelessWidget {
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
       cursorColor: Color(0xff3A4750),
-      validator: (value) {
-        return (value != null && value.length >= 6)
-            ? null
-            : 'La contraseña debe de ser de 6 caracteres';
-      },
+      onChanged: (value) =>loginFromProvider.verificarContrasena = value,
+     
     );
+  }
+
+  Widget validacionContrasena(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+          Text(
+            validacion ? 'El valor ingresado no luce como una contraseña' : '',
+            style: TextStyle(color: utils.Colors.rojo),
+          ),
+      ],
+    ));
+  }
+  Widget validacionConfirmarContrasena(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+          Text(
+            validacion ? 'El valor ingresado no luce como una contraseña' : '',
+            style: TextStyle(color: utils.Colors.rojo),
+          ),
+      ],
+    ));
+  }
+  Widget validacionContrasenas(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+          Text(
+            validacion ? 'Las dos contraseñas no estan iguales' : '',
+            style: TextStyle(color: utils.Colors.rojo),
+          ),
+      ],
+    ));
   }
 }
