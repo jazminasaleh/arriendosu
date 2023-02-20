@@ -200,7 +200,7 @@ class _DescripcionPublicacionesState extends State<DescripcionPublicaciones> {
     ));
   }
 }
-
+//*Lista de galeria de imagenes
 class _galeria extends StatelessWidget {
   const _galeria({
     Key? key,
@@ -235,7 +235,7 @@ class _galeria extends StatelessWidget {
     );
   }
 }
-
+//*Lista de detalles de la publicacion
 class _detalles extends StatelessWidget {
   const _detalles({
     Key? key,
@@ -282,7 +282,7 @@ class _detalles extends StatelessWidget {
     );
   }
 }
-
+//*Lista de restricciones de la publicacion
 class _restricciones extends StatelessWidget {
   const _restricciones({
     Key? key,
@@ -329,7 +329,7 @@ class _restricciones extends StatelessWidget {
     );
   }
 }
-
+//*Descripcion general de la publicacion
 class _descripcion extends StatelessWidget {
   _descripcion({
    required this.descripcion,

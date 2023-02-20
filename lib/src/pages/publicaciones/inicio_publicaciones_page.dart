@@ -213,23 +213,23 @@ class _listaSugerencias extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SidesShow(
-                      slides: listaSugerencias[index].imagenes,
-                      direccion: listaSugerencias[index].direccion, 
-                       barrio: listaSugerencias[index].barrio, 
-                       precio: listaSugerencias[index].precio, 
-                       iconosDetalles: listaSugerencias[index].iconosDetalle, 
-                       nombreDeatlles: listaSugerencias[index].nombreDetalle, 
-                       iconosRestricciones: listaSugerencias[index].iconosRestricciones, 
-                       nombreRestricciones: listaSugerencias[index].nombreRestricciones, 
-                       descripcion: '',
-              ) 
-          ),
-        );
-      },
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SidesShow(
+                                  slides: listaSugerencias[index].imagenes,
+                                  direccion: listaSugerencias[index].direccion, 
+                                  barrio: listaSugerencias[index].barrio, 
+                                  precio: listaSugerencias[index].precio, 
+                                  iconosDetalles: listaSugerencias[index].iconosDetalle, 
+                                  nombreDeatlles: listaSugerencias[index].nombreDetalle, 
+                                  iconosRestricciones: listaSugerencias[index].iconosRestricciones, 
+                                  nombreRestricciones: listaSugerencias[index].nombreRestricciones, 
+                                  descripcion: '',
+                          ) 
+                      ),
+                    );
+                  },
                   child: Container(
                     height: 130,
                     width: 386,

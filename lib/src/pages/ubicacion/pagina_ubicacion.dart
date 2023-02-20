@@ -6,7 +6,7 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 import '../../widgets/button.dart';
 import '../perfil/perfil.dart';
-//*pagina donde el usuario puede digitar su ubicacion
+//*pagina donde el usuario puede digitar su ubicacion y ver un mapa
 class UbicacionPage extends StatefulWidget {
   const UbicacionPage({super.key});
 

@@ -8,7 +8,7 @@ import 'package:app_arriendosu/src/pages/login/login.dart';
 //*Pagina para poder asignar una nueva contraseña
 class NuevaContrasenaPage extends StatelessWidget {
   String correo;
-  NuevaContrasenaPage({super.key, required this.correo});
+  NuevaContrasenaPage({required this.correo});
 
   NuevaContrasenaController _contrasenaController = new NuevaContrasenaController();
 

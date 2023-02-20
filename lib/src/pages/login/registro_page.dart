@@ -106,12 +106,14 @@ bool validacionConfPassword = false;
 bool validacionPasswords = false;
 int contador = 0;
 
+
 class _formTextField extends StatelessWidget {
+  static final formKeRegistro = const Key('__RIKEY2__');
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFromProvider>(context);
     return Form(
-        key: loginForm.formKey,
+        key: formKeRegistro,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
@@ -194,7 +196,8 @@ class _formTextField extends StatelessWidget {
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 25),
-                    )),
+                    )
+                ),
                 onPressed: loginForm.isLoading
                     ? null
                     : () async {
@@ -249,15 +252,16 @@ class _formTextField extends StatelessWidget {
                           validacionPassword = false;
                           validacionConfPassword = false;
                           validacionPasswords = false;
-                          if (!loginForm.isValidForm()) return;
                           loginForm.isLoading = true;
                           await Future.delayed(Duration(seconds: 1));
                           loginForm.isLoading = false;
                           Navigator.popAndPushNamed(context, 'inicio');
                         }
-                      })
+                      }
+            )
           ],
-        ));
+        )
+      );
   }
 
 //*Campo para confrimar la contraseña

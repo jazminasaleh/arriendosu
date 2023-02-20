@@ -12,6 +12,8 @@ class Home_Page extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.60,
           ),
+        
+        
           Container(
             height: MediaQuery.of(context).size.height * 0.40,
             width: MediaQuery.of(context).size.width * 100,
@@ -34,8 +36,8 @@ class Home_Page extends StatelessWidget {
                     height: 15,
                   ),
                   const Text(
-                    'Amet minim mollit non deserunt ullamco est sitt aliqua dolor do a sunt nostrud amet.',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.Colors.blanco),
+                    'App para todos los miembros que pertenezcan a la UPTC y deseen encontrar un inmbueble en arriendo de forma rapida.',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.Colors.blanco),textAlign: TextAlign.justify,
                   ),
                   Expanded(child: Container()),
                   Row(

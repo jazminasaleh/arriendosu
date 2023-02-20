@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//*Colores que se estan utilizando a lo largo de toda la app
 class Colors {
   static const Color ocre = Color.fromRGBO(255, 185, 1, 1);
   static const Color grisOscuro = Color(0xff757575);

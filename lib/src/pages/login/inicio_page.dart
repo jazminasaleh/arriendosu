@@ -120,10 +120,11 @@ class _Inicio_PageState extends State<Inicio_Page> {
   bool validacionEmail = false;
   bool validacionContrasegna = false;
   int contador = 0;
+  static GlobalKey<FormState> formKeyInicio = new GlobalKey<FormState>();
   Widget _formTextField() {
     final loginForm = Provider.of<LoginFromProvider>(context);
     return Form(
-        key: loginForm.formKey,
+        key: formKeyInicio,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
@@ -198,7 +199,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                         if (contador >= 2) {
                           validacionEmail = false;
                           validacionContrasegna = false;
-                          if (!loginForm.isValidForm()) return;
+                          formKeyInicio.currentState?.validate() ?? false;
                           loginForm.isLoading = true;
                           await Future.delayed(Duration(seconds: 1));
                           loginForm.isLoading = false;

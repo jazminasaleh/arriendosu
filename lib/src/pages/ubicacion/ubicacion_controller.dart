@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
+//*Guarda la ubicacion obtenida de pg ubicacion
 class UbicacionController {
   late BuildContext context;
 
