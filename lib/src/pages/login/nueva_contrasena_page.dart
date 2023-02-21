@@ -167,6 +167,7 @@ class NuevaContrasenaPage extends StatelessWidget {
                               ),
                             ),
                             validacionConfirmarContrasena(validacionConfirmarContrasegna),
+                            SizedBox(height: 10,),
                             validacionContrasenas(validacionContrasegnas)
                           ],
                         )
@@ -198,13 +199,13 @@ class NuevaContrasenaPage extends StatelessWidget {
                          FocusScope.of(context).unfocus();
                          String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
                         RegExp regExp = new RegExp(pattern);
-                        if(regExp.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena != ''){
+                        if(regExp.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena == ''){
                           validacionContrasegna = false;
                           contador++;
                         }else{
                           validacionContrasegna = true;
                         }
-                         if(regExp.hasMatch(loginForm.verificarContrasena ?? '') && loginForm.verificarContrasena != ''){
+                         if(regExp.hasMatch(loginForm.verificarContrasena ?? '') && loginForm.verificarContrasena == ''){
                           contador++;
                           validacionConfirmarContrasegna = false;
                         }else{

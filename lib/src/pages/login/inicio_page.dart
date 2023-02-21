@@ -178,18 +178,19 @@ class _Inicio_PageState extends State<Inicio_Page> {
                     : () async {
                         contador = 0;
                         FocusScope.of(context).unfocus();
+                         String  patternContrasena = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+                        RegExp regExpContrasena = new RegExp(patternContrasena);
                         String pattern =
                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                         RegExp regExp = new RegExp(pattern);
-                        if (regExp.hasMatch(loginForm.correo ?? '') && loginForm.correo != '') {
+                        if (regExp.hasMatch(loginForm.correo ?? '') && loginForm.correo == '') {
                           validacionEmail = false;
                           contador++;
                         } else {
                           validacionEmail = true;
                           validacionCorreo(validacionEmail);
                         }
-                        if (loginForm.contrasena != null &&
-                            loginForm.contrasena.length >= 6) {
+                        if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena == '') {
                           validacionContrasegna = false;
                           contador++;
                         } else {

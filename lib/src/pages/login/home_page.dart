@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+import 'package:flutter_svg/flutter_svg.dart';
 
 //*Pagina principal de bienvenida
 class Home_Page extends StatelessWidget {
@@ -10,10 +11,12 @@ class Home_Page extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.60,
+            height: MediaQuery.of(context).size.height * 0.20,
           ),
-        
-        
+         SvgPicture.asset( 'assets/registro/Logo.svg'),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.23,
+          ),
           Container(
             height: MediaQuery.of(context).size.height * 0.40,
             width: MediaQuery.of(context).size.width * 100,
@@ -36,7 +39,7 @@ class Home_Page extends StatelessWidget {
                     height: 15,
                   ),
                   const Text(
-                    'App para todos los miembros que pertenezcan a la UPTC y deseen encontrar un inmbueble en arriendo de forma rapida.',
+                    'App para todos los miembros que pertenezcan a la UPTC y deseen encontrar un inmueble en arriendo de forma rápida.',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.Colors.blanco),textAlign: TextAlign.justify,
                   ),
                   Expanded(child: Container()),
