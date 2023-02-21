@@ -53,7 +53,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                     ),
                     ButtonApp(
                         onpress: _editarController.datosUsuario,
-                        direccion: 'inicio',
+                        direccion: 'perfil',
                         texto: 'Guardar'),
                     const SizedBox(
                       height: 20,

@@ -11,14 +11,14 @@ class Home_Page extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.20,
+            height: MediaQuery.of(context).size.height * 0.18,
           ),
          SvgPicture.asset( 'assets/registro/Logo.svg'),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.23,
+            height: MediaQuery.of(context).size.height * 0.20,
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.40,
+            height: MediaQuery.of(context).size.height * 0.45,
             width: MediaQuery.of(context).size.width * 100,
             decoration: const BoxDecoration(
                 color: utils.Colors.azulOscuro,

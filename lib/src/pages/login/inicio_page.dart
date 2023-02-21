@@ -183,14 +183,14 @@ class _Inicio_PageState extends State<Inicio_Page> {
                         String pattern =
                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                         RegExp regExp = new RegExp(pattern);
-                        if (regExp.hasMatch(loginForm.correo ?? '') && loginForm.correo == '') {
+                       if (regExp.hasMatch(loginForm.correo ?? '') && loginForm.correo != '') {
                           validacionEmail = false;
                           contador++;
-                        } else {
+                        }else {
                           validacionEmail = true;
                           validacionCorreo(validacionEmail);
                         }
-                        if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena == '') {
+                        if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena != '') {
                           validacionContrasegna = false;
                           contador++;
                         } else {
