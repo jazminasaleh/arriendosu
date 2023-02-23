@@ -125,6 +125,8 @@ class _Inicio_PageState extends State<Inicio_Page> {
   static GlobalKey<FormState> formKeyInicio = new GlobalKey<FormState>();
   Widget _formTextField() {
     final loginForm = Provider.of<LoginFromProvider>(context);
+    loginForm.contrasena = '';
+    loginForm.correo = '';
     return Form(
         key: formKeyInicio,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -178,42 +180,46 @@ class _Inicio_PageState extends State<Inicio_Page> {
                 onPressed: loginForm.isLoading
                     ? null
                     : () async {
+                        print('${loginForm.contrasena}');
                         contador = 0;
                         FocusScope.of(context).unfocus();
-                         final authService =
+                        final authService =
                             Provider.of<AuthService>(context, listen: false);
-                         String  patternContrasena = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+                        String patternContrasena =
+                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
                         RegExp regExpContrasena = new RegExp(patternContrasena);
                         String pattern =
                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                         RegExp regExp = new RegExp(pattern);
-                       if (regExp.hasMatch(loginForm.correo ?? '') && loginForm.correo != '') {
+                        if (regExp.hasMatch(loginForm.correo ?? '') &&
+                            loginForm.correo != '') {
                           validacionEmail = false;
                           contador++;
-                        }else {
+                        } else {
                           validacionEmail = true;
                           validacionCorreo(validacionEmail);
                         }
-                        if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena != '') {
+                        if (regExpContrasena
+                                .hasMatch(loginForm.contrasena ?? '') &&
+                            loginForm.contrasena != '') {
                           validacionContrasegna = false;
                           contador++;
                         } else {
                           validacionContrasegna = true;
                           validacionContrasena(validacionContrasegna);
                         }
-                        
                         if (contador >= 2) {
-                         loginForm.isLoading = true;
-                          final String? errorMessage =
-                              await authService.login(
-                                  loginForm.correo, loginForm.contrasena);
+                          loginForm.isLoading = true;
+                          final String? errorMessage = await authService.login(
+                              loginForm.correo, loginForm.contrasena);
                           if (errorMessage == null) {
-                             Navigator.popAndPushNamed(context, 'inicioPublicaciones');
+                            Navigator.popAndPushNamed(
+                                context, 'inicioPublicaciones');
+                            loginForm.isLoading = false;
                           } else {
                             print(errorMessage);
                             loginForm.isLoading = false;
                           }
-                         
                         }
                       })
           ],
@@ -355,10 +361,10 @@ class _Inicio_PageState extends State<Inicio_Page> {
         child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-          Text(
-            validacion ? 'El valor ingresado no luce como una contraseña' : '',
-            style: TextStyle(color: utils.Colors.rojo),
-          ),
+        Text(
+          validacion ? 'El valor ingresado no luce como una contraseña' : '',
+          style: TextStyle(color: utils.Colors.rojo),
+        ),
       ],
     ));
   }

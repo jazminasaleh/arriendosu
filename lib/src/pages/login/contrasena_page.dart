@@ -129,7 +129,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                                         fontWeight: FontWeight.w600)),
                                 cursorHeight: 20,
                                 cursorColor: Color(0xff3A4750),
-                                onChanged: (value) => loginForm.corroOlvido = value,
+                                onChanged: (value) => loginForm.correoOlvido = value,
                                 /*validator: (value) {
                                   String pattern =
                                       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -170,14 +170,13 @@ class OlvidarContrasenaPage extends StatelessWidget {
                                 String pattern =
                                     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                                 RegExp regExp = new RegExp(pattern);
-                                if (regExp.hasMatch(loginForm.corroOlvido ?? '') &&
-                                    loginForm.corroOlvido != '') {
-                                    
+                                if (regExp.hasMatch(loginForm.correoOlvido ?? '') &&
+                                    loginForm.correoOlvido != '') {
                                     validacionEmail = false;
                                     Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => NuevaContrasenaPage(correo: loginForm.corroOlvido)),
+                                        builder: (context) => NuevaContrasenaPage(correo: loginForm.correoOlvido)),
                                   );
                                 } else {
                                   validacionEmail = true;

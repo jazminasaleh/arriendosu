@@ -11,7 +11,7 @@ class LoginFromProvider extends ChangeNotifier {
   final formKeRegistro = const Key('__RIKEY2__');
   final formKecontrasena = const Key('__RIKEY3__');*/
   String correo = ' ';
-  String corroOlvido = ' ';
+  String correoOlvido = ' ';
   String contrasena = ' ';
   String verificarContrasena = ' ';
   String nomUusario = ' ';

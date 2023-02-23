@@ -258,6 +258,7 @@ class _formTextField extends StatelessWidget {
                             print(errorMessage);
                             loginForm.isLoading = false;
                           }
+                          loginForm.isLoading = false;
                         }
                       })
           ],
