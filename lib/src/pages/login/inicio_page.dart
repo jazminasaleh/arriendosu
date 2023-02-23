@@ -7,6 +7,8 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 import 'package:provider/provider.dart';
 
+import '../../services/auth_service.dart';
+
 //*Pagina para iniciar sesion
 class Inicio_Page extends StatefulWidget {
   @override
@@ -178,6 +180,8 @@ class _Inicio_PageState extends State<Inicio_Page> {
                     : () async {
                         contador = 0;
                         FocusScope.of(context).unfocus();
+                         final authService =
+                            Provider.of<AuthService>(context, listen: false);
                          String  patternContrasena = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
                         RegExp regExpContrasena = new RegExp(patternContrasena);
                         String pattern =
@@ -197,15 +201,19 @@ class _Inicio_PageState extends State<Inicio_Page> {
                           validacionContrasegna = true;
                           validacionContrasena(validacionContrasegna);
                         }
+                        
                         if (contador >= 2) {
-                          validacionEmail = false;
-                          validacionContrasegna = false;
-                          formKeyInicio.currentState?.validate() ?? false;
-                          loginForm.isLoading = true;
-                          await Future.delayed(Duration(seconds: 1));
-                          loginForm.isLoading = false;
-                          Navigator.popAndPushNamed(
-                              context, 'inicioPublicaciones');
+                         loginForm.isLoading = true;
+                          final String? errorMessage =
+                              await authService.login(
+                                  loginForm.correo, loginForm.contrasena);
+                          if (errorMessage == null) {
+                             Navigator.popAndPushNamed(context, 'inicioPublicaciones');
+                          } else {
+                            print(errorMessage);
+                            loginForm.isLoading = false;
+                          }
+                         
                         }
                       })
           ],

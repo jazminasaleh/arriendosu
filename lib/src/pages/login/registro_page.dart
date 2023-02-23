@@ -204,6 +204,8 @@ class _formTextField extends StatelessWidget {
                         FocusScope.of(context).unfocus();
                         final authService =
                             Provider.of<AuthService>(context, listen: false);
+                        String  patternContrasena = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+                        RegExp regExpContrasena = new RegExp(patternContrasena);
                         String pattern =
                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                         RegExp regExp = new RegExp(pattern);
@@ -223,22 +225,19 @@ class _formTextField extends StatelessWidget {
                           validEmail = true;
                           validacionCorreo(validEmail);
                         }
-                        if (loginForm.contrasena != null &&
-                            loginForm.contrasena.length >= 6) {
+                         if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena != '') {
                           validacionPassword = false;
                           contador++;
                         } else {
                           validacionPassword = true;
-                          validacionContrasena(validacionConfPassword);
+                          validacionContrasena(validacionPassword);
                         }
-                        if (loginForm.verificarContrasena != null &&
-                            loginForm.verificarContrasena.length >= 6) {
-                          validacionConfPassword = false;
+                         if (regExpContrasena.hasMatch(loginForm.verificarContrasena ?? '') && loginForm.verificarContrasena != '') {
+                           validacionConfPassword = false;
                           contador++;
                         } else {
-                          validacionConfPassword = true;
-
-                          validacionContrasena(validacionConfPassword);
+                           validacionConfPassword = true;
+                          validacionContrasena( validacionConfPassword);
                         }
                         if (loginForm.contrasena ==
                             loginForm.verificarContrasena) {
@@ -257,8 +256,8 @@ class _formTextField extends StatelessWidget {
                             Navigator.popAndPushNamed(context, 'inicio');
                           } else {
                             print(errorMessage);
+                            loginForm.isLoading = false;
                           }
-                          loginForm.isLoading = false;
                         }
                       })
           ],

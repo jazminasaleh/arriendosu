@@ -162,7 +162,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     (value)
-                                      ? widget.whatsapp = value!
+                                      ? widget.whatsapp = value
                                       : widget.whatsapp = value;
                                   });
                                 }
@@ -189,7 +189,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     (value)
-                                      ? widget.telegram = value!
+                                      ? widget.telegram = value
                                       : widget.telegram = value;
                                   });
                                 }
