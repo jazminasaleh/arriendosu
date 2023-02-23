@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -106,7 +107,6 @@ bool validacionConfPassword = false;
 bool validacionPasswords = false;
 int contador = 0;
 
-
 class _formTextField extends StatelessWidget {
   static final formKeRegistro = const Key('__RIKEY2__');
   @override
@@ -196,13 +196,14 @@ class _formTextField extends StatelessWidget {
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 25),
-                    )
-                ),
+                    )),
                 onPressed: loginForm.isLoading
                     ? null
                     : () async {
                         contador = 0;
                         FocusScope.of(context).unfocus();
+                        final authService =
+                            Provider.of<AuthService>(context, listen: false);
                         String pattern =
                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                         RegExp regExp = new RegExp(pattern);
@@ -246,22 +247,22 @@ class _formTextField extends StatelessWidget {
                         } else {
                           validacionPasswords = true;
                         }
+                       
                         if (contador >= 5) {
-                          validacionUsser = false;
-                          validEmail = false;
-                          validacionPassword = false;
-                          validacionConfPassword = false;
-                          validacionPasswords = false;
                           loginForm.isLoading = true;
-                          await Future.delayed(Duration(seconds: 1));
+                          final String? errorMessage =
+                              await authService.createUser(
+                                  loginForm.correo, loginForm.contrasena);
+                          if (errorMessage == null) {
+                            Navigator.popAndPushNamed(context, 'inicio');
+                          } else {
+                            print(errorMessage);
+                          }
                           loginForm.isLoading = false;
-                          Navigator.popAndPushNamed(context, 'inicio');
                         }
-                      }
-            )
+                      })
           ],
-        )
-      );
+        ));
   }
 
 //*Campo para confrimar la contraseña

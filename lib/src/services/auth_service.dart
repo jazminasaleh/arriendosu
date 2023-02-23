@@ -6,18 +6,25 @@ import 'package:http/http.dart' as http;
 class AuthService extends ChangeNotifier {
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   final String _firebaseToken = 'AIzaSyDr-SySwAGUap4T90lh_oEj3TYismqY6xs';
-
-  Future<String?> createUser(String correo, String contrasena) async {
+//Crear un nuevo usuario
+  Future<String?> createUser(String email, String password) async {
     final Map<String, dynamic> authData = {
-      'correo': correo,
-      'contrasena': contrasena
+      'email': email,
+      'password': password,
     };
+    print(authData);
 
     final url =
-        Uri.http(_baseUrl, '/v1/accounts:signUp', {'key': _firebaseToken});
+        Uri.https(_baseUrl, '/v1/accounts:signUp', {'key': _firebaseToken});
 
     final resp = await http.post(url, body: json.encode(authData));
+    print('respuesta $resp');
     final Map<String, dynamic> decodedResp = json.decode(resp.body);
-    print(decodedResp);
+    if (decodedResp.containsKey('idToken')) {
+      print(decodedResp);
+      return null;
+    } else {
+      return decodedResp['error']['message'];
+    }
   }
 }

@@ -15,11 +15,12 @@ void main() => runApp(AppState());
 class AppState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => LoginFromProvider()),
-      ChangeNotifierProvider(create: (_) => AuthService()),
-    ],
-    child: MyApp(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthService()),
+        ChangeNotifierProvider(create: (_) => LoginFromProvider()),
+      ],
+      child: MyApp(),
     );
   }
 }
