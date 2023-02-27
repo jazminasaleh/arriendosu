@@ -6,6 +6,7 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:provider/provider.dart';
 
 import '../../provider/login_form_provider.dart';
+import '../../services/notificaciones_services.dart';
 
 //*Pagina para hacer el registro en la app
 class RegistroPage extends StatelessWidget {
@@ -255,7 +256,7 @@ class _formTextField extends StatelessWidget {
                           if (errorMessage == null) {
                             Navigator.popAndPushNamed(context, 'inicio');
                           } else {
-                            print(errorMessage);
+                             NotificacionesService.showSnackbar(errorMessage);
                             loginForm.isLoading = false;
                           }
                           loginForm.isLoading = false;

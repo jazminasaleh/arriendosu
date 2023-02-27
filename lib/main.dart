@@ -4,6 +4,7 @@ import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
 import 'package:app_arriendosu/src/provider/login_form_provider.dart';
 import 'package:app_arriendosu/src/services/auth_service.dart';
+import 'package:app_arriendosu/src/services/notificaciones_services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         'ubicacion': (BuildContext context) => UbicacionPage(),
         'perfil': (BuildContext context) => PerfilPage()
       },
+      scaffoldMessengerKey: NotificacionesService.mesnajeKey,
     );
   }
 }

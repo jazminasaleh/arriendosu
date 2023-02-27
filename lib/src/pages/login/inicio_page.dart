@@ -1,4 +1,5 @@
 import 'package:app_arriendosu/src/provider/login_form_provider.dart';
+import 'package:app_arriendosu/src/services/notificaciones_services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -125,8 +126,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
   static GlobalKey<FormState> formKeyInicio = new GlobalKey<FormState>();
   Widget _formTextField() {
     final loginForm = Provider.of<LoginFromProvider>(context);
-    loginForm.contrasena = '';
-    loginForm.correo = '';
+   
     return Form(
         key: formKeyInicio,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -217,7 +217,8 @@ class _Inicio_PageState extends State<Inicio_Page> {
                                 context, 'inicioPublicaciones');
                             loginForm.isLoading = false;
                           } else {
-                            print(errorMessage);
+                            print('error$errorMessage');
+                            NotificacionesService.showSnackbar(errorMessage);
                             loginForm.isLoading = false;
                           }
                         }
