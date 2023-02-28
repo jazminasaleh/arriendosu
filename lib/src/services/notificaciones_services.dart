@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+//*Mnejsae del alerta
 class NotificacionesService {
   static GlobalKey<ScaffoldMessengerState> mesnajeKey =
       new GlobalKey<ScaffoldMessengerState>();

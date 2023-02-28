@@ -256,6 +256,7 @@ class _formTextField extends StatelessWidget {
                           if (errorMessage == null) {
                             Navigator.popAndPushNamed(context, 'inicio');
                           } else {
+                            //*Notifiar que hay algo mal
                              NotificacionesService.showSnackbar(errorMessage);
                             loginForm.isLoading = false;
                           }

@@ -7,9 +7,6 @@ class LoginFromProvider extends ChangeNotifier {
   final GlobalKey<FormState> formKeRegistro = new GlobalKey<FormState>();
   final GlobalKey<FormState> formKecontrasena = new GlobalKey<FormState>();
 
-   /*final formKeyInicio = const Key('__RIKEY1__');
-  final formKeRegistro = const Key('__RIKEY2__');
-  final formKecontrasena = const Key('__RIKEY3__');*/
   String correo = ' ';
   String correoOlvido = ' ';
   String contrasena = ' ';

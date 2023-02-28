@@ -11,6 +11,5 @@ class UbicacionController {
 
   void ubicacion() {
     String ubicacion = ubicacionController.text;
-    print('$ubicacion');
   }
 }
