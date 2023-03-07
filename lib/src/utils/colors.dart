@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 //*Colores que se estan utilizando a lo largo de toda la app
 class Colors {
   static const Color ocre = Color.fromRGBO(255, 185, 1, 1);
@@ -9,4 +10,5 @@ class Colors {
   static const Color azulOscuro = Color(0xff1F222A);
   static const Color blanco = Color(0xffffffff);
   static const Color rojo = Color(0xffF75555);
+  static const Color verde = Color(0xff1AB65C);
 }

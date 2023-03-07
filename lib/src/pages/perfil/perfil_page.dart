@@ -165,7 +165,7 @@ class _PerfilPageState extends State<PerfilPage> {
               _menuPerfil(
                 iconoItem: Icons.photo_camera_back_sharp,
                 nomItem: 'Publicar',
-                onPress: 'perfil',
+                onPress: 'publicar1',
               ),
               _menuPerfil(
                 iconoItem: Icons.logout_outlined,

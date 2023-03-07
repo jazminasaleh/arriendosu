@@ -218,6 +218,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                     }
                   }
                 )
+          
           ],
         ));
   }
