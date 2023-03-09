@@ -2,6 +2,7 @@ import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
 
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/pages/publicar/publicar1.dart';
+import 'package:app_arriendosu/src/pages/publicar/publicar2.dart';
 import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
 import 'package:app_arriendosu/src/provider/login_form_provider.dart';
 import 'package:app_arriendosu/src/services/auth_service.dart';
@@ -52,7 +53,8 @@ class MyApp extends StatelessWidget {
         'editarperfil': (BuildContext context) => EditarPerfilPage(),
         'ubicacion': (BuildContext context) => UbicacionPage(),
         'perfil': (BuildContext context) => PerfilPage(),
-        'publicar1': (BuildContext context) => Publicar1Pagr()
+        'publicar1': (BuildContext context) => Publicar1Pagr(),
+        'publicar2': (BuildContext context) => Publicar2Page()
       },
       scaffoldMessengerKey: NotificacionesService.mesnajeKey,
     );

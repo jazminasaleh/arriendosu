@@ -2,12 +2,15 @@ import 'package:app_arriendosu/src/pages/publicar/ubicacion_inmueble_controller.
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
+import '../../widgets/button.dart';
+
 class Publicar1Pagr extends StatefulWidget {
   @override
   State<Publicar1Pagr> createState() => _Publicar1PagrState();
 }
 
 class _Publicar1PagrState extends State<Publicar1Pagr> {
+  //*precio
   var apartamento = false;
   var contador = 0;
   var habitacion = false;
@@ -222,7 +225,15 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                       ),
                     ),
                   ),
-                )
+                ),
+                Expanded(child: Container()),
+                 Padding(
+                  padding: EdgeInsets.only(bottom: 50),
+                   child: ButtonApp(
+                      onpress: _ubicacionController.ubicacion,
+                          direccion: 'publicar2',
+                          texto: 'Siguiente'),
+                 ),
               ],
             ),
           ),
