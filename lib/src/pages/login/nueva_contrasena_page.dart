@@ -107,11 +107,10 @@ class NuevaContrasenaPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(Icons.email, color: Colors.black, size: 30,),
+                              const Icon(Icons.email, color: Colors.black, size: 30,),
                               Padding(
-                              padding: EdgeInsets.only(left: 13),
-                              child: Text(correo, style: TextStyle(color: Colors.black,  fontSize: 20,
-                                    fontWeight: FontWeight.w600),),
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Text(correo, style: const TextStyle(color: Colors.black,  fontSize: 20, fontWeight: FontWeight.w600),),
                             )],
                           ),
                         ),
@@ -166,7 +165,7 @@ class NuevaContrasenaPage extends StatelessWidget {
                               ),
                             ),
                             validacionConfirmarContrasena(validacionConfirmarContrasegna),
-                            SizedBox(height: 10,),
+                            const SizedBox(height: 10,),
                             validacionContrasenas(validacionContrasegnas)
                           ],
                         )
@@ -222,7 +221,7 @@ class NuevaContrasenaPage extends StatelessWidget {
                           validacionConfirmarContrasegna=false;
                           formKeyContrasena.currentState?.validate() ?? false;
                           loginForm.isLoading = true;
-                          await Future.delayed(Duration(seconds: 1));
+                          await Future.delayed(const Duration(seconds: 1));
                           loginForm.isLoading = false;
                            Navigator.push(
                                     context,
@@ -259,7 +258,7 @@ class NuevaContrasenaPage extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 20,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
     );
   }
 
@@ -282,7 +281,7 @@ class NuevaContrasenaPage extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
       onChanged: (value)=> loginFromProvider.contrasena = value,
     );
   }
@@ -306,7 +305,7 @@ class NuevaContrasenaPage extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
       onChanged: (value) =>loginFromProvider.verificarContrasena = value,
      
     );
@@ -319,7 +318,7 @@ class NuevaContrasenaPage extends StatelessWidget {
       children: [
           Text(
             validacion ? 'El valor ingresado no luce como una contraseña' : '',
-            style: TextStyle(color: utils.Colors.rojo),
+            style: const TextStyle(color: utils.Colors.rojo),
           ),
       ],
     ));
@@ -331,7 +330,7 @@ class NuevaContrasenaPage extends StatelessWidget {
       children: [
           Text(
             validacion ? 'El valor ingresado no luce como una contraseña' : '',
-            style: TextStyle(color: utils.Colors.rojo),
+            style: const TextStyle(color: utils.Colors.rojo),
           ),
       ],
     ));
@@ -343,7 +342,7 @@ class NuevaContrasenaPage extends StatelessWidget {
       children: [
           Text(
             validacion ? 'Las dos contraseñas no estan iguales' : '',
-            style: TextStyle(color: utils.Colors.rojo),
+            style: const TextStyle(color: utils.Colors.rojo),
           ),
       ],
     ));

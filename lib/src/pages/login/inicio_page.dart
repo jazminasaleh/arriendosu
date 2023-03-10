@@ -176,6 +176,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 25),
+                          textAlign: TextAlign.center,
                     )
                 ),
                 onPressed: loginForm.isLoading
@@ -243,7 +244,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 20,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.correo = value,
     );
   }
@@ -268,7 +269,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 20,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.contrasena = value,
     );
   }
@@ -330,7 +331,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                   fontWeight: FontWeight.w500),
             ),
             IconButton(
-                onPressed: () {}, icon: Icon(Icons.arrow_forward_ios_rounded))
+                onPressed: () {}, icon: const Icon(Icons.arrow_forward_ios_rounded))
           ],
         ),
       ),
@@ -343,10 +344,10 @@ class _Inicio_PageState extends State<Inicio_Page> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 10),
           child: Text(
             validacion ? 'El valor ingresado no luce como un correo' : '',
-            style: TextStyle(color: utils.Colors.rojo),
+            style: const TextStyle(color: utils.Colors.rojo),
           ),
         ),
       ],
@@ -359,8 +360,10 @@ class _Inicio_PageState extends State<Inicio_Page> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          validacion ? 'El valor ingresado no luce como una contraseña' : '',
-          style: TextStyle(color: utils.Colors.rojo),
+          validacion ? 'El valor ingresado no es una contraseña' : '',
+          style: const TextStyle(color: utils.Colors.rojo),
+          textAlign: TextAlign.center,
+          maxLines: 3,
         ),
       ],
     ));

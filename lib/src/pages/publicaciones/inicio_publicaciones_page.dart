@@ -1,5 +1,3 @@
-import 'package:app_arriendosu/src/pages/publicaciones/descripcion_publicaciones.dart';
-
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
@@ -17,16 +15,13 @@ class InicioPublicaciones extends StatelessWidget {
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
-        leading: Text(''),
+       leading: const SizedBox(),
         title: Row(
-          children: [
+          children: const [
             Icon(
               Icons.home_work_rounded,
               color: utils.Colors.ocre,
               size: 35,
-            ),
-            SizedBox(
-              width: 5,
             ),
             Text(
               'Uhome',
@@ -42,12 +37,12 @@ class InicioPublicaciones extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.notifications_none_outlined,
                   color: utils.Colors.blanco,
                   size: 35,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 IconButton(
@@ -61,7 +56,7 @@ class InicioPublicaciones extends StatelessWidget {
                               )),
                     );
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.bookmark_outline_rounded,
                     color: utils.Colors.blanco,
                     size: 35,
@@ -74,7 +69,7 @@ class InicioPublicaciones extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-            padding: EdgeInsets.only(left: 30, top: 20, right: 20),
+            padding: const EdgeInsets.only(left: 30, top: 20, right: 20),
             child: Column(
               children: [
                 Row(
@@ -88,8 +83,8 @@ class InicioPublicaciones extends StatelessWidget {
                     )
                   ],
                 ),
-                _buscador(),
-                SizedBox(
+                const _buscador(),
+                const SizedBox(
                   height: 10,
                 ),
                 _listaFavoritos(listaFavoritos: listaFavoritos.listaFavoritos),
@@ -110,7 +105,7 @@ class InicioPublicaciones extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Padding(
+        const Padding(
             padding: EdgeInsets.only(left: 10),
             child: Text('Sugerencias',
                 style: TextStyle(
@@ -128,7 +123,7 @@ class InicioPublicaciones extends StatelessWidget {
                         )),
               );
             },
-            child: Text(
+            child: const Text(
               'Ver todo',
               style: TextStyle(fontSize: 16),
             )),
@@ -151,7 +146,7 @@ class _bottomNavigationBar extends StatelessWidget {
     return BottomNavigationBar(
         backgroundColor: utils.Colors.fondoOscuro,
         items: [
-          new BottomNavigationBarItem(
+          new BottomNavigationBarItem (
             icon: IconButton(
               icon: Icon(
                 Icons.home,
@@ -231,22 +226,22 @@ class _listaSugerencias extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    height: 130,
-                    width: 386,
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    height:  MediaQuery.of(context).size.height*0.15,
+                    width: MediaQuery.of(context).size.width*0.90,
+                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     decoration: BoxDecoration(
                       color: utils.Colors.azulOscuro,
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: 5),
+                            padding: const EdgeInsets.only(left: 5),
                             child: Container(
-                              width: 110,
-                              height: 110,
+                              width:  MediaQuery.of(context).size.width*0.25,
+                              height: MediaQuery.of(context).size.height*0.25,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
@@ -257,27 +252,35 @@ class _listaSugerencias extends StatelessWidget {
                                   )),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              RichText(
-                                  text: TextSpan(
-                                      text: listaSugerencias[index].direccion,
-                                      style: TextStyle(
-                                          color: utils.Colors.blanco,
-                                          fontWeight: FontWeight.w400))),
+                              Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                children:[
+                                  Text(
+                                  listaSugerencias[index].direccion,
+                                  style: const TextStyle(
+                                    color: utils.Colors.blanco,
+                                    fontWeight: FontWeight.w300
+                                  ),
+                                  maxLines: 3,
+                                  textAlign: TextAlign.center,
+                                ),
+                                ] 
+                              ),
                               Text(
                                 listaSugerencias[index].barrio,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 16, color: utils.Colors.blanco),
                               ),
                               Text(
                                 '\$${listaSugerencias[index].precio}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: utils.Colors.ocre,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600),
@@ -342,7 +345,7 @@ class _listaFavoritos extends StatelessWidget {
                     child: Container(
                       height: 364,
                       width: 280,
-                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           image: DecorationImage(
@@ -351,40 +354,42 @@ class _listaFavoritos extends StatelessWidget {
                             fit: BoxFit.cover,
                           )),
                       child: Padding(
-                        padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               listaFavoritos[index].direccion,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.w500,
                                   color: utils.Colors.blanco),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 3,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
                               listaFavoritos[index].barrio,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 15, color: utils.Colors.blanco),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Row(
                               children: [
                                 Text(
                                   '\$ ${listaFavoritos[index].precio}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: utils.Colors.blanco,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Expanded(child: Container()),
-                                Icon(
+                                const Icon(
                                   Icons.bookmark_outline_rounded,
                                   color: utils.Colors.blanco,
                                   size: 30,
@@ -414,7 +419,7 @@ class _buscador extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 20,
       ),
       child: GestureDetector(
@@ -427,7 +432,7 @@ class _buscador extends StatelessWidget {
               color: utils.Colors.azulOscuro,
               borderRadius: BorderRadius.circular(10)),
           child: Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             child: Row(
               children: const [
                 Icon(

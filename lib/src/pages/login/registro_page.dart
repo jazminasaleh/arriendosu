@@ -286,7 +286,7 @@ class _formTextField extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.verificarContrasena = value,
     );
   }
@@ -310,7 +310,7 @@ class _formTextField extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 20,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.nomUusario = value,
     );
   }
@@ -334,7 +334,7 @@ class _formTextField extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 20,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.correo = value,
     );
   }
@@ -358,7 +358,7 @@ class _formTextField extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
       onChanged: (value) => loginFromProvider.contrasena = value,
     );
   }
@@ -370,7 +370,7 @@ class _formTextField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 10),
           child: Text(
             validacion ? 'El valor ingresado no luce como un usuario' : '',
             style: const TextStyle(color: utils.Colors.rojo),
@@ -419,7 +419,7 @@ class _formTextField extends StatelessWidget {
       children: [
         Text(
           validacion ? 'La contraseña debe de ser de 6 caracteres' : '',
-          style: TextStyle(color: utils.Colors.rojo),
+          style: const TextStyle(color: utils.Colors.rojo),
         ),
       ],
     ));
@@ -433,7 +433,7 @@ class _formTextField extends StatelessWidget {
       children: [
         Text(
           validacion ? 'Las dos contraseñas no coindicen' : '',
-          style: TextStyle(color: utils.Colors.rojo),
+          style: const TextStyle(color: utils.Colors.rojo),
         ),
       ],
     ));

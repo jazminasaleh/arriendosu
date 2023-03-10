@@ -128,7 +128,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600)),
                                 cursorHeight: 20,
-                                cursorColor: Color(0xff3A4750),
+                                cursorColor: const Color(0xff3A4750),
                                 onChanged: (value) => loginForm.correoOlvido = value,
                                 /*validator: (value) {
                                   String pattern =
@@ -201,7 +201,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 10),
           child: Text(
             validacion ? 'El valor ingresado no luce como un correo' : '',
-            style: TextStyle(color: utils.Colors.rojo),
+            style: const TextStyle(color: utils.Colors.rojo),
           ),
         ),
       ],

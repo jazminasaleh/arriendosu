@@ -16,7 +16,7 @@ class ListasPage extends StatelessWidget {
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             size: 35,
           ),
@@ -26,20 +26,21 @@ class ListasPage extends StatelessWidget {
         ),
         title: Text(
           titulo,
-          style: TextStyle(fontSize: 25),
+          style: const TextStyle(fontSize: 25),
         ),
         actions: [
-          Icon(
+          const Icon(
             Icons.view_agenda_outlined,
             color: utils.Colors.ocre,
             size: 35,
           ),
           IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.view_module_sharp,
-                size: 35,
-              )),
+            onPressed: () {},
+            icon: const Icon(
+              Icons.view_module_sharp,
+              size: 35,
+            )
+          ),
           SizedBox(width: MediaQuery.of(context).size.width*0.02,)
         ],
       ),
@@ -55,48 +56,62 @@ class ListasPage extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
+                        Navigator.push(context,
                           MaterialPageRoute(
-                              builder: (context) => SidesShow(
-                                      slides: lista[index].imagenes,
-                                      direccion: lista[index].direccion, 
-                                      barrio: lista[index].barrio, 
-                                      precio: lista[index].precio, 
-                                      iconosDetalles: lista[index].iconosDetalle, 
-                                      nombreDeatlles: lista[index].nombreDetalle, 
-                                      iconosRestricciones: lista[index].iconosRestricciones, 
-                                      nombreRestricciones: lista[index].nombreRestricciones, 
-                                      descripcion: lista[index].descripcion,
-                              ) 
+                            builder: (context) => SidesShow(
+                              slides: lista[index].imagenes,
+                              direccion: lista[index].direccion, 
+                              barrio: lista[index].barrio, 
+                              precio: lista[index].precio, 
+                              iconosDetalles: lista[index].iconosDetalle, 
+                              nombreDeatlles: lista[index].nombreDetalle, 
+                              iconosRestricciones: lista[index].iconosRestricciones, 
+                              nombreRestricciones: lista[index].nombreRestricciones, 
+                              descripcion: lista[index].descripcion,
+                            ) 
                           ),
                         );
                       },
                       child: Container(
-                        height: 130,
-                        width: 386,
-                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        height:  MediaQuery.of(context).size.height*0.15,
+                        width: MediaQuery.of(context).size.width*0.80,
+                        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                         decoration: BoxDecoration(
                           color: utils.Colors.azulOscuro,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Row(
                             children: [
-                              Image.asset(lista[index].iamgen,width: 110,),
-                              SizedBox(width: 10),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text( lista[index].direccion,style: TextStyle(color: utils.Colors.blanco,fontSize: 17,fontWeight: FontWeight.w500),),
-                                  Text(lista[index].barrio,style: TextStyle(fontSize: 16, color: utils.Colors.blanco),),
-                                  Text('\$${lista[index].precio}',style: TextStyle(color: utils.Colors.ocre,fontSize: 20,fontWeight: FontWeight.w600),)
-                                ],
-                              ),
-                            ],
+                               Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                                child: Container(
+                                  width:  MediaQuery.of(context).size.width*0.25,
+                                  height: MediaQuery.of(context).size.height*0.25,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                    opacity: 0.50,
+                                    image: AssetImage(
+                                      lista[index].iamgen
+                                    ),
+                                    fit: BoxFit.cover,
+                                  )
+                                ),
+                            ),
                           ),
+                          const SizedBox(width: 10),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(children:[Text( lista[index].direccion,style: const TextStyle(color: utils.Colors.blanco,fontSize: 16,fontWeight: FontWeight.w500),maxLines: 3, textAlign: TextAlign.center,)] ),
+                              Text(lista[index].barrio,style: const TextStyle(fontSize: 15, color: utils.Colors.blanco),),
+                              Text('\$${lista[index].precio}',style: const TextStyle(color: utils.Colors.ocre,fontSize: 20,fontWeight: FontWeight.w600),)
+                            ],
+                          ),],
+                        ),
                         ),
                       ),
                     );

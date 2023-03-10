@@ -22,14 +22,14 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
              Navigator.push(context,MaterialPageRoute(
                 builder: (context) => PerfilPage()
             ));
           },
         ),
-        title: Text('Editar perfil'),
+        title: const Text('Editar perfil'),
       ),
       body: SingleChildScrollView(
         child: GestureDetector(
@@ -116,7 +116,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
               height: 30,
             ),
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Container(
                 decoration: BoxDecoration(
                   color: utils.Colors.azulOscuro,
@@ -298,7 +298,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
               fontSize: 20,
               fontWeight: FontWeight.w600)),
       cursorHeight: 15,
-      cursorColor: Color(0xff3A4750),
+      cursorColor: const Color(0xff3A4750),
     );
   }
 }

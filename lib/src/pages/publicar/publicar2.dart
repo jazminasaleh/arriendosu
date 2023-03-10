@@ -1,43 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
+//*Pagina donde muestra la segunda parte para publicar el inmueble
+//*Como lo son sus caracteristicas, estrato, habitacionesa y área
 class Publicar2Page extends StatefulWidget {
   @override
   State<Publicar2Page> createState() => _Publicar2PageState();
 }
 
 class _Publicar2PageState extends State<Publicar2Page> {
-//*Estrato, habitaciones, baños, area, antiguedad,
-  bool internt = false;
-  var contadorInt = 0;
+  bool internt = false,
+      servicios = false,
+      garaje = false,
+      muebles = false,
+      lavadero = false,
+      unaHabitacion = false,
+      dosHabitacion = false,
+      tresHabitacion = false,
+      cuatroHabitacion = false,
+      cincoHabitacion = false;
+  var contadorInt = 0,
+      contadorServicios = 0,
+      contadorGaraje = 0,
+      contadorMuebles = 0,
+      contadorLavadero = 0,
+      contaodrUnaHbaitacion = 0,
+      contaodrDosHbaitacion = 0,
+      contaodrTresHbaitacion = 0,
+      contaodrCuatroHbaitacion = 0,
+      contaodrCincoHbaitacion = 0;
 
-  bool servicios = false;
-  var contadorServicios = 0;
-
-  bool garaje = false;
-  var contadorGaraje = 0;
-
-  bool muebles = false;
-  var contadorMuebles = 0;
-
-  bool lavadero = false;
-  var contadorLavadero = 0;
-
-  bool unaHabitacion = false;
-  var contaodrUnaHbaitacion = 0;
-
-  bool dosHabitacion = false;
-  var contaodrDosHbaitacion = 0;
-
-  bool tresHabitacion = false;
-  var contaodrTresHbaitacion = 0;
-
-  bool cuatroHabitacion = false;
-  var contaodrCuatroHbaitacion = 0;
-
-  bool cincoHabitacion = false;
-  var contaodrCincoHbaitacion = 0;
-
+  var contadorEstratoCero = 0,
+      contadorEstratoUno = 0,
+      contadorEstratoDos = 0,
+      contadorEstratoTres = 0,
+      contadorEstratoCuatro = 0,
+      contadorEstartoCinco = 0;
+  var estratoCero = false,
+      estratoUno = false,
+      estratoDos = false,
+      estratoTres = false,
+      estratoCuatro = false,
+      estratoCinco = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,11 +51,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
           onPressed: () {
             Navigator.pushReplacementNamed(context, 'publicar1');
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           iconSize: 20,
           color: utils.Colors.blanco,
         ),
-        title: Text('Características'),
+        title: const Text('Características'),
       ),
       body: SingleChildScrollView(
         child: GestureDetector(
@@ -69,14 +73,14 @@ class _Publicar2PageState extends State<Publicar2Page> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
                       Transform.scale(
                         scale: 1.2,
                         child: Checkbox(
-                            side:
-                                BorderSide(width: 2, color: utils.Colors.ocre),
+                            side: const BorderSide(
+                                width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
                             value: internt,
@@ -92,7 +96,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                               });
                             }),
                       ),
-                      Text(
+                      const Text(
                         'Internet',
                         style: TextStyle(
                             fontSize: 25,
@@ -103,14 +107,14 @@ class _Publicar2PageState extends State<Publicar2Page> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
                       Transform.scale(
                         scale: 1.2,
                         child: Checkbox(
-                            side:
-                                BorderSide(width: 2, color: utils.Colors.ocre),
+                            side: const BorderSide(
+                                width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
                             value: servicios,
@@ -126,7 +130,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                               });
                             }),
                       ),
-                      Text(
+                      const Text(
                         'Servicios',
                         style: TextStyle(
                             fontSize: 25,
@@ -137,14 +141,14 @@ class _Publicar2PageState extends State<Publicar2Page> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
                       Transform.scale(
                         scale: 1.2,
                         child: Checkbox(
-                            side:
-                                BorderSide(width: 2, color: utils.Colors.ocre),
+                            side: const BorderSide(
+                                width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
                             value: garaje,
@@ -160,8 +164,8 @@ class _Publicar2PageState extends State<Publicar2Page> {
                               });
                             }),
                       ),
-                      Text(
-                        'Garaje',
+                      const Text(
+                        'Parqueadero',
                         style: TextStyle(
                             fontSize: 25,
                             color: utils.Colors.blanco,
@@ -171,14 +175,14 @@ class _Publicar2PageState extends State<Publicar2Page> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
                       Transform.scale(
                         scale: 1.2,
                         child: Checkbox(
-                            side:
-                                BorderSide(width: 2, color: utils.Colors.ocre),
+                            side: const BorderSide(
+                                width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
                             value: muebles,
@@ -194,7 +198,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                               });
                             }),
                       ),
-                      Text(
+                      const Text(
                         'Muebles',
                         style: TextStyle(
                             fontSize: 25,
@@ -205,14 +209,14 @@ class _Publicar2PageState extends State<Publicar2Page> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
                       Transform.scale(
                         scale: 1.2,
                         child: Checkbox(
-                            side:
-                                BorderSide(width: 2, color: utils.Colors.ocre),
+                            side: const BorderSide(
+                                width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
                             value: lavadero,
@@ -228,7 +232,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                               });
                             }),
                       ),
-                      Text(
+                      const Text(
                         'Lavadero',
                         style: TextStyle(
                             fontSize: 25,
@@ -239,19 +243,19 @@ class _Publicar2PageState extends State<Publicar2Page> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.85,
+                    width: MediaQuery.of(context).size.width * 0.9,
                     decoration: BoxDecoration(
                       color: utils.Colors.azulOscuro,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
-                        padding: EdgeInsets.only(top: 10),
+                        padding: const EdgeInsets.only(top: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'Habitaciones',
                               style: TextStyle(
                                   fontSize: 25,
@@ -259,7 +263,8 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 10, bottom: 20),
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 20),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -282,15 +287,15 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: 40,
-                                      width: 40,
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
                                       decoration: BoxDecoration(
                                           color: unaHabitacion
                                               ? utils.Colors.ocre
                                               : utils.Colors.grisClaro,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child: Text(
+                                      child: const Text(
                                         '1',
                                         style: TextStyle(
                                             fontSize: 30,
@@ -306,7 +311,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                         if (contaodrDosHbaitacion == 1) {
                                           dosHabitacion = true;
                                           contaodrDosHbaitacion++;
-                                           unaHabitacion =false;
+                                          unaHabitacion = false;
                                           tresHabitacion = false;
                                           cuatroHabitacion = false;
                                           cincoHabitacion = false;
@@ -317,15 +322,15 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: 40,
-                                      width: 40,
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
                                       decoration: BoxDecoration(
                                           color: dosHabitacion
                                               ? utils.Colors.ocre
                                               : utils.Colors.grisClaro,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child: Text(
+                                      child: const Text(
                                         '2',
                                         style: TextStyle(
                                             fontSize: 30,
@@ -352,15 +357,15 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: 40,
-                                      width: 40,
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
                                       decoration: BoxDecoration(
                                           color: tresHabitacion
                                               ? utils.Colors.ocre
                                               : utils.Colors.grisClaro,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child: Text(
+                                      child: const Text(
                                         '3',
                                         style: TextStyle(
                                             fontSize: 30,
@@ -395,7 +400,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                               : utils.Colors.grisClaro,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child: Text(
+                                      child: const Text(
                                         '4',
                                         style: TextStyle(
                                             fontSize: 30,
@@ -422,15 +427,266 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: 40,
-                                      width: 40,
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
                                       decoration: BoxDecoration(
                                           color: cincoHabitacion
                                               ? utils.Colors.ocre
                                               : utils.Colors.grisClaro,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child: Text(
+                                      child: const Text(
+                                        '5+',
+                                        style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    decoration: BoxDecoration(
+                      color: utils.Colors.azulOscuro,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Estrato',
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  color: utils.Colors.blanco,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        contadorEstratoCero++;
+                                        if (contadorEstratoCero == 1) {
+                                          estratoCero = true;
+                                          contadorEstratoCero++;
+                                          estratoDos = false;
+                                          estratoTres = false;
+                                          estratoUno = false;
+                                          estratoCuatro = false;
+                                          estratoCinco = false;
+                                        } else {
+                                          estratoCero = false;
+                                          contadorEstratoCero = 0;
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
+                                      decoration: BoxDecoration(
+                                          color: estratoCero
+                                              ? utils.Colors.ocre
+                                              : utils.Colors.grisClaro,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: const Text(
+                                        '0',
+                                        style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        contadorEstratoUno++;
+                                        if (contadorEstratoUno == 1) {
+                                          estratoUno = true;
+                                          contadorEstratoUno++;
+                                          estratoCero = false;
+                                          estratoDos = false;
+                                          estratoTres = false;
+                                          estratoCuatro = false;
+                                          estratoCinco = false;
+                                        } else {
+                                          estratoUno = false;
+                                          contadorEstratoUno = 0;
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
+                                      decoration: BoxDecoration(
+                                          color: estratoUno
+                                              ? utils.Colors.ocre
+                                              : utils.Colors.grisClaro,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: const Text(
+                                        '1',
+                                        style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        contadorEstratoDos++;
+                                        if (contadorEstratoDos == 1) {
+                                          contadorEstratoDos++;
+                                          estratoDos    = true;
+                                          estratoUno    = false;
+                                          estratoCero   = false;
+                                          estratoTres   = false;
+                                          estratoCuatro =  false;
+                                          estratoCinco  = false;
+                                        } else {
+                                          estratoDos = false;
+                                          contadorEstratoDos = 0;
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
+                                      decoration: BoxDecoration(
+                                          color: estratoDos
+                                              ? utils.Colors.ocre
+                                              : utils.Colors.grisClaro,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: const Text(
+                                        '2',
+                                        style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        contadorEstratoTres++;
+                                        if (contadorEstratoTres == 1) {
+                                          estratoTres = true;
+                                          contadorEstratoTres++;
+                                          estratoDos    = false;
+                                          estratoUno    = false;
+                                          estratoCero   = false;
+                                          estratoCuatro =  false;
+                                          estratoCinco  = false;
+                                        } else {
+                                          estratoTres = false;
+                                          contadorEstratoTres = 0;
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
+                                      decoration: BoxDecoration(
+                                          color: estratoTres
+                                              ? utils.Colors.ocre
+                                              : utils.Colors.grisClaro,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: const Text(
+                                        '3',
+                                        style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        contadorEstratoCuatro ++;
+                                        if (contadorEstratoCuatro == 1) {
+                                          contadorEstratoCuatro ++;
+                                          estratoDos    = false;
+                                          estratoUno    = false;
+                                          estratoCero   = false;
+                                          estratoCuatro = true;
+                                          estratoCinco  = false;
+                                          estratoTres   = false;
+                                        } else {
+                                          estratoTres = false;
+                                          contadorEstratoCuatro = 0;
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
+                                      decoration: BoxDecoration(
+                                          color: estratoCuatro
+                                              ? utils.Colors.ocre
+                                              : utils.Colors.grisClaro,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: const Text(
+                                        '4',
+                                        style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        contadorEstartoCinco ++;
+                                        if (contadorEstartoCinco == 1) {
+                                          contadorEstartoCinco ++;
+                                          estratoDos    = false;
+                                          estratoUno    = false;
+                                          estratoCero   = false;
+                                          estratoCuatro = false;
+                                          estratoCinco  = true;
+                                          estratoTres   = false;
+                                        } else {
+                                          estratoCinco = false;
+                                          contadorEstartoCinco = 0;
+                                        }
+                                      });
+                                    },
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height*0.045,
+                                      width: MediaQuery.of(context).size.width*0.095,
+                                      decoration: BoxDecoration(
+                                          color: estratoCinco
+                                              ? utils.Colors.ocre
+                                              : utils.Colors.grisClaro,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: const Text(
                                         '5+',
                                         style: TextStyle(
                                             fontSize: 30,

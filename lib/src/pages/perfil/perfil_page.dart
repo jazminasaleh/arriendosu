@@ -41,7 +41,7 @@ class _PerfilPageState extends State<PerfilPage> {
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.push(
                   context,
@@ -79,7 +79,7 @@ class _PerfilPageState extends State<PerfilPage> {
                 child: Stack(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 20),
                       child: Container(
                         height: 150,
                         width: 200,
@@ -124,7 +124,7 @@ class _PerfilPageState extends State<PerfilPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               const Text(
                 'Jasmin Saleh',
                 style: TextStyle(
@@ -186,7 +186,7 @@ class _PerfilPageState extends State<PerfilPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            contentPadding: EdgeInsets.all(0),
+            contentPadding: const EdgeInsets.all(0),
             content: SingleChildScrollView(
               child: Column(
                 children: [
@@ -246,7 +246,7 @@ class _PerfilPageState extends State<PerfilPage> {
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: utils.Colors.rojo,
                       ),
                       child: Row(
@@ -293,7 +293,7 @@ class _menuPerfil extends StatelessWidget {
       },
       child: Container(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Row(
             children: [
               Icon(
@@ -301,7 +301,7 @@ class _menuPerfil extends StatelessWidget {
                 color: color,
                 size: 40,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(

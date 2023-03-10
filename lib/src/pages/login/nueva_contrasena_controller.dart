@@ -6,9 +6,8 @@ class NuevaContrasenaController {
   TextEditingController codigoController = new TextEditingController();
   TextEditingController correoController = new TextEditingController();
 
-  TextEditingController passwordController = new TextEditingController();
-  TextEditingController confirmarPasswordController =
-      new TextEditingController();
+  TextEditingController passwordController          = new TextEditingController();
+  TextEditingController confirmarPasswordController = new TextEditingController();
 
   Future init(BuildContext context) async {
     this.context = context;

@@ -9,7 +9,7 @@ class GaleriaImagenes extends StatelessWidget {
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
-        title: Text('Galeria'),
+        title: const Text('Galeria'),
       ),
     );
   }

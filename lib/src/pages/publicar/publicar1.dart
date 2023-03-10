@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 import '../../widgets/button.dart';
-
+//*Pagina para comenzar a digitar los datos para subir un inmueble
+//*Digitar datos como: ubicacion, fotos y el tipo de inmuble
 class Publicar1Pagr extends StatefulWidget {
   @override
   State<Publicar1Pagr> createState() => _Publicar1PagrState();
@@ -18,8 +19,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
 
   @override
   Widget build(BuildContext context) {
-    UbicacionInmuebleController _ubicacionController =
-        new UbicacionInmuebleController();
+    UbicacionInmuebleController _ubicacionController = new UbicacionInmuebleController();
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -27,11 +27,11 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
           onPressed: () {
             Navigator.pushReplacementNamed(context, 'perfil');
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           iconSize: 20,
           color: utils.Colors.blanco,
         ),
-        title: Text('Publicar'),
+        title: const Text('Publicar'),
       ),
       body: SingleChildScrollView(
         child: GestureDetector(
@@ -92,14 +92,14 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                         borderRadius: BorderRadius.circular(10)),
                     child: Row(
                       children: [
-                        Padding(
+                        const Padding(
                             padding: EdgeInsets.all(10),
                             child: Icon(
                               Icons.camera_alt,
                               size: 30,
                               color: utils.Colors.grisOscuro,
                             )),
-                        Text(
+                        const Text(
                           'Fotos',
                           style: TextStyle(
                               fontSize: 20,
@@ -108,10 +108,10 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                         ),
                         Expanded(child: Container()),
                         Padding(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.add_a_photo,
                                 size: 30,
                                 color: utils.Colors.verde,
@@ -121,7 +121,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                     ),
                   ),
                 ),
-                Padding(
+                const Padding(
                     padding: EdgeInsets.only(top: 20, bottom: 20),
                     child: Text(
                       'Tipo de inmueble',
@@ -131,7 +131,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                           fontWeight: FontWeight.bold),
                     )),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -156,7 +156,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                       child: Row(
                         children: [
                           Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Icon(
                                 Icons.house,
                                 color: apartamento
@@ -170,7 +170,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                                 fontSize: 20,
                                 color: apartamento
                                     ? utils.Colors.fondoOscuro
-                                    : Color(0xff3A4750),
+                                    : const Color(0xff3A4750),
                                 fontWeight: FontWeight.w600),
                           ),
                         ],
@@ -179,7 +179,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -204,7 +204,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                       child: Row(
                         children: [
                           Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Icon(
                                 Icons.house,
                                 color: habitacion
@@ -218,7 +218,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                                 fontSize: 20,
                                 color: habitacion
                                     ? utils.Colors.fondoOscuro
-                                    : Color(0xff3A4750),
+                                    : const Color(0xff3A4750),
                                 fontWeight: FontWeight.w600),
                           ),
                         ],
@@ -228,7 +228,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                 ),
                 Expanded(child: Container()),
                  Padding(
-                  padding: EdgeInsets.only(bottom: 50),
+                  padding: const EdgeInsets.only(bottom: 50),
                    child: ButtonApp(
                       onpress: _ubicacionController.ubicacion,
                           direccion: 'publicar2',

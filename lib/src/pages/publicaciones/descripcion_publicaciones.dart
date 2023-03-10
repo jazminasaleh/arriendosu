@@ -88,7 +88,7 @@ class _DescripcionPublicacionesState extends State<DescripcionPublicaciones> {
             child: Container(
               height: 1,
               width: double.infinity,
-              color: Color.fromARGB(221, 52, 52, 52),
+              color: const Color.fromARGB(221, 52, 52, 52),
             ),
           ),
           Row(
@@ -343,8 +343,8 @@ class _descripcion extends StatelessWidget {
         children: [
          Column(
           children: [
-            SizedBox(height: 10,),
-            Text(descripcion, style: TextStyle(fontSize: 18, color: utils.Colors.blanco), textAlign: TextAlign.justify,)
+            const SizedBox(height: 10,),
+            Text(descripcion, style: const TextStyle(fontSize: 18, color: utils.Colors.blanco), textAlign: TextAlign.justify,)
           ],
          )
         ],
