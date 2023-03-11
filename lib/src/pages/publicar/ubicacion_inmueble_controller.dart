@@ -1,15 +1,44 @@
 import 'package:flutter/cupertino.dart';
+
 //*Guarda la ubicacion obtenida de pg ubicacion
-class UbicacionInmuebleController {
+class UbicacionInmuebleController extends ChangeNotifier{
   late BuildContext context;
 
-  TextEditingController ubicacionInmuebleController = new TextEditingController();
+  String ubicacionInmuebleController = '';
+  String precioInmuebleController = '';
+  String areaInmuebleController = '';
+  String tipoInmuebleController = '';
+  String habitacionesInmuebleController = '';
+  String estratoInmuebleController = '';
 
-  Future init(BuildContext context) async {
-    this.context = context;
+  bool internetInmuebleController = false;
+  bool serviciosInmuebleController = false;
+  bool parqueaderoInmuebleController = false;
+  bool mueblesInmuebleController = false;
+  bool lavaderoInmuebleController = false;
+
+ bool _isLoading = false;
+  
+
+  set carga(bool value) {
+    _isLoading = value;
+    
+    String ubicacion = ubicacionInmuebleController;
+    String precio = precioInmuebleController;
+    String area = areaInmuebleController;
+    String tipo = tipoInmuebleController;
+    String habitaciones = habitacionesInmuebleController;
+    String estrato = estratoInmuebleController;
+
+    bool internt = internetInmuebleController;
+    bool servicios = serviciosInmuebleController;
+    bool parqueadero = parqueaderoInmuebleController;
+    bool muebles = mueblesInmuebleController;
+    bool lavadero = lavaderoInmuebleController;
+    notifyListeners();
+    print('ubicacion $ubicacion precio $precio tipo $tipo area $area habitaciones $habitaciones estrato $estrato internt$internt servicios $servicios parqueadero$parqueadero muebles $muebles lavadero$lavadero');
+    
   }
 
-  void ubicacion() {
-    String ubicacion = ubicacionInmuebleController.text;
-  }
+ 
 }

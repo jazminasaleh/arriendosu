@@ -169,7 +169,7 @@ class _PerfilPageState extends State<PerfilPage> {
               ),
               _menuPerfil(
                 iconoItem: Icons.logout_outlined,
-                nomItem: 'Salir',
+                nomItem: 'Cerrar sesión',
                 onPress: 'inicio',
                 color: utils.Colors.rojo,
               )

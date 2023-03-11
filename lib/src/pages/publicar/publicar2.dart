@@ -1,24 +1,31 @@
+import 'package:app_arriendosu/src/pages/publicar/ubicacion_inmueble_controller.dart';
+import 'package:app_arriendosu/src/provider/publicar_inmueble.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+import 'package:provider/provider.dart';
 
 //*Pagina donde muestra la segunda parte para publicar el inmueble
 //*Como lo son sus caracteristicas, estrato, habitacionesa y área
 class Publicar2Page extends StatefulWidget {
+  UbicacionInmuebleController _ubicacionController =
+      new UbicacionInmuebleController();
+
+  Publicar2Page(this._ubicacionController);
   @override
-  State<Publicar2Page> createState() => _Publicar2PageState();
+  State<Publicar2Page> createState() =>
+      _Publicar2PageState(this._ubicacionController);
 }
 
 class _Publicar2PageState extends State<Publicar2Page> {
-  bool internt = false,
-      servicios = false,
-      garaje = false,
-      muebles = false,
-      lavadero = false,
-      unaHabitacion = false,
+  UbicacionInmuebleController _ubicacionController;
+  _Publicar2PageState(this._ubicacionController);
+
+  bool unaHabitacion = false,
       dosHabitacion = false,
       tresHabitacion = false,
       cuatroHabitacion = false,
       cincoHabitacion = false;
+
   var contadorInt = 0,
       contadorServicios = 0,
       contadorGaraje = 0,
@@ -35,15 +42,21 @@ class _Publicar2PageState extends State<Publicar2Page> {
       contadorEstratoDos = 0,
       contadorEstratoTres = 0,
       contadorEstratoCuatro = 0,
-      contadorEstartoCinco = 0;
-  var estratoCero = false,
+      contadorEstartoCinco = 0,
+      contadorbtn = 0;
+  bool estratoCero = false,
       estratoUno = false,
       estratoDos = false,
       estratoTres = false,
       estratoCuatro = false,
-      estratoCinco = false;
+      estratoCinco = false,
+      validArea = false,
+      validHabitaciones = false,
+      validaEstrato = false;
+
   @override
   Widget build(BuildContext context) {
+    final publicarInmueble = Provider.of<PublicarProvider>(context);
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -73,7 +86,9 @@ class _Publicar2PageState extends State<Publicar2Page> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                  ),
                   child: Row(
                     children: [
                       Transform.scale(
@@ -83,15 +98,19 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
-                            value: internt,
+                            value: publicarInmueble.internt,
                             onChanged: (value) {
                               setState(() {
                                 if (contadorInt == 0) {
                                   contadorInt++;
-                                  internt = true;
+                                  publicarInmueble.internt = true;
+                                  _ubicacionController
+                                      .internetInmuebleController = true;
                                 } else {
                                   contadorInt = 0;
-                                  internt = false;
+                                  publicarInmueble.internt = false;
+                                  _ubicacionController
+                                      .internetInmuebleController = false;
                                 }
                               });
                             }),
@@ -117,15 +136,19 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
-                            value: servicios,
+                            value: publicarInmueble.servicios,
                             onChanged: (value) {
                               setState(() {
                                 if (contadorServicios == 0) {
                                   contadorServicios++;
-                                  servicios = true;
+                                  publicarInmueble.servicios = true;
+                                  _ubicacionController
+                                      .serviciosInmuebleController = true;
                                 } else {
                                   contadorServicios = 0;
-                                  servicios = false;
+                                  publicarInmueble.servicios = false;
+                                  _ubicacionController
+                                      .serviciosInmuebleController = false;
                                 }
                               });
                             }),
@@ -151,15 +174,19 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
-                            value: garaje,
+                            value: publicarInmueble.parqueadero,
                             onChanged: (value) {
                               setState(() {
                                 if (contadorGaraje == 0) {
                                   contadorGaraje++;
-                                  garaje = true;
+                                  publicarInmueble.parqueadero = true;
+                                  _ubicacionController
+                                      .parqueaderoInmuebleController = true;
                                 } else {
                                   contadorGaraje = 0;
-                                  garaje = false;
+                                  publicarInmueble.parqueadero = false;
+                                  _ubicacionController
+                                      .parqueaderoInmuebleController = false;
                                 }
                               });
                             }),
@@ -185,15 +212,19 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
-                            value: muebles,
+                            value: publicarInmueble.muebles,
                             onChanged: (value) {
                               setState(() {
                                 if (contadorMuebles == 0) {
                                   contadorMuebles++;
-                                  muebles = true;
+                                  publicarInmueble.muebles = true;
+                                  _ubicacionController
+                                      .mueblesInmuebleController = true;
                                 } else {
                                   contadorMuebles = 0;
-                                  muebles = false;
+                                  publicarInmueble.muebles = false;
+                                  _ubicacionController
+                                      .mueblesInmuebleController = false;
                                 }
                               });
                             }),
@@ -219,15 +250,19 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 width: 2, color: utils.Colors.ocre),
                             checkColor: utils.Colors.fondoOscuro,
                             activeColor: utils.Colors.ocre,
-                            value: lavadero,
+                            value: publicarInmueble.lavadero,
                             onChanged: (value) {
                               setState(() {
                                 if (contadorLavadero == 0) {
                                   contadorLavadero++;
-                                  lavadero = true;
+                                  publicarInmueble.lavadero = true;
+                                  _ubicacionController
+                                      .lavaderoInmuebleController = true;
                                 } else {
                                   contadorLavadero = 0;
-                                  lavadero = false;
+                                  publicarInmueble.lavadero = false;
+                                  _ubicacionController
+                                      .lavaderoInmuebleController = false;
                                 }
                               });
                             }),
@@ -243,9 +278,39 @@ class _Publicar2PageState extends State<Publicar2Page> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, top: 30, bottom: 10),
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: 64,
+                    decoration: BoxDecoration(
+                        color: utils.Colors.grisMedio,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextFormField(
+                      autocorrect: false,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Área del inmueble',
+                          labelText: 'Área en m²',
+                          prefixIcon: Icon(
+                            Icons.area_chart,
+                            size: 30,
+                          ),
+                          iconColor: Color(0xff3A4750),
+                          labelStyle: TextStyle(
+                              color: Color(0xff3A4750),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600)),
+                      onChanged: (value) => publicarInmueble.area = value,
+                    ),
+                  ),
+                ),
+                validacionArea(validArea),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.95,
                     decoration: BoxDecoration(
                       color: utils.Colors.azulOscuro,
                       borderRadius: BorderRadius.circular(10),
@@ -287,8 +352,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: unaHabitacion
                                               ? utils.Colors.ocre
@@ -322,8 +390,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: dosHabitacion
                                               ? utils.Colors.ocre
@@ -357,8 +428,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: tresHabitacion
                                               ? utils.Colors.ocre
@@ -427,8 +501,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: cincoHabitacion
                                               ? utils.Colors.ocre
@@ -451,6 +528,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                         )),
                   ),
                 ),
+                validacionHabitacion(validHabitaciones),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -498,8 +576,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: estratoCero
                                               ? utils.Colors.ocre
@@ -534,8 +615,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: estratoUno
                                               ? utils.Colors.ocre
@@ -557,12 +641,12 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                         contadorEstratoDos++;
                                         if (contadorEstratoDos == 1) {
                                           contadorEstratoDos++;
-                                          estratoDos    = true;
-                                          estratoUno    = false;
-                                          estratoCero   = false;
-                                          estratoTres   = false;
-                                          estratoCuatro =  false;
-                                          estratoCinco  = false;
+                                          estratoDos = true;
+                                          estratoUno = false;
+                                          estratoCero = false;
+                                          estratoTres = false;
+                                          estratoCuatro = false;
+                                          estratoCinco = false;
                                         } else {
                                           estratoDos = false;
                                           contadorEstratoDos = 0;
@@ -570,8 +654,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: estratoDos
                                               ? utils.Colors.ocre
@@ -594,11 +681,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                         if (contadorEstratoTres == 1) {
                                           estratoTres = true;
                                           contadorEstratoTres++;
-                                          estratoDos    = false;
-                                          estratoUno    = false;
-                                          estratoCero   = false;
-                                          estratoCuatro =  false;
-                                          estratoCinco  = false;
+                                          estratoDos = false;
+                                          estratoUno = false;
+                                          estratoCero = false;
+                                          estratoCuatro = false;
+                                          estratoCinco = false;
                                         } else {
                                           estratoTres = false;
                                           contadorEstratoTres = 0;
@@ -606,8 +693,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: estratoTres
                                               ? utils.Colors.ocre
@@ -626,15 +716,15 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        contadorEstratoCuatro ++;
+                                        contadorEstratoCuatro++;
                                         if (contadorEstratoCuatro == 1) {
-                                          contadorEstratoCuatro ++;
-                                          estratoDos    = false;
-                                          estratoUno    = false;
-                                          estratoCero   = false;
+                                          contadorEstratoCuatro++;
+                                          estratoDos = false;
+                                          estratoUno = false;
+                                          estratoCero = false;
                                           estratoCuatro = true;
-                                          estratoCinco  = false;
-                                          estratoTres   = false;
+                                          estratoCinco = false;
+                                          estratoTres = false;
                                         } else {
                                           estratoTres = false;
                                           contadorEstratoCuatro = 0;
@@ -642,8 +732,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: estratoCuatro
                                               ? utils.Colors.ocre
@@ -662,15 +755,15 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        contadorEstartoCinco ++;
+                                        contadorEstartoCinco++;
                                         if (contadorEstartoCinco == 1) {
-                                          contadorEstartoCinco ++;
-                                          estratoDos    = false;
-                                          estratoUno    = false;
-                                          estratoCero   = false;
+                                          contadorEstartoCinco++;
+                                          estratoDos = false;
+                                          estratoUno = false;
+                                          estratoCero = false;
                                           estratoCuatro = false;
-                                          estratoCinco  = true;
-                                          estratoTres   = false;
+                                          estratoCinco = true;
+                                          estratoTres = false;
                                         } else {
                                           estratoCinco = false;
                                           contadorEstartoCinco = 0;
@@ -678,8 +771,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                       });
                                     },
                                     child: Container(
-                                      height: MediaQuery.of(context).size.height*0.045,
-                                      width: MediaQuery.of(context).size.width*0.095,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.045,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.095,
                                       decoration: BoxDecoration(
                                           color: estratoCinco
                                               ? utils.Colors.ocre
@@ -701,6 +797,110 @@ class _Publicar2PageState extends State<Publicar2Page> {
                           ],
                         )),
                   ),
+                ),
+                validacionEstratos(validaEstrato),
+                Expanded(child: Container()),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 50, left: 20, right: 20),
+                  child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35)),
+                      disabledColor: utils.Colors.grisOscuro,
+                      elevation: 0,
+                      color: utils.Colors.ocre,
+                      height: 60,
+                      child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 100, vertical: 15),
+                          child: const Text(
+                            'Siguiente',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 25),
+                            textAlign: TextAlign.center,
+                          )),
+                      onPressed: publicarInmueble.isLoading
+                          ? null
+                          : () async {
+                              FocusScope.of(context).unfocus();
+                              contadorbtn = 0;
+                              if (publicarInmueble.area.length >= 2) {
+                                contadorbtn++;
+                                validArea = false;
+                              } else {
+                                validArea = true;
+                                validacionArea(validArea);
+                              }
+
+                              if (unaHabitacion == true ||
+                                  dosHabitacion == true ||
+                                  tresHabitacion == true ||
+                                  cuatroHabitacion == true ||
+                                  cincoHabitacion == true) {
+                                contadorbtn++;
+                                validHabitaciones = false;
+                                if (unaHabitacion == true) {
+                                  publicarInmueble.habitaciones = 'una';
+                                } else if (dosHabitacion == true) {
+                                  publicarInmueble.habitaciones = 'dos';
+                                } else if (tresHabitacion == true) {
+                                  publicarInmueble.habitaciones = 'tres';
+                                } else if (cuatroHabitacion == true) {
+                                  publicarInmueble.habitaciones = 'cuatro';
+                                } else {
+                                  publicarInmueble.habitaciones = 'cinco o mas';
+                                }
+                              } else {
+                                validHabitaciones = true;
+                              }
+
+                              if (estratoCero == true ||
+                                  estratoUno == true ||
+                                  estratoDos == true ||
+                                  estratoTres == true ||
+                                  estratoCuatro == true ||
+                                  estratoCinco == true) {
+                                contadorbtn++;
+                                validaEstrato = false;
+                                if (estratoCero == true) {
+                                  publicarInmueble.estrato = 'cero';
+                                } else if (estratoUno == true) {
+                                  publicarInmueble.estrato = 'uno';
+                                } else if (estratoDos == true) {
+                                  publicarInmueble.estrato = 'dos';
+                                } else if (estratoTres == true) {
+                                  publicarInmueble.habitaciones = 'tres';
+                                } else if (estratoCuatro == true) {
+                                  publicarInmueble.estrato = 'cuatro';
+                                } else {
+                                  publicarInmueble.estrato = 'cinco o mas';
+                                }
+                              } else {
+                                validaEstrato = true;
+                              }
+
+                              if (contadorbtn >= 3) {
+                                _ubicacionController.areaInmuebleController =
+                                    publicarInmueble.area;
+                                _ubicacionController
+                                        .habitacionesInmuebleController =
+                                    publicarInmueble.habitaciones;
+                                _ubicacionController.estratoInmuebleController =
+                                    publicarInmueble.estrato;
+                                publicarInmueble.area = '';
+                                publicarInmueble.habitaciones = '';
+                                publicarInmueble.estrato = '';
+
+                                publicarInmueble.isLoading = true;
+                                _ubicacionController.carga = true;
+                                Navigator.popAndPushNamed(context, 'publicar3');
+                                publicarInmueble.isLoading = false;
+                              } else {
+                                publicarInmueble.isLoading = false;
+                              }
+                            }),
                 )
               ],
             ),
@@ -708,5 +908,50 @@ class _Publicar2PageState extends State<Publicar2Page> {
         ),
       ),
     );
+  }
+
+  Widget validacionArea(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          validacion ? 'El valor ingresado no es un área' : '',
+          style: const TextStyle(color: utils.Colors.rojo),
+          textAlign: TextAlign.center,
+          maxLines: 3,
+        ),
+      ],
+    ));
+  }
+
+  Widget validacionHabitacion(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          validacion ? 'Seleccione cantidad de habitaciones' : '',
+          style: const TextStyle(color: utils.Colors.rojo),
+          textAlign: TextAlign.center,
+          maxLines: 3,
+        ),
+      ],
+    ));
+  }
+
+  Widget validacionEstratos(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          validacion ? 'Seleccione el estrato' : '',
+          style: const TextStyle(color: utils.Colors.rojo),
+          textAlign: TextAlign.center,
+          maxLines: 3,
+        ),
+      ],
+    ));
   }
 }
