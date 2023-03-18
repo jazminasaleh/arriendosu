@@ -372,7 +372,7 @@ class _formTextField extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
-            validacion ? 'El valor ingresado no luce como un usuario' : '',
+            validacion ? 'Ese usuario no funcionó' : '',
             style: const TextStyle(color: utils.Colors.rojo),
           ),
         ),
@@ -389,7 +389,7 @@ class _formTextField extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
-            validacion ? 'El valor ingresado no luce como un correo' : '',
+            validacion ? 'Ese correo no funcionó' : '',
             style: const TextStyle(color: utils.Colors.rojo),
           ),
         ),
@@ -404,7 +404,7 @@ class _formTextField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          validacion ? 'La contraseña debe de ser de 6 caracteres' : '',
+          validacion ? 'Esa contraseña no funiconó' : '',
           style: const TextStyle(color: utils.Colors.rojo),
         ),
       ],
@@ -418,7 +418,7 @@ class _formTextField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          validacion ? 'La contraseña debe de ser de 6 caracteres' : '',
+          validacion ? 'Esa contraseña no funiconó' : '',
           style: const TextStyle(color: utils.Colors.rojo),
         ),
       ],

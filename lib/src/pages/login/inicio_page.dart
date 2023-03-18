@@ -199,8 +199,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                           validacionEmail = true;
                           validacionCorreo(validacionEmail);
                         }
-                        if (regExpContrasena
-                                .hasMatch(loginForm.contrasena ?? '') &&
+                        if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') &&
                             loginForm.contrasena != '') {
                           validacionContrasegna = false;
                           contador++;
@@ -351,7 +350,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
-            validacion ? 'El valor ingresado no luce como un correo' : '',
+            validacion ? 'Ese correo no funionó' : '',
             style: const TextStyle(color: utils.Colors.rojo),
           ),
         ),
@@ -365,7 +364,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          validacion ? 'El valor ingresado no es una contraseña' : '',
+          validacion ? 'Esa contraseña no funcionó' : '',
           style: const TextStyle(color: utils.Colors.rojo),
           textAlign: TextAlign.center,
           maxLines: 3,

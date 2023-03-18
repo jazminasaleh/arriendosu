@@ -28,21 +28,7 @@ class ListasPage extends StatelessWidget {
           titulo,
           style: const TextStyle(fontSize: 25),
         ),
-        actions: [
-          const Icon(
-            Icons.view_agenda_outlined,
-            color: utils.Colors.ocre,
-            size: 35,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.view_module_sharp,
-              size: 35,
-            )
-          ),
-          SizedBox(width: MediaQuery.of(context).size.width*0.02,)
-        ],
+       
       ),
       body: SingleChildScrollView(
         child: Container(

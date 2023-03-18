@@ -110,7 +110,7 @@ class NuevaContrasenaPage extends StatelessWidget {
                               const Icon(Icons.email, color: Colors.black, size: 30,),
                               Padding(
                               padding: const EdgeInsets.only(left: 13),
-                              child: Text(correo, style: const TextStyle(color: Colors.black,  fontSize: 20, fontWeight: FontWeight.w600),),
+                              child: Text(correo, style: const TextStyle(color: Colors.black,  fontSize: 15, fontWeight: FontWeight.w600),),
                             )],
                           ),
                         ),
@@ -317,7 +317,7 @@ class NuevaContrasenaPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
           Text(
-            validacion ? 'El valor ingresado no luce como una contraseña' : '',
+            validacion ? 'Esa contraseña no funiconó' : '',
             style: const TextStyle(color: utils.Colors.rojo),
           ),
       ],
@@ -329,7 +329,7 @@ class NuevaContrasenaPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
           Text(
-            validacion ? 'El valor ingresado no luce como una contraseña' : '',
+            validacion ? 'Esa contraseña no funiconó' : '',
             style: const TextStyle(color: utils.Colors.rojo),
           ),
       ],
