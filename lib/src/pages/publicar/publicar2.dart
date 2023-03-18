@@ -1,4 +1,4 @@
-import 'package:app_arriendosu/src/pages/publicar/ubicacion_inmueble_controller.dart';
+import 'package:app_arriendosu/src/pages/publicar/publicar3.dart';
 import 'package:app_arriendosu/src/provider/publicar_inmueble.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
@@ -7,18 +7,18 @@ import 'package:provider/provider.dart';
 //*Pagina donde muestra la segunda parte para publicar el inmueble
 //*Como lo son sus caracteristicas, estrato, habitacionesa y área
 class Publicar2Page extends StatefulWidget {
-  UbicacionInmuebleController _ubicacionController =
-      new UbicacionInmuebleController();
+  PublicarProvider _publicarController =
+      new PublicarProvider();
 
-  Publicar2Page(this._ubicacionController);
+  Publicar2Page(this._publicarController);
   @override
   State<Publicar2Page> createState() =>
-      _Publicar2PageState(this._ubicacionController);
+      _Publicar2PageState(this._publicarController);
 }
 
 class _Publicar2PageState extends State<Publicar2Page> {
-  UbicacionInmuebleController _ubicacionController;
-  _Publicar2PageState(this._ubicacionController);
+  PublicarProvider _publicarController;
+  _Publicar2PageState(this._publicarController);
 
   bool unaHabitacion = false,
       dosHabitacion = false,
@@ -79,7 +79,6 @@ class _Publicar2PageState extends State<Publicar2Page> {
             }
           },
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.90,
             color: utils.Colors.fondoOscuro,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -104,13 +103,9 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 if (contadorInt == 0) {
                                   contadorInt++;
                                   publicarInmueble.internt = true;
-                                  _ubicacionController
-                                      .internetInmuebleController = true;
                                 } else {
                                   contadorInt = 0;
                                   publicarInmueble.internt = false;
-                                  _ubicacionController
-                                      .internetInmuebleController = false;
                                 }
                               });
                             }),
@@ -142,13 +137,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 if (contadorServicios == 0) {
                                   contadorServicios++;
                                   publicarInmueble.servicios = true;
-                                  _ubicacionController
-                                      .serviciosInmuebleController = true;
+                                 
                                 } else {
                                   contadorServicios = 0;
                                   publicarInmueble.servicios = false;
-                                  _ubicacionController
-                                      .serviciosInmuebleController = false;
+                                
                                 }
                               });
                             }),
@@ -180,13 +173,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 if (contadorGaraje == 0) {
                                   contadorGaraje++;
                                   publicarInmueble.parqueadero = true;
-                                  _ubicacionController
-                                      .parqueaderoInmuebleController = true;
+                               
                                 } else {
                                   contadorGaraje = 0;
                                   publicarInmueble.parqueadero = false;
-                                  _ubicacionController
-                                      .parqueaderoInmuebleController = false;
+                                 
                                 }
                               });
                             }),
@@ -218,13 +209,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 if (contadorMuebles == 0) {
                                   contadorMuebles++;
                                   publicarInmueble.muebles = true;
-                                  _ubicacionController
-                                      .mueblesInmuebleController = true;
+                                
                                 } else {
                                   contadorMuebles = 0;
                                   publicarInmueble.muebles = false;
-                                  _ubicacionController
-                                      .mueblesInmuebleController = false;
+                                
                                 }
                               });
                             }),
@@ -256,13 +245,11 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 if (contadorLavadero == 0) {
                                   contadorLavadero++;
                                   publicarInmueble.lavadero = true;
-                                  _ubicacionController
-                                      .lavaderoInmuebleController = true;
+                                
                                 } else {
                                   contadorLavadero = 0;
                                   publicarInmueble.lavadero = false;
-                                  _ubicacionController
-                                      .lavaderoInmuebleController = false;
+                                 
                                 }
                               });
                             }),
@@ -799,7 +786,6 @@ class _Publicar2PageState extends State<Publicar2Page> {
                   ),
                 ),
                 validacionEstratos(validaEstrato),
-                Expanded(child: Container()),
                 Padding(
                   padding:
                       const EdgeInsets.only(bottom: 50, left: 20, right: 20),
@@ -882,20 +868,13 @@ class _Publicar2PageState extends State<Publicar2Page> {
                               }
 
                               if (contadorbtn >= 3) {
-                                _ubicacionController.areaInmuebleController =
-                                    publicarInmueble.area;
-                                _ubicacionController
-                                        .habitacionesInmuebleController =
-                                    publicarInmueble.habitaciones;
-                                _ubicacionController.estratoInmuebleController =
-                                    publicarInmueble.estrato;
-                                publicarInmueble.area = '';
-                                publicarInmueble.habitaciones = '';
-                                publicarInmueble.estrato = '';
-
                                 publicarInmueble.isLoading = true;
-                                _ubicacionController.carga = true;
-                                Navigator.popAndPushNamed(context, 'publicar3');
+                                publicarInmueble.isLoading = false;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Publicar3Page(
+                                            _publicarController)));
                                 publicarInmueble.isLoading = false;
                               } else {
                                 publicarInmueble.isLoading = false;

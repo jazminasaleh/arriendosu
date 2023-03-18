@@ -13,13 +13,19 @@ class PublicarProvider extends ChangeNotifier {
       parqueadero = false,
       muebles = false,
       lavadero = false;
-
+  bool mascotas = false,
+      fumar = false,
+      personas = false,
+      horario = false,
+      lavadado = false,
+      fiestas = false;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
   set isLoading(bool value) {
     _isLoading = value;
+    print('servicio $internt $ubicacion $precio $tipo $habitaciones $fiestas');
     notifyListeners();
   }
 }
