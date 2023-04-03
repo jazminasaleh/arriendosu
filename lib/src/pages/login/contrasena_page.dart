@@ -110,6 +110,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(35),
                               ),
                               child: TextFormField(
+                                //*revisar si esta bien el correo
                                 controller:
                                     contrasenaController.correoController,
                                 autocorrect: false,
@@ -200,7 +201,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(bottom: 10),
           child: Text(
-            validacion ? 'El valor ingresado no luce como un correo' : '',
+            validacion ? 'Este correo no funciono' : '',
             style: const TextStyle(color: utils.Colors.rojo),
           ),
         ),

@@ -23,6 +23,7 @@ class _UbicacionPageState extends State<UbicacionPage> {
       target: LatLng(5.704476, -72.941981),
       zoom: 10,
       tilt: 60,
+      
     );
     Set<Marker> markers = new Set<Marker>();
     markers.add(
