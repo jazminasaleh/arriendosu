@@ -108,163 +108,156 @@ bool validacionConfPassword = false;
 bool validacionPasswords = false;
 int contador = 0;
 
+//*formulario de nombre de usuario, correo, contraseña y confirmar contraseña 
 class _formTextField extends StatelessWidget {
   static final formKeRegistro = const Key('__RIKEY2__');
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFromProvider>(context);
     return Form(
-        key: formKeRegistro,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFieldUsuario(loginForm),
+      key: formKeRegistro,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: Container(
+              height: 64,
+              decoration: BoxDecoration(
+                color: utils.Colors.grisMedio,
+                borderRadius: BorderRadius.circular(35),
               ),
+              child: _textFieldUsuario(loginForm),
             ),
-            validacionUsuario(validacionUsser),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFielCorreo(loginForm),
+          ),
+          validacionUsuario(validacionUsser),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: Container(
+              height: 64,
+              decoration: BoxDecoration(
+                color: utils.Colors.grisMedio,
+                borderRadius: BorderRadius.circular(35),
               ),
+              child: _textFielCorreo(loginForm),
             ),
-            validacionCorreo(validEmail),
-            const SizedBox(
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFieldContrasena(loginForm),
+          ),
+          validacionCorreo(validEmail),
+          const SizedBox(
+            height: 40,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: Container(
+              height: 64,
+              decoration: BoxDecoration(
+                color: utils.Colors.grisMedio,
+                borderRadius: BorderRadius.circular(35),
               ),
+              child: _textFieldContrasena(loginForm),
             ),
-            validacionContrasena(validacionPassword),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFieldContrasena2(loginForm),
+          ),
+          validacionContrasena(validacionPassword),
+          const SizedBox(height: 10,),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: Container(
+              height: 64,
+              decoration: BoxDecoration(
+                color: utils.Colors.grisMedio,
+                borderRadius: BorderRadius.circular(35),
               ),
+              child: _textFieldContrasena2(loginForm),
             ),
-            validacionConfContrasena(validacionConfPassword),
-            const SizedBox(
-              height: 10,
+          ),
+          validacionConfContrasena(validacionConfPassword),
+          const SizedBox(height: 10,),
+          validacionContrasenas(validacionPasswords),
+          const SizedBox(height: 50,),
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35)
             ),
-            validacionContrasenas(validacionPasswords),
-            const SizedBox(
-              height: 50,
+            disabledColor: utils.Colors.grisOscuro,
+            elevation: 0,
+            color: utils.Colors.ocre,
+            height: 64,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+              child: Text(
+                loginForm.isLoading ? 'Espere' : 'Registrarse',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 25
+                ),
+              )
             ),
-            MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(35)),
-                disabledColor: utils.Colors.grisOscuro,
-                elevation: 0,
-                color: utils.Colors.ocre,
-                height: 64,
-                child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                    child: Text(
-                      loginForm.isLoading ? 'Espere' : 'Registrarse',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 25),
-                    )),
-                onPressed: loginForm.isLoading
-                    ? null
-                    : () async {
-                        contador = 0;
-                        FocusScope.of(context).unfocus();
-                        final authService =
-                            Provider.of<AuthService>(context, listen: false);
-                        String  patternContrasena = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-                        RegExp regExpContrasena = new RegExp(patternContrasena);
-                        String pattern =
-                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                        RegExp regExp = new RegExp(pattern);
-                        if (loginForm.nomUusario != null &&
-                            loginForm.nomUusario.length >= 3) {
-                          validacionUsser = false;
-                          contador++;
-                        } else {
-                          validacionUsser = true;
-                          validacionUsuario(validacionUsser);
-                        }
-                        if (regExp.hasMatch(loginForm.correo ?? '') &&
-                            loginForm.correo != '') {
-                          validEmail = false;
-                          contador++;
-                        } else {
-                          validEmail = true;
-                          validacionCorreo(validEmail);
-                        }
-                         if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena != '') {
-                          validacionPassword = false;
-                          contador++;
-                        } else {
-                          validacionPassword = true;
-                          validacionContrasena(validacionPassword);
-                        }
-                         if (regExpContrasena.hasMatch(loginForm.verificarContrasena ?? '') && loginForm.verificarContrasena != '') {
-                           validacionConfPassword = false;
-                          contador++;
-                        } else {
-                           validacionConfPassword = true;
-                          validacionContrasena( validacionConfPassword);
-                        }
-                        if (loginForm.contrasena ==
-                            loginForm.verificarContrasena) {
-                          contador++;
-                          validacionPasswords = false;
-                        } else {
-                          validacionPasswords = true;
-                        }
-                       
-                        if (contador >= 5) {
-                          loginForm.isLoading = true;
-                          final String? errorMessage =
-                              await authService.createUser(
-                                  loginForm.correo, loginForm.contrasena);
-                          if (errorMessage == null) {
-                            Navigator.popAndPushNamed(context, 'inicio');
-                          } else {
-                            //*Notifiar que hay algo mal
-                             NotificacionesService.showSnackbar(errorMessage);
-                            loginForm.isLoading = false;
-                          }
-                          loginForm.isLoading = false;
-                        }
-                      })
-          ],
-        ));
+            //*por medio de expresiones regulares se valida los campos 
+            onPressed: loginForm.isLoading
+            ? null
+            : () async {
+              contador = 0;
+              FocusScope.of(context).unfocus();
+              final authService = Provider.of<AuthService>(context, listen: false);
+              String  patternContrasena = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+              RegExp regExpContrasena = new RegExp(patternContrasena);
+              String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+              RegExp regExp = new RegExp(pattern);
+              if (loginForm.nomUusario != null && loginForm.nomUusario.length >= 3) {
+                validacionUsser = false;
+                contador++;
+              } else {
+                validacionUsser = true;
+                validacionUsuario(validacionUsser);
+              }
+              if (regExp.hasMatch(loginForm.correo ?? '') && loginForm.correo != '') {
+                validEmail = false;
+                contador++;
+              } else {
+                validEmail = true;
+                validacionCorreo(validEmail);
+              }
+              if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena != '') {
+                validacionPassword = false;
+                contador++;
+              } else {
+                validacionPassword = true;
+                validacionContrasena(validacionPassword);
+              }
+              if (regExpContrasena.hasMatch(loginForm.verificarContrasena ?? '') && loginForm.verificarContrasena != '') {
+                validacionConfPassword = false;
+                contador++;
+              } else {
+                validacionConfPassword = true;
+                validacionContrasena( validacionConfPassword);
+              }
+              if (loginForm.contrasena == loginForm.verificarContrasena) {
+                contador++;
+                validacionPasswords = false;
+              } else {
+                validacionPasswords = true;
+              }
+              if (contador >= 5) {
+                loginForm.isLoading = true;
+                final String? errorMessage = await authService.createUser(loginForm.correo, loginForm.contrasena);
+                if (errorMessage == null) {
+                  Navigator.popAndPushNamed(context, 'inicio');
+                } else {
+                //*Notifiar que hay algo mal
+                  NotificacionesService.showSnackbar(errorMessage);
+                  loginForm.isLoading = false;
+                }
+                loginForm.isLoading = false;
+              }
+            }
+          )
+        ],
+      )
+    );
   }
 
 //*Campo para confrimar la contraseña

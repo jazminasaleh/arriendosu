@@ -126,105 +126,101 @@ class _Inicio_PageState extends State<Inicio_Page> {
   static GlobalKey<FormState> formKeyInicio = new GlobalKey<FormState>();
   Widget _formTextField() {
     final loginForm = Provider.of<LoginFromProvider>(context);
-
     return Form(
-        key: formKeyInicio,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFieldUsuario(loginForm),
+      key: formKeyInicio,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: Container(
+              height: 64,
+              decoration: BoxDecoration(
+                color: utils.Colors.grisMedio,
+                borderRadius: BorderRadius.circular(35),
               ),
+              child: _textFieldUsuario(loginForm),
             ),
-            validacionCorreo(validacionEmail),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: utils.Colors.grisMedio,
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: _textFieldContrasena(loginForm),
+          ),
+          validacionCorreo(validacionEmail),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35),
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                color: utils.Colors.grisMedio,
+                borderRadius: BorderRadius.circular(35),
               ),
+              child: _textFieldContrasena(loginForm),
             ),
-            validacionContrasena(validacionContrasegna),
-            _textContrasena(),
-            const SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(35)),
-                disabledColor: utils.Colors.grisOscuro,
-                elevation: 0,
-                color: utils.Colors.ocre,
-                height: 60,
-                child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                    child: Text(
-                      loginForm.isLoading ? 'Espere' : 'Ingresar',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 25),
-                      textAlign: TextAlign.center,
-                    )),
-                onPressed: loginForm.isLoading
-                    ? null
-                    : () async {
-                        contador = 0;
-                        FocusScope.of(context).unfocus();
-                        final authService =
-                            Provider.of<AuthService>(context, listen: false);
-                        String patternContrasena =
-                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-                        RegExp regExpContrasena = new RegExp(patternContrasena);
-                        String pattern =
-                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                        RegExp regExp = new RegExp(pattern);
-                        if (regExp.hasMatch(loginForm.correo ?? '') &&
-                            loginForm.correo != '') {
-                          validacionEmail = false;
-                          contador++;
-                        } else {
-                          validacionEmail = true;
-                          validacionCorreo(validacionEmail);
-                        }
-                        if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') &&
-                            loginForm.contrasena != '') {
-                          validacionContrasegna = false;
-                          contador++;
-                        } else {
-                          validacionContrasegna = true;
-                          validacionContrasena(validacionContrasegna);
-                        }
-                        if (contador >= 2) {
-                          loginForm.isLoading = true;
-                          final String? errorMessage = await authService.login(
-                              loginForm.correo, loginForm.contrasena);
-                          if (errorMessage == null) {
-                            loginForm.contrasena = '';
-                            loginForm.correo =  '';
-                            Navigator.popAndPushNamed(
-                                context, 'inicioPublicaciones');
-                            loginForm.isLoading = false;
-                          } else {
-                            NotificacionesService.showSnackbar(errorMessage);
-                            loginForm.isLoading = false;
-                          }
-                        }
-                      })
-          ],
-        ));
+          ),
+          validacionContrasena(validacionContrasegna),
+          _textContrasena(),
+          const SizedBox(
+            height: 20,
+          ),
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(35)
+          ),
+          disabledColor: utils.Colors.grisOscuro,
+          elevation: 0,
+          color: utils.Colors.ocre,
+          height: 60,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+            child: Text(
+              loginForm.isLoading ? 'Espere' : 'Ingresar',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 25
+              ),
+              textAlign: TextAlign.center,
+            )
+          ),
+          //*se hace la validacion de los inputs con expresiones regulares
+          onPressed: loginForm.isLoading
+          ? null
+          : () async {
+            contador = 0;
+            FocusScope.of(context).unfocus();
+            final authService = Provider.of<AuthService>(context, listen: false);
+            String patternContrasena = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+            RegExp regExpContrasena = new RegExp(patternContrasena);
+            String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+            RegExp regExp = new RegExp(pattern);
+            if (regExp.hasMatch(loginForm.correo ?? '') && loginForm.correo != '') {
+              validacionEmail = false;
+              contador++;
+            } else {
+              validacionEmail = true;
+              validacionCorreo(validacionEmail);
+            }
+            if (regExpContrasena.hasMatch(loginForm.contrasena ?? '') && loginForm.contrasena != '') {
+              validacionContrasegna = false;
+              contador++;
+            } else {
+              validacionContrasegna = true;
+              validacionContrasena(validacionContrasegna);
+            }
+            if (contador >= 2) {
+              loginForm.isLoading = true;
+              final String? errorMessage = await authService.login(loginForm.correo, loginForm.contrasena);
+              if (errorMessage == null) {
+                loginForm.contrasena = '';
+                loginForm.correo =  '';
+                Navigator.popAndPushNamed(context, 'inicioPublicaciones');
+                loginForm.isLoading = false;
+              } else {
+                NotificacionesService.showSnackbar(errorMessage);
+                loginForm.isLoading = false;
+              }
+            }
+          })
+        ],
+      )
+    );
   }
 
 //*Campo para llenar el correo
@@ -341,7 +337,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
       ),
     );
   }
-
+//*el mensaje de validacion del correo 
   Widget validacionCorreo(bool validacion) {
     return Container(
         child: Row(
@@ -357,7 +353,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
       ],
     ));
   }
-
+//*el mesnaje de validacion de la contraseña 
   Widget validacionContrasena(bool validacion) {
     return Container(
         child: Row(

@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 
 import '../../provider/login_form_provider.dart';
 
-
 //*pagina de si la persona olvido su contraseña
+//*En la cual debe ingresar el correo para enviarle un codigo al correo y cambiar contraseña
 class OlvidarContrasenaPage extends StatelessWidget {
   ContrasenaController contrasenaController = new ContrasenaController();
   bool validacionEmail = false;
@@ -30,19 +30,17 @@ class OlvidarContrasenaPage extends StatelessWidget {
         ),
         actions: [
           TextButton(
-              onPressed: () {
-                Navigator.popAndPushNamed(context, 'inicio');
-              },
-              child: const Text(
-                'Iniciar',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: utils.Colors.blanco),
-              )),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.05,
+            onPressed: () {Navigator.popAndPushNamed(context, 'inicio');},
+            child: const Text(
+              'Iniciar',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: utils.Colors.blanco
+              ),
+            )
           ),
+          SizedBox(width: MediaQuery.of(context).size.width * 0.05,),
         ],
       ),
       body: SingleChildScrollView(
@@ -64,13 +62,12 @@ class OlvidarContrasenaPage extends StatelessWidget {
                       Text(
                         '¿Olvido su contraseña?',
                         style: TextStyle(
-                            fontSize: 45,
-                            fontWeight: FontWeight.bold,
-                            color: utils.Colors.blanco),
+                          fontSize: 45,
+                          fontWeight: FontWeight.bold,
+                          color: utils.Colors.blanco
+                        ),
                       ),
-                      const SizedBox(
-                        height: 50,
-                      ),
+                      const SizedBox(height: 50),
                     ],
                   ),
                 ),
@@ -91,98 +88,93 @@ class OlvidarContrasenaPage extends StatelessWidget {
                       child: Text(
                         'Si ha olvidado su contraseña, por favor ingrese su correo electrónico, y ahí le llegará un código de verificación, y en la siguiente pantalla podrá ingresar ese código y asignar una nueva contraseña.',
                         style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: utils.Colors.blanco),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: utils.Colors.blanco
+                        ),
                         textAlign: TextAlign.justify,
                       ),
                     ),
+                    //*input para ingresar el correo
                     Form(
-                        key: formKecontrasena,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        child: Column(children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 35),
-                            child: Container(
-                              height: 64,
-                              decoration: BoxDecoration(
-                                color: utils.Colors.grisMedio,
-                                borderRadius: BorderRadius.circular(35),
+                      key: formKecontrasena,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      child: Column(children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 35),
+                          child: Container(
+                            height: 64,
+                            decoration: BoxDecoration(
+                              color: utils.Colors.grisMedio,
+                              borderRadius: BorderRadius.circular(35),
+                            ),
+                            child: TextFormField(
+                            //*revisar si esta bien el correo
+                              controller:contrasenaController.correoController,
+                              autocorrect: false,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'Correo electronico',
+                                labelText: 'Correo',
+                                prefixIcon: Icon(
+                                  Icons.email,
+                                  size: 30,
+                                ),
+                                iconColor: Color(0xff3A4750),
+                                labelStyle: TextStyle(
+                                  color: Color(0xff3A4750),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600
+                                )
                               ),
-                              child: TextFormField(
-                                //*revisar si esta bien el correo
-                                controller:
-                                    contrasenaController.correoController,
-                                autocorrect: false,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Correo electronico',
-                                    labelText: 'Correo',
-                                    prefixIcon: Icon(
-                                      Icons.email,
-                                      size: 30,
-                                    ),
-                                    iconColor: Color(0xff3A4750),
-                                    labelStyle: TextStyle(
-                                        color: Color(0xff3A4750),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600)),
-                                cursorHeight: 20,
-                                cursorColor: const Color(0xff3A4750),
-                                onChanged: (value) => loginForm.correoOlvido = value,
-                                /*validator: (value) {
-                                  String pattern =
-                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                  RegExp regExp = new RegExp(pattern);
-                                  return regExp.hasMatch(value ?? '')
-                                      ? null
-                                      : 'El valor ingresado no luce como un correo';
-                                },*/
-                              ),
+                              cursorHeight: 20,
+                              cursorColor: const Color(0xff3A4750),
+                              onChanged: (value) =>loginForm.correoOlvido = value,
                             ),
                           ),
-                        ])),
-                    validacionCorreoOlvidado(validacionEmail),
-                    const SizedBox(
-                      height: 40,
+                        ),
+                      ])
                     ),
+                    //*poder validar si el correo si es un correo
+                    validacionCorreoOlvidado(validacionEmail),
+                    const SizedBox(height: 40,),
+                    //*Botton donde se espera dos segundos y valida si el correo ingresado si es un correo
+                    //*se mira que el correo si este bien con expresiones regulares 
                     MaterialButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(35)),
-                        disabledColor: utils.Colors.grisOscuro,
-                        elevation: 0,
-                        color: utils.Colors.ocre,
-                        height: 60,
-                        child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 100, vertical: 15),
-                            child: Text(
-                              loginForm.isLoading ? 'Espere' : 'Enviar',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 25),
-                            )),
-                        onPressed: loginForm.isLoading
-                            ? null
-                            : () async {
-                                FocusScope.of(context).unfocus();
-                                String pattern =
-                                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                RegExp regExp = new RegExp(pattern);
-                                if (regExp.hasMatch(loginForm.correoOlvido ?? '') &&
-                                    loginForm.correoOlvido != '') {
-                                    validacionEmail = false;
-                                    Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => NuevaContrasenaPage(correo: loginForm.correoOlvido)),
-                                  );
-                                } else {
-                                  validacionEmail = true;
-                                }
-                              })
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+                      disabledColor: utils.Colors.grisOscuro,
+                      elevation: 0,
+                      color: utils.Colors.ocre,
+                      height: 60,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                        child: Text(
+                          loginForm.isLoading ? 'Espere' : 'Enviar',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25
+                          ),
+                        )
+                      ),
+                      onPressed: loginForm.isLoading
+                      ? null
+                      : () async {
+                      FocusScope.of(context).unfocus();
+                      String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                      RegExp regExp = new RegExp(pattern);
+                      if (regExp.hasMatch(loginForm.correoOlvido ?? '') && loginForm.correoOlvido != '') {
+                        validacionEmail = false;
+                        Navigator.push( context,
+                          MaterialPageRoute(
+                            builder: (context) => NuevaContrasenaPage(correo: loginForm.correoOlvido)
+                          ),
+                        );
+                      } else {
+                        validacionEmail = true;
+                      }}
+                    )
                   ],
                 ),
               )
@@ -193,6 +185,7 @@ class OlvidarContrasenaPage extends StatelessWidget {
     );
   }
 
+//*se hace la validacion de que el correo ingresado si sea un correo
   Widget validacionCorreoOlvidado(bool validacion) {
     return Container(
         child: Row(
