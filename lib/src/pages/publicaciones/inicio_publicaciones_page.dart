@@ -26,9 +26,10 @@ class InicioPublicaciones extends StatelessWidget {
             Text(
               'Uhome',
               style: TextStyle(
-                  fontSize: 25,
-                  color: utils.Colors.blanco,
-                  fontWeight: FontWeight.bold),
+                fontSize: 25,
+                color: utils.Colors.blanco,
+                fontWeight: FontWeight.bold
+              ),
             ),
           ],
         ),
@@ -50,10 +51,11 @@ class InicioPublicaciones extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ListasPage(
-                                lista: listaFavoritos.listaFavoritos,
-                                titulo: 'Gurdaddos',
-                              )),
+                        builder: (context) => ListasPage(
+                          lista: listaFavoritos.listaFavoritos,
+                          titulo: 'Gurdaddos',
+                        )
+                      ),
                     );
                   },
                   icon: const Icon(
@@ -69,31 +71,33 @@ class InicioPublicaciones extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-            padding: const EdgeInsets.only(left: 30, top: 20, right: 20),
-            child: Column(
-              children: [
-                Row(
-                  children: const [
-                    Text(
-                      'Hola, jas',
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: utils.Colors.blanco,
-                          fontWeight: FontWeight.w500),
-                    )
-                  ],
-                ),
-                const _buscador(),
-                const SizedBox(
-                  height: 10,
-                ),
-                _listaFavoritos(listaFavoritos: listaFavoritos.listaFavoritos),
-                _textSugerencias(context, listaSugernecias),
-                _listaSugerencias(
-                    listaSugerencias: listaSugernecias.listaSugerencias)
-              ],
-            )),
+          padding: const EdgeInsets.only(left: 30, top: 20, right: 20),
+          child: Column(
+            children: [
+              Row(
+                children: const [
+                  Text(
+                    'Hola, jas',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: utils.Colors.blanco,
+                      fontWeight: FontWeight.w500
+                    ),
+                  )
+                ],
+              ),
+              const _buscador(),
+              const SizedBox(height: 10,),
+              //*lista de inmuebles favoritos
+              _listaFavoritos(listaFavoritos: listaFavoritos.listaFavoritos),
+              _textSugerencias(context, listaSugernecias),
+               //*lista de inmuebles sugeridos
+              _listaSugerencias(listaSugerencias: listaSugernecias.listaSugerencias)
+            ],
+          )
+        ),
       ),
+      //*la parte inferior del la pantalla 
       bottomNavigationBar: _bottomNavigationBar(listaFavoritos: listaFavoritos),
     );
   }
@@ -101,32 +105,34 @@ class InicioPublicaciones extends StatelessWidget {
 //*Texto de sugerincia
 //*Boton de ver todo para ver la lista de todas las sugerencias
   Row _textSugerencias(
-      BuildContext context, ListaLlenaSugerencias listaSugernecias) {
+    BuildContext context, ListaLlenaSugerencias listaSugernecias) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Text('Sugerencias',
-                style: TextStyle(
-                    color: utils.Colors.blanco,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500))),
+          padding: EdgeInsets.only(left: 10),
+          child: Text('Sugerencias',
+            style: TextStyle(
+              color: utils.Colors.blanco,
+              fontSize: 16,
+              fontWeight: FontWeight.w500
+            )
+          )
+        ),
         TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ListasPage(
-                          lista: listaSugernecias.listaSugerencias,
-                          titulo: 'Sugerencias',
-                        )),
-              );
-            },
-            child: const Text(
-              'Ver todo',
-              style: TextStyle(fontSize: 16),
-            )),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ListasPage(lista: listaSugernecias.listaSugerencias,titulo: 'Sugerencias',)
+              ),
+            );
+          },
+          child: const Text(
+            'Ver todo',
+            style: TextStyle(fontSize: 16),
+          )
+        ),
       ],
     );
   }
@@ -140,20 +146,19 @@ class _bottomNavigationBar extends StatelessWidget {
   }) : super(key: key);
 
   final ListaLlenaFavoritos listaFavoritos;
-
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-        backgroundColor: utils.Colors.fondoOscuro,
-        items: [
-          new BottomNavigationBarItem (
-            icon: IconButton(
-              icon: Icon(
-                Icons.home,
-                size: 35,
-              ),
-              onPressed: () {},
+      backgroundColor: utils.Colors.fondoOscuro,
+      items: [
+        new BottomNavigationBarItem (
+          icon: IconButton(
+            icon: Icon(
+              Icons.home,
+              size: 35,
             ),
+            onPressed: () {},
+          ),
             label: '',
           ),
           new BottomNavigationBarItem(
@@ -168,21 +173,23 @@ class _bottomNavigationBar extends StatelessWidget {
             label: '',
           ),
           new BottomNavigationBarItem(
-              icon: IconButton(
-                icon: Icon(
-                  Icons.person,
-                  size: 35,
-                  color: utils.Colors.grisClaro,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PerfilPage()),
-                  );
-                },
+            icon: IconButton(
+              icon: Icon(
+                Icons.person,
+                size: 35,
+                color: utils.Colors.grisClaro,
               ),
-              label: ''),
-        ]);
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PerfilPage()),
+                );
+              },
+            ),
+            label: ''
+          ),
+        ]
+      );
   }
 }
 
@@ -211,17 +218,17 @@ class _listaSugerencias extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SidesShow(
-                                  slides: listaSugerencias[index].imagenes,
-                                  direccion: listaSugerencias[index].direccion, 
-                                  barrio: listaSugerencias[index].barrio, 
-                                  precio: listaSugerencias[index].precio, 
-                                  iconosDetalles: listaSugerencias[index].iconosDetalle, 
-                                  nombreDeatlles: listaSugerencias[index].nombreDetalle, 
-                                  iconosRestricciones: listaSugerencias[index].iconosRestricciones, 
-                                  nombreRestricciones: listaSugerencias[index].nombreRestricciones, 
-                                  descripcion: '',
-                          ) 
+                        builder: (context) => SidesShow(
+                          slides: listaSugerencias[index].imagenes,
+                          direccion: listaSugerencias[index].direccion, 
+                          barrio: listaSugerencias[index].barrio, 
+                          precio: listaSugerencias[index].precio, 
+                          iconosDetalles: listaSugerencias[index].iconosDetalle, 
+                          nombreDeatlles: listaSugerencias[index].nombreDetalle, 
+                          iconosRestricciones: listaSugerencias[index].iconosRestricciones, 
+                          nombreRestricciones: listaSugerencias[index].nombreRestricciones, 
+                          descripcion: '',
+                        ) 
                       ),
                     );
                   },
@@ -243,47 +250,49 @@ class _listaSugerencias extends StatelessWidget {
                               width:  MediaQuery.of(context).size.width*0.25,
                               height: MediaQuery.of(context).size.height*0.25,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    opacity: 0.50,
-                                    image: AssetImage(
-                                        listaSugerencias[index].iamgen),
-                                    fit: BoxFit.cover,
-                                  )),
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  opacity: 0.50,
+                                  image: AssetImage(
+                                    listaSugerencias[index].iamgen
+                                  ),
+                                  fit: BoxFit.cover,
+                                )
+                              ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10,),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children:[
                                   Text(
-                                  listaSugerencias[index].direccion,
-                                  style: const TextStyle(
-                                    color: utils.Colors.blanco,
-                                    fontWeight: FontWeight.w300
+                                    listaSugerencias[index].direccion,
+                                    style: const TextStyle(
+                                      color: utils.Colors.blanco,
+                                      fontWeight: FontWeight.w300
+                                    ),
+                                    maxLines: 3,
+                                    textAlign: TextAlign.center,
                                   ),
-                                  maxLines: 3,
-                                  textAlign: TextAlign.center,
-                                ),
                                 ] 
                               ),
                               Text(
                                 listaSugerencias[index].barrio,
                                 style: const TextStyle(
-                                    fontSize: 16, color: utils.Colors.blanco),
+                                  fontSize: 16, color: utils.Colors.blanco
+                                ),
                               ),
                               Text(
                                 '\$${listaSugerencias[index].precio}',
                                 style: const TextStyle(
-                                    color: utils.Colors.ocre,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
+                                  color: utils.Colors.ocre,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600
+                                ),
                               )
                             ],
                           ),

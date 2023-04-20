@@ -16,7 +16,6 @@ class PerfilPage extends StatefulWidget {
 
 class _PerfilPageState extends State<PerfilPage> {
   File? imagen;
-
   final picker = ImagePicker();
 
   Future selImagen(op) async {
@@ -41,13 +40,11 @@ class _PerfilPageState extends State<PerfilPage> {
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => InicioPublicaciones()));
-            }),
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(context,MaterialPageRoute(builder: (context) => InicioPublicaciones()));
+          }
+        ),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
           child: Row(
@@ -63,14 +60,16 @@ class _PerfilPageState extends State<PerfilPage> {
               Text(
                 'Perfil',
                 style: TextStyle(
-                    fontSize: 25,
-                    color: utils.Colors.blanco,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 25,
+                  color: utils.Colors.blanco,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ],
           ),
         ),
       ),
+      //*poder subir una iamgen o modificar la imagen
       body: SingleChildScrollView(
         child: Center(
           child: Container(
@@ -152,6 +151,7 @@ class _PerfilPageState extends State<PerfilPage> {
               const SizedBox(
                 height: 20,
               ),
+              //*opciones del menu del perfil, como editar perfil, ubicacion  y publicar
               _menuPerfil(
                 iconoItem: Icons.account_circle_outlined,
                 nomItem: 'Editar Perfil',
@@ -183,97 +183,101 @@ class _PerfilPageState extends State<PerfilPage> {
 //*sale la opcion de tomar foto o una de la galeria
   void opciones(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            contentPadding: const EdgeInsets.all(0),
-            content: SingleChildScrollView(
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      selImagen(1);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(width: 1, color: Colors.grey)),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(0),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    selImagen(1);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: Colors.grey)
                       ),
-                      child: Row(
-                        children: const [
-                          Expanded(
-                            child: Text(
-                              'Tomar una foto',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child: Text(
+                            'Tomar una foto',
+                            style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500
                             ),
                           ),
-                          Icon(
-                            Icons.camera_alt,
-                            color: utils.Colors.ocre,
-                          )
-                        ],
-                      ),
+                        ),
+                        Icon(
+                          Icons.camera_alt,
+                          color: utils.Colors.ocre,
+                        )
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      selImagen(2);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      child: Row(
-                        children: const [
-                          Expanded(
-                            child: Text(
-                              'Seleccionar una foto',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
-                            ),
+                ),
+                InkWell(
+                  onTap: () {
+                    selImagen(2);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child: Text(
+                            'Seleccionar una foto',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                           ),
-                          Icon(
-                            Icons.image,
-                            color: utils.Colors.ocre,
-                          )
-                        ],
-                      ),
+                        ),
+                        Icon(
+                          Icons.image,
+                          color: utils.Colors.ocre,
+                        )
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(
-                        color: utils.Colors.rojo,
-                      ),
-                      child: Row(
-                        children: const [
-                          Expanded(
-                            child: Text(
-                              'Cancelar',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: utils.Colors.blanco),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      color: utils.Colors.rojo,
                     ),
-                  )
-                ],
-              ),
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child: Text(
+                            'Cancelar',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: utils.Colors.blanco
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
-          );
-        });
+          ),
+        );
+      }
+    );
   }
 }
 
 //*Menu del perfil
+//*recibe cada uno el titulo, el icono y la direccion
 class _menuPerfil extends StatelessWidget {
   String nomItem;
   IconData iconoItem;

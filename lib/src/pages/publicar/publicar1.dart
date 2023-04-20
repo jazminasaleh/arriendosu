@@ -25,7 +25,6 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
   @override
   Widget build(BuildContext context) {
     final publicarInmueble = Provider.of<PublicarProvider>(context);
-
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -54,120 +53,130 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  //*fromulario para llenar ubicacion, precio, fotos 
                   Form(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 30, right: 30, top: 30, bottom: 10),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10),
                             child: Container(
                               height: 64,
                               decoration: BoxDecoration(
-                                  color: utils.Colors.grisMedio,
-                                  borderRadius: BorderRadius.circular(10)),
+                                color: utils.Colors.grisMedio,
+                                borderRadius: BorderRadius.circular(10)
+                              ),
                               child: TextFormField(
                                 autocorrect: false,
                                 keyboardType: TextInputType.streetAddress,
                                 decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Dirección del inmueble',
-                                    labelText: 'Ubicación',
-                                    prefixIcon: Icon(
-                                      Icons.location_on_rounded,
-                                      size: 30,
-                                    ),
-                                    iconColor: Color(0xff3A4750),
-                                    labelStyle: TextStyle(
-                                        color: Color(0xff3A4750),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600)),
-                                onChanged: (value) =>
-                                    publicarInmueble.ubicacion = value,
+                                  border: InputBorder.none,
+                                  hintText: 'Dirección del inmueble',
+                                  labelText: 'Ubicación',
+                                  prefixIcon: Icon(
+                                    Icons.location_on_rounded,
+                                    size: 30,
+                                  ),
+                                  iconColor: Color(0xff3A4750),
+                                  labelStyle: TextStyle(
+                                    color: Color(0xff3A4750),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600
+                                  )
+                                ),
+                                onChanged: (value) => publicarInmueble.ubicacion = value,
                               ),
                             ),
                           ),
                           validacionUbicacion(validUbicacion),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 30, right: 30, top: 10, bottom: 10),
+                            padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
                             child: Container(
                               height: 64,
                               decoration: BoxDecoration(
-                                  color: utils.Colors.grisMedio,
-                                  borderRadius: BorderRadius.circular(10)),
+                                color: utils.Colors.grisMedio,
+                                borderRadius: BorderRadius.circular(10)
+                              ),
                               child: TextFormField(
                                 autocorrect: false,
                                 keyboardType: TextInputType.number,
                                 decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Precio del inmueble',
-                                    labelText: 'Precio',
-                                    prefixIcon: Icon(
-                                      Icons.attach_money_sharp,
-                                      size: 30,
-                                    ),
-                                    iconColor: Color(0xff3A4750),
-                                    labelStyle: TextStyle(
-                                        color: Color(0xff3A4750),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600)),
-                                onChanged: (value) =>
-                                    publicarInmueble.precio = value,
+                                  border: InputBorder.none,
+                                  hintText: 'Precio del inmueble',
+                                  labelText: 'Precio',
+                                  prefixIcon: Icon(
+                                    Icons.attach_money_sharp,
+                                    size: 30,
+                                  ),
+                                  iconColor: Color(0xff3A4750),
+                                  labelStyle: TextStyle(
+                                    color: Color(0xff3A4750),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600
+                                  )
+                                ),
+                                onChanged: (value) =>publicarInmueble.precio = value,
                               ),
-                            ),
-                          )
-                        ],
-                      )),
+                          ),
+                        )
+                      ],
+                    )
+                  ),
                   validacionPrecio(validPrecio),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                     child: Container(
                       height: 64,
                       decoration: BoxDecoration(
-                          color: utils.Colors.grisMedio,
-                          borderRadius: BorderRadius.circular(10)),
+                        color: utils.Colors.grisMedio,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
                       child: Row(
                         children: [
                           const Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Icon(
-                                Icons.camera_alt,
-                                size: 30,
-                                color: utils.Colors.grisOscuro,
-                              )),
+                            padding: EdgeInsets.all(10),
+                            child: Icon(
+                              Icons.camera_alt,
+                              size: 30,
+                              color: utils.Colors.grisOscuro,
+                            )
+                          ),
                           const Text(
                             'Fotos',
                             style: TextStyle(
-                                fontSize: 20,
-                                color: Color(0xff3A4750),
-                                fontWeight: FontWeight.w600),
+                              fontSize: 20,
+                              color: Color(0xff3A4750),
+                              fontWeight: FontWeight.w600
+                            ),
                           ),
                           Expanded(child: Container()),
                           Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.add_a_photo,
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.add_a_photo,
                                   size: 30,
                                   color: utils.Colors.verde,
-                                )),
+                                )
+                            ),
                           )
                         ],
                       ),
                     ),
                   ),
+                  //*tipo de inmubeble ya sea partamneto o habitacion 
                   const Padding(
-                      padding: EdgeInsets.only(top: 20, bottom: 20),
-                      child: Text(
-                        'Tipo de inmueble',
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: utils.Colors.blanco,
-                            fontWeight: FontWeight.bold),
-                      )),
+                    padding: EdgeInsets.only(top: 20, bottom: 20),
+                    child: Text(
+                      'Tipo de inmueble',
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: utils.Colors.blanco,
+                        fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: GestureDetector(
@@ -187,29 +196,32 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                       child: Container(
                         height: 64,
                         decoration: BoxDecoration(
-                            color: apartamento
-                                ? utils.Colors.ocre
-                                : utils.Colors.grisClaro,
-                            borderRadius: BorderRadius.circular(10)),
+                          color: apartamento
+                            ? utils.Colors.ocre
+                            : utils.Colors.grisClaro,  
+                          borderRadius: BorderRadius.circular(10)
+                        ),
                         child: Row(
                           children: [
                             Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Icon(
-                                  Icons.house,
-                                  color: apartamento
-                                      ? utils.Colors.fondoOscuro
-                                      : utils.Colors.grisOscuro,
-                                  size: 30,
-                                )),
+                              padding: const EdgeInsets.all(10),
+                              child: Icon(
+                                Icons.house,
+                                color: apartamento
+                                  ? utils.Colors.fondoOscuro
+                                  : utils.Colors.grisOscuro,
+                                size: 30,
+                              )
+                            ),
                             Text(
                               'Apartamento',
                               style: TextStyle(
-                                  fontSize: 20,
-                                  color: apartamento
-                                      ? utils.Colors.fondoOscuro
-                                      : const Color(0xff3A4750),
-                                  fontWeight: FontWeight.w600),
+                                fontSize: 20,
+                                color: apartamento
+                                  ? utils.Colors.fondoOscuro
+                                  : const Color(0xff3A4750),
+                                fontWeight: FontWeight.w600
+                              ),
                             ),
                           ],
                         ),
@@ -217,8 +229,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                    padding:const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
@@ -236,29 +247,31 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                       child: Container(
                         height: 64,
                         decoration: BoxDecoration(
-                            color: habitacion
-                                ? utils.Colors.ocre
-                                : utils.Colors.grisClaro,
-                            borderRadius: BorderRadius.circular(10)),
+                          color: habitacion
+                            ? utils.Colors.ocre
+                            : utils.Colors.grisClaro,
+                          borderRadius: BorderRadius.circular(10)
+                        ),
                         child: Row(
                           children: [
                             Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Icon(
-                                  Icons.bed,
-                                  color: habitacion
-                                      ? utils.Colors.fondoOscuro
-                                      : utils.Colors.grisOscuro,
-                                  size: 30,
-                                )),
+                              padding: const EdgeInsets.all(10),
+                              child: Icon(
+                                Icons.bed,
+                                color: habitacion
+                                  ? utils.Colors.fondoOscuro
+                                  : utils.Colors.grisOscuro,
+                                size: 30,
+                              )
+                            ),
                             Text(
                               'Habitación',
                               style: TextStyle(
-                                  fontSize: 20,
-                                  color: habitacion
-                                      ? utils.Colors.fondoOscuro
-                                      : const Color(0xff3A4750),
-                                  fontWeight: FontWeight.w600),
+                                fontSize: 20,
+                                color: habitacion
+                                  ? utils.Colors.fondoOscuro
+                                  : const Color(0xff3A4750),
+                                fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -266,75 +279,75 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                     ),
                   ),
                   validacionTipo(validTipo),
-                  //*Expanded(child: Container()),
                   Padding(
-                      padding: const EdgeInsets.only(bottom: 50),
-                      child: MaterialButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(35)),
-                        disabledColor: utils.Colors.grisOscuro,
-                        elevation: 0,
-                        color: utils.Colors.ocre,
-                        height: 60,
-                        child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 100, vertical: 15),
-                            child: const Text(
-                              'Siguiente',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 25),
-                              textAlign: TextAlign.center,
-                            )),
-                        onPressed: publicarInmueble.isLoading
-                            ? null
-                            : () async {
-                                FocusScope.of(context).unfocus();
-                                contadorbtn = 0;
-                                if (publicarInmueble.ubicacion.length >= 7) {
-                                  contadorbtn++;
-                                  validUbicacion = false;
-                                } else {
-                                  validUbicacion = true;
-                                  validacionUbicacion(validPrecio);
-                                }
-          
-                                if (publicarInmueble.precio.length >= 5) {
-                                  contadorbtn++;
-                                  validPrecio = false;
-                                } else {
-                                  validPrecio = true;
-                                  validacionPrecio(validPrecio);
-                                }
-          
-                                if (apartamento == true || habitacion == true) {
-                                  validTipo = false;
-                                  contadorbtn++;
-                                  if (apartamento == true) {
-                                    publicarInmueble.tipo = 'apartamento';
-                                  } else {
-                                    publicarInmueble.tipo = 'habitacion';
-                                  }
-                                } else {
-                                  validTipo = true;
-                                  validacionTipo(validTipo);
-                                }
-          
-                                if (contadorbtn >= 3) {
-                                 
-                                  publicarInmueble.isLoading = true;
-                                 
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Publicar2Page(publicarInmueble)));
-                                  publicarInmueble.isLoading = false;
-                                } else {
-                                  publicarInmueble.isLoading = false;
-                                }
-                              },
-                      )),
+                    padding: const EdgeInsets.only(bottom: 50),
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35)
+                      ),
+                      disabledColor: utils.Colors.grisOscuro,
+                      elevation: 0,
+                      color: utils.Colors.ocre,
+                      height: 60,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                        child: const Text(
+                          'Siguiente',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      ),
+                      onPressed: publicarInmueble.isLoading
+                        ? null
+                        : () async {
+                      FocusScope.of(context).unfocus();
+                        contadorbtn = 0;
+                        if (publicarInmueble.ubicacion.length >= 7) {
+                          contadorbtn++;
+                          validUbicacion = false;
+                        } else {
+                          validUbicacion = true;
+                          validacionUbicacion(validPrecio);
+                        }
+
+                        if (publicarInmueble.precio.length >= 5) {
+                          contadorbtn++;
+                          validPrecio = false;
+                        } else {
+                          validPrecio = true;
+                          validacionPrecio(validPrecio);
+                        }
+  
+                        if (apartamento == true || habitacion == true) {
+                          validTipo = false;
+                          contadorbtn++;
+                          if (apartamento == true) {
+                            publicarInmueble.tipo = 'apartamento';
+                          } else {
+                            publicarInmueble.tipo = 'habitacion';
+                          }
+                        } else {
+                          validTipo = true;
+                          validacionTipo(validTipo);
+                        }
+  
+                        if (contadorbtn >= 3) {
+                          publicarInmueble.isLoading = true;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Publicar2Page(publicarInmueble))
+                          );
+                          publicarInmueble.isLoading = false;
+                        } else {
+                          publicarInmueble.isLoading = false;
+                        }
+                      },
+                    )
+                  ),
                 ],
               ),
             ),
@@ -343,6 +356,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
     );
   }
 
+//*mensaje de que la ubicacion no esta bien
   Widget validacionUbicacion(bool validacion) {
     return Container(
         child: Row(
@@ -358,6 +372,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
     ));
   }
 
+//*mesnaje de que el precio n esta bien
   Widget validacionPrecio(bool validacion) {
     return Container(
         child: Row(
@@ -373,6 +388,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
     ));
   }
 
+//*mensaje de que debe de seleccionafr un tipo de  inmubeble
   Widget validacionTipo(bool validacion) {
     return Container(
         child: Row(
