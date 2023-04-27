@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/models/inmuebles.dart';
 import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
 
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
@@ -6,6 +7,7 @@ import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
 import 'package:app_arriendosu/src/provider/login_form_provider.dart';
 import 'package:app_arriendosu/src/provider/publicar_inmueble.dart';
 import 'package:app_arriendosu/src/services/auth_service.dart';
+import 'package:app_arriendosu/src/services/inmuebles_services.dart';
 import 'package:app_arriendosu/src/services/notificaciones_services.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +25,8 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => LoginFromProvider()),
-        ChangeNotifierProvider(create: (_) => PublicarProvider())
+        ChangeNotifierProvider(create: (_) => PublicarProvider()),
+        ChangeNotifierProvider(create: (_) => InmueblesServices())
       ],
       child: MyApp(),
     );
