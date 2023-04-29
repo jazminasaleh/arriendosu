@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+import 'package:provider/provider.dart';
 
+import '../../services/inmuebles_services.dart';
 import '../../widgets/slidesShow.dart';
 
 //*Pagina de listas ya sea de favoritos o de sugernecias
 class ListasPage extends StatelessWidget {
   final List lista;
   final String titulo;
-
+ 
   ListasPage({super.key, required this.lista, required this.titulo});
 
   @override
   Widget build(BuildContext context) {
+     final inmuebleServices = Provider.of<InmueblesServices>(context);
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -45,15 +48,11 @@ class ListasPage extends StatelessWidget {
                         Navigator.push(context,
                           MaterialPageRoute(
                             builder: (context) => SidesShow(
-                              slides: lista[index].imagenes,
-                              direccion: lista[index].direccion, 
-                              barrio: lista[index].barrio, 
-                              precio: lista[index].precio, 
-                              iconosDetalles: lista[index].iconosDetalle, 
-                              nombreDeatlles: lista[index].nombreDetalle, 
-                              iconosRestricciones: lista[index].iconosRestricciones, 
-                              nombreRestricciones: lista[index].nombreRestricciones, 
-                              descripcion: lista[index].descripcion,
+                               direccion: lista[index].direccion,
+                                barrio: lista[index].nombreInmueble,
+                                precio: lista[index].precio,
+                                descripcion: lista[index].descripcion,
+                                listaInmuebles: lista[index],
                             ) 
                           ),
                         );
@@ -80,7 +79,7 @@ class ListasPage extends StatelessWidget {
                                     image: DecorationImage(
                                     opacity: 0.50,
                                     image: AssetImage(
-                                      lista[index].iamgen
+                                      lista[index].fotos
                                     ),
                                     fit: BoxFit.cover,
                                   )
@@ -93,7 +92,7 @@ class ListasPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Column(children:[Text( lista[index].direccion,style: const TextStyle(color: utils.Colors.blanco,fontSize: 16,fontWeight: FontWeight.w500),maxLines: 3, textAlign: TextAlign.center,)] ),
-                              Text(lista[index].barrio,style: const TextStyle(fontSize: 15, color: utils.Colors.blanco),),
+                              Text(lista[index].nombreInmueble,style: const TextStyle(fontSize: 15, color: utils.Colors.blanco),),
                               Text('\$${lista[index].precio}',style: const TextStyle(color: utils.Colors.ocre,fontSize: 20,fontWeight: FontWeight.w600),)
                             ],
                           ),],

@@ -6,7 +6,7 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 class ListaFavoritos {
   final String direccion;
   final String barrio;
-  final String precio;
+  final int precio;
   final String iamgen;
   List<Widget> imagenes;
   List<Widget> iconosDetalle;
@@ -33,7 +33,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Maria 1',
-        precio: '350.000',
+        precio: 350000,
         iamgen: 'assets/publicaciones/pub1.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub1.jpg')),
@@ -94,7 +94,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Carrear 10 # 10-78',
         barrio: 'Santa Maria 2',
-        precio: '340.000',
+        precio: 340000,
         iamgen: 'assets/publicaciones/pub2.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub2.jpg')),
@@ -160,7 +160,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Carrera 18 # 104-125',
         barrio: 'Santa Maria 2',
-        precio: '340.000',
+        precio: 340000,
         iamgen: 'assets/publicaciones/pub3.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub3.jpg')),
@@ -224,7 +224,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Maria 2',
-        precio: '340.000',
+        precio: 340000,
         iamgen: 'assets/publicaciones/pub4.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub4.jpg')),
@@ -288,7 +288,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Maria 2',
-        precio: '340.000',
+        precio: 340000,
         iamgen: 'assets/publicaciones/pub5.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub5.jpg')),
@@ -352,7 +352,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Barbara 1',
-        precio: '350.000',
+        precio: 350000,
         iamgen: 'assets/publicaciones/pub1.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub1.jpg')),
@@ -416,7 +416,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Carrear 10 # 10-78',
         barrio: 'Santa Maria 2',
-        precio: '340.000',
+        precio: 340000,
         iamgen: 'assets/publicaciones/pub2.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub2.jpg')),
@@ -480,7 +480,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Carrera 18 # 104-125',
         barrio: 'Santa Maria 2',
-        precio: '340.000',
+        precio: 340000,
         iamgen: 'assets/publicaciones/pub3.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub3.jpg')),
@@ -544,7 +544,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Maria 2',
-        precio: '340.000',
+        precio: 340000,
         iamgen: 'assets/publicaciones/pub4.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub4.jpg')),
@@ -608,7 +608,7 @@ class ListaLlenaFavoritos {
     ListaFavoritos(
         direccion: 'Calle 47 # 14-25',
         barrio: 'Santa Barbara 2',
-        precio: '340.000',
+        precio: 340000,
         iamgen: 'assets/publicaciones/pub5.jpg',
         imagenes: [
           Image(image: AssetImage('assets/publicaciones/pub5.jpg')),

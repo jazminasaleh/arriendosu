@@ -1,48 +1,53 @@
-
+import 'package:app_arriendosu/src/models/inmuebles.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/descripcion_publicaciones.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import '../provider/publicaciones_slider.dart';
+import '../services/inmuebles_services.dart';
+
 //*slider de imagnes de la pagina descripcion de publicaciones
 class SidesShow extends StatelessWidget {
-  List<Widget> slides;
+  final InmueblesServices listaInmuebles;
+  List<Widget> ?slides;
   String direccion;
   String barrio;
-  String precio;
-  List iconosDetalles;
-  List nombreDeatlles;
-  List iconosRestricciones;
-  List nombreRestricciones;
+  int precio;
+  List ?iconosDetalles;
+  List ?nombreDeatlles;
+  List ?iconosRestricciones;
+  List ?nombreRestricciones;
   String descripcion;
-  SidesShow({
-    required this.slides, 
-    required this.direccion, 
-    required this.barrio, 
-    required this.precio, 
-    required this.iconosDetalles, 
-    required this.nombreDeatlles,
-    required this.iconosRestricciones,
-    required this.nombreRestricciones,
-    required this.descripcion}
-  );
+  SidesShow(
+      {
+      required this.listaInmuebles,
+      this.slides,
+      required this.direccion,
+      required this.barrio,
+      required this.precio,
+      this.iconosDetalles,
+      this.nombreDeatlles,
+      this.iconosRestricciones,
+      this.nombreRestricciones,
+      required this.descripcion});
 
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     return ChangeNotifierProvider(
       create: (_) => new SliderModel(),
       child: Scaffold(
           backgroundColor: utils.Colors.fondoOscuro,
           appBar: AppBar(),
-          body: 
-              SingleChildScrollView(
-                child: Column(
-                          children: [
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
                 Container(
                   height: 300,
                   width: double.infinity,
                   child: _Slides(
-                    slides: this.slides,
+                    slides: listaInmuebles.inmuebles,
                   ),
                 ),
                 SizedBox(
@@ -50,22 +55,23 @@ class SidesShow extends StatelessWidget {
                 ),
                 Center(
                   child: _Dots(
-                    totalSlides: this.slides.length,
+                    totalSlides: this.listaInmuebles.inmuebles.length,
                   ),
                 ),
                 DescripcionPublicaciones(
-                  direccion: direccion, 
-                  barrio: barrio, 
-                  precio: precio, 
-                  slides: slides, 
-                  iconosDetalles: iconosDetalles, 
-                  nombreDeatlles: nombreDeatlles, 
-                  iconosRestricciones: iconosRestricciones, 
-                  nombreRestricciones: nombreRestricciones, 
-                  descripcion: descripcion,)
-                  ],
-                ),
-              )),
+                  direccion: direccion,
+                  barrio: barrio,
+                  precio: precio.toString(),
+                  slides: listaInmuebles.inmuebles,
+                  iconosDetalles: iconosDetalles!,
+                  nombreDeatlles: nombreDeatlles!,
+                  iconosRestricciones: iconosRestricciones!,
+                  nombreRestricciones: nombreRestricciones!,
+                  descripcion: descripcion,
+                )
+              ],
+            ),
+          )),
     );
   }
 }
@@ -87,7 +93,8 @@ class _Dots extends StatelessWidget {
     );
   }
 }
-//*uno de los punticos 
+
+//*uno de los punticos
 class _Dot extends StatelessWidget {
   final int index;
 
@@ -110,9 +117,8 @@ class _Dot extends StatelessWidget {
   }
 }
 
-
 class _Slides extends StatefulWidget {
-  final List<Widget> slides;
+  final List slides;
 
   const _Slides({required this.slides});
   @override

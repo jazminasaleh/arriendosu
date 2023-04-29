@@ -1,8 +1,10 @@
+import 'package:app_arriendosu/src/services/inmuebles_services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
+import 'package:provider/provider.dart';
 
 import '../../widgets/slidesShow.dart';
 
@@ -12,10 +14,11 @@ class InicioPublicaciones extends StatelessWidget {
   Widget build(BuildContext context) {
     ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
     ListaLlenaSugerencias listaSugernecias = new ListaLlenaSugerencias();
+    final inmuebleServices = Provider.of<InmueblesServices>(context);
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
-       leading: const SizedBox(),
+        leading: const SizedBox(),
         title: Row(
           children: const [
             Icon(
@@ -26,78 +29,49 @@ class InicioPublicaciones extends StatelessWidget {
             Text(
               'Uhome',
               style: TextStyle(
-                fontSize: 25,
-                color: utils.Colors.blanco,
-                fontWeight: FontWeight.bold
-              ),
+                  fontSize: 25,
+                  color: utils.Colors.blanco,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.notifications_none_outlined,
-                  color: utils.Colors.blanco,
-                  size: 35,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ListasPage(
-                          lista: listaFavoritos.listaFavoritos,
-                          titulo: 'Gurdaddos',
-                        )
-                      ),
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.bookmark_outline_rounded,
-                    color: utils.Colors.blanco,
-                    size: 35,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
+        
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 30, top: 20, right: 20),
-          child: Column(
-            children: [
-              Row(
-                children: const [
-                  Text(
-                    'Hola, jas',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: utils.Colors.blanco,
-                      fontWeight: FontWeight.w500
-                    ),
-                  )
-                ],
-              ),
-              const _buscador(),
-              const SizedBox(height: 10,),
-              //*lista de inmuebles favoritos
-              _listaFavoritos(listaFavoritos: listaFavoritos.listaFavoritos),
-              _textSugerencias(context, listaSugernecias),
-               //*lista de inmuebles sugeridos
-              _listaSugerencias(listaSugerencias: listaSugernecias.listaSugerencias)
-            ],
-          )
-        ),
+            padding: const EdgeInsets.only(left: 30, top: 20, right: 20),
+            child: Column(
+              children: [
+                Row(
+                  children: const [
+                    Text(
+                      'Inmuebles sugeridos',
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: utils.Colors.blanco,
+                          fontWeight: FontWeight.w500),
+                    )
+                  ],
+                ),
+                const _buscador(),
+                const SizedBox(
+                  height: 10,
+                ),
+                //*lista de inmuebles favoritos
+                _listaFavoritos(
+                  listaFavoritos: listaFavoritos.listaFavoritos,
+                  listaInmuebles: inmuebleServices,
+                ),
+                _textSugerencias(context, inmuebleServices),
+                //*lista de inmuebles sugeridos
+                _listaSugerencias(
+                  listaSugerencias: listaSugernecias.listaSugerencias,
+                  listaInmuebles: inmuebleServices,
+                )
+              ],
+            )),
       ),
-      //*la parte inferior del la pantalla 
+      //*la parte inferior del la pantalla
       bottomNavigationBar: _bottomNavigationBar(listaFavoritos: listaFavoritos),
     );
   }
@@ -105,34 +79,32 @@ class InicioPublicaciones extends StatelessWidget {
 //*Texto de sugerincia
 //*Boton de ver todo para ver la lista de todas las sugerencias
   Row _textSugerencias(
-    BuildContext context, ListaLlenaSugerencias listaSugernecias) {
+      BuildContext context, InmueblesServices listaSugernecias) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         const Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Text('Sugerencias',
-            style: TextStyle(
-              color: utils.Colors.blanco,
-              fontSize: 16,
-              fontWeight: FontWeight.w500
-            )
-          )
-        ),
+            padding: EdgeInsets.only(left: 10),
+            child: Text('Sugerencias',
+                style: TextStyle(
+                    color: utils.Colors.blanco,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500))),
         TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ListasPage(lista: listaSugernecias.listaSugerencias,titulo: 'Sugerencias',)
-              ),
-            );
-          },
-          child: const Text(
-            'Ver todo',
-            style: TextStyle(fontSize: 16),
-          )
-        ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ListasPage(
+                          lista:listaSugernecias.inmuebles,
+                          titulo: 'Sugerencias',
+                        )),
+              );
+            },
+            child: const Text(
+              'Ver todo',
+              style: TextStyle(fontSize: 16),
+            )),
       ],
     );
   }
@@ -149,56 +121,43 @@ class _bottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: utils.Colors.fondoOscuro,
-      items: [
-        new BottomNavigationBarItem (
-          icon: IconButton(
-            icon: Icon(
-              Icons.home,
-              size: 35,
-            ),
-            onPressed: () {},
-          ),
-            label: '',
-          ),
+        backgroundColor: utils.Colors.fondoOscuro,
+        items: [
           new BottomNavigationBarItem(
             icon: IconButton(
               icon: Icon(
-                Icons.search_rounded,
+                Icons.home,
                 size: 35,
-                color: utils.Colors.grisClaro,
               ),
               onPressed: () {},
             ),
             label: '',
           ),
           new BottomNavigationBarItem(
-            icon: IconButton(
-              icon: Icon(
-                Icons.person,
-                size: 35,
-                color: utils.Colors.grisClaro,
+              icon: IconButton(
+                icon: Icon(
+                  Icons.person,
+                  size: 35,
+                  color: utils.Colors.grisClaro,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PerfilPage()),
+                  );
+                },
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PerfilPage()),
-                );
-              },
-            ),
-            label: ''
-          ),
-        ]
-      );
+              label: ''),
+        ]);
   }
 }
 
 //*Muestra la lista de inmuebles sugeridos
 class _listaSugerencias extends StatelessWidget {
-  const _listaSugerencias({
-    Key? key,
-    required this.listaSugerencias,
-  }) : super(key: key);
+  InmueblesServices listaInmuebles;
+  _listaSugerencias(
+      {Key? key, required this.listaSugerencias, required this.listaInmuebles})
+      : super(key: key);
 
   final List<ListaSugernecias> listaSugerencias;
 
@@ -211,31 +170,28 @@ class _listaSugerencias extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: listaSugerencias.length,
+              itemCount: listaInmuebles.inmuebles.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SidesShow(
-                          slides: listaSugerencias[index].imagenes,
-                          direccion: listaSugerencias[index].direccion, 
-                          barrio: listaSugerencias[index].barrio, 
-                          precio: listaSugerencias[index].precio, 
-                          iconosDetalles: listaSugerencias[index].iconosDetalle, 
-                          nombreDeatlles: listaSugerencias[index].nombreDetalle, 
-                          iconosRestricciones: listaSugerencias[index].iconosRestricciones, 
-                          nombreRestricciones: listaSugerencias[index].nombreRestricciones, 
-                          descripcion: '',
-                        ) 
-                      ),
+                          builder: (context) => SidesShow(
+                                direccion: listaInmuebles.inmuebles[index].direccion,
+                                barrio: listaInmuebles.inmuebles[index].nombreInmueble,
+                                precio: listaInmuebles.inmuebles[index].precio,
+                                descripcion: listaInmuebles.inmuebles[index].descripcion,
+                                listaInmuebles: listaInmuebles,
+                                
+                              )),
                     );
                   },
                   child: Container(
-                    height:  MediaQuery.of(context).size.height*0.15,
-                    width: MediaQuery.of(context).size.width*0.90,
-                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
                     decoration: BoxDecoration(
                       color: utils.Colors.azulOscuro,
                       borderRadius: BorderRadius.circular(25),
@@ -247,52 +203,48 @@ class _listaSugerencias extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
                             child: Container(
-                              width:  MediaQuery.of(context).size.width*0.25,
-                              height: MediaQuery.of(context).size.height*0.25,
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              height: MediaQuery.of(context).size.height * 0.25,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  opacity: 0.50,
-                                  image: AssetImage(
-                                    listaSugerencias[index].iamgen
-                                  ),
-                                  fit: BoxFit.cover,
-                                )
-                              ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    opacity: 0.50,
+                                    image: AssetImage(
+                                        listaSugerencias[index].iamgen),
+                                    fit: BoxFit.cover,
+                                  )),
                             ),
                           ),
-                          const SizedBox(width: 10,),
+                          const SizedBox(
+                            width: 10,
+                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children:[
-                                  Text(
-                                    listaSugerencias[index].direccion,
-                                    style: const TextStyle(
-                                      color: utils.Colors.blanco,
-                                      fontWeight: FontWeight.w300
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      listaInmuebles.inmuebles[index].direccion,
+                                      style: const TextStyle(
+                                          color: utils.Colors.blanco,
+                                          fontWeight: FontWeight.w300),
+                                      maxLines: 3,
+                                      textAlign: TextAlign.center,
                                     ),
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ] 
+                                  ]),
+                              Text(
+                                listaInmuebles.inmuebles[index].nombreInmueble,
+                                style: const TextStyle(
+                                    fontSize: 16, color: utils.Colors.blanco),
                               ),
                               Text(
-                                listaSugerencias[index].barrio,
+                                '\$${listaInmuebles.inmuebles[index].precio}',
                                 style: const TextStyle(
-                                  fontSize: 16, color: utils.Colors.blanco
-                                ),
-                              ),
-                              Text(
-                                '\$${listaSugerencias[index].precio}',
-                                style: const TextStyle(
-                                  color: utils.Colors.ocre,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600
-                                ),
+                                    color: utils.Colors.ocre,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
@@ -312,9 +264,8 @@ class _listaSugerencias extends StatelessWidget {
 
 //*Lista de los inmuebles gurdados o considerados como favoritos
 class _listaFavoritos extends StatelessWidget {
-  const _listaFavoritos({
-    required this.listaFavoritos,
-  });
+  InmueblesServices listaInmuebles;
+  _listaFavoritos({required this.listaFavoritos, required this.listaInmuebles});
 
   final List<ListaFavoritos> listaFavoritos;
 
@@ -323,99 +274,92 @@ class _listaFavoritos extends StatelessWidget {
     BuildContext context,
   ) {
     return Container(
-        width: double.infinity,
-        height: 370,
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: listaFavoritos.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                     onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SidesShow(
-                              slides: listaFavoritos[index].imagenes,
-                              direccion: listaFavoritos[index].direccion, 
-                              barrio: listaFavoritos[index].barrio, 
-                              precio: listaFavoritos[index].precio, 
-                              iconosDetalles: listaFavoritos[index].iconosDetalle, 
-                              nombreDeatlles: listaFavoritos[index].nombreDetalle, 
-                              iconosRestricciones: listaFavoritos[index].iconosRestricciones,
-                              nombreRestricciones: listaFavoritos[index].nombreRestricciones,
-                              descripcion: listaFavoritos[index].descripcion,
-                            ) 
+      width: double.infinity,
+      height: 370,
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: listaInmuebles.inmuebles.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SidesShow(
+                               direccion: listaInmuebles.inmuebles[index].direccion,
+                                barrio: listaInmuebles.inmuebles[index].nombreInmueble,
+                                precio: listaInmuebles.inmuebles[index].precio,
+                                descripcion: listaInmuebles.inmuebles[index].descripcion,
+                                listaInmuebles: listaInmuebles,
+                              )),
+                    );
+                  },
+                  child: Container(
+                    height: 364,
+                    width: 280,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        image: DecorationImage(
+                          opacity: 0.50,
+                          image: AssetImage(listaFavoritos[index].iamgen),
+                          fit: BoxFit.cover,
+                        )),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, bottom: 10, right: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                           listaInmuebles.inmuebles[index].direccion,
+                            style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w500,
+                                color: utils.Colors.blanco),
+                            textAlign: TextAlign.center,
+                            maxLines: 3,
                           ),
-                        );
-                      },
-                    child: Container(
-                      height: 364,
-                      width: 280,
-                      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          image: DecorationImage(
-                            opacity: 0.50,
-                            image: AssetImage(listaFavoritos[index].iamgen),
-                            fit: BoxFit.cover,
-                          )),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              listaFavoritos[index].direccion,
-                              style: const TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w500,
-                                  color: utils.Colors.blanco),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 3,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              listaFavoritos[index].barrio,
-                              style: const TextStyle(
-                                  fontSize: 15, color: utils.Colors.blanco),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  '\$ ${listaFavoritos[index].precio}',
-                                  style: const TextStyle(
-                                      color: utils.Colors.blanco,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Expanded(child: Container()),
-                                const Icon(
-                                  Icons.bookmark_outline_rounded,
-                                  color: utils.Colors.blanco,
-                                  size: 30,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            listaInmuebles.inmuebles[index].nombreInmueble,
+                            style: const TextStyle(
+                                fontSize: 15, color: utils.Colors.blanco),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '\$ ${listaInmuebles.inmuebles[index].precio}',
+                                style: const TextStyle(
+                                    color: utils.Colors.blanco,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Expanded(child: Container()),
+                             
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -427,40 +371,80 @@ class _buscador extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 20,
-      ),
-      child: GestureDetector(
-        onTap: () {
-          //*Parte del filtro
-        },
-        child: Container(
-          height: 60,
-          decoration: BoxDecoration(
-              color: utils.Colors.azulOscuro,
-              borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Row(
-              children: const [
-                Icon(
-                  Icons.search,
-                  size: 35,
-                  color: utils.Colors.grisOscuro,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  'Buscar',
-                  style: TextStyle(fontSize: 25, color: utils.Colors.grisClaro),
-                )
-              ],
+    return Row(
+      children: [
+         Padding(
+        padding: const EdgeInsets.only(
+          top: 20,
+        ),
+        child: GestureDetector(
+          onTap: () {
+            //*Parte del filtro
+          },
+          child: Container(
+            height: 60,
+            decoration: BoxDecoration(
+                color: utils.Colors.azulOscuro,
+                borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.home,
+                    size: 35,
+                    color: utils.Colors.grisOscuro,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    'Aptu.',
+                    style: TextStyle(fontSize: 25, color: utils.Colors.grisClaro),
+                  )
+                ],
+              ),
             ),
           ),
         ),
       ),
+      SizedBox(width: MediaQuery.of(context).size.width*0.08,),
+       Padding(
+        padding: const EdgeInsets.only(
+          top: 20,
+        ),
+        child: GestureDetector(
+          onTap: () {
+            //*Parte del filtro
+          },
+          child: Container(
+            height: 60,
+            decoration: BoxDecoration(
+                color: utils.Colors.ocre,
+                borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 20),
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.bed,
+                    size: 35,
+                    color: utils.Colors.grisOscuro,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    'Habitación',
+                    style: TextStyle(fontSize: 25, color: utils.Colors.grisClaro),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      ]
     );
   }
 }
