@@ -9,15 +9,34 @@ import '../services/inmuebles_services.dart';
 //*slider de imagnes de la pagina descripcion de publicaciones
 class SidesShow extends StatelessWidget {
   final InmueblesServices listaInmuebles;
-  List<Widget> ?slides;
+  //*datos generlaes del inmueble
+  List<Widget>? slides;
   String direccion;
   String barrio;
-  int precio;
-  List ?iconosDetalles;
-  List ?nombreDeatlles;
-  List ?iconosRestricciones;
-  List ?nombreRestricciones;
+  String precio;
   String descripcion;
+  String tipo;
+  //*datos de los detalles
+  bool internt;
+  bool servicios;
+  bool parqueadero;
+  bool muebles;
+  bool lavadero;
+  int area;
+  int cantHabitaciones;
+  int cantBanos;
+  int estrato;
+  //*restricciones
+  bool mascotas;
+  bool fumar;
+  //*datos del arrendador
+  String nombreArrendador;
+  String apellidosArrendador;
+  String telefonoArrendador;
+  String correo;
+  bool telegram;
+  bool whatsapp;
+
   SidesShow(
       {
       required this.listaInmuebles,
@@ -25,11 +44,27 @@ class SidesShow extends StatelessWidget {
       required this.direccion,
       required this.barrio,
       required this.precio,
-      this.iconosDetalles,
-      this.nombreDeatlles,
-      this.iconosRestricciones,
-      this.nombreRestricciones,
-      required this.descripcion});
+      required this.descripcion,
+      required this.tipo,
+      required this.internt,
+      required this.servicios,
+      required this.parqueadero,
+      required this.muebles,
+      required this.lavadero,
+      required this.area,
+      required this.cantHabitaciones,
+      required this.cantBanos,
+      required this.estrato,
+      required this.mascotas,
+      required this.fumar,
+      required this.nombreArrendador,
+      required this.apellidosArrendador,
+      required this.telefonoArrendador,
+      required this.correo,
+      required this.telegram,
+      required this.whatsapp
+      
+    });
 
   @override
   Widget build(
@@ -61,13 +96,26 @@ class SidesShow extends StatelessWidget {
                 DescripcionPublicaciones(
                   direccion: direccion,
                   barrio: barrio,
-                  precio: precio.toString(),
+                  precio: precio,
                   slides: listaInmuebles.inmuebles,
-                  iconosDetalles: iconosDetalles!,
-                  nombreDeatlles: nombreDeatlles!,
-                  iconosRestricciones: iconosRestricciones!,
-                  nombreRestricciones: nombreRestricciones!,
-                  descripcion: descripcion,
+                  descripcion: descripcion, 
+                  apellidoArrendador: apellidosArrendador,
+                  nombreArrendador: nombreArrendador,
+                  telefonoArrendador: telefonoArrendador,
+                  correo: correo,
+                  telegram: telegram,
+                  whatsapp: whatsapp,
+                  fumar: fumar, 
+                  internt: internt, 
+                  lavadero: lavadero, 
+                  mascotas: mascotas, 
+                  muebles: muebles, 
+                  parqueadero: parqueadero, 
+                  servicios: servicios, 
+                  tipo: tipo,
+                  cantHbaitaciones: cantHabitaciones.toString(),
+                  cantbanos: cantBanos.toString(), 
+                  estrato: estrato.toString(),
                 )
               ],
             ),

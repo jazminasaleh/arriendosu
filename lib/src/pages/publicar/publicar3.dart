@@ -162,11 +162,6 @@ class _Publicar3PageState extends State<Publicar3Page> {
                           publicarInmueble.estrato = '';
                           publicarInmueble.mascotas = false;
                           publicarInmueble.fumar = false;
-                          publicarInmueble.personas = false;
-                          publicarInmueble.horario = false;
-                          publicarInmueble.lavadado = false;
-                          publicarInmueble.fiestas = false;
-
                           publicarInmueble.isLoading = false;
                           Navigator.push(
                               context,
