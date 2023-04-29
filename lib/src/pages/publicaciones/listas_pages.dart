@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/publicaciones/actualizarPublicacion.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:provider/provider.dart';
@@ -7,14 +8,17 @@ import '../../widgets/slidesShow.dart';
 
 //*Pagina de listas ya sea de favoritos o de sugernecias
 class ListasPage extends StatelessWidget {
-  final List lista;
   final String titulo;
- 
-  ListasPage({super.key, required this.lista, required this.titulo});
+  final bool editar;
+
+  ListasPage(
+      {super.key,
+      required this.titulo,
+      required this.editar});
 
   @override
   Widget build(BuildContext context) {
-     final inmuebleServices = Provider.of<InmueblesServices>(context);
+    final inmuebleServices = Provider.of<InmueblesServices>(context);
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -31,7 +35,6 @@ class ListasPage extends StatelessWidget {
           titulo,
           style: const TextStyle(fontSize: 25),
         ),
-       
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -41,43 +44,47 @@ class ListasPage extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView.builder(
-                  itemCount: lista.length,
+                  itemCount: inmuebleServices.inmuebles.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
+                        Navigator.push(
+                          context,
                           MaterialPageRoute(
-                            builder: (context) => SidesShow(
-                               direccion: lista[index].direccion,
-                                barrio: lista[index].nombreInmueble,
-                                precio: lista[index].precio.toString(),
-                                descripcion: lista[index].descripcion,
-                                listaInmuebles: lista[index], 
-                                apellidosArrendador: lista[index].apellidos, 
-                                area: lista[index].area, 
-                                correo: lista[index].correo, 
-                                estrato: lista[index].estrato, 
-                                fumar: lista[index].fumar, 
-                                internt: lista[index].internt, 
-                                lavadero: lista[index].lavadero, 
-                                mascotas: lista[index].mascotas, 
-                                muebles: lista[index].muebles, 
-                                nombreArrendador: lista[index].nombrePersona, parqueadero: lista[index].parqueadero, 
-                                servicios: lista[index].servicios, 
-                                telefonoArrendador: lista[index].telefono, 
-                                telegram: lista[index].telegram,
-                                whatsapp: lista[index].whatsapp, 
-                                tipo: lista[index].tipo,
-                                cantBanos: lista[index].cantbanos,
-                                cantHabitaciones: lista[index].cantHabitaciones,
-                            ) 
-                          ),
+                              builder: (context) => SidesShow(
+                                    direccion: inmuebleServices.inmuebles[index].direccion,
+                                    barrio: inmuebleServices.inmuebles[index].nombreInmueble,
+                                    precio: inmuebleServices.inmuebles[index].precio.toString(),
+                                    descripcion: inmuebleServices.inmuebles[index].descripcion,
+                                    listaInmuebles: inmuebleServices,
+                                    apellidosArrendador: inmuebleServices.inmuebles[index].apellidos,
+                                    area: inmuebleServices.inmuebles[index].area,
+                                    correo: inmuebleServices.inmuebles[index].correo,
+                                    estrato: inmuebleServices.inmuebles[index].estrato,
+                                    fumar: inmuebleServices.inmuebles[index].fumar,
+                                    internt: inmuebleServices.inmuebles[index].internt,
+                                    lavadero: inmuebleServices.inmuebles[index].lavadero,
+                                    mascotas: inmuebleServices.inmuebles[index].mascotas,
+                                    muebles: inmuebleServices.inmuebles[index].muebles,
+                                    nombreArrendador:
+                                        inmuebleServices.inmuebles[index].nombrePersona,
+                                    parqueadero: inmuebleServices.inmuebles[index].parqueadero,
+                                    servicios: inmuebleServices.inmuebles[index].servicios,
+                                    telefonoArrendador: inmuebleServices.inmuebles[index].telefono.toString(),
+                                    telegram: inmuebleServices.inmuebles[index].telegram,
+                                    whatsapp: inmuebleServices.inmuebles[index].whatsapp,
+                                    tipo: inmuebleServices.inmuebles[index].tipo,
+                                    cantBanos: inmuebleServices.inmuebles[index].cantbanos,
+                                    cantHabitaciones:
+                                        inmuebleServices.inmuebles[index].cantHabitaciones,
+                                  )),
                         );
                       },
                       child: Container(
-                        height:  MediaQuery.of(context).size.height*0.15,
-                        width: MediaQuery.of(context).size.width*0.80,
-                        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        width: MediaQuery.of(context).size.width * 0.80,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
                         decoration: BoxDecoration(
                           color: utils.Colors.azulOscuro,
                           borderRadius: BorderRadius.circular(25),
@@ -86,34 +93,75 @@ class ListasPage extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                           child: Row(
                             children: [
-                               Padding(
+                              Padding(
                                 padding: const EdgeInsets.only(left: 5),
                                 child: Container(
-                                  width:  MediaQuery.of(context).size.width*0.25,
-                                  height: MediaQuery.of(context).size.height*0.25,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.25,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.25,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                    opacity: 0.50,
-                                    image: AssetImage(
-                                      lista[index].fotos
-                                    ),
-                                    fit: BoxFit.cover,
-                                  )
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        opacity: 0.50,
+                                        image: AssetImage(''),
+                                        fit: BoxFit.cover,
+                                      )),
                                 ),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(children:[Text( lista[index].direccion,style: const TextStyle(color: utils.Colors.blanco,fontSize: 16,fontWeight: FontWeight.w500),maxLines: 3, textAlign: TextAlign.center,)] ),
-                              Text(lista[index].nombreInmueble,style: const TextStyle(fontSize: 15, color: utils.Colors.blanco),),
-                              Text('\$${lista[index].precio}',style: const TextStyle(color: utils.Colors.ocre,fontSize: 20,fontWeight: FontWeight.w600),)
+                              ),
+                              const SizedBox(width: 10),
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Column(children: [
+                                    Text(
+                                      inmuebleServices.inmuebles[index].direccion,
+                                      style: const TextStyle(
+                                          color: utils.Colors.blanco,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                      maxLines: 3,
+                                      textAlign: TextAlign.center,
+                                    )
+                                  ]),
+                                  Text(
+                                    inmuebleServices.inmuebles[index].nombreInmueble,
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        color: utils.Colors.blanco),
+                                  ),
+                                  Text(
+                                    '\$${inmuebleServices.inmuebles[index].precio}',
+                                    style: const TextStyle(
+                                        color: utils.Colors.ocre,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ActualizarInmueblePage()),
+                                            );
+                                          },
+                                          icon: Icon(
+                                            Icons.pending_actions_outlined,
+                                            color: utils.Colors.ocre,
+                                          ))
+                                    ],
+                                  )
+                                ],
+                              ),
                             ],
-                          ),],
-                        ),
+                          ),
                         ),
                       ),
                     );

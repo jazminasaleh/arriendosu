@@ -35,7 +35,21 @@ class InicioPublicaciones extends StatelessWidget {
             ),
           ],
         ),
-        
+        actions: [
+          IconButton(
+              onPressed: () {
+                print('lista de inmuebles${inmuebleServices.inmuebles}');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListasPage(
+                            titulo: 'Mis publicaciones',
+                            editar: true,
+                          )),
+                );
+              },
+              icon: Icon(Icons.list_alt_rounded))
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -59,13 +73,11 @@ class InicioPublicaciones extends StatelessWidget {
                 ),
                 //*lista de inmuebles favoritos
                 _listaFavoritos(
-                  listaFavoritos: listaFavoritos.listaFavoritos,
                   listaInmuebles: inmuebleServices,
                 ),
-                _textSugerencias(context, inmuebleServices),
+                _textSugerencias(context, inmuebleServices.inmuebles),
                 //*lista de inmuebles sugeridos
                 _listaSugerencias(
-                  listaSugerencias: listaSugernecias.listaSugerencias,
                   listaInmuebles: inmuebleServices,
                 )
               ],
@@ -78,8 +90,7 @@ class InicioPublicaciones extends StatelessWidget {
 
 //*Texto de sugerincia
 //*Boton de ver todo para ver la lista de todas las sugerencias
-  Row _textSugerencias(
-      BuildContext context, InmueblesServices listaSugernecias) {
+  Row _textSugerencias(BuildContext context, List listaInmuebles) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -96,8 +107,8 @@ class InicioPublicaciones extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ListasPage(
-                          lista:listaSugernecias.inmuebles,
                           titulo: 'Sugerencias',
+                          editar: false,
                         )),
               );
             },
@@ -155,11 +166,7 @@ class _bottomNavigationBar extends StatelessWidget {
 //*Muestra la lista de inmuebles sugeridos
 class _listaSugerencias extends StatelessWidget {
   InmueblesServices listaInmuebles;
-  _listaSugerencias(
-      {Key? key, required this.listaSugerencias, required this.listaInmuebles})
-      : super(key: key);
-
-  final List<ListaSugernecias> listaSugerencias;
+  _listaSugerencias({Key? key, required this.listaInmuebles}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -174,33 +181,53 @@ class _listaSugerencias extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
+                    print('lista de inmuebles${listaInmuebles.inmuebles[index]}');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => SidesShow(
-                                direccion: listaInmuebles.inmuebles[index].direccion,
-                                barrio: listaInmuebles.inmuebles[index].nombreInmueble,
-                                precio: listaInmuebles.inmuebles[index].precio.toString(),
-                                descripcion: listaInmuebles.inmuebles[index].descripcion,
+                                direccion:
+                                    listaInmuebles.inmuebles[index].direccion,
+                                barrio: listaInmuebles
+                                    .inmuebles[index].nombreInmueble,
+                                precio: listaInmuebles.inmuebles[index].precio
+                                    .toString(),
+                                descripcion:
+                                    listaInmuebles.inmuebles[index].descripcion,
                                 listaInmuebles: listaInmuebles,
-                                apellidosArrendador: listaInmuebles.inmuebles[index].apellidos, 
-                                area: listaInmuebles.inmuebles[index].area, 
-                                correo: listaInmuebles.inmuebles[index].correo, 
-                                estrato: listaInmuebles.inmuebles[index].estrato, 
-                                fumar: listaInmuebles.inmuebles[index].fumar, 
-                                internt: listaInmuebles.inmuebles[index].internt, 
-                                lavadero: listaInmuebles.inmuebles[index].lavadero, 
-                                mascotas: listaInmuebles.inmuebles[index].mascotas, 
-                                muebles: listaInmuebles.inmuebles[index].muebles, 
-                                nombreArrendador: listaInmuebles.inmuebles[index].nombrePersona, 
-                                parqueadero: listaInmuebles.inmuebles[index].parqueadero, 
-                                servicios: listaInmuebles.inmuebles[index].servicios, 
-                                telefonoArrendador: listaInmuebles.inmuebles[index].telefono.toString(), 
-                                telegram: listaInmuebles.inmuebles[index].telegram,
-                                whatsapp: listaInmuebles.inmuebles[index].whatsapp, 
-                                tipo: listaInmuebles.inmuebles[index].tipo, 
-                                cantBanos: listaInmuebles.inmuebles[index].cantbanos,
-                                cantHabitaciones: listaInmuebles.inmuebles[index].cantHabitaciones,
+                                apellidosArrendador:
+                                    listaInmuebles.inmuebles[index].apellidos,
+                                area: listaInmuebles.inmuebles[index].area,
+                                correo: listaInmuebles.inmuebles[index].correo,
+                                estrato:
+                                    listaInmuebles.inmuebles[index].estrato,
+                                fumar: listaInmuebles.inmuebles[index].fumar,
+                                internt:
+                                    listaInmuebles.inmuebles[index].internt,
+                                lavadero:
+                                    listaInmuebles.inmuebles[index].lavadero,
+                                mascotas:
+                                    listaInmuebles.inmuebles[index].mascotas,
+                                muebles:
+                                    listaInmuebles.inmuebles[index].muebles,
+                                nombreArrendador: listaInmuebles
+                                    .inmuebles[index].nombrePersona,
+                                parqueadero:
+                                    listaInmuebles.inmuebles[index].parqueadero,
+                                servicios:
+                                    listaInmuebles.inmuebles[index].servicios,
+                                telefonoArrendador: listaInmuebles
+                                    .inmuebles[index].telefono
+                                    .toString(),
+                                telegram:
+                                    listaInmuebles.inmuebles[index].telegram,
+                                whatsapp:
+                                    listaInmuebles.inmuebles[index].whatsapp,
+                                tipo: listaInmuebles.inmuebles[index].tipo,
+                                cantBanos:
+                                    listaInmuebles.inmuebles[index].cantbanos,
+                                cantHabitaciones: listaInmuebles
+                                    .inmuebles[index].cantHabitaciones,
                               )),
                     );
                   },
@@ -226,8 +253,7 @@ class _listaSugerencias extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     opacity: 0.50,
-                                    image: AssetImage(
-                                        listaSugerencias[index].iamgen),
+                                    image: AssetImage(''),
                                     fit: BoxFit.cover,
                                   )),
                             ),
@@ -282,9 +308,7 @@ class _listaSugerencias extends StatelessWidget {
 //*Lista de los inmuebles gurdados o considerados como favoritos
 class _listaFavoritos extends StatelessWidget {
   InmueblesServices listaInmuebles;
-  _listaFavoritos({required this.listaFavoritos, required this.listaInmuebles});
-
-  final List<ListaFavoritos> listaFavoritos;
+  _listaFavoritos({required this.listaInmuebles});
 
   @override
   Widget build(
@@ -302,33 +326,53 @@ class _listaFavoritos extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
+                    
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => SidesShow(
-                               direccion: listaInmuebles.inmuebles[index].direccion,
-                                barrio: listaInmuebles.inmuebles[index].nombreInmueble,
-                                precio: listaInmuebles.inmuebles[index].precio.toString(),
-                                descripcion: listaInmuebles.inmuebles[index].descripcion,
+                                direccion:
+                                    listaInmuebles.inmuebles[index].direccion,
+                                barrio: listaInmuebles
+                                    .inmuebles[index].nombreInmueble,
+                                precio: listaInmuebles.inmuebles[index].precio
+                                    .toString(),
+                                descripcion:
+                                    listaInmuebles.inmuebles[index].descripcion,
                                 listaInmuebles: listaInmuebles,
-                                apellidosArrendador: listaInmuebles.inmuebles[index].apellidos, 
-                                area: listaInmuebles.inmuebles[index].area, 
-                                correo: listaInmuebles.inmuebles[index].correo, 
-                                estrato: listaInmuebles.inmuebles[index].estrato, 
-                                fumar: listaInmuebles.inmuebles[index].fumar, 
-                                internt: listaInmuebles.inmuebles[index].internt, 
-                                lavadero: listaInmuebles.inmuebles[index].lavadero, 
-                                mascotas: listaInmuebles.inmuebles[index].mascotas, 
-                                muebles: listaInmuebles.inmuebles[index].muebles, 
-                                nombreArrendador: listaInmuebles.inmuebles[index].nombrePersona, 
-                                parqueadero: listaInmuebles.inmuebles[index].parqueadero, 
-                                servicios: listaInmuebles.inmuebles[index].servicios, 
-                                telefonoArrendador: listaInmuebles.inmuebles[index].telefono.toString(), 
-                                telegram: listaInmuebles.inmuebles[index].telegram,
-                                whatsapp: listaInmuebles.inmuebles[index].whatsapp, 
+                                apellidosArrendador:
+                                    listaInmuebles.inmuebles[index].apellidos,
+                                area: listaInmuebles.inmuebles[index].area,
+                                correo: listaInmuebles.inmuebles[index].correo,
+                                estrato:
+                                    listaInmuebles.inmuebles[index].estrato,
+                                fumar: listaInmuebles.inmuebles[index].fumar,
+                                internt:
+                                    listaInmuebles.inmuebles[index].internt,
+                                lavadero:
+                                    listaInmuebles.inmuebles[index].lavadero,
+                                mascotas:
+                                    listaInmuebles.inmuebles[index].mascotas,
+                                muebles:
+                                    listaInmuebles.inmuebles[index].muebles,
+                                nombreArrendador: listaInmuebles
+                                    .inmuebles[index].nombrePersona,
+                                parqueadero:
+                                    listaInmuebles.inmuebles[index].parqueadero,
+                                servicios:
+                                    listaInmuebles.inmuebles[index].servicios,
+                                telefonoArrendador: listaInmuebles
+                                    .inmuebles[index].telefono
+                                    .toString(),
+                                telegram:
+                                    listaInmuebles.inmuebles[index].telegram,
+                                whatsapp:
+                                    listaInmuebles.inmuebles[index].whatsapp,
                                 tipo: listaInmuebles.inmuebles[index].tipo,
-                                 cantBanos: listaInmuebles.inmuebles[index].cantbanos,
-                                cantHabitaciones: listaInmuebles.inmuebles[index].cantHabitaciones,
+                                cantBanos:
+                                    listaInmuebles.inmuebles[index].cantbanos,
+                                cantHabitaciones: listaInmuebles
+                                    .inmuebles[index].cantHabitaciones,
                               )),
                     );
                   },
@@ -341,7 +385,7 @@ class _listaFavoritos extends StatelessWidget {
                         borderRadius: BorderRadius.circular(25),
                         image: DecorationImage(
                           opacity: 0.50,
-                          image: AssetImage(listaFavoritos[index].iamgen),
+                          image: AssetImage(''),
                           fit: BoxFit.cover,
                         )),
                     child: Padding(
@@ -352,7 +396,7 @@ class _listaFavoritos extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                           listaInmuebles.inmuebles[index].direccion,
+                            listaInmuebles.inmuebles[index].direccion,
                             style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w500,
@@ -381,7 +425,6 @@ class _listaFavoritos extends StatelessWidget {
                                     fontWeight: FontWeight.w500),
                               ),
                               Expanded(child: Container()),
-                             
                             ],
                           )
                         ],
@@ -406,9 +449,8 @@ class _buscador extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-         Padding(
+    return Row(children: [
+      Padding(
         padding: const EdgeInsets.only(
           top: 20,
         ),
@@ -435,7 +477,8 @@ class _buscador extends StatelessWidget {
                   ),
                   Text(
                     'Apto.',
-                    style: TextStyle(fontSize: 25, color: utils.Colors.grisClaro),
+                    style:
+                        TextStyle(fontSize: 25, color: utils.Colors.grisClaro),
                   )
                 ],
               ),
@@ -443,8 +486,10 @@ class _buscador extends StatelessWidget {
           ),
         ),
       ),
-      SizedBox(width: MediaQuery.of(context).size.width*0.08,),
-       Padding(
+      SizedBox(
+        width: MediaQuery.of(context).size.width * 0.08,
+      ),
+      Padding(
         padding: const EdgeInsets.only(
           top: 20,
         ),
@@ -471,7 +516,8 @@ class _buscador extends StatelessWidget {
                   ),
                   Text(
                     'Habitación',
-                    style: TextStyle(fontSize: 25, color: utils.Colors.grisClaro),
+                    style:
+                        TextStyle(fontSize: 25, color: utils.Colors.grisClaro),
                   )
                 ],
               ),
@@ -479,7 +525,6 @@ class _buscador extends StatelessWidget {
           ),
         ),
       ),
-      ]
-    );
+    ]);
   }
 }
