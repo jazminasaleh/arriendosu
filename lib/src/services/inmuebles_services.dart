@@ -18,17 +18,14 @@ class InmueblesServices extends ChangeNotifier {
     this.isLoading = true;
     notifyListeners();
     final url = Uri.https(_baseUrl, 'Inmuebles.json');
-    print('final url $url');
     final resp = await http.get(url);
     final Map<String, dynamic> inmueblesMap = json.decode(resp.body);
 
     inmueblesMap.forEach((key, value) {
-       print('El valor que llega $value');
       final inmuebleTemporal = Inmuebles.fromMap(value);
-      print('Infomrcaion inmueble temporal que llega ${inmuebleTemporal}');
       inmuebleTemporal.id = key;
       this.inmuebles.add(inmuebleTemporal);
-      print('Infomrcaion inmueble que llega ${inmuebles}');
+     
     });
 
     this.isLoading = false;

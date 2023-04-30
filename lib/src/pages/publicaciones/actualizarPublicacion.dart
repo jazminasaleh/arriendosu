@@ -89,6 +89,7 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
   bool validUbicacion = false;
   bool validPrecio = false;
   bool validTipo = false;
+
   String direccion;
   String barrio;
   String precio;
@@ -731,7 +732,7 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
                                 validacionPrecio(validPrecio);
                               }
 
-                              if (apartamento == true || habitacion == true) {
+                              if (tipo == 'apartamento' || tipo == 'habitacion') {
                                 validTipo = false;
                                 contadorbtn++;
                                 if (apartamento == true) {
@@ -752,10 +753,7 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
                               }
 
                               if (contadorbtn >= 3) {
-                                print(fumar);
-                                print(internt);
-                                print(servicios);
-                                print(parqueadero);
+                               
                                 inmuebleService.isLoading = true;
                                 inmuebleService.guardarOCrearInmueble(Inmuebles(
                                     apellidos: apellidoArrendador,
@@ -774,7 +772,7 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
                                     mascotas: mascotas,
                                     muebles: muebles,
                                     nombreInmueble: barrio,
-                                    nombrePersona: '',
+                                    nombrePersona: nombreArrendador,
                                     parqueadero: parqueadero,
                                     precio: int.parse(precio),
                                     servicios: servicios,
@@ -783,6 +781,12 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
                                     whatsapp: whatsapp,
                                     telefono: int.parse(telefonoArrendador)));
                                 inmuebleService.isLoading = false;
+                                 Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ListasPage(titulo: 'Mis publicaciones', editar: true)),
+                                );
                               } else {
                                 inmuebleService.isLoading = false;
                               }

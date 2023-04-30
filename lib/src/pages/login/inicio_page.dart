@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
 import 'package:app_arriendosu/src/provider/login_form_provider.dart';
 import 'package:app_arriendosu/src/services/inmuebles_services.dart';
 import 'package:app_arriendosu/src/services/notificaciones_services.dart';
@@ -215,11 +216,17 @@ class _Inicio_PageState extends State<Inicio_Page> {
                           final String? errorMessage = await authService.login(
                               loginForm.correo, loginForm.contrasena);
                           if (errorMessage == null) {
+                            String correoPerfil = loginForm.correo;
                             loginForm.contrasena = '';
                             loginForm.correo = '';
-
-                            Navigator.popAndPushNamed(
-                                context, 'inicioPublicaciones');
+                            print('El correo ${correoPerfil}');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => InicioPublicaciones(
+                                        correo: correoPerfil,
+                                      )),
+                            );
                             loginForm.isLoading = false;
                           } else {
                             NotificacionesService.showSnackbar(errorMessage);

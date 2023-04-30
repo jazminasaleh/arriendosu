@@ -9,6 +9,7 @@ import 'package:app_arriendosu/src/provider/publicar_inmueble.dart';
 import 'package:app_arriendosu/src/services/auth_service.dart';
 import 'package:app_arriendosu/src/services/inmuebles_services.dart';
 import 'package:app_arriendosu/src/services/notificaciones_services.dart';
+import 'package:app_arriendosu/src/services/usuarios_services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
@@ -27,7 +28,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => LoginFromProvider()),
         ChangeNotifierProvider(create: (_) => PublicarProvider()),
         ChangeNotifierProvider(create: (_) => InmueblesServices()),
-        
+        ChangeNotifierProvider(create: (_) => UsuariosServices())
       ],
       child: MyApp(),
     );

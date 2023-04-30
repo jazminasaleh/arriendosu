@@ -10,14 +10,17 @@ import 'package:image_picker/image_picker.dart';
 //*editar perfil, ubicacion, publicar y salir
 
 class PerfilPage extends StatefulWidget {
+  String? correo;
+  PerfilPage({this.correo});
   @override
-  State<PerfilPage> createState() => _PerfilPageState();
+  State<PerfilPage> createState() => _PerfilPageState(correo: correo!);
 }
 
 class _PerfilPageState extends State<PerfilPage> {
   File? imagen;
   final picker = ImagePicker();
-
+  String correo;
+  _PerfilPageState({required this.correo});
   Future selImagen(op) async {
     var pickedFile;
     if (op == 1) {
@@ -40,11 +43,13 @@ class _PerfilPageState extends State<PerfilPage> {
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.push(context,MaterialPageRoute(builder: (context) => InicioPublicaciones()));
-          }
-        ),
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => InicioPublicaciones()));
+            }),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
           child: Row(
@@ -60,10 +65,9 @@ class _PerfilPageState extends State<PerfilPage> {
               Text(
                 'Perfil',
                 style: TextStyle(
-                  fontSize: 25,
-                  color: utils.Colors.blanco,
-                  fontWeight: FontWeight.bold
-                ),
+                    fontSize: 25,
+                    color: utils.Colors.blanco,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -80,26 +84,25 @@ class _PerfilPageState extends State<PerfilPage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Container(
-                        height: 150,
-                        width: 200,
-                        decoration: BoxDecoration(
-                           color: utils.Colors.fondoOscuro,
-                          borderRadius: BorderRadius.circular(30)
-                        ),
-                        child:  CircleAvatar(
-                          backgroundColor: utils.Colors.fondoOscuro,
-                          child:  imagen == null 
-                            ? ClipRRect(
-                             borderRadius: BorderRadius.circular(10),
-                              child: Image.asset('assets/perfil/foto.jpg',),
-                            ) 
-                            : 
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.file(imagen!),
-                            ) ,
-                        )
-                      ),
+                          height: 150,
+                          width: 200,
+                          decoration: BoxDecoration(
+                              color: utils.Colors.fondoOscuro,
+                              borderRadius: BorderRadius.circular(30)),
+                          child: CircleAvatar(
+                            backgroundColor: utils.Colors.fondoOscuro,
+                            child: imagen == null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset(
+                                      'assets/perfil/foto.jpg',
+                                    ),
+                                  )
+                                : ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.file(imagen!),
+                                  ),
+                          )),
                     ),
                     const Positioned(
                         bottom: -4,
@@ -117,13 +120,13 @@ class _PerfilPageState extends State<PerfilPage> {
                                 size: 30, color: Colors.black),
                             onPressed: () {
                               opciones(context);
-                            }
-                        )
-                    ),
+                            })),
                   ],
                 ),
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               const Text(
                 'Jasmin Saleh',
                 style: TextStyle(
@@ -131,8 +134,8 @@ class _PerfilPageState extends State<PerfilPage> {
                     fontWeight: FontWeight.bold,
                     color: utils.Colors.blanco),
               ),
-              const Text(
-                'jaminsaleh@uptc.edu.co',
+              Text(
+                correo,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -179,100 +182,98 @@ class _PerfilPageState extends State<PerfilPage> {
       ),
     );
   }
+
 //*el cuadro que sale caundo se desea editar la imagen del jusuario
 //*sale la opcion de tomar foto o una de la galeria
   void opciones(BuildContext context) {
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          contentPadding: const EdgeInsets.all(0),
-          content: SingleChildScrollView(
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () {
-                    selImagen(1);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(width: 1, color: Colors.grey)
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: const EdgeInsets.all(0),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      selImagen(1);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(width: 1, color: Colors.grey)),
+                      ),
+                      child: Row(
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'Tomar una foto',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Icon(
+                            Icons.camera_alt,
+                            color: utils.Colors.ocre,
+                          )
+                        ],
                       ),
                     ),
-                    child: Row(
-                      children: const [
-                        Expanded(
-                          child: Text(
-                            'Tomar una foto',
-                            style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500
+                  ),
+                  InkWell(
+                    onTap: () {
+                      selImagen(2);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'Seleccionar una foto',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
                             ),
                           ),
-                        ),
-                        Icon(
-                          Icons.camera_alt,
-                          color: utils.Colors.ocre,
-                        )
-                      ],
+                          Icon(
+                            Icons.image,
+                            color: utils.Colors.ocre,
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    selImagen(2);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
-                      children: const [
-                        Expanded(
-                          child: Text(
-                            'Seleccionar una foto',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        Icon(
-                          Icons.image,
-                          color: utils.Colors.ocre,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: const BoxDecoration(
-                      color: utils.Colors.rojo,
-                    ),
-                    child: Row(
-                      children: const [
-                        Expanded(
-                          child: Text(
-                            'Cancelar',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: utils.Colors.blanco
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                        color: utils.Colors.rojo,
+                      ),
+                      child: Row(
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'Cancelar',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: utils.Colors.blanco),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
 }
 

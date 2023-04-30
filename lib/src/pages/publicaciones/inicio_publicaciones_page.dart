@@ -1,4 +1,5 @@
 import 'package:app_arriendosu/src/services/inmuebles_services.dart';
+import 'package:app_arriendosu/src/services/usuarios_services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/pages/perfil/perfil.dart';
@@ -10,10 +11,13 @@ import '../../widgets/slidesShow.dart';
 
 //*Pagina donde muestra las publicaciones de sugerencia y guardadas
 class InicioPublicaciones extends StatelessWidget {
+  String? correo;
+  InicioPublicaciones({this.correo});
   @override
   Widget build(BuildContext context) {
     ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
     final inmuebleServices = Provider.of<InmueblesServices>(context);
+    final usuariosServices = Provider.of<UsuariosServices>(context);
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -83,7 +87,8 @@ class InicioPublicaciones extends StatelessWidget {
             )),
       ),
       //*la parte inferior del la pantalla
-      bottomNavigationBar: _bottomNavigationBar(listaFavoritos: listaFavoritos),
+      bottomNavigationBar:
+          _bottomNavigationBar(listaFavoritos: listaFavoritos, correo: correo!),
     );
   }
 
@@ -122,10 +127,10 @@ class InicioPublicaciones extends StatelessWidget {
 
 //*El navegador de la parte inferior
 class _bottomNavigationBar extends StatelessWidget {
-  const _bottomNavigationBar({
-    Key? key,
-    required this.listaFavoritos,
-  }) : super(key: key);
+  String correo;
+  _bottomNavigationBar(
+      {Key? key, required this.listaFavoritos, required this.correo})
+      : super(key: key);
 
   final ListaLlenaFavoritos listaFavoritos;
   @override
@@ -151,9 +156,10 @@ class _bottomNavigationBar extends StatelessWidget {
                   color: utils.Colors.grisClaro,
                 ),
                 onPressed: () {
+                  
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PerfilPage()),
+                    MaterialPageRoute(builder: (context) => PerfilPage(correo: correo,)),
                   );
                 },
               ),
@@ -180,7 +186,8 @@ class _listaSugerencias extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    print('lista de inmuebles${listaInmuebles.inmuebles[index]}');
+                    print(
+                        'lista de inmuebles${listaInmuebles.inmuebles[index]}');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -325,7 +332,6 @@ class _listaFavoritos extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    
                     Navigator.push(
                       context,
                       MaterialPageRoute(
