@@ -1,4 +1,5 @@
 import 'package:app_arriendosu/src/pages/publicaciones/actualizarPublicacion.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:provider/provider.dart';
@@ -28,7 +29,10 @@ class ListasPage extends StatelessWidget {
             size: 35,
           ),
           onPressed: () {
-            Navigator.pop(context);
+             Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => InicioPublicaciones()),
+            );
           },
         ),
         title: Text(
@@ -149,7 +153,29 @@ class ListasPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ActualizarInmueblePage()),
+                                                    ActualizarInmueblePage(
+                                                      id: inmuebleServices.inmuebles[index].id.toString(),
+                                                      area: inmuebleServices.inmuebles[index].area.toString(),
+                                                      direccion: inmuebleServices.inmuebles[index].direccion,
+                                                      barrio: inmuebleServices.inmuebles[index].nombreInmueble,
+                                                      precio: inmuebleServices.inmuebles[index].precio.toString(),
+                                                      descripcion: inmuebleServices.inmuebles[index].descripcion, 
+                                                      apellidoArrendador: inmuebleServices.inmuebles[index].apellidos, 
+                                                      correo: inmuebleServices.inmuebles[index].correo, 
+                                                      estrato: inmuebleServices.inmuebles[index].estrato.toString(), 
+                                                      fumar: inmuebleServices.inmuebles[index].fumar, 
+                                                      internt: inmuebleServices.inmuebles[index].internt, 
+                                                      lavadero: inmuebleServices.inmuebles[index].lavadero, 
+                                                      mascotas: inmuebleServices.inmuebles[index].mascotas, 
+                                                      muebles: inmuebleServices.inmuebles[index].muebles, 
+                                                      nombreArrendador: inmuebleServices.inmuebles[index].nombrePersona, 
+                                                      parqueadero: inmuebleServices.inmuebles[index].parqueadero, 
+                                                      servicios: inmuebleServices.inmuebles[index].servicios, 
+                                                      telefonoArrendador: inmuebleServices.inmuebles[index].telefono.toString(), 
+                                                      telegram: inmuebleServices.inmuebles[index].telegram, 
+                                                      tipo: inmuebleServices.inmuebles[index].tipo, 
+                                                      whatsapp: inmuebleServices.inmuebles[index].whatsapp,
+                                                    )),
                                             );
                                           },
                                           icon: Icon(

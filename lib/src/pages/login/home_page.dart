@@ -40,7 +40,7 @@ class Home_Page extends StatelessWidget {
                       height: 15,
                     ),
                     const Text(
-                      'App para todos los miembros que pertenezcan a la UPTC y deseen encontrar un inmueble en arriendo de forma rápida.',
+                      'App para todos los miembros que pertenezcan a la UPTC seccional Sogamoso y deseen encontrar un inmueble en arriendo de forma rápida.',
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.Colors.blanco),textAlign: TextAlign.justify,
                     ),
                     Expanded(child: Container()),

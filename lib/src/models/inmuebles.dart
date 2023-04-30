@@ -2,7 +2,6 @@
 //
 //     final inmuebles = inmueblesFromMap(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 Inmuebles inmueblesFromMap(String str) => Inmuebles.fromMap(json.decode(str));
@@ -113,6 +112,7 @@ class Inmuebles {
         "servicios": servicios,
         "telegram": telegram,
         "tipo": tipo,
+        "telefono": telefono,
         "whatsapp": whatsapp,
       };
 }

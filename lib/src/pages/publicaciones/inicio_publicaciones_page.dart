@@ -13,7 +13,6 @@ class InicioPublicaciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
-    ListaLlenaSugerencias listaSugernecias = new ListaLlenaSugerencias();
     final inmuebleServices = Provider.of<InmueblesServices>(context);
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
