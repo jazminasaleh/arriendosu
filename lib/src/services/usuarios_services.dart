@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:app_arriendosu/src/models/usuarios.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,9 @@ import 'package:http/http.dart' as http;
 class UsuariosServices extends ChangeNotifier {
   final String _baseUrl = 'app-arriendos-default-rtdb.firebaseio.com';
   final List<Usuarios> usuarios = [];
+  late Usuarios selectUusario;
+  File? newPictureFile;
+
   bool isLoading = true;
   bool isSaving = false;
 
@@ -20,12 +24,11 @@ class UsuariosServices extends ChangeNotifier {
     notifyListeners();
     final url = Uri.https(_baseUrl, 'Usuarios.json');
     final resp = await http.get(url);
-    print('Infromacion de los usuarios$resp');
     final Map<String, dynamic> usuariosMap = json.decode(resp.body);
-    print('Infromacion de los usuarios$usuariosMap');
+    this.isLoading = false;
     usuariosMap.forEach((key, value) {
       final usuariosTemporal = Usuarios.fromMap(value);
-      usuariosTemporal.correo = key;
+      usuariosTemporal.id = key;
       this.usuarios.add(usuariosTemporal);
     });
 
@@ -51,7 +54,7 @@ class UsuariosServices extends ChangeNotifier {
   }
 
   Future<String> updateUsuario(Usuarios usuario) async {
-    final url = Uri.https(_baseUrl, 'Inmuebles/${usuario.id}.json');
+    final url = Uri.https(_baseUrl, 'Usuarios/${usuario.id}.json');
     final resp = await http.put(url, body: usuario.toJson());
     final decodeData = resp.body;
 
@@ -64,7 +67,7 @@ class UsuariosServices extends ChangeNotifier {
   }
 
   Future<String> createUsuario(Usuarios usuario) async {
-    final url = Uri.https(_baseUrl, 'Inmuebles.json');
+    final url = Uri.https(_baseUrl, 'Usuarios.json');
     final resp = await http.post(url, body: usuario.toJson());
     final decodeData = json.decode(resp.body);
 
@@ -72,5 +75,34 @@ class UsuariosServices extends ChangeNotifier {
     this.usuarios.add(usuario);
 
     return usuario.id.toString();
+  }
+
+  void updateSelectUserImage(String path) {
+    this.selectUusario.foto = path;
+    this.newPictureFile = File.fromUri(Uri(path: path));
+
+    notifyListeners();
+    uploadImage();
+  }
+
+  Future<String?> uploadImage() async {
+    if (this.newPictureFile == null) return null;
+
+    this.isSaving = true;
+    notifyListeners();
+
+    final url = Uri.parse(
+        'https://api.cloudinary.com/v1_1/dbzsnembj/image/upload?upload_preset=foqpn6y9');
+
+    final imageUploadRequest = http.MultipartRequest('POST', url);
+    final file =
+        await http.MultipartFile.fromPath('file', newPictureFile!.path);
+
+    imageUploadRequest.files.add(file);
+
+    final streamResponse = await imageUploadRequest.send();
+    final resp = await http.Response.fromStream(streamResponse);
+
+    print(resp.body);
   }
 }

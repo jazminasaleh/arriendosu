@@ -243,7 +243,7 @@ class _formTextField extends StatelessWidget {
               }
               if (contador >= 5) {
                 loginForm.isLoading = true;
-                final String? errorMessage = await authService.createUser(loginForm.correo, loginForm.contrasena);
+                final String? errorMessage = await authService.createUser(loginForm.correo!, loginForm.contrasena);
                 if (errorMessage == null) {
                   Navigator.popAndPushNamed(context, 'inicio');
                 } else {

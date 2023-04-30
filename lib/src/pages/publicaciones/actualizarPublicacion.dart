@@ -1,9 +1,6 @@
 import 'package:app_arriendosu/src/models/inmuebles.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/listas_pages.dart';
-import 'package:app_arriendosu/src/pages/publicar/publicar2.dart';
-import 'package:app_arriendosu/src/pages/publicar/publicar2H.dart';
-import 'package:app_arriendosu/src/provider/publicar_inmueble.dart';
 import 'package:app_arriendosu/src/services/inmuebles_services.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
@@ -156,11 +153,13 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
+            print('va de actualizaciones este correo $correo');
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      ListasPage(titulo: 'Mis publicaciones', editar: true)),
+                  builder: (context) => InicioPublicaciones(
+                        correo: correo,
+                      )),
             );
           },
           icon: const Icon(Icons.arrow_back),
@@ -732,7 +731,8 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
                                 validacionPrecio(validPrecio);
                               }
 
-                              if (tipo == 'apartamento' || tipo == 'habitacion') {
+                              if (tipo == 'apartamento' ||
+                                  tipo == 'habitacion') {
                                 validTipo = false;
                                 contadorbtn++;
                                 if (apartamento == true) {
@@ -753,7 +753,7 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
                               }
 
                               if (contadorbtn >= 3) {
-                               
+                                contadorbtn = 0;
                                 inmuebleService.isLoading = true;
                                 inmuebleService.guardarOCrearInmueble(Inmuebles(
                                     apellidos: apellidoArrendador,
@@ -781,11 +781,14 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
                                     whatsapp: whatsapp,
                                     telefono: int.parse(telefonoArrendador)));
                                 inmuebleService.isLoading = false;
-                                 Navigator.push(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          ListasPage(titulo: 'Mis publicaciones', editar: true)),
+                                      builder: (context) => ListasPage(
+                                            titulo: 'Mis publicaciones',
+                                            editar: true,
+                                            correoo: correo,
+                                          )),
                                 );
                               } else {
                                 inmuebleService.isLoading = false;

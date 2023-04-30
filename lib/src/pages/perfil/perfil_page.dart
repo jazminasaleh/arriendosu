@@ -1,26 +1,55 @@
 import 'dart:io';
 
+import 'package:app_arriendosu/src/pages/login/inicio_page.dart';
+import 'package:app_arriendosu/src/pages/perfil/editar_perfil_page.dart';
+import 'package:app_arriendosu/src/pages/publicar/publicar1.dart';
+import 'package:app_arriendosu/src/pages/ubicacion/pagina_ubicacion.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_arriendosu/src/pages/publicaciones/publicaciones.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+
+import '../../services/usuarios_services.dart';
 
 //* Pagina de perfil, donde muestra el menu de opciones
 //*editar perfil, ubicacion, publicar y salir
 
 class PerfilPage extends StatefulWidget {
-  String? correo;
-  PerfilPage({this.correo});
+  String? correo, nombre, apellidos, telefono;
+  bool? telegram, whatsapp;
+
+  PerfilPage(
+      {this.correo,
+      this.nombre,
+      this.apellidos,
+      this.telefono,
+      this.telegram,
+      this.whatsapp});
   @override
-  State<PerfilPage> createState() => _PerfilPageState(correo: correo!);
+  State<PerfilPage> createState() => _PerfilPageState(
+      correo: correo!,
+      nombre: nombre,
+      apellidos: apellidos,
+      telefono: telefono,
+      whatsapp: whatsapp,
+      telegram: telegram);
 }
 
 class _PerfilPageState extends State<PerfilPage> {
   File? imagen;
   final picker = ImagePicker();
-  String correo;
-  _PerfilPageState({required this.correo});
+  String? correo, nombre, apellidos, telefono;
+  bool? telegram, whatsapp;
+  UsuariosServices? usuariosServices;
+  _PerfilPageState(
+      {this.correo,
+      this.nombre,
+      this.apellidos,
+      this.telefono,
+      this.telegram,
+      this.whatsapp});
   Future selImagen(op) async {
     var pickedFile;
     if (op == 1) {
@@ -31,6 +60,8 @@ class _PerfilPageState extends State<PerfilPage> {
     setState(() {
       if (pickedFile != null) {
         imagen = File(pickedFile.path);
+        //usuariosServices!.updateSelectUserImage(pickedFile.path);
+        print(' tenemos imagen $imagen');
       } else {
         print('No se selecciono ninguna imagen');
       }
@@ -39,6 +70,7 @@ class _PerfilPageState extends State<PerfilPage> {
 
   @override
   Widget build(BuildContext context) {
+    usuariosServices = Provider.of<UsuariosServices>(context);
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -48,7 +80,9 @@ class _PerfilPageState extends State<PerfilPage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => InicioPublicaciones()));
+                      builder: (context) => InicioPublicaciones(
+                            correo: correo,
+                          )));
             }),
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -127,15 +161,15 @@ class _PerfilPageState extends State<PerfilPage> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
-                'Jasmin Saleh',
+              Text(
+                nombre!,
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: utils.Colors.blanco),
               ),
               Text(
-                correo,
+                correo!,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -155,25 +189,34 @@ class _PerfilPageState extends State<PerfilPage> {
                 height: 20,
               ),
               //*opciones del menu del perfil, como editar perfil, ubicacion  y publicar
-              _menuPerfil(
+              _menuPerfilEditar(
                 iconoItem: Icons.account_circle_outlined,
                 nomItem: 'Editar Perfil',
-                onPress: 'editarperfil',
+                correo: correo!,
+                apellidos: apellidos!,
+                nombre: nombre!,
+                telefono: telefono!,
+                telegram: telegram!,
+                whatsapp: whatsapp!,
               ),
-              _menuPerfil(
+              _menuPerfilUbicacion(
                 iconoItem: Icons.map_outlined,
                 nomItem: 'Ubicación',
-                onPress: 'ubicacion',
+                correo: correo!,
               ),
-              _menuPerfil(
+              _menuPerfilPublicar(
                 iconoItem: Icons.photo_camera_back_sharp,
                 nomItem: 'Publicar',
-                onPress: 'publicar1',
+                correo: correo!,
+                apellido: apellidos!,
+                nombrePersona: nombre!,
+                telefono: telefono!,
+                telegram: telegram!,
+                whatsapp: whatsapp!,
               ),
-              _menuPerfil(
+              _menuPerfilCerrar(
                 iconoItem: Icons.logout_outlined,
                 nomItem: 'Cerrar sesión',
-                onPress: 'inicio',
                 color: utils.Colors.rojo,
               )
             ]),
@@ -279,22 +322,189 @@ class _PerfilPageState extends State<PerfilPage> {
 
 //*Menu del perfil
 //*recibe cada uno el titulo, el icono y la direccion
-class _menuPerfil extends StatelessWidget {
-  String nomItem;
+class _menuPerfilEditar extends StatelessWidget {
+  String nomItem, correo;
   IconData iconoItem;
-  String onPress;
   Color color;
-  _menuPerfil(
+  String? nombre, apellidos, telefono;
+  bool? telegram, whatsapp;
+  _menuPerfilEditar(
       {required this.nomItem,
       required this.iconoItem,
-      required this.onPress,
+      required this.correo,
+      this.color = utils.Colors.blanco,
+      this.nombre,
+      this.apellidos,
+      this.telefono,
+      this.telegram,
+      this.whatsapp});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => EditarPerfilPage(
+                      correo: correo,
+                      apellidos: apellidos,
+                      nombre: nombre,
+                      telefono: telefono,
+                      telegram: telegram,
+                      whatsapp: whatsapp,
+                    )));
+      },
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Icon(
+                iconoItem,
+                color: color,
+                size: 40,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                nomItem,
+                style: TextStyle(color: color, fontSize: 22),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _menuPerfilUbicacion extends StatelessWidget {
+  String nomItem;
+  IconData iconoItem;
+  Color color;
+  String correo;
+  _menuPerfilUbicacion(
+      {required this.nomItem,
+      required this.iconoItem,
+      required this.correo,
       this.color = utils.Colors.blanco});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.popAndPushNamed(context, onPress);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => UbicacionPage(
+                      correo: correo,
+                    )));
+      },
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Icon(
+                iconoItem,
+                color: color,
+                size: 40,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                nomItem,
+                style: TextStyle(color: color, fontSize: 22),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _menuPerfilPublicar extends StatelessWidget {
+  String nomItem;
+  IconData iconoItem;
+  Color color;
+  String apellido, correo, nombrePersona, telefono;
+  bool whatsapp, telegram;
+
+  _menuPerfilPublicar({
+    required this.nomItem,
+    required this.iconoItem,
+    required this.correo,
+    this.color = utils.Colors.blanco,
+    required this.apellido,
+    required this.nombrePersona,
+    required this.telefono,
+    required this.whatsapp,
+    required this.telegram,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print(apellido);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Publicar1Pagr(
+                      correo: correo,
+                      apellido: apellido,
+                      nombrePersona: nombrePersona,
+                      telefono: telefono,
+                      whatsapp: whatsapp,
+                      telegram: telegram,
+                    )));
+      },
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Icon(
+                iconoItem,
+                color: color,
+                size: 40,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                nomItem,
+                style: TextStyle(color: color, fontSize: 22),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _menuPerfilCerrar extends StatelessWidget {
+  String nomItem;
+  IconData iconoItem;
+  Color color;
+
+  _menuPerfilCerrar({
+    required this.nomItem,
+    required this.iconoItem,
+    this.color = utils.Colors.blanco,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Inicio_Page()));
       },
       child: Container(
         child: Padding(

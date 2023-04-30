@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
 import 'package:app_arriendosu/src/pages/ubicacion/ubicacion_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,15 +7,20 @@ import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 
 import '../../widgets/button.dart';
 import '../perfil/perfil.dart';
+
 //*pagina donde el usuario puede digitar su ubicacion y ver un mapa
 class UbicacionPage extends StatefulWidget {
-  const UbicacionPage({super.key});
+  String? correo;
+  UbicacionPage({super.key, this.correo});
 
   @override
-  State<UbicacionPage> createState() => _UbicacionPageState();
+  State<UbicacionPage> createState() => _UbicacionPageState(correo:  correo!);
 }
+
 //*para observar el mapa se consumio la api de google maps
 class _UbicacionPageState extends State<UbicacionPage> {
+  String correo;
+  _UbicacionPageState({required this.correo});
   Completer<GoogleMapController> _controller = Completer();
   UbicacionController _ubicacionController = new UbicacionController();
   @override
@@ -23,7 +29,6 @@ class _UbicacionPageState extends State<UbicacionPage> {
       target: LatLng(5.704476, -72.941981),
       zoom: 10,
       tilt: 60,
-      
     );
     Set<Marker> markers = new Set<Marker>();
     markers.add(
@@ -39,7 +44,7 @@ class _UbicacionPageState extends State<UbicacionPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => PerfilPage()));
+                context, MaterialPageRoute(builder: (context) => InicioPublicaciones(correo: correo,)));
           },
         ),
         title: const Text('Ubicación'),
@@ -73,35 +78,39 @@ class _UbicacionPageState extends State<UbicacionPage> {
         ],
       ),
       body: SingleChildScrollView(
-          child: GestureDetector(
-             onTap: (){
-             final FocusScopeNode focus = FocusScope.of(context);
+        child: GestureDetector(
+          onTap: () {
+            final FocusScopeNode focus = FocusScope.of(context);
             if (!focus.hasPrimaryFocus && focus.hasFocus) {
               FocusManager.instance.primaryFocus!.unfocus();
             }
           },
-            child: Container(
-              height: MediaQuery.of(context).size.height*0.90,
-              color: utils.Colors.fondoOscuro,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center, 
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.90,
+            color: utils.Colors.fondoOscuro,
+            child: SingleChildScrollView(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-                  Container(
-                    height: 350,
-                    width: 350,
-                    child: GoogleMap(
-                      myLocationButtonEnabled: true,
-                      markers: markers,
-                      mapType: MapType.normal,
-                      initialCameraPosition: puntoInicial,
-                      onMapCreated: (GoogleMapController controller) {
-                        _controller.complete(controller);
-                      },
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+                    Container(
+                      height: 350,
+                      width: 350,
+                      child: GoogleMap(
+                        myLocationButtonEnabled: true,
+                        markers: markers,
+                        mapType: MapType.normal,
+                        initialCameraPosition: puntoInicial,
+                        onMapCreated: (GoogleMapController controller) {
+                          _controller.complete(controller);
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
                     Form(
                         child: Column(
                       children: [
@@ -113,42 +122,42 @@ class _UbicacionPageState extends State<UbicacionPage> {
                                 color: utils.Colors.grisMedio,
                                 borderRadius: BorderRadius.circular(10)),
                             child: TextFormField(
-                              controller: _ubicacionController.ubicacionController,
+                              controller:
+                                  _ubicacionController.ubicacionController,
                               autocorrect: false,
                               keyboardType: TextInputType.streetAddress,
                               decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Su dirección',
-                                labelText: 'Ubicación',
-                                prefixIcon: Icon(
-                                  Icons.location_on_rounded,
-                                  size: 30,
-                                ),
-                                iconColor: Color(0xff3A4750),
-                                 labelStyle: TextStyle(
-                                  color: Color(0xff3A4750),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600
-                                )
-                              ),
+                                  border: InputBorder.none,
+                                  hintText: 'Su dirección',
+                                  labelText: 'Ubicación',
+                                  prefixIcon: Icon(
+                                    Icons.location_on_rounded,
+                                    size: 30,
+                                  ),
+                                  iconColor: Color(0xff3A4750),
+                                  labelStyle: TextStyle(
+                                      color: Color(0xff3A4750),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600)),
                             ),
                           ),
                         )
                       ],
                     )),
-                  
-                  SizedBox(height: MediaQuery.of(context).size.height*0.20,),
-                  ButtonApp(
-                    onpress: _ubicacionController.ubicacion,
-                    direccion: 'perfil',
-                    texto: 'Guardar'
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.05,),
-                ]),
-              ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.20,
+                    ),
+                    ButtonApp(
+                        onpress: _ubicacionController.ubicacion,
+                        direccion: 'perfil',
+                        texto: 'Guardar'),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                  ]),
             ),
           ),
-        
+        ),
       ),
     );
   }

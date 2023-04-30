@@ -36,7 +36,6 @@ class Usuarios {
         telefono: json["telefono"],
         telegram: json["telegram"],
         whatsapp: json["whatsapp"],
-        id: json["id"]
       );
 
   Map<String, dynamic> toMap() => {

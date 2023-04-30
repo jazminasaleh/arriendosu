@@ -55,8 +55,7 @@ class InmueblesServices extends ChangeNotifier {
     final decodeData = resp.body;
 
     print(decodeData);
-    final index =
-        this.inmuebles.indexWhere((element) => element.id == inmueble.id);
+    final index =this.inmuebles.indexWhere((element) => element.id == inmueble.id);
     this.inmuebles[index] = inmueble;
 
     return inmueble.id.toString();

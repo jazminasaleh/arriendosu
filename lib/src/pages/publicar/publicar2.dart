@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/publicar/publicar1.dart';
 import 'package:app_arriendosu/src/pages/publicar/publicar3.dart';
 import 'package:app_arriendosu/src/provider/publicar_inmueble.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +9,19 @@ import 'package:provider/provider.dart';
 //*Como lo son sus caracteristicas, estrato, habitacionesa y área
 class Publicar2Page extends StatefulWidget {
   PublicarProvider _publicarController = new PublicarProvider();
-
-  Publicar2Page(this._publicarController);
+  String? apellido, correo, nombrePersona, telefono;
+  bool? whatsapp, telegram;
+  Publicar2Page(this._publicarController, this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
   @override
   State<Publicar2Page> createState() =>
-      _Publicar2PageState(this._publicarController);
+      _Publicar2PageState(this._publicarController,  this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
 }
 
 class _Publicar2PageState extends State<Publicar2Page> {
   PublicarProvider _publicarController;
-  _Publicar2PageState(this._publicarController);
+   String? apellido, correo, nombrePersona, telefono;
+  bool? whatsapp, telegram;
+  _Publicar2PageState(this._publicarController,  this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
 
   bool unaHabitacion = false,
       dosHabitacion = false,
@@ -72,7 +76,8 @@ class _Publicar2PageState extends State<Publicar2Page> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, 'publicar1');
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) =>Publicar1Pagr(apellido: apellido, correo: correo, nombrePersona: nombrePersona, telefono: telefono, telegram: telegram, whatsapp: whatsapp,)));
           },
           icon: const Icon(Icons.arrow_back),
           iconSize: 20,
@@ -1102,7 +1107,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Publicar3Page(
-                                            _publicarController)));
+                                            _publicarController, apellido, correo, nombrePersona, telefono, whatsapp, telegram)));
                                 publicarInmueble.isLoading = false;
                               } else {
                                 publicarInmueble.isLoading = false;

@@ -11,11 +11,13 @@ import '../../widgets/slidesShow.dart';
 class ListasPage extends StatelessWidget {
   final String titulo;
   final bool editar;
+  String correoo;
 
   ListasPage(
       {super.key,
       required this.titulo,
-      required this.editar});
+      required this.editar,
+      required this.correoo});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,13 @@ class ListasPage extends StatelessWidget {
             size: 35,
           ),
           onPressed: () {
-             Navigator.push(
+            print('El correo que va de listas page es $correoo');
+            Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => InicioPublicaciones()),
+              MaterialPageRoute(
+                  builder: (context) => InicioPublicaciones(
+                        correo: correoo,
+                      )),
             );
           },
         ),
@@ -56,31 +62,53 @@ class ListasPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => SidesShow(
-                                    direccion: inmuebleServices.inmuebles[index].direccion,
-                                    barrio: inmuebleServices.inmuebles[index].nombreInmueble,
-                                    precio: inmuebleServices.inmuebles[index].precio.toString(),
-                                    descripcion: inmuebleServices.inmuebles[index].descripcion,
+                                    direccion: inmuebleServices
+                                        .inmuebles[index].direccion,
+                                    barrio: inmuebleServices
+                                        .inmuebles[index].nombreInmueble,
+                                    precio: inmuebleServices
+                                        .inmuebles[index].precio
+                                        .toString(),
+                                    descripcion: inmuebleServices
+                                        .inmuebles[index].descripcion,
                                     listaInmuebles: inmuebleServices,
-                                    apellidosArrendador: inmuebleServices.inmuebles[index].apellidos,
-                                    area: inmuebleServices.inmuebles[index].area,
-                                    correo: inmuebleServices.inmuebles[index].correo,
-                                    estrato: inmuebleServices.inmuebles[index].estrato,
-                                    fumar: inmuebleServices.inmuebles[index].fumar,
-                                    internt: inmuebleServices.inmuebles[index].internt,
-                                    lavadero: inmuebleServices.inmuebles[index].lavadero,
-                                    mascotas: inmuebleServices.inmuebles[index].mascotas,
-                                    muebles: inmuebleServices.inmuebles[index].muebles,
-                                    nombreArrendador:
-                                        inmuebleServices.inmuebles[index].nombrePersona,
-                                    parqueadero: inmuebleServices.inmuebles[index].parqueadero,
-                                    servicios: inmuebleServices.inmuebles[index].servicios,
-                                    telefonoArrendador: inmuebleServices.inmuebles[index].telefono.toString(),
-                                    telegram: inmuebleServices.inmuebles[index].telegram,
-                                    whatsapp: inmuebleServices.inmuebles[index].whatsapp,
-                                    tipo: inmuebleServices.inmuebles[index].tipo,
-                                    cantBanos: inmuebleServices.inmuebles[index].cantbanos,
-                                    cantHabitaciones:
-                                        inmuebleServices.inmuebles[index].cantHabitaciones,
+                                    apellidosArrendador: inmuebleServices
+                                        .inmuebles[index].apellidos,
+                                    area:
+                                        inmuebleServices.inmuebles[index].area,
+                                    correo: inmuebleServices
+                                        .inmuebles[index].correo,
+                                    estrato: inmuebleServices
+                                        .inmuebles[index].estrato,
+                                    fumar:
+                                        inmuebleServices.inmuebles[index].fumar,
+                                    internt: inmuebleServices
+                                        .inmuebles[index].internt,
+                                    lavadero: inmuebleServices
+                                        .inmuebles[index].lavadero,
+                                    mascotas: inmuebleServices
+                                        .inmuebles[index].mascotas,
+                                    muebles: inmuebleServices
+                                        .inmuebles[index].muebles,
+                                    nombreArrendador: inmuebleServices
+                                        .inmuebles[index].nombrePersona,
+                                    parqueadero: inmuebleServices
+                                        .inmuebles[index].parqueadero,
+                                    servicios: inmuebleServices
+                                        .inmuebles[index].servicios,
+                                    telefonoArrendador: inmuebleServices
+                                        .inmuebles[index].telefono
+                                        .toString(),
+                                    telegram: inmuebleServices
+                                        .inmuebles[index].telegram,
+                                    whatsapp: inmuebleServices
+                                        .inmuebles[index].whatsapp,
+                                    tipo:
+                                        inmuebleServices.inmuebles[index].tipo,
+                                    cantBanos: inmuebleServices
+                                        .inmuebles[index].cantbanos,
+                                    cantHabitaciones: inmuebleServices
+                                        .inmuebles[index].cantHabitaciones,
                                   )),
                         );
                       },
@@ -121,7 +149,8 @@ class ListasPage extends StatelessWidget {
                                 children: [
                                   Column(children: [
                                     Text(
-                                      inmuebleServices.inmuebles[index].direccion,
+                                      inmuebleServices
+                                          .inmuebles[index].direccion,
                                       style: const TextStyle(
                                           color: utils.Colors.blanco,
                                           fontSize: 16,
@@ -131,7 +160,8 @@ class ListasPage extends StatelessWidget {
                                     )
                                   ]),
                                   Text(
-                                    inmuebleServices.inmuebles[index].nombreInmueble,
+                                    inmuebleServices
+                                        .inmuebles[index].nombreInmueble,
                                     style: const TextStyle(
                                         fontSize: 15,
                                         color: utils.Colors.blanco),
@@ -153,29 +183,103 @@ class ListasPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                    ActualizarInmueblePage(
-                                                      id: inmuebleServices.inmuebles[index].id.toString(),
-                                                      area: inmuebleServices.inmuebles[index].area.toString(),
-                                                      direccion: inmuebleServices.inmuebles[index].direccion,
-                                                      barrio: inmuebleServices.inmuebles[index].nombreInmueble,
-                                                      precio: inmuebleServices.inmuebles[index].precio.toString(),
-                                                      descripcion: inmuebleServices.inmuebles[index].descripcion, 
-                                                      apellidoArrendador: inmuebleServices.inmuebles[index].apellidos, 
-                                                      correo: inmuebleServices.inmuebles[index].correo, 
-                                                      estrato: inmuebleServices.inmuebles[index].estrato.toString(), 
-                                                      fumar: inmuebleServices.inmuebles[index].fumar, 
-                                                      internt: inmuebleServices.inmuebles[index].internt, 
-                                                      lavadero: inmuebleServices.inmuebles[index].lavadero, 
-                                                      mascotas: inmuebleServices.inmuebles[index].mascotas, 
-                                                      muebles: inmuebleServices.inmuebles[index].muebles, 
-                                                      nombreArrendador: inmuebleServices.inmuebles[index].nombrePersona, 
-                                                      parqueadero: inmuebleServices.inmuebles[index].parqueadero, 
-                                                      servicios: inmuebleServices.inmuebles[index].servicios, 
-                                                      telefonoArrendador: inmuebleServices.inmuebles[index].telefono.toString(), 
-                                                      telegram: inmuebleServices.inmuebles[index].telegram, 
-                                                      tipo: inmuebleServices.inmuebles[index].tipo, 
-                                                      whatsapp: inmuebleServices.inmuebles[index].whatsapp,
-                                                    )),
+                                                      ActualizarInmueblePage(
+                                                        id: inmuebleServices
+                                                            .inmuebles[index].id
+                                                            .toString(),
+                                                        area: inmuebleServices
+                                                            .inmuebles[index]
+                                                            .area
+                                                            .toString(),
+                                                        direccion:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .direccion,
+                                                        barrio: inmuebleServices
+                                                            .inmuebles[index]
+                                                            .nombreInmueble,
+                                                        precio: inmuebleServices
+                                                            .inmuebles[index]
+                                                            .precio
+                                                            .toString(),
+                                                        descripcion:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .descripcion,
+                                                        apellidoArrendador:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .apellidos,
+                                                        correo: inmuebleServices
+                                                            .inmuebles[index]
+                                                            .correo,
+                                                        estrato:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .estrato
+                                                                .toString(),
+                                                        fumar: inmuebleServices
+                                                            .inmuebles[index]
+                                                            .fumar,
+                                                        internt:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .internt,
+                                                        lavadero:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .lavadero,
+                                                        mascotas:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .mascotas,
+                                                        muebles:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .muebles,
+                                                        nombreArrendador:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .nombrePersona,
+                                                        parqueadero:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .parqueadero,
+                                                        servicios:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .servicios,
+                                                        telefonoArrendador:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .telefono
+                                                                .toString(),
+                                                        telegram:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .telegram,
+                                                        tipo: inmuebleServices
+                                                            .inmuebles[index]
+                                                            .tipo,
+                                                        whatsapp:
+                                                            inmuebleServices
+                                                                .inmuebles[
+                                                                    index]
+                                                                .whatsapp,
+                                                      )),
                                             );
                                           },
                                           icon: Icon(

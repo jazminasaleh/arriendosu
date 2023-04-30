@@ -17,7 +17,7 @@ class InicioPublicaciones extends StatelessWidget {
   Widget build(BuildContext context) {
     ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
     final inmuebleServices = Provider.of<InmueblesServices>(context);
-    final usuariosServices = Provider.of<UsuariosServices>(context);
+
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -41,13 +41,14 @@ class InicioPublicaciones extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                print('lista de inmuebles${inmuebleServices.inmuebles}');
+                print('El correo que se va es $correo');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => ListasPage(
                             titulo: 'Mis publicaciones',
                             editar: true,
+                            correoo: correo!,
                           )),
                 );
               },
@@ -113,6 +114,7 @@ class InicioPublicaciones extends StatelessWidget {
                     builder: (context) => ListasPage(
                           titulo: 'Sugerencias',
                           editar: false,
+                          correoo: correo!,
                         )),
               );
             },
@@ -128,6 +130,7 @@ class InicioPublicaciones extends StatelessWidget {
 //*El navegador de la parte inferior
 class _bottomNavigationBar extends StatelessWidget {
   String correo;
+
   _bottomNavigationBar(
       {Key? key, required this.listaFavoritos, required this.correo})
       : super(key: key);
@@ -135,6 +138,7 @@ class _bottomNavigationBar extends StatelessWidget {
   final ListaLlenaFavoritos listaFavoritos;
   @override
   Widget build(BuildContext context) {
+    final usuariosServices = Provider.of<UsuariosServices>(context);
     return BottomNavigationBar(
         backgroundColor: utils.Colors.fondoOscuro,
         items: [
@@ -156,11 +160,76 @@ class _bottomNavigationBar extends StatelessWidget {
                   color: utils.Colors.grisClaro,
                 ),
                 onPressed: () {
-                  
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PerfilPage(correo: correo,)),
-                  );
+                  print('El correo que llego aca es $correo');
+
+                  String correoGuardado = correo;
+                  print('El correo guardado $correoGuardado');
+                 
+                  int contador = 0;
+                  for (var i = 0; i < usuariosServices.usuarios.length; i++) {
+                    if (correo != '') {
+                      if (usuariosServices.usuarios[i].correo == correo) {
+                        correoGuardado = usuariosServices.usuarios[i].correo;
+                        print('el correo gurdado $correoGuardado');
+                        contador++;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PerfilPage(
+                                    correo: usuariosServices.usuarios[i].correo,
+                                    nombre: usuariosServices.usuarios[i].nombre,
+                                    apellidos:
+                                        usuariosServices.usuarios[i].apellidos,
+                                    telefono: usuariosServices
+                                        .usuarios[i].telefono
+                                        .toString(),
+                                    whatsapp:
+                                        usuariosServices.usuarios[i].whatsapp,
+                                    telegram:
+                                        usuariosServices.usuarios[i].telegram,
+                                  )),
+                        );
+                      }
+                    } else {
+                      if (usuariosServices.usuarios[i].correo ==
+                          correoGuardado) {
+                        correoGuardado = usuariosServices.usuarios[i].correo;
+                        print('el correo gurdado $correoGuardado');
+                        contador++;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PerfilPage(
+                                    correo: usuariosServices.usuarios[i].correo,
+                                    nombre: usuariosServices.usuarios[i].nombre,
+                                    apellidos:
+                                        usuariosServices.usuarios[i].apellidos,
+                                    telefono: usuariosServices
+                                        .usuarios[i].telefono
+                                        .toString(),
+                                    whatsapp:
+                                        usuariosServices.usuarios[i].whatsapp,
+                                    telegram:
+                                        usuariosServices.usuarios[i].telegram,
+                                  )),
+                        );
+                      }
+                    }
+                  }
+                  if (contador == 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PerfilPage(
+                                correo: correo,
+                                nombre: 'Sin nombre',
+                                apellidos: '',
+                                telefono: '',
+                                whatsapp: false,
+                                telegram: false,
+                              )),
+                    );
+                  }
                 },
               ),
               label: ''),

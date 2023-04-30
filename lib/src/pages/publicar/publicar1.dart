@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
 import 'package:app_arriendosu/src/pages/publicar/publicar2.dart';
 import 'package:app_arriendosu/src/pages/publicar/publicar2H.dart';
 import 'package:app_arriendosu/src/provider/publicar_inmueble.dart';
@@ -5,14 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
 import 'package:provider/provider.dart';
 
+import '../perfil/perfil.dart';
+
 //*Pagina para comenzar a digitar los datos para subir un inmueble
 //*Digitar datos como: ubicacion, fotos y el tipo de inmuble
 class Publicar1Pagr extends StatefulWidget {
+  String? apellido, correo, nombrePersona, telefono;
+  bool? whatsapp, telegram;
+  Publicar1Pagr({this.correo, this.apellido, this.nombrePersona, this.telefono, this.whatsapp, this.telegram});
   @override
-  State<Publicar1Pagr> createState() => _Publicar1PagrState();
+  State<Publicar1Pagr> createState() => _Publicar1PagrState(correo: correo!, apellido: apellido, nombrePersona: nombrePersona, telefono: telefono, telegram: telegram, whatsapp: whatsapp);
 }
 
 class _Publicar1PagrState extends State<Publicar1Pagr> {
+  String? apellido, correo, nombrePersona, telefono;
+  bool? whatsapp, telegram;
+  _Publicar1PagrState({required this.correo, this.apellido, this.nombrePersona, this.telefono, this.whatsapp, this.telegram});
   //*precio
   bool apartamento = false;
   var contador = 0;
@@ -22,7 +31,7 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
   bool validUbicacion = false;
   bool validPrecio = false;
   bool validTipo = false;
-
+  bool validNombre = false;
   @override
   Widget build(BuildContext context) {
     final publicarInmueble = Provider.of<PublicarProvider>(context);
@@ -31,7 +40,9 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, 'perfil');
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) =>InicioPublicaciones(correo: correo,)));
+          
           },
           icon: const Icon(Icons.arrow_back),
           iconSize: 20,
@@ -58,6 +69,36 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: Column(
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 30, right: 30, top: 30),
+                          child: Container(
+                            height: 64,
+                            decoration: BoxDecoration(
+                                color: utils.Colors.grisMedio,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: TextFormField(
+                              autocorrect: false,
+                              keyboardType: TextInputType.name,
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Nombre del inmueble',
+                                  labelText: 'Nombre',
+                                  prefixIcon: Icon(
+                                    Icons.home_filled,
+                                    size: 30,
+                                  ),
+                                  iconColor: Color(0xff3A4750),
+                                  labelStyle: TextStyle(
+                                      color: Color(0xff3A4750),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600)),
+                              onChanged: (value) =>
+                                  publicarInmueble.nombre = value,
+                            ),
+                          ),
+                        ),
+                        validacionNombre(validNombre),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 30, right: 30, top: 30, bottom: 10),
@@ -292,6 +333,13 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                           : () async {
                               FocusScope.of(context).unfocus();
                               contadorbtn = 0;
+                              if (publicarInmueble.nombre.length >= 5) {
+                                contadorbtn++;
+                                validNombre = false;
+                              } else {
+                                validNombre = true;
+                                validacionNombre(validNombre);
+                              }
                               if (publicarInmueble.ubicacion.length >= 7) {
                                 contadorbtn++;
                                 validUbicacion = false;
@@ -321,16 +369,15 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
                                 validacionTipo(validTipo);
                               }
 
-                              if (contadorbtn >= 3) {
+                              if (contadorbtn >= 4) {
                                 publicarInmueble.isLoading = true;
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   if (apartamento == true) {
-                                    return Publicar2Page(publicarInmueble);
-                                  }else{
-                                    return Publicar2HPage(publicarInmueble);
+                                    return Publicar2Page(publicarInmueble, apellido, correo, nombrePersona, telefono, whatsapp, telegram);
+                                  } else {
+                                    return Publicar2HPage(publicarInmueble, apellido, correo, nombrePersona, telefono, whatsapp, telegram);
                                   }
-                                  
                                 }));
                                 publicarInmueble.isLoading = false;
                               } else {
@@ -354,6 +401,21 @@ class _Publicar1PagrState extends State<Publicar1Pagr> {
       children: [
         Text(
           validacion ? 'El valor ingresado no es una ubicación' : '',
+          style: const TextStyle(color: utils.Colors.rojo),
+          textAlign: TextAlign.center,
+          maxLines: 3,
+        ),
+      ],
+    ));
+  }
+
+  Widget validacionNombre(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          validacion ? 'El valor ingresado no es un nombre' : '',
           style: const TextStyle(color: utils.Colors.rojo),
           textAlign: TextAlign.center,
           maxLines: 3,

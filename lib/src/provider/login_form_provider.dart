@@ -7,7 +7,7 @@ class LoginFromProvider extends ChangeNotifier {
   final GlobalKey<FormState> formKeRegistro = new GlobalKey<FormState>();
   final GlobalKey<FormState> formKecontrasena = new GlobalKey<FormState>();
 
-  String correo = ' ';
+  String? correo;
   String correoOlvido = ' ';
   String contrasena = ' ';
   String verificarContrasena = ' ';

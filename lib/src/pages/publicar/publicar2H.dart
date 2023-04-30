@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/publicar/publicar1.dart';
 import 'package:app_arriendosu/src/pages/publicar/publicar3.dart';
 import 'package:app_arriendosu/src/provider/publicar_inmueble.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +9,19 @@ import 'package:provider/provider.dart';
 //*Como lo son sus caracteristicas, estrato, habitacionesa y área
 class Publicar2HPage extends StatefulWidget {
   PublicarProvider _publicarController = new PublicarProvider();
-
-  Publicar2HPage(this._publicarController);
+  String? apellido, correo, nombrePersona, telefono;
+  bool? whatsapp, telegram;
+  Publicar2HPage(this._publicarController, this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
   @override
   State<Publicar2HPage> createState() =>
-      _Publicar2HPageState(this._publicarController);
+      _Publicar2HPageState(this._publicarController, this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
 }
 
 class _Publicar2HPageState extends State<Publicar2HPage> {
   PublicarProvider _publicarController;
-  _Publicar2HPageState(this._publicarController);
+  String? apellido, correo, nombrePersona, telefono;
+  bool? whatsapp, telegram;
+  _Publicar2HPageState(this._publicarController, this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
 
   bool unaHabitacion = false,
       dosHabitacion = false,
@@ -72,7 +76,8 @@ class _Publicar2HPageState extends State<Publicar2HPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, 'publicar1');
+             Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Publicar1Pagr(apellido: apellido, correo: correo, nombrePersona: nombrePersona, telefono: telefono,telegram: telegram, whatsapp: whatsapp,)));
           },
           icon: const Icon(Icons.arrow_back),
           iconSize: 20,
@@ -296,7 +301,6 @@ class _Publicar2HPageState extends State<Publicar2HPage> {
                 ),
                 validacionArea(validArea),
                 
-                validacionHabitacion(validHabitaciones),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -648,14 +652,14 @@ class _Publicar2HPageState extends State<Publicar2HPage> {
                                 validaEstrato = true;
                               }
 
-                              if (contadorbtn >= 3) {
+                              if (contadorbtn >= 1) {
                                 publicarInmueble.isLoading = true;
                                 publicarInmueble.isLoading = false;
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Publicar3Page(
-                                            _publicarController)));
+                                            _publicarController, correo, apellido, nombrePersona, telefono, telegram, whatsapp)));
                                 publicarInmueble.isLoading = false;
                               } else {
                                 publicarInmueble.isLoading = false;
@@ -677,21 +681,6 @@ class _Publicar2HPageState extends State<Publicar2HPage> {
       children: [
         Text(
           validacion ? 'El valor ingresado no es un área' : '',
-          style: const TextStyle(color: utils.Colors.rojo),
-          textAlign: TextAlign.center,
-          maxLines: 3,
-        ),
-      ],
-    ));
-  }
-
-  Widget validacionHabitacion(bool validacion) {
-    return Container(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          validacion ? 'Seleccione cantidad de habitaciones' : '',
           style: const TextStyle(color: utils.Colors.rojo),
           textAlign: TextAlign.center,
           maxLines: 3,

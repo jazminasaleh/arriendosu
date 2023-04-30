@@ -214,17 +214,15 @@ class _Inicio_PageState extends State<Inicio_Page> {
                         if (contador >= 2) {
                           loginForm.isLoading = true;
                           final String? errorMessage = await authService.login(
-                              loginForm.correo, loginForm.contrasena);
+                              loginForm.correo!, loginForm.contrasena);
                           if (errorMessage == null) {
-                            String correoPerfil = loginForm.correo;
-                            loginForm.contrasena = '';
-                            loginForm.correo = '';
-                            print('El correo ${correoPerfil}');
+                           
+                            print('El correo ${loginForm.correo!}');
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => InicioPublicaciones(
-                                        correo: correoPerfil,
+                                        correo: loginForm.correo,
                                       )),
                             );
                             loginForm.isLoading = false;
