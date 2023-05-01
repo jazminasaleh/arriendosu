@@ -34,6 +34,7 @@ class InicioPublicaciones extends StatelessWidget {
             ),
             Text(
               'Uhome',
+               key: Key('app-bar-title'),
               style: TextStyle(
                   fontSize: 25,
                   color: utils.Colors.blanco,

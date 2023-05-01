@@ -34,6 +34,7 @@ class Home_Page extends StatelessWidget {
                   children: [
                     const Text(
                       'Bienvenido',
+                       key: Key('bienvenido'),
                       style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold, color: utils.Colors.blanco),
                     ),
                     const SizedBox(
