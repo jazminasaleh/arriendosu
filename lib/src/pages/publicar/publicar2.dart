@@ -11,17 +11,25 @@ class Publicar2Page extends StatefulWidget {
   PublicarProvider _publicarController = new PublicarProvider();
   String? apellido, correo, nombrePersona, telefono;
   bool? whatsapp, telegram;
-  Publicar2Page(this._publicarController, this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
+  Publicar2Page(this._publicarController, this.apellido, this.correo,
+      this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
   @override
-  State<Publicar2Page> createState() =>
-      _Publicar2PageState(this._publicarController,  this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
+  State<Publicar2Page> createState() => _Publicar2PageState(
+      this._publicarController,
+      this.apellido,
+      this.correo,
+      this.nombrePersona,
+      this.telefono,
+      this.whatsapp,
+      this.telegram);
 }
 
 class _Publicar2PageState extends State<Publicar2Page> {
   PublicarProvider _publicarController;
-   String? apellido, correo, nombrePersona, telefono;
+  String? apellido, correo, nombrePersona, telefono;
   bool? whatsapp, telegram;
-  _Publicar2PageState(this._publicarController,  this.apellido, this.correo, this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
+  _Publicar2PageState(this._publicarController, this.apellido, this.correo,
+      this.nombrePersona, this.telefono, this.whatsapp, this.telegram);
 
   bool unaHabitacion = false,
       dosHabitacion = false,
@@ -66,7 +74,8 @@ class _Publicar2PageState extends State<Publicar2Page> {
       estratoCinco = false,
       validArea = false,
       validHabitaciones = false,
-      validaEstrato = false;
+      validaEstrato = false,
+      validaBanos = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +86,16 @@ class _Publicar2PageState extends State<Publicar2Page> {
         leading: IconButton(
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) =>Publicar1Pagr(apellido: apellido, correo: correo, nombrePersona: nombrePersona, telefono: telefono, telegram: telegram, whatsapp: whatsapp,)));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Publicar1Pagr(
+                          apellido: apellido,
+                          correo: correo,
+                          nombrePersona: nombrePersona,
+                          telefono: telefono,
+                          telegram: telegram,
+                          whatsapp: whatsapp,
+                        )));
           },
           icon: const Icon(Icons.arrow_back),
           iconSize: 20,
@@ -556,7 +574,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                         setState(() {
                                           contaodrUnBano++;
                                           if (contaodrUnBano == 1) {
-                                            unBano= true;
+                                            unBano = true;
                                             contaodrUnBano++;
                                             dosBanos = false;
                                             tresBanos = false;
@@ -748,7 +766,7 @@ class _Publicar2PageState extends State<Publicar2Page> {
                             ],
                           )),
                     )),
-                validacionHabitacion(validHabitaciones),
+                validacionBanos(validaBanos),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -1061,15 +1079,15 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 contadorbtn++;
                                 validHabitaciones = false;
                                 if (unaHabitacion == true) {
-                                  publicarInmueble.habitaciones = 'una';
+                                  publicarInmueble.habitaciones = '1';
                                 } else if (dosHabitacion == true) {
-                                  publicarInmueble.habitaciones = 'dos';
+                                  publicarInmueble.habitaciones = '2';
                                 } else if (tresHabitacion == true) {
-                                  publicarInmueble.habitaciones = 'tres';
+                                  publicarInmueble.habitaciones = '3';
                                 } else if (cuatroHabitacion == true) {
-                                  publicarInmueble.habitaciones = 'cuatro';
+                                  publicarInmueble.habitaciones = '4';
                                 } else {
-                                  publicarInmueble.habitaciones = 'cinco o mas';
+                                  publicarInmueble.habitaciones = '5';
                                 }
                               } else {
                                 validHabitaciones = true;
@@ -1084,30 +1102,57 @@ class _Publicar2PageState extends State<Publicar2Page> {
                                 contadorbtn++;
                                 validaEstrato = false;
                                 if (estratoCero == true) {
-                                  publicarInmueble.estrato = 'cero';
+                                  publicarInmueble.estrato = '0';
                                 } else if (estratoUno == true) {
-                                  publicarInmueble.estrato = 'uno';
+                                  publicarInmueble.estrato = '1';
                                 } else if (estratoDos == true) {
-                                  publicarInmueble.estrato = 'dos';
+                                  publicarInmueble.estrato = '2';
                                 } else if (estratoTres == true) {
-                                  publicarInmueble.habitaciones = 'tres';
+                                  publicarInmueble.estrato = '3';
                                 } else if (estratoCuatro == true) {
-                                  publicarInmueble.estrato = 'cuatro';
+                                  publicarInmueble.estrato = '4';
                                 } else {
-                                  publicarInmueble.estrato = 'cinco o mas';
+                                  publicarInmueble.estrato = '5';
                                 }
                               } else {
                                 validaEstrato = true;
                               }
 
-                              if (contadorbtn >= 3) {
+                              if (unBano == true ||
+                                  dosBanos == true ||
+                                  tresBanos == true ||
+                                  cuatroBanos == true ||
+                                  cincoBanos == true) {
+                                contadorbtn++;
+                                validaBanos = false;
+                                if (unBano == true) {
+                                  publicarInmueble.banos = '1';
+                                } else if (dosBanos == true) {
+                                  publicarInmueble.banos = '2';
+                                } else if (tresBanos == true) {
+                                  publicarInmueble.banos = '3';
+                                } else if (cuatroBanos == true) {
+                                  publicarInmueble.banos = '4';
+                                } else if (cincoBanos == true) {
+                                  publicarInmueble.banos = '5';
+                                }
+                              } else {
+                                validaBanos = true;
+                              }
+                              if (contadorbtn >= 4) {
                                 publicarInmueble.isLoading = true;
                                 publicarInmueble.isLoading = false;
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Publicar3Page(
-                                            _publicarController, apellido, correo, nombrePersona, telefono, whatsapp, telegram)));
+                                            _publicarController,
+                                            apellido,
+                                            correo,
+                                            nombrePersona,
+                                            telefono,
+                                            whatsapp,
+                                            telegram)));
                                 publicarInmueble.isLoading = false;
                               } else {
                                 publicarInmueble.isLoading = false;
@@ -1159,6 +1204,21 @@ class _Publicar2PageState extends State<Publicar2Page> {
       children: [
         Text(
           validacion ? 'Seleccione el estrato' : '',
+          style: const TextStyle(color: utils.Colors.rojo),
+          textAlign: TextAlign.center,
+          maxLines: 3,
+        ),
+      ],
+    ));
+  }
+
+  Widget validacionBanos(bool validacion) {
+    return Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          validacion ? 'Seleccione cantidad baños' : '',
           style: const TextStyle(color: utils.Colors.rojo),
           textAlign: TextAlign.center,
           maxLines: 3,

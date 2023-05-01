@@ -1,5 +1,6 @@
 import 'package:app_arriendosu/src/models/inmuebles.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
+import 'package:app_arriendosu/src/pages/publicaciones/lista_sugernecias.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/listas_pages.dart';
 import 'package:app_arriendosu/src/services/inmuebles_services.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +148,7 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
   @override
   Widget build(BuildContext context) {
     final inmuebleService = Provider.of<InmueblesServices>(context);
-
+    ListaLlenaSugerencias listaSugerncias = new ListaLlenaSugerencias();
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -788,6 +789,7 @@ class _ActualizarInmueblePage extends State<ActualizarInmueblePage> {
                                             titulo: 'Mis publicaciones',
                                             editar: true,
                                             correoo: correo,
+                                            slides: listaSugerncias.listaSugerencias,
                                           )),
                                 );
                               } else {

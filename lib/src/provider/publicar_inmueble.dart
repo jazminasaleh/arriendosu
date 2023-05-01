@@ -7,6 +7,7 @@ class PublicarProvider extends ChangeNotifier {
   String tipo = ' ';
   String area = ' ';
   String habitaciones = ' ';
+  String banos = ' ';
   String estrato = ' ';
   String nombre = ' ';
   String descripcion = ' ';
@@ -15,14 +16,15 @@ class PublicarProvider extends ChangeNotifier {
       parqueadero = false,
       muebles = false,
       lavadero = false;
-  bool mascotas = false, fumar = false, telegram = false, whatsaap= false;
+  bool mascotas = false, fumar = false, telegram = false, whatsaap = false;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
   set isLoading(bool value) {
     _isLoading = value;
-    print('nombre $nombre internt $internt  ubicacion $ubicacion precio $precio tipo $tipo habitaciones $habitaciones descripcion $descripcion');
+    print(
+        'nombre $nombre internt $internt  ubicacion $ubicacion precio $precio tipo $tipo habitaciones $habitaciones descripcion $descripcion');
     notifyListeners();
   }
 }

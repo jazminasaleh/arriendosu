@@ -99,16 +99,7 @@ class _Inicio_PageState extends State<Inicio_Page> {
                       create: (_) => LoginFromProvider(),
                       child: _formTextField(),
                     ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    _buttonConectar(
-                        'Continuar con google', 'assets/registro/google.png'),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    _buttonConectar(
-                        'Continuar con facebook', 'assets/registro/face.png')
+                  
                   ],
                 ),
               )
@@ -310,46 +301,6 @@ class _Inicio_PageState extends State<Inicio_Page> {
     );
   }
 
-//*Ingresar con una cuneta de google o facebook
-  Widget _buttonConectar(String texto, String linkImge) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(35),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.grey,
-                spreadRadius: 0.2,
-                blurRadius: 5,
-                offset: Offset(0, 2),
-              )
-            ]),
-        height: 64,
-        width: 340,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(linkImge),
-              backgroundColor: Colors.white,
-            ),
-            Text(
-              texto,
-              style: const TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500),
-            ),
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.arrow_forward_ios_rounded))
-          ],
-        ),
-      ),
-    );
-  }
 
 //*el mensaje de validacion del correo
   Widget validacionCorreo(bool validacion) {

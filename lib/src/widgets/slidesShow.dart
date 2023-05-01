@@ -82,7 +82,7 @@ class SidesShow extends StatelessWidget {
                   height: 300,
                   width: double.infinity,
                   child: _Slides(
-                    slides: listaInmuebles.inmuebles,
+                    slides: slides!,
                   ),
                 ),
                 SizedBox(
@@ -90,14 +90,14 @@ class SidesShow extends StatelessWidget {
                 ),
                 Center(
                   child: _Dots(
-                    totalSlides: this.listaInmuebles.inmuebles.length,
+                    totalSlides: slides!.length,
                   ),
                 ),
                 DescripcionPublicaciones(
                   direccion: direccion,
                   barrio: barrio,
                   precio: precio,
-                  slides: listaInmuebles.inmuebles,
+                  slides: slides!,
                   descripcion: descripcion, 
                   apellidoArrendador: apellidosArrendador,
                   nombreArrendador: nombreArrendador,

@@ -16,6 +16,7 @@ class InicioPublicaciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
+    ListaLlenaSugerencias listaSugerncias = new ListaLlenaSugerencias();
     final inmuebleServices = Provider.of<InmueblesServices>(context);
 
     return Scaffold(
@@ -49,6 +50,7 @@ class InicioPublicaciones extends StatelessWidget {
                             titulo: 'Mis publicaciones',
                             editar: true,
                             correoo: correo!,
+                            slides: listaSugerncias.listaSugerencias,
                           )),
                 );
               },
@@ -78,11 +80,13 @@ class InicioPublicaciones extends StatelessWidget {
                 //*lista de inmuebles favoritos
                 _listaFavoritos(
                   listaInmuebles: inmuebleServices,
+                  listaFavoritos: listaFavoritos,
                 ),
-                _textSugerencias(context, inmuebleServices.inmuebles),
+                _textSugerencias(context, inmuebleServices.inmuebles, listaSugerncias.listaSugerencias),
                 //*lista de inmuebles sugeridos
                 _listaSugerencias(
                   listaInmuebles: inmuebleServices,
+                  listaSugerncias: listaSugerncias,
                 )
               ],
             )),
@@ -95,7 +99,7 @@ class InicioPublicaciones extends StatelessWidget {
 
 //*Texto de sugerincia
 //*Boton de ver todo para ver la lista de todas las sugerencias
-  Row _textSugerencias(BuildContext context, List listaInmuebles) {
+  Row _textSugerencias(BuildContext context, List listaInmuebles, List listaSugerncias) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -115,6 +119,7 @@ class InicioPublicaciones extends StatelessWidget {
                           titulo: 'Sugerencias',
                           editar: false,
                           correoo: correo!,
+                          slides: listaSugerncias,
                         )),
               );
             },
@@ -164,7 +169,7 @@ class _bottomNavigationBar extends StatelessWidget {
 
                   String correoGuardado = correo;
                   print('El correo guardado $correoGuardado');
-                 
+
                   int contador = 0;
                   for (var i = 0; i < usuariosServices.usuarios.length; i++) {
                     if (correo != '') {
@@ -240,7 +245,10 @@ class _bottomNavigationBar extends StatelessWidget {
 //*Muestra la lista de inmuebles sugeridos
 class _listaSugerencias extends StatelessWidget {
   InmueblesServices listaInmuebles;
-  _listaSugerencias({Key? key, required this.listaInmuebles}) : super(key: key);
+  ListaLlenaSugerencias listaSugerncias;
+  _listaSugerencias(
+      {Key? key, required this.listaInmuebles, required this.listaSugerncias})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -261,6 +269,7 @@ class _listaSugerencias extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => SidesShow(
+                            slides: listaSugerncias.listaSugerencias[index].imagenes,
                                 direccion:
                                     listaInmuebles.inmuebles[index].direccion,
                                 barrio: listaInmuebles
@@ -328,7 +337,8 @@ class _listaSugerencias extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     opacity: 0.50,
-                                    image: AssetImage(''),
+                                    image: AssetImage(listaSugerncias
+                                        .listaSugerencias[index].iamgen),
                                     fit: BoxFit.cover,
                                   )),
                             ),
@@ -383,7 +393,8 @@ class _listaSugerencias extends StatelessWidget {
 //*Lista de los inmuebles gurdados o considerados como favoritos
 class _listaFavoritos extends StatelessWidget {
   InmueblesServices listaInmuebles;
-  _listaFavoritos({required this.listaInmuebles});
+  ListaLlenaFavoritos listaFavoritos;
+  _listaFavoritos({required this.listaInmuebles, required this.listaFavoritos});
 
   @override
   Widget build(
@@ -405,6 +416,7 @@ class _listaFavoritos extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => SidesShow(
+                            slides: listaFavoritos.listaFavoritos[index].imagenes,
                                 direccion:
                                     listaInmuebles.inmuebles[index].direccion,
                                 barrio: listaInmuebles
@@ -459,7 +471,7 @@ class _listaFavoritos extends StatelessWidget {
                         borderRadius: BorderRadius.circular(25),
                         image: DecorationImage(
                           opacity: 0.50,
-                          image: AssetImage(''),
+                          image: AssetImage(listaFavoritos.listaFavoritos[index].iamgen),
                           fit: BoxFit.cover,
                         )),
                     child: Padding(

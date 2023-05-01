@@ -12,12 +12,14 @@ class ListasPage extends StatelessWidget {
   final String titulo;
   final bool editar;
   String correoo;
+  List slides;
 
   ListasPage(
       {super.key,
       required this.titulo,
       required this.editar,
-      required this.correoo});
+      required this.correoo,
+      required this.slides});
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +64,7 @@ class ListasPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => SidesShow(
+                                    slides: slides[index].imagenes,
                                     direccion: inmuebleServices
                                         .inmuebles[index].direccion,
                                     barrio: inmuebleServices

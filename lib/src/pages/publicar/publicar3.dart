@@ -188,15 +188,16 @@ class _Publicar3PageState extends State<Publicar3Page> {
                     onPressed: publicarInmueble.isLoading
                         ? null
                         : () async {
-                            inmueblesService.guardarOCrearInmueble(Inmuebles(
+                          if(publicarInmueble.tipo == 'apartamento'){
+                               inmueblesService.guardarOCrearInmueble(Inmuebles(
                                 apellidos: apellido!,
                                 area: int.parse(publicarInmueble.area),
-                                cantHabitaciones: 9,
-                                cantbanos: 8,
+                                cantHabitaciones: int.parse(publicarInmueble.habitaciones),
+                                cantbanos: int.parse(publicarInmueble.banos),
                                 correo: correo!,
                                 descripcion: publicarInmueble.descripcion,
                                 direccion: publicarInmueble.ubicacion,
-                                estrato: 9,
+                                estrato: int.parse(publicarInmueble.estrato),
                                 fotos: '',
                                 fumar: publicarInmueble.fumar,
                                 internt: publicarInmueble.internt,
@@ -212,7 +213,35 @@ class _Publicar3PageState extends State<Publicar3Page> {
                                 tipo: publicarInmueble.tipo,
                                 whatsapp: whatsapp!,
                                 telefono: int.parse(telefono!),
-                                id: 'RTY43'));
+                                id: 'ABC980'));
+                          }else{
+                             inmueblesService.guardarOCrearInmueble(Inmuebles(
+                                apellidos: apellido!,
+                                area: int.parse(publicarInmueble.area),
+                                cantHabitaciones: 1,
+                                cantbanos: 1,
+                                correo: correo!,
+                                descripcion: publicarInmueble.descripcion,
+                                direccion: publicarInmueble.ubicacion,
+                                estrato: 2,
+                                fotos: '',
+                                fumar: publicarInmueble.fumar,
+                                internt: publicarInmueble.internt,
+                                lavadero: publicarInmueble.lavadero,
+                                mascotas: publicarInmueble.mascotas,
+                                muebles: publicarInmueble.muebles,
+                                nombreInmueble: publicarInmueble.nombre,
+                                nombrePersona: nombrePersona!,
+                                parqueadero: publicarInmueble.parqueadero,
+                                precio: int.parse(publicarInmueble.precio),
+                                servicios: publicarInmueble.servicios,
+                                telegram: telegram!,
+                                tipo: publicarInmueble.tipo,
+                                whatsapp: whatsapp!,
+                                telefono: int.parse(telefono!),
+                                id: 'ABC980'));
+                          }
+                           
                             //*Aqui almacenas la info en la base de datos, ya que despues todo se borra
 
                             publicarInmueble.ubicacion = '';

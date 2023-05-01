@@ -52,7 +52,14 @@ class DescripcionPublicaciones extends StatefulWidget {
 
   @override
   State<DescripcionPublicaciones> createState() =>
-      _DescripcionPublicacionesState();
+      _DescripcionPublicacionesState(
+          apellidoArrendador: apellidoArrendador,
+          correo: correo,
+          nombreArrendador: nombreArrendador,
+          telefonoArrendador: telefonoArrendador,
+          telegram: telegram,
+          whatsapp: whatsapp,
+          precio: precio);
 
   List iconosDetalles() {
     List iconosDetalles = [];
@@ -116,7 +123,7 @@ class DescripcionPublicaciones extends StatefulWidget {
   }
 
   List restriccionesNombre() {
-     List nombreRestricciones = [];
+    List nombreRestricciones = [];
     if (fumar) {
       nombreRestricciones.add('Fumar');
     }
@@ -130,7 +137,20 @@ class DescripcionPublicaciones extends StatefulWidget {
 class _DescripcionPublicacionesState extends State<DescripcionPublicaciones> {
   Completer<GoogleMapController> _controller = Completer();
   UbicacionController _ubicacionController = new UbicacionController();
-
+  String nombreArrendador,
+      apellidoArrendador,
+      telefonoArrendador,
+      correo,
+      precio;
+  bool telegram, whatsapp;
+  _DescripcionPublicacionesState(
+      {required this.nombreArrendador,
+      required this.apellidoArrendador,
+      required this.telefonoArrendador,
+      required this.correo,
+      required this.telegram,
+      required this.whatsapp,
+      required this.precio});
   @override
   Widget build(BuildContext context) {
     List iconosDetalles = widget.iconosDetalles();
@@ -197,18 +217,6 @@ class _DescripcionPublicacionesState extends State<DescripcionPublicaciones> {
                     color: utils.Colors.blanco,
                     fontWeight: FontWeight.w500),
               ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const GaleriaImagenes()),
-                    );
-                  },
-                  child: const Text(
-                    'Ver todo',
-                    style: TextStyle(color: utils.Colors.ocre, fontSize: 15),
-                  ))
             ],
           ),
           const SizedBox(
@@ -279,6 +287,17 @@ class _DescripcionPublicacionesState extends State<DescripcionPublicaciones> {
               ),
             ],
           ),
+          Row(
+            children:[
+              Text(
+                widget.direccion,
+                style: TextStyle(
+                    fontSize: 25,
+                    color: utils.Colors.blanco,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
           //*mapa de la ubicacion del inmueble
           const SizedBox(
             height: 20,
@@ -299,6 +318,15 @@ class _DescripcionPublicacionesState extends State<DescripcionPublicaciones> {
           const SizedBox(
             height: 30,
           ),
+          navigationBar(
+            apellidos: apellidoArrendador,
+            correo: correo,
+            nombre: nombreArrendador,
+            precio: precio,
+            telefono: telefonoArrendador,
+            telegram: telegram,
+            whatsaap: whatsapp,
+          )
         ],
       ),
     ));
@@ -425,7 +453,7 @@ class _restricciones extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                 Icon(
+                                Icon(
                                   iconoRestricciones[index],
                                   size: 40,
                                   color: utils.Colors.rojo,
@@ -477,5 +505,144 @@ class _descripcion extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class navigationBar extends StatelessWidget {
+  String correo, telefono, nombre, apellidos, precio;
+  bool telegram, whatsaap;
+  navigationBar(
+      {required this.apellidos,
+      required this.correo,
+      required this.telefono,
+      required this.nombre,
+      required this.telegram,
+      required this.whatsaap,
+      required this.precio});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+        backgroundColor: utils.Colors.fondoOscuro,
+        items: [
+          new BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(
+                Icons.money,
+                size: 35,
+              ),
+              onPressed: () {},
+            ),
+            label: '\$$precio',
+          ),
+          new BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(
+                Icons.phone,
+                size: 35,
+                color: utils.Colors.grisClaro,
+              ),
+              onPressed: () {
+                print('nombre $nombre');
+                print('Apellido $apellidos');
+                print('correo $correo');
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        contentPadding: const EdgeInsets.all(0),
+                        content: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              InkWell(
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            width: 1, color: Colors.grey)),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.person,
+                                        color: utils.Colors.ocre,
+                                      ),
+                                      Text(
+                                        '$nombre $apellidos',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            width: 1, color: Colors.grey)),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.phone,
+                                        color: utils.Colors.ocre,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        '$telefono',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Expanded(child: Container()),
+                                       Icon(
+                                        Icons.whatsapp,
+                                        color: utils.Colors.verde,
+                                      ),
+                                      SizedBox(width: 5,),
+                                       Icon(
+                                        Icons.telegram,
+                                        color: Colors.blue[900],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.email,
+                                        color: utils.Colors.ocre,
+                                      ),
+                                      Text(
+                                        '$correo',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    });
+              },
+            ),
+            label: '',
+          ),
+        ]);
   }
 }
