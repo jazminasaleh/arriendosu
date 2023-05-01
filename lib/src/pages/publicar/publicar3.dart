@@ -154,7 +154,7 @@ class _Publicar3PageState extends State<Publicar3Page> {
                       keyboardType: TextInputType.name,
                       decoration: const InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Nombre del inmueble',
+                          hintText: 'Descripción general del inmueble',
                           iconColor: Color(0xff3A4750),
                           labelStyle: TextStyle(
                               color: Color(0xff3A4750),
@@ -165,6 +165,7 @@ class _Publicar3PageState extends State<Publicar3Page> {
                     ),
                   ),
                 ),
+                SizedBox(height: 50,),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 50, left: 30),
                   child: MaterialButton(
@@ -213,7 +214,7 @@ class _Publicar3PageState extends State<Publicar3Page> {
                                 tipo: publicarInmueble.tipo,
                                 whatsapp: whatsapp!,
                                 telefono: int.parse(telefono!),
-                                id: 'ABC767'));
+                                id: 'WBC767'));
                           }else{
                              inmueblesService.guardarOCrearInmueble(Inmuebles(
                                 apellidos: apellido!,
@@ -239,7 +240,7 @@ class _Publicar3PageState extends State<Publicar3Page> {
                                 tipo: publicarInmueble.tipo,
                                 whatsapp: whatsapp!,
                                 telefono: int.parse(telefono!),
-                                id: 'ABC456'));
+                                id: 'WBC403'));
                           }
                            
                             //*Aqui almacenas la info en la base de datos, ya que despues todo se borra

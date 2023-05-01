@@ -575,7 +575,7 @@ class _buscador extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => ListaMisFiltros(
-                        titulo: 'Sugernecias apartamentos',
+                        titulo: 'Sugernecias apto.',
                         editar: true,
                         correoo: correo,
                         slides: listaApto,
