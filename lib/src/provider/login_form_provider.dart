@@ -20,10 +20,4 @@ class LoginFromProvider extends ChangeNotifier {
     _isLoading = value;
     notifyListeners();
   }
-
-  /*bool isValidFormInicio() {
-    print('$nomUusario $correo $contrasena $verificarContrasena $corroOlvido');
-    print('se esta validadndo${formKeyInicio.currentState?.validate()}');
-    return formKeyInicio.currentState?.validate() ?? false;
-  }*/
 }

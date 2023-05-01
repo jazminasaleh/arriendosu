@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/publicaciones/list_filtrar.dart';
 import 'package:app_arriendosu/src/pages/publicaciones/misPublicaciones.dart';
 import 'package:app_arriendosu/src/services/inmuebles_services.dart';
 import 'package:app_arriendosu/src/services/usuarios_services.dart';
@@ -43,18 +44,13 @@ class InicioPublicaciones extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                int contador = 0;
                 for (var i = 0; i < inmuebleServices.inmuebles.length; i++) {
                   if (correo == inmuebleServices.inmuebles[i].correo) {
-                    contador++;
                     misPublicaciones.add(inmuebleServices.inmuebles[i]);
                     imagnesMispublicaciones
                         .add(listaSugerncias.listaSugerencias[i]);
                   }
                 }
-
-                print(
-                    'El correo que se va es $contador ${misPublicaciones.length}');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -86,7 +82,11 @@ class InicioPublicaciones extends StatelessWidget {
                     )
                   ],
                 ),
-                const _buscador(),
+                _buscador(
+                  inmuebles: inmuebleServices,
+                  sugeridos: listaSugerncias,
+                  correo: correo!,
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -547,9 +547,14 @@ class _listaFavoritos extends StatelessWidget {
 
 //*Buscador que nos manda a los filtros
 class _buscador extends StatelessWidget {
-  const _buscador({
-    Key? key,
-  }) : super(key: key);
+  InmueblesServices inmuebles;
+  ListaLlenaSugerencias sugeridos;
+  String correo;
+  List listaApto = [],
+      listHabitacion = [],
+      listImgApt = [],
+      listImgHabitacion = [];
+  _buscador({required this.inmuebles, required this.sugeridos, required this.correo});
 
   @override
   Widget build(BuildContext context) {
@@ -560,6 +565,23 @@ class _buscador extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () {
+            for (var i = 0; i < inmuebles.inmuebles.length; i++) {
+              if ('apartamento' == inmuebles.inmuebles[i].tipo) {
+                listaApto.add(inmuebles.inmuebles[i]);
+                listImgApt.add(sugeridos.listaSugerencias[i]);
+              }
+            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ListaMisFiltros(
+                        titulo: 'Sugernecias apartamentos',
+                        editar: true,
+                        correoo: correo,
+                        slides: listaApto,
+                        misImagenes: listImgApt,
+                      )),
+            );
             //*Parte del filtro
           },
           child: Container(
@@ -599,7 +621,23 @@ class _buscador extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () {
-            //*Parte del filtro
+             for (var i = 0; i < inmuebles.inmuebles.length; i++) {
+              if ('habitacion' == inmuebles.inmuebles[i].tipo) {
+                listHabitacion.add(inmuebles.inmuebles[i]);
+                listImgHabitacion.add(sugeridos.listaSugerencias[i]);
+              }
+            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ListaMisFiltros(
+                        titulo: 'Sugernecias habitaciones',
+                        editar: true,
+                        correoo: correo,
+                        slides: listHabitacion,
+                        misImagenes: listImgHabitacion,
+                      )),
+            );
           },
           child: Container(
             height: 60,

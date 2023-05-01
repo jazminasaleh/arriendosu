@@ -12,7 +12,7 @@ import '../../services/usuarios_services.dart';
 //*Pagina para que el usuario pueda editar su perfil
 //*Editar datos como nombre, apellido, correo y telefono
 class EditarPerfilPage extends StatefulWidget {
-  String? correo;
+  String? correo, mesnaje;
   String? nombre, apellidos, telefono;
   bool? telegram, whatsapp;
 
@@ -22,7 +22,8 @@ class EditarPerfilPage extends StatefulWidget {
       this.apellidos,
       this.telefono,
       this.telegram,
-      this.whatsapp});
+      this.whatsapp,
+      this.mesnaje});
   @override
   State<EditarPerfilPage> createState() => _EditarPerfilPageState(
       correo: correo,
@@ -30,12 +31,13 @@ class EditarPerfilPage extends StatefulWidget {
       apellidos: apellidos,
       telefono: telefono,
       telegram: telegram,
-      whatsapp: whatsapp);
+      whatsapp: whatsapp,
+      mensaje: mesnaje);
 }
 
 class _EditarPerfilPageState extends State<EditarPerfilPage> {
   EditarPerfilController _editarController = new EditarPerfilController();
-  String? correo;
+  String? correo, mensaje;
   String? nombre, apellidos, telefono;
   bool? telegram, whatsapp;
   int contadorbtn = 0;
@@ -46,7 +48,8 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
       this.apellidos,
       this.telefono,
       this.telegram,
-      this.whatsapp});
+      this.whatsapp,
+      this.mensaje});
   @override
   Widget build(BuildContext context) {
     final usuariosServices = Provider.of<UsuariosServices>(context);
@@ -79,10 +82,21 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
               Container(
                 child: Column(
                   children: [
-                    const SizedBox(
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: Text(
+                          mensaje!,
+                          style: TextStyle(
+                            color: utils.Colors.rojo,
+                            fontSize: 20,
+                          ),
+                          textAlign: TextAlign.center,
+                        )),
+                    SizedBox(
                       height: 50,
                     ),
-                    _formTextField(nombre!, apellidos!, correo!, telefono!),
+                    _formTextField(nombre!, apellidos!, correo!, telefono!,
+                        validNombre, validApellidos, validTel),
                     const SizedBox(
                       height: 50,
                     ),
@@ -109,9 +123,14 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                           onPressed: usuariosServices.isLoading
                               ? null
                               : () async {
+                                  print(nombre);
+                                  print(telefono);
+                                  print(apellidos);
                                   FocusScope.of(context).unfocus();
                                   contadorbtn = 0;
-                                  if (nombre != '') {
+                                  if (nombre != 'Sin nombre' &&
+                                      nombre != '' &&
+                                      nombre!.length >= 3) {
                                     contadorbtn++;
                                     validNombre = false;
                                   } else {
@@ -127,7 +146,8 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                                     validacionApellidos(validApellidos);
                                   }
 
-                                  if (telefono != '') {
+                                  if (telefono != '' &&
+                                      telefono!.length == 10) {
                                     validTel = false;
                                     contadorbtn++;
                                   } else {
@@ -175,8 +195,8 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
   }
 
 //*Formulario para digitar la infromacion para editar el perfil
-  Widget _formTextField(
-      String nombre, String apellido, String correo, String telefono) {
+  Widget _formTextField(String nombre, String apellido, String correo,
+      String telefono, bool validNombre, bool validApellidos, bool validTel) {
     return Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
@@ -189,9 +209,10 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                   color: utils.Colors.grisMedio,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: _textFieldNombre(nombre),
+                child: _textFieldNombre(),
               ),
             ),
+            validacionNombre(validNombre),
             const SizedBox(
               height: 15,
             ),
@@ -203,9 +224,10 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                   color: utils.Colors.grisMedio,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: _textFieldApellido(apellido),
+                child: _textFieldApellido(),
               ),
             ),
+            validacionApellidos(validApellidos),
             const SizedBox(
               height: 15,
             ),
@@ -264,9 +286,10 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                           color: utils.Colors.grisMedio,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: _textFieldTelefono(telefono),
+                        child: _textFieldTelefono(),
                       ),
                     ),
+                    validacionTelefono(validTel),
                     const SizedBox(
                       height: 10,
                     ),
@@ -357,7 +380,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
   }
 
 //*Textfield del nombre del usuario
-  TextFormField _textFieldNombre(String nombre) {
+  TextFormField _textFieldNombre() {
     return TextFormField(
       initialValue: nombre,
       autocorrect: false,
@@ -382,7 +405,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
   }
 
   //*Textfield del apellido del usuario
-  TextFormField _textFieldApellido(String apellido) {
+  TextFormField _textFieldApellido() {
     return TextFormField(
       initialValue: apellidos,
       autocorrect: false,
@@ -407,7 +430,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
   }
 
 //*Textfield del correo del usuario
-  TextFormField _textFieldCorreo(String correo) {
+  TextFormField _textFieldCorreo() {
     return TextFormField(
       initialValue: correo,
       autocorrect: false,
@@ -432,7 +455,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
   }
 
 //*Textfield del telefono del usuario
-  TextFormField _textFieldTelefono(String telefono) {
+  TextFormField _textFieldTelefono() {
     return TextFormField(
       initialValue: telefono,
       autocorrect: false,

@@ -353,6 +353,7 @@ class _menuPerfilEditar extends StatelessWidget {
                       telefono: telefono,
                       telegram: telegram,
                       whatsapp: whatsapp,
+                      mesnaje: '',
                     )));
       },
       child: Container(
@@ -450,18 +451,25 @@ class _menuPerfilPublicar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(apellido);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Publicar1Pagr(
-                      correo: correo,
-                      apellido: apellido,
-                      nombrePersona: nombrePersona,
-                      telefono: telefono,
-                      whatsapp: whatsapp,
-                      telegram: telegram,
-                    )));
+        print('este es el telefono $nombrePersona');
+        if (telefono == '' || nombrePersona == 'Sin nombre') {
+           Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => EditarPerfilPage(apellidos: apellido,correo: correo,mesnaje: 'Por fvaor digitar esta infromación antes de hacer la publicación de un inmueble',nombre: nombrePersona,telefono: telefono,telegram: telegram,whatsapp: whatsapp,)));
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Publicar1Pagr(
+                        correo: correo,
+                        apellido: apellido,
+                        nombrePersona: nombrePersona,
+                        telefono: telefono,
+                        whatsapp: whatsapp,
+                        telegram: telegram,
+                      )));
+        }
       },
       child: Container(
         child: Padding(

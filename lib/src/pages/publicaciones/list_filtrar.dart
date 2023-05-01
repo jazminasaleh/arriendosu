@@ -2,28 +2,26 @@ import 'package:app_arriendosu/src/pages/publicaciones/actualizarPublicacion.dar
 import 'package:app_arriendosu/src/pages/publicaciones/inicio_publicaciones_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_arriendosu/src/utils/colors.dart' as utils;
-import 'package:provider/provider.dart';
-
-import '../../services/inmuebles_services.dart';
 import '../../widgets/slidesShow.dart';
 
 //*Pagina de listas ya sea de favoritos o de sugernecias
-class ListasPage extends StatelessWidget {
+class ListaMisFiltros extends StatelessWidget {
   final String titulo;
   final bool editar;
   String correoo;
-  List slides;
+  List slides, misImagenes;
 
-  ListasPage(
+  ListaMisFiltros(
       {super.key,
       required this.titulo,
       required this.editar,
       required this.correoo,
-      required this.slides});
+      required this.slides,
+      required this.misImagenes});
 
   @override
   Widget build(BuildContext context) {
-    final inmuebleServices = Provider.of<InmueblesServices>(context);
+   
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -56,7 +54,7 @@ class ListasPage extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView.builder(
-                  itemCount: inmuebleServices.inmuebles.length,
+                  itemCount: slides.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
@@ -64,54 +62,34 @@ class ListasPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => SidesShow(
-                                    slides: slides[index].imagenes,
-                                    direccion: inmuebleServices
-                                        .inmuebles[index].direccion,
-                                    barrio: inmuebleServices
-                                        .inmuebles[index].nombreInmueble,
-                                    precio: inmuebleServices
-                                        .inmuebles[index].precio
+                                    slides: misImagenes[index].imagenes,
+                                    direccion: slides[index].direccion,
+                                    barrio: slides[index].nombreInmueble,
+                                    precio: slides[index].precio
                                         .toString(),
-                                    descripcion: inmuebleServices
-                                        .inmuebles[index].descripcion,
-                                    listaInmuebles: inmuebleServices,
-                                    apellidosArrendador: inmuebleServices
-                                        .inmuebles[index].apellidos,
+                                    descripcion: slides[index].descripcion,
+                                    apellidosArrendador: slides[index].apellidos,
                                     area:
-                                        inmuebleServices.inmuebles[index].area,
-                                    correo: inmuebleServices
-                                        .inmuebles[index].correo,
-                                    estrato: inmuebleServices
-                                        .inmuebles[index].estrato,
+                                       slides[index].area,
+                                    correo: slides[index].correo,
+                                    estrato: slides[index].estrato,
                                     fumar:
-                                        inmuebleServices.inmuebles[index].fumar,
-                                    internt: inmuebleServices
-                                        .inmuebles[index].internt,
-                                    lavadero: inmuebleServices
-                                        .inmuebles[index].lavadero,
-                                    mascotas: inmuebleServices
-                                        .inmuebles[index].mascotas,
-                                    muebles: inmuebleServices
-                                        .inmuebles[index].muebles,
-                                    nombreArrendador: inmuebleServices
-                                        .inmuebles[index].nombrePersona,
-                                    parqueadero: inmuebleServices
-                                        .inmuebles[index].parqueadero,
-                                    servicios: inmuebleServices
-                                        .inmuebles[index].servicios,
-                                    telefonoArrendador: inmuebleServices
-                                        .inmuebles[index].telefono
+                                        slides[index].fumar,
+                                    internt: slides[index].internt,
+                                    lavadero: slides[index].lavadero,
+                                    mascotas: slides[index].mascotas,
+                                    muebles: slides[index].muebles,
+                                    nombreArrendador:slides[index].nombrePersona,
+                                    parqueadero: slides[index].parqueadero,
+                                    servicios: slides[index].servicios,
+                                    telefonoArrendador: slides[index].telefono
                                         .toString(),
-                                    telegram: inmuebleServices
-                                        .inmuebles[index].telegram,
-                                    whatsapp: inmuebleServices
-                                        .inmuebles[index].whatsapp,
+                                    telegram: slides[index].telegram,
+                                    whatsapp: slides[index].whatsapp,
                                     tipo:
-                                        inmuebleServices.inmuebles[index].tipo,
-                                    cantBanos: inmuebleServices
-                                        .inmuebles[index].cantbanos,
-                                    cantHabitaciones: inmuebleServices
-                                        .inmuebles[index].cantHabitaciones,
+                                        slides[index].tipo,
+                                    cantBanos: slides[index].cantbanos,
+                                    cantHabitaciones: slides[index].cantHabitaciones,
                                   )),
                         );
                       },
@@ -139,7 +117,7 @@ class ListasPage extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(
                                         opacity: 0.50,
-                                        image: AssetImage(slides[index].iamgen),
+                                        image: AssetImage(misImagenes[index].iamgen),
                                         fit: BoxFit.cover,
                                       )),
                                 ),
@@ -152,8 +130,7 @@ class ListasPage extends StatelessWidget {
                                 children: [
                                   Column(children: [
                                     Text(
-                                      inmuebleServices
-                                          .inmuebles[index].direccion,
+                                      slides[index].direccion,
                                       style: const TextStyle(
                                           color: utils.Colors.blanco,
                                           fontSize: 16,
@@ -163,20 +140,18 @@ class ListasPage extends StatelessWidget {
                                     )
                                   ]),
                                   Text(
-                                    inmuebleServices
-                                        .inmuebles[index].nombreInmueble,
+                                    slides[index].nombreInmueble,
                                     style: const TextStyle(
                                         fontSize: 15,
                                         color: utils.Colors.blanco),
                                   ),
                                   Text(
-                                    '\$${inmuebleServices.inmuebles[index].precio}',
+                                    '\$${slides[index].precio}',
                                     style: const TextStyle(
                                         color: utils.Colors.ocre,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600),
                                   ),
-
                                 ],
                               ),
                             ],
