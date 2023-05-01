@@ -139,7 +139,7 @@ class ListasPage extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(
                                         opacity: 0.50,
-                                        image: AssetImage(''),
+                                        image: AssetImage(slides[index].iamgen),
                                         fit: BoxFit.cover,
                                       )),
                                 ),

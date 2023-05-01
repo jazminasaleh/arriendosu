@@ -213,7 +213,7 @@ class _Publicar3PageState extends State<Publicar3Page> {
                                 tipo: publicarInmueble.tipo,
                                 whatsapp: whatsapp!,
                                 telefono: int.parse(telefono!),
-                                id: 'ABC980'));
+                                id: 'ABC767'));
                           }else{
                              inmueblesService.guardarOCrearInmueble(Inmuebles(
                                 apellidos: apellido!,
@@ -239,7 +239,7 @@ class _Publicar3PageState extends State<Publicar3Page> {
                                 tipo: publicarInmueble.tipo,
                                 whatsapp: whatsapp!,
                                 telefono: int.parse(telefono!),
-                                id: 'ABC980'));
+                                id: 'ABC456'));
                           }
                            
                             //*Aqui almacenas la info en la base de datos, ya que despues todo se borra

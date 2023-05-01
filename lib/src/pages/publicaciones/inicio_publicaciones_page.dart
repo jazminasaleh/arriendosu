@@ -1,3 +1,4 @@
+import 'package:app_arriendosu/src/pages/publicaciones/misPublicaciones.dart';
 import 'package:app_arriendosu/src/services/inmuebles_services.dart';
 import 'package:app_arriendosu/src/services/usuarios_services.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class InicioPublicaciones extends StatelessWidget {
     ListaLlenaFavoritos listaFavoritos = new ListaLlenaFavoritos();
     ListaLlenaSugerencias listaSugerncias = new ListaLlenaSugerencias();
     final inmuebleServices = Provider.of<InmueblesServices>(context);
-
+    List misPublicaciones = [], imagnesMispublicaciones = [];
     return Scaffold(
       backgroundColor: utils.Colors.fondoOscuro,
       appBar: AppBar(
@@ -42,15 +43,27 @@ class InicioPublicaciones extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                print('El correo que se va es $correo');
+                int contador = 0;
+                for (var i = 0; i < inmuebleServices.inmuebles.length; i++) {
+                  if (correo == inmuebleServices.inmuebles[i].correo) {
+                    contador++;
+                    misPublicaciones.add(inmuebleServices.inmuebles[i]);
+                    imagnesMispublicaciones
+                        .add(listaSugerncias.listaSugerencias[i]);
+                  }
+                }
+
+                print(
+                    'El correo que se va es $contador ${misPublicaciones.length}');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ListasPage(
+                      builder: (context) => ListaMisPublicaciones(
                             titulo: 'Mis publicaciones',
                             editar: true,
                             correoo: correo!,
-                            slides: listaSugerncias.listaSugerencias,
+                            slides: misPublicaciones,
+                            misImagenes: imagnesMispublicaciones,
                           )),
                 );
               },
@@ -82,7 +95,8 @@ class InicioPublicaciones extends StatelessWidget {
                   listaInmuebles: inmuebleServices,
                   listaFavoritos: listaFavoritos,
                 ),
-                _textSugerencias(context, inmuebleServices.inmuebles, listaSugerncias.listaSugerencias),
+                _textSugerencias(context, inmuebleServices.inmuebles,
+                    listaSugerncias.listaSugerencias),
                 //*lista de inmuebles sugeridos
                 _listaSugerencias(
                   listaInmuebles: inmuebleServices,
@@ -99,7 +113,8 @@ class InicioPublicaciones extends StatelessWidget {
 
 //*Texto de sugerincia
 //*Boton de ver todo para ver la lista de todas las sugerencias
-  Row _textSugerencias(BuildContext context, List listaInmuebles, List listaSugerncias) {
+  Row _textSugerencias(
+      BuildContext context, List listaInmuebles, List listaSugerncias) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -269,7 +284,8 @@ class _listaSugerencias extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => SidesShow(
-                            slides: listaSugerncias.listaSugerencias[index].imagenes,
+                                slides: listaSugerncias
+                                    .listaSugerencias[index].imagenes,
                                 direccion:
                                     listaInmuebles.inmuebles[index].direccion,
                                 barrio: listaInmuebles
@@ -416,7 +432,8 @@ class _listaFavoritos extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => SidesShow(
-                            slides: listaFavoritos.listaFavoritos[index].imagenes,
+                                slides: listaFavoritos
+                                    .listaFavoritos[index].imagenes,
                                 direccion:
                                     listaInmuebles.inmuebles[index].direccion,
                                 barrio: listaInmuebles
@@ -471,7 +488,8 @@ class _listaFavoritos extends StatelessWidget {
                         borderRadius: BorderRadius.circular(25),
                         image: DecorationImage(
                           opacity: 0.50,
-                          image: AssetImage(listaFavoritos.listaFavoritos[index].iamgen),
+                          image: AssetImage(
+                              listaFavoritos.listaFavoritos[index].iamgen),
                           fit: BoxFit.cover,
                         )),
                     child: Padding(

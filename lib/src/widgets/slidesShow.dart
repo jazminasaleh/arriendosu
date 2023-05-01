@@ -8,7 +8,7 @@ import '../services/inmuebles_services.dart';
 
 //*slider de imagnes de la pagina descripcion de publicaciones
 class SidesShow extends StatelessWidget {
-  final InmueblesServices listaInmuebles;
+  InmueblesServices? listaInmuebles;
   //*datos generlaes del inmueble
   List<Widget>? slides;
   String direccion;
@@ -39,7 +39,7 @@ class SidesShow extends StatelessWidget {
 
   SidesShow(
       {
-      required this.listaInmuebles,
+      this.listaInmuebles,
       this.slides,
       required this.direccion,
       required this.barrio,
